@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd $(git rev-parse --show-toplevel)
+
+rm -rf _site
+jekyll build
+
+git add _site
+git subtree push --prefix _site origin gh-pages
