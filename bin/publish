@@ -21,6 +21,7 @@ function check-git-state() {
 	true
     fi
 
+    git diff >/dev/null 2>&1 # fixes a bug in git diff-index
     if ! git diff-index --quiet HEAD ; then
 	fail "Your working tree has uncommitted changes; commit first or use -f"
     fi
