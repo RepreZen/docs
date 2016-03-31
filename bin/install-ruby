@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+bindir=$(dirname $0)
+case $(uname -o) in
+    Cygwin)
+	$bindir/install-ruby-cygwin ;;
+    *Linux)
+	$bindir/install-ruby-linux ;;
+    *)
+	echo "Don't know how to install ruby for '$(uname -o)'" >&2
+	exit 1
+esac
+
