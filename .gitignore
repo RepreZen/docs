@@ -4,3 +4,4 @@ _pdf
 .idea/
 *~
 \#*
+Gemfile.lock
