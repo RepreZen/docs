@@ -1,7 +1,5 @@
 ---
 ---
-== Hello there!
+== RepreZen End-User Documentation
 
-This is some asciidoc stuff
-
-Another line
+Stay tuned as we begin to publish to this site, beginning with comprehensive documentation on the extensive Code Generation capabilities of RepreZen API Studio!

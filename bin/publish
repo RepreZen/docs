@@ -1,9 +1,40 @@
 #!/bin/bash
 
+if [[ $1 == "-f" ]] ; then
+    force=true
+fi
+
+function fail() {
+    echo "$*" >&2
+    exit 1
+}
+
+function check-git-state() {
+    if [[ $force ]] ; then
+	return
+    fi
+
+    branch=$(git rev-parse --abrev-ref HEAD)
+    if [[ $branch != master ]] ; then
+	fail "Must publish from master branch or use -f"
+    fi
+
+    if ! git diff-index --quiet HEAD ; then
+	fail "Your working tree has uncommitted changes; commit first or use -f"
+    fi
+
+    if [[ ! -z "$(git ls-files --exclude-standard --others)" ]] ; then
+	fail "Your working tree includes untracked and unignored files; commit or clean them first, or use -f"
+    fi
+}
+
 cd $(git rev-parse --show-toplevel)
+
+check-git-state
 
 rm -rf _site
 jekyll build
 
-git add _site
+check-git-state
+
 git subtree push --prefix _site origin gh-pages
