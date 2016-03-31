@@ -1,0 +1,49 @@
+#!/bin/bash
+
+if [[ $1 == "-f" ]] ; then
+    force=true
+fi
+
+function fail() {
+    echo "$*" >&2
+    exit 1
+}
+
+function check-git-state() {
+    if [[ $force ]] ; then
+	warn "Working tree checks suppressed... this command may do nothing at all or something you do not expect"
+	return
+    fi
+
+    branch=$(git rev-parse --abrev-ref HEAD)
+    if [[ $branch != master ]] ; then
+	fail "Must publish from master branch or use -f"
+    fi
+
+    git diff >/dev/null 2>&1 # mitigates a bug in git diff-index
+    if ! git diff-index --quiet HEAD ; then
+	fail "Your working tree has uncommitted changes; commit first or use -f"
+    fi
+
+    if [[ ! -z "$(git ls-files --exclude-standard --others)" ]] ; then
+	fail "Your working tree includes untracked and unignored files; commit or clean them first, or use -f"
+    fi
+
+    git fetch --quiet
+    working=$(git rev-parse @)     # @ = current branch head (see git rev-parse help)
+    origin=$(git rev-parse @{u})   # @{u} = head of remote (upstream) branch for current branch
+    if [[ $working != $origin ]]; then
+	fail "Your working tree is not in sync with the origin; push/pull first as needed, or use -f"
+    fi
+}
+
+cd $(git rev-parse --show-toplevel)
+
+check-git-state
+
+rm -rf _site
+jekyll build
+
+check-git-state
+
+git subtree push --prefix _site origin gh-pages
