@@ -18,6 +18,7 @@ function check-git-state() {
     branch=$(git rev-parse --abrev-ref HEAD)
     if [[ $branch != master ]] ; then
 #	fail "Must publish from master branch or use -f"
+	true
     fi
 
     if ! git diff-index --quiet HEAD ; then
