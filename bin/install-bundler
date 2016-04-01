@@ -7,7 +7,12 @@ fi
 
 if ! hash bundle 2>/dev/null; then
    if ! hash gem 2>/dev/null; then
-      $(dirname $0)/install-ruby
+      newpath=$($(dirname $0)/install-ruby)
+      if [[ $newpath ]] ; then
+	  PATH="$newpath"
+      fi
    fi
-   $GEMCMD install bundler
+   echo Installing Ruby Bundler > /dev/tty
+   $GEMCMD install bundler > /dev/tty
+   echo $newpath
 fi
