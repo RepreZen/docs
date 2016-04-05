@@ -9,6 +9,10 @@ function fail() {
     exit 1
 }
 
+function warn() {
+    echo "$*" >&2
+}
+
 function check-git-state() {
     if [[ $force ]] ; then
 	warn "Working tree checks suppressed... this command may do nothing at all or something you do not expect"
