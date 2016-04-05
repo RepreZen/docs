@@ -1,5 +1,8 @@
 ---
+title: RepreZen End-User Documentation
+type: homepage
+toc: false
+permalink: /
 ---
-== RepreZen End-User Documentation
 
 Stay tuned as we begin to publish to this site, beginning with comprehensive documentation on the extensive Code Generation capabilities of RepreZen API Studio!

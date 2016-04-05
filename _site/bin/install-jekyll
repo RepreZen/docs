@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+if ! hash jekyll 2>/dev/null; then
+    if ! hash bundle 2>/dev/null ; then
+	newpath="$($(dirname $0)/install-bundler)"
+	if [[ $newpath ]] ; then
+	    PATH="$newpath"
+	fi
+    fi
+    echo Installing jekyll and its dependencies
+    bundle install
+    wait
+    if [[ $newpath ]] ; then
+	echo You may need to update your path variable to use jekyll:
+	echo "PATH='$newpath'"
+    fi
+fi

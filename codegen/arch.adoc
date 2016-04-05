@@ -1,0 +1,43 @@
+== The Generator Architecture
+
+This figure shows the main parts of the {RAS} code generation framework.
+
+image::arch.png[alt="Code Generation Architecture",role=text-center]
+
+
+Components in this framework include:
+
+GenEngine :: A GenEngine encompasses facilities built into {RAS} to support a specific code
+generation technology, such as a templating engine. {RAS} currently comes with a single GenEngine,
+which supports the http://xtend-lang.org[Xtend,window=_blank] templating language.footnote:[Note
+that the Xtend language is very nearly a superset of Java, so if you are a Java programmer you can
+use most of what you know in your Xtend classes. And you can intermingle pure Java classes at will,
+and use all available Java libraries with without any compatibility issues. This is guaranteed by
+the fact that Xtend classes are not actually compiled, but are rather transformed into pure Java
+classes, which are then compiled by the Java compiler.]
++
+GenEngines are not currently implemented in a way that makes it feasible for end users to create
+their own. We hope to provide GenEngines for other popular generation tools in the future.
+
+GenTemplate :: A GenTemplate is an implementation of a code generator using a particular
+GenEngine. Each GenTemplate produces output for a specific purpose, in a form suited to that
+purpose. The generators that are built into {RAS} are all GenTemplates built using the Xtend
+GenEngine.footnote:[Building on the footnote regarding Xtend in the context of GenEngine, we can
+further point out that it is perfectly possible to code an Xtend GenTemplate completely in
+Java. Indeed, some of the GenTemplates built into {RAS} are pure Java.]
+
+GenTarget :: A GenTarget applies a GenTemplate to a model. When you create a GenTarget, it becomes
+part of the model project.
++
+Executing a GenTarget causes the associated GenTemplate to be executed against the associated model,
+with the results appearing as files in the model project, in a folder specified by the GenTarget.
+
+As stated earlier, {RAS} comes with numerous built-in generators. We can now state that with a bit
+more precision: {RAS} comes with a number of built-in GenTemplates, each based on the Xtend
+GenEngine. Likewise, when we stated that developers could create their own customized generators,
+that really meant that developers can easily create and use their own GenTemplates, also based on
+the Xtend GenEngine.
+
+// LocalWords: API GenTargets RepreZen's GenEngine templating Xtend RAS gentargets MyModel RZ 
+// objectResource collectionResource getXxx gentemplate // LocalWords: GenEngines GenTemplate 
+// GenTemplates GenTarget ReferenceAPI MyModelObject MyModelCollection imagesdir linkattrs

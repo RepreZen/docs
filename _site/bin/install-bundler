@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+GEMCMD=gem
+if [[ $(uname -s) == Linux ]] ; then
+  GEMCMD="sudo gem"
+fi
+
+if ! hash bundle 2>/dev/null; then
+   if ! hash gem 2>/dev/null; then
+      newpath=$($(dirname $0)/install-ruby)
+      if [[ $newpath ]] ; then
+	  PATH="$newpath"
+      fi
+   fi
+   echo Installing Ruby Bundler > /dev/tty
+   $GEMCMD install bundler > /dev/tty
+   echo $newpath
+fi

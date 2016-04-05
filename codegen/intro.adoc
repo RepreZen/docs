@@ -1,0 +1,32 @@
+---
+permalink: /codegen_intro/
+---
+= Introduction to Code Generation in {RAS}
+RepreZen, Inc.
+October 2015
+:imagesdir: ../images/codegen
+:linkattrs:
+:docinfo2:
+:RAS: RepreZen API Studio 
+:RZ: RepreZen
+
+The code generation features of {RAS} create the bridge between richly specifying an API and building systems that use that API properly.
+
+A number of generators are built into the product and can be used immediately in any model project. Examples include (HTML) Documentation, Diagram,
+Swagger, JSON Schema, XML Schema, and many others. And since our goal is to make {RZ}'s unique approach to modeling as widely adoptable as possible,
+we will be adding more built-in generators in the future.
+
+However, it is also possible -- and relatively straightforward -- to create and share custom generators for your own needs.
+
+In this document we will cover basic concepts and see how to use code generation in {RAS}. We'll cover how to perform common tasks using wizards and
+other features of {RAS}, and we'll create a custom code generator to address a fictional but plausible requirement in a large enterprise.
+
+We'll finish with a brief run-down of some advanced features that will allow experienced Java developers to create more powerful generators.
+
+include::codegen/arch.adoc[]
+
+include::codegen/i_wizards.adoc[]
+
+// LocalWords:  API GenTargets RepreZen's GenEngine templating Xtend RAS gentargets MyModel RZ objectResource collectionResource getXxx gentemplate
+// LocalWords:  GenEngines GenTemplate GenTemplates GenTarget ReferenceAPI MyModelObject MyModelCollection imagesdir linkattrs
+
