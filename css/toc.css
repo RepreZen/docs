@@ -13,13 +13,13 @@ nav[data-toggle='toc'] {
   }
 }
 
-#toc .nav li a {
+#sidetoc .nav li a {
     padding-bottom: 2px;
     border-bottom: 1px solid #eee;
     padding-left: 10px;
 }
 
-#toc .nav ul {
+#sidetoc .nav ul {
     margin-left: 15px
 }
 
