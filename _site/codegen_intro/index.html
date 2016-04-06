@@ -31,6 +31,8 @@
   <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/docs/feed.xml">
 
   <script src="/docs/js/misc.js"></script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 </head>
 
   <body data-spy="scroll" data-targets="#toc">
@@ -180,9 +182,13 @@ built into RepreZen API Studio that relate to code generation.</p>
 <div class="sect2">
 <h3 id="reprezen-project">RepreZen Project</h3>
 <div class="paragraph">
-<p>The first wizard you are likely to encounter in RepreZen API Studio is the RepreZen Project wizard, which is one of
-the choices presented in the <em>New</em> &#8594; <em>Project&#8230;&#8203;</em> dialog. Selecting <em>RepreZen API Studio</em> / <em>RepreZen Project</em> in
-that dialog brings up the following window:</p>
+<p>The first wizard you are likely to encounter in RepreZen API Studio is the RepreZen Project wizard, which is available
+by selecting <em>RepreZen Project</em> in the <em>New</em>  menu.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/new-project-menu.png" alt="RepreZen New Project Menu">
+</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -190,34 +196,28 @@ that dialog brings up the following window:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that we have selected the option to create a Zen Model as part of the project creation. As a
-result, we have the opportunity to create an initial set of GenTargets for that model. If we were to
-check the "Create GenTargets" option, we could then create all of the offered GenTargets for our new
-model, or we could use the "Add" and "Remove" buttons to customize the list. The initial list
-contains some of the most popular GenTargets, but others will show up in the "Add" list&#8201;&#8212;&#8201;including
-any custom GenTemplates that are available.</p>
+<p>Note that we have selected the option to create a RAPID-ML or Swagger Model as part of the project
+creation. We therefore have the opportunity to equip that model with an initial set of GenTargets by
+checking the "Create GenTargets" option. Which GenTargets? Those named in the box: <em>Documentation</em>
+and <em>Swagger</em>, in this example. We used the <em>Remove</em> button to remove a few other options that are
+included in the factory-default settings.</p>
 </div>
 <div class="paragraph">
-<p>For this walk-through, we will select the Documentation and Swagger GenTargets.</p>
+<p>Once we click <em>OK</em> to crate the project, we can fully expand its folder tree in the Project
+Explorer:</p>
 </div>
-<div class="paragraph">
-<p>Once we have created the project, if we fully expand the folder tree in the Project Explorer, we see
-the following:</p>
-</div>
-<div class="openblock float-group">
-<div class="content">
-<div class="imageblock left rel thumb">
+<div class="imageblock text-center">
 <div class="content">
 <img src="../images/codegen/proj-structure.png" alt="RepreZen Project Structure">
 </div>
 </div>
 <div class="paragraph">
-<p>Here we see two top-level folders named <code>gentargets</code> and <code>models</code>. Naturally enough, the
-<code>MyModel.zen</code> file, which is where we will define our model, landed in the <code>models</code> folder, and we
-see both our initial GenTargets in the <code>MyModel</code> sub-folder of <code>gentargets</code>. The reason for the
-sub-folder is that each GenTarget applies to a specific model, and there might be multiple models in
-a single RepreZen project. In this case, we only have a single model named <code>MyModel</code>, and both targets
-apply to it.</p>
+<p>Within the <code>MyProject</code> project folder we see two top-level folders named <code>gentargets</code> and
+<code>models</code>. Naturally enough, the <code>MyModel.zen</code> file, which is where we will define our model, landed
+in the <code>models</code> folder, and we see both of our initial GenTargets in the <code>MyModel</code> sub-folder of
+<code>gentargets</code>. The reason for the sub-folder is that each GenTarget applies to a specific model, and
+there might be multiple models in a single RepreZen project. In this case, we only have a single model
+named <code>MyModel</code>, and both targets apply to it.</p>
 </div>
 <div class="paragraph">
 <p>Each GenTarget is represented as a folder with three files: <code>build.gradle</code>, <code>pom.xml</code>, and a <code>.gen</code>
@@ -227,11 +227,7 @@ file named after the GenTarget&#8217;s associated GenTemplate.</p>
 <p>The <code>build.gradle</code> and <code>pom.xml</code> files support command-line execution of their containing GenTargets
 (also known as "headless" code generation), using popular build tools
 <a href="http://gradle.org/" target="_blank">Gradle</a> and <a href="https://maven.apache.org/" target="_blank">Maven</a>,
-respectively. Headless execution is not covered in this guide, but it is fully documented in the
-{cgfordev}. That document also describes how to modify a GenTarget&#8217;s configuration by editing its
-<code>.gen</code> file.</p>
-</div>
-</div>
+respectively.</p>
 </div>
 </div>
 <div class="sect2">
@@ -240,10 +236,10 @@ respectively. Headless execution is not covered in this guide, but it is fully d
 <p>There are a couple of standard ways to execute GenTargets. First is the "Generate GenTargets"
 drop-down menu in the RepreZen API Studio tool bar:</p>
 </div>
-<div class="openblock float-group">
+<div class="imageblock text-center">
 <div class="content">
-<div class="paragraph">
-<p><span class="image left rel thumb"><img src="../images/codegen/gen-menu.png" alt="Generate GenTargets Menu"></span></p>
+<img src="../images/codegen/gen-menu.png" alt="Generate GenTargets Menu">
+</div>
 </div>
 <div class="paragraph">
 <p>You can select any of the listed options, and the corresponding GenTarget (or all of them if you
@@ -253,15 +249,16 @@ select the first option) will be executed.</p>
 <p>The other way to execute a GenTarget is from the context menu of the GenTarget in the Project
 Explorer.</p>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/gen-target-context-menu.png" alt="GenTarget Context Menu">
 </div>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s run the Swagger GenTarget and see what happens to our project. Here&#8217;s the fully-expanded
 Project Explorer pane after the GenTarget has completed:</p>
 </div>
-<div class="openblock float-group">
-<div class="content">
-<div class="imageblock left rel thumb">
+<div class="imageblock text-center">
 <div class="content">
 <img src="../images/codegen/proj-structure-after-gentarget.png" alt="Project Structure After GenTarget">
 </div>
@@ -273,18 +270,15 @@ two output files, due to Swagger&#8217;s support for both JSON and YAML formats.
 </div>
 <div class="paragraph">
 <p>In addition, we see a new file, <code>Swagger.trace.json</code>, that was also created under the <code>Swagger</code>
-GenTarget, but it&#8217;s not in the <code>generated</code> folder. This file contains <em>trace</em> information, which is
-discussed in the {cgfordev}.</p>
-</div>
-</div>
+GenTarget, but it&#8217;s not in the <code>generated</code> folder. This file contains <em>trace</em> information, which
+enables <em>chaining</em> of GenTargets&#8201;&#8212;&#8201;feeding the output of one GenTarget into another. We&#8217;ll see an
+example of GenTarget chaining later.</p>
 </div>
 <div class="paragraph">
 <p>If we now execute the Documentation GenTarget, we&#8217;ll see an additional twist. Here&#8217;s the partially
 expanded project tree that results:</p>
 </div>
-<div class="openblock float-group">
-<div class="content">
-<div class="imageblock left rel thumb">
+<div class="imageblock text-center">
 <div class="content">
 <img src="../images/codegen/proj-structure-doc-gen.png" alt="Project Structure After Document GenTarget">
 </div>
@@ -302,36 +296,25 @@ into the Documentation GenTemplate itself. Files that are copied in this fashion
 resources</em>.</p>
 </div>
 <div class="paragraph">
-<p>The {cgfordev} fully describes how to add static resources to a GenTemplate.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>In general, each GenTemplate defines any number of dynamic templates, and any number of static
-resources. Each template gives rise to a single file, and each resource gives rise to a
-folder. These output files and folders are all placed in the GenTarget&#8217;s output folder, which by
-default is a sub-folder named <code>generated</code>.</p>
+<p>In general, each GenTemplate gives rise to some number of <em>dynamic outputs</em> (files that depend on
+the model itself), and some number of static resources, all arranged in some folder hierarchy
+starting with the GenTarget&#8217;s output folder, which by default is named <code>generated</code>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="adding-a-gen-target-and-resolving-dependencies">Adding a Gen Target (and Resolving Dependencies)</h3>
-<div class="openblock float-group">
-<div class="content">
-<div class="imageblock left rel thumb">
+<div class="paragraph">
+<p>Now let&#8217;s look at how we can add GenTargets to an existing model. The easiest way is to click on the
+"Create a New Generation Target" tool in the RepreZen API Studio tool bar while we&#8217;re editing a model file or when
+a model file is active in the Project Explorer pane.</p>
+</div>
+<div class="imageblock text-center">
 <div class="content">
 <img src="../images/codegen/new-gentarget-tool.png" alt="Create a New Generation Target Tool">
 </div>
 </div>
 <div class="paragraph">
-<p>Now let&#8217;s look at how we can add GenTargets to an existing model. The easiest way is to click on the
-"Create a New Generation Target" tool in the RepreZen API Studio tool bar while we&#8217;re editing a model file or when
-a model file is active in the Project Explorer pane. We can also select <em>New</em> / <em>GenTarget</em> from the
-context menu when right-clicking a model file in the Project Explorer pane.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>This will bring up the following dialog box, where we can choose which GenTarget we wish to add.</p>
+<p>The following dialog box apperas, where we can choose which GenTarget we wish to add.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -350,20 +333,15 @@ and we can see what it means by clicking on the "Next" button, leading to anothe
 </div>
 <div class="paragraph">
 <p>This dialog is alerting us to the fact that the WADL GenTarget requires an XML Schema GenTemplate on
-the same model as a prerequisite.</p>
+the same model as a prerequisite. This is an example of GenTarget chaining mentioned earlier. In
+this case, the WADL GenTemplate has been designed to make use of trace information created by the
+standard XML Schema GenTemplate. To fully configure a WADL GenTarget, therefore, we must <em>resolve</em>
+the dependency by specifying an XML Schema GenTarget whose trace information will be used by the
+WADL GenTarget.</p>
 </div>
 <div class="paragraph">
-<p>GenTarget dependencies arise from GenTemplate Dependencies. If GenTemplate A has a dependency on
-GenTemplate B, it means that one of the input files required by A is an output produced by B. Any
-such dependency between GenTemplate gives rise to an analogous dependency among GenTargets. Details
-about GenTemplate dependencies are provided in the {cgfordev}. Here we will confine ourselves to
-understanding how GenTargets can be created when dependencies arise.</p>
-</div>
-<div class="paragraph">
-<p>Whenever you attempt to create a GenTarget with dependencies, you are asked to decide whether and
-how to <em>resolve</em> those dependencies&#8201;&#8212;&#8201;that is, identify or create other GenTargets to satisfy those
-dependencies. There are three possible resolution strategies that may appear in the selection menu
-appearing for each dependency listed in the GenTarget dependency dialog:</p>
+<p>There are three possible resolution strategies that may appear in the selection menu appearing for
+each dependency listed in the GenTarget dependency dialog:</p>
 </div>
 <div class="dlist">
 <dl>
@@ -377,29 +355,7 @@ be used to create yet more new GenTargets, and so forth.</p>
 </dd>
 <dt class="hdlist1">Do Not Resolve </dt>
 <dd>
-<p>This option defers resolution until some other time. Until that happens, the
-GenTarget is likely to fail. Unfortunately, there is currently no wizard-based help for resolving a
-deferred dependency at a later point in time. Therefore users who are not interested in learn the
-inner workings of GenTarget configuration (e.g. by perusing the {cgfordev}) are encouraged to avoid
-this option. Unfortunately, this is the default option when no existing GenTarget can satisfy the
-dependency, so failing to click "Next" in the initial dialog will result in a GenTarget that likely
-will not work.</p>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-"Do Not Resolve" is currently the default resolution strategy when no conforming GenTarget
-already exists. Users are encouraged to avoid clicking "Finish" on the first dialog box if the
-"Next" button is active, since that will apply these defaults. Rather the user should click "Next"
-to view the dependencies and ensure that none of the dependencies has "Do Not Resolve" as a
-resolution strategy.
-</td>
-</tr>
-</table>
-</div>
+<p>This is an advanced option that should not be used by most users.</p>
 </dd>
 <dt class="hdlist1">Use an Existing GenTarget </dt>
 <dd>
@@ -474,10 +430,10 @@ you would like to learn more, see the <a href="https://eclipse.org/xtend/documen
 <div class="sect3">
 <h4 id="a-look-at-the-initial-template">A Look At the Initial Template</h4>
 <div class="paragraph">
-<p>If we click on <code>MainTemplate.xtend</code> in the Project Explorer, we will see the source code in the main
-panel of RepreZen API Studio. We&#8217;ll take a look at that code, but just as much of what appears in the overall
-GenTemplate project is boilerplate, so also is some of the code in this file. We will currently
-restrict our attention purely to the Xtend template that appears within the file:</p>
+<p>If we double-click on <code>MainTemplate.xtend</code> in the Project Explorer, we will see the source code in
+the main panel of RepreZen API Studio. We&#8217;ll take a look at that code, but just as much of what appears in the
+overall GenTemplate project is boilerplate, so also is some of the code in this file. We will
+currently restrict our attention purely to the Xtend template that appears within the file:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -487,8 +443,8 @@ restrict our attention purely to the Xtend template that appears within the file
 <div class="paragraph">
 <p>The template starts and ends with three consecutive apostrophes. The initial content of the template
 will generate a very simple HTML file that includes the name of your model in its title and displays
-bulleted list of the resource APIs defined in your model. Of course, that&#8217;s not what we need for our
-Lexicon export, but the wizard has provided a working example that we can change to suit our
+a bulleted list of the resource APIs defined in your model. Of course, that&#8217;s not what we need for
+our Lexicon export, but the wizard has provided a working example that we can change to suit our
 needs. We&#8217;ll use it to take our first look at Xtend, and then we&#8217;ll replace it with the template we
 need for our CSV file.</p>
 </div>
@@ -518,11 +474,12 @@ of that expression will appear in the output to take the place of the interpolat
 <div class="paragraph">
 <p>In our case, we have <code>&laquo;model.name&raquo;</code>. When RepreZen API Studio applies this template to a model, a
 variable named <code>model</code> will represent the model itself, in the form of an object of type
-<code>ZenModel</code>. The <code>ZenModel</code> class contains a number of properties, one of which is the model&#8217;s
-name. The Xtend expression <code>model.name</code> yields the model&#8217;s name, and that name is what replaces
-<code>&laquo;model.name&raquo;</code> in the output file. Therefore, if we use this GenTemplate on the model we
-created above, the generated HTML file will have as its title "Sample Generated HTML for MyModel,"
-thanks to the interpolation construct on line 12.</p>
+<code>ZenModel</code>.<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup> The <code>ZenModel</code> class contains
+a number of properties, one of which is the model&#8217;s name. The Xtend expression <code>model.name</code> yields
+the model&#8217;s name, and that name is what replaces <code>&laquo;model.name&raquo;</code> in the output
+file. Therefore, if we use this GenTemplate on the model we created above, the generated HTML file
+will have as its title "Sample Generated HTML for MyModel," thanks to the interpolation construct on
+line 12.</p>
 </div>
 <div class="paragraph">
 <p>Next, we have two instances of the Xtend loop construct, one covering lines 18-22, and another
@@ -570,7 +527,7 @@ created it as a working sample model with one resource API, named <code>MyModelA
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="2"></strong> thru <strong class="conum" data-value="4"></strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>The second loop introduces a new variable, <code>resource</code>, that will represent, in turn, each of the
-resources defined in whichever resource API is currently represented by the <code>resourceAPI</code>
+Resources defined in whichever Resource API is currently represented by the <code>resourceAPI</code>
 variable. These are obtained via the <code>ownedResourceDefinitions</code> property of the <code>ResourceAPI</code> class.</p>
 </div>
 <div class="admonitionblock note">
@@ -591,13 +548,13 @@ an object resource named <code>MyModelObject</code>, and a collection resource n
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="3"></strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>Finally, we have an interpolation construct that emits the name of whichever resource is currently
- bound to the <code>resource</code> variable, as a list item.</p>
+ bound to the <code>resource</code> variable, in an HTML list item.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The upshot of these two loops is that the names of all the resources defined by all the resource
+<p>The upshot of these two loops is that the names of all the Resources defined by all the Resource
 APIs in our model will appear in an itemized list. In our case, in our untouched model, we have a
 single resource API named <code>MyModelAPI</code>, with two resources named <code>objectResource</code> and
 <code>collectionResource</code>. Our itemized list will contain those two resource names.</p>
@@ -700,7 +657,7 @@ as a whole, by adding the following line to our template:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«model.name»,Model,,,«model.name»,</code></pre>
+<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«model.name»,Model,,,«model.name»,«model.documentation.text»</code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -722,27 +679,36 @@ appear to work on OS X.)
 <div class="paragraph">
 <p>Our model name will appear in the first column of this record, and "Model" will appear in the
 second. Our model has no parent, so the parent fields are left blank. The model in which our model
-appears is, of course, our model; so we repeat the model name in the "Model" column. There is
-currently no way to provide any overall documentation for a RepreZen model as a whole, so the
-documentation column is blank.</p>
+appears is, of course, our model; so we repeat the model name in the "Model" column.</p>
+</div>
+<div class="paragraph">
+<p>There is one problem with this line: If the model lacks top-level documentation, this GenTemplate
+will fail. The problem isthat in that case, <code>model.documentation</code> will have a null value, and
+therefore, trying to retrieve its <code>text</code> property will fail.</p>
+</div>
+<div class="paragraph">
+<p>Fortunately, Xtend includes an extremely useful "guard" syntax to avoid references to properties of
+null values: instead of <code>model.documentation.text</code> we can write <code>model.documentation?.text</code>. The
+question mark causes a following property access to be ignored if the prior value happens to be
+null. In that case, the value of the overall expression is null. The whole expression is equivalent
+to the following java expression:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-java" data-lang="java">model.documentation != null ? model.documentation.text : null</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this modification, this line in our template now reads:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«model.name»,Model,,,«model.name»,«model.documentation?.text»</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Next, we&#8217;ll create records for all the resource APIs defined in our model, using the same
 <code>resourceAPIs</code> property of <code>ZenModel</code> as we saw in the initial template:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«FOR resourceAPI: model.resourceAPIs»
-  «resourceAPI.name»,ResourceAPI,«model.name»,Model,«model.name»,«resourceAPI.documentation.text»
-«ENDFOR»</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Everything should be fairly self-explanatory in this line, but there is a problem. If any resource
-API is missing documentation, this GenTemplate will fail. The problem is that in that case,
-<code>resourceAPI.documentation</code> will have a null value, and therefore, trying to retrieve its <code>text</code>
-property will fail. We&#8217;ll ignore this issue for now, but we&#8217;ll address it <a href="#Fixing the Documentation
-Issue">later</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -752,12 +718,22 @@ Issue">later</a>.</p>
 </td>
 <td class="content">
 The sample model created by the RepreZen Project wizard does not include any documentation
-comments, so the <code>Documentation</code> column will always be empty, even once we fix the documentation
-issue. You can add comments of the form <code>/** documentation here */</code> in front of many of the model
+comments, so the <code>Documentation</code> column will always be empty when our template is applied to that
+model. You can add comments of the form <code>/** documentation here */</code> in front of many of the model
 elements, and they will be picked up by our template.
 </td>
 </tr>
 </table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«FOR resourceAPI: model.resourceAPIs»
+  «resourceAPI.name»,ResourceAPI,«model.name»,Model,«model.name»,«resourceAPI.documentation?.text»
+«ENDFOR»</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Everything should be fairly self-explanatory in this line.</p>
 </div>
 <div class="paragraph">
 <p>We also want records for all the resources defined for each resource API. For this we&#8217;ll want
@@ -767,7 +743,7 @@ template. We&#8217;ll use something like this:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«FOR resource: resourceAPI.ownedResourceDefinitions»
-  «resource.name»,???,«resourceAPI.name»,ResourceAPI,«model.name»,«resource.documentation.text»
+  «resource.name»,???,«resourceAPI.name»,ResourceAPI,«model.name»,«resource.documentation?.text»
 «ENDFOR»</code></pre>
 </div>
 </div>
@@ -869,30 +845,6 @@ additional items for our lexicon, including resource methods and their parameter
 their properties, and so forth.</p>
 </div>
 <div class="sect4">
-<h5 id="fixing-the-documentation-issue">Fixing the Documentation Issue</h5>
-<div class="paragraph">
-<p>Now let&#8217;s fix that problem we had with documentation. To recap, the expression we want to use to
-access it, <code>xxx.documentation.text</code>, causes the entire template to fail if the documentation is
-missing. In that case <code>xxx.documentation</code> has the value <code>null</code>, and <code>null</code> has no properties, let
-alone a <code>text</code> property.</p>
-</div>
-<div class="paragraph">
-<p>We can off-load the task of obtaining documentation to a separate method, which we will design so
-that it works on any object that implements the <code>Documentable</code> interface:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">def getDoc(Documentable item) {
-  '''«IF item.documentation !=null»«item.documentation.text»«ENDIF»'''
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Then instead of the brittle <code>xxx.documentation.text</code>, we can use <code>xxx.doc</code> in our templates to yield
-the documentation, if it exists, or nothing if it does not.</p>
-</div>
-</div>
-<div class="sect4">
 <h5 id="our-finished-template">Our Finished Template</h5>
 <div class="paragraph">
 <p>With this we can now show our final version of <code>MainTemplate.xtend</code>:</p>
@@ -912,7 +864,6 @@ case you want to use it to try things out in RepreZen API Studio:</p>
 
 import com.modelsolv.reprezen.generators.api.zenmodel.ZenModelOutputItem
 import com.modelsolv.reprezen.restapi.CollectionResource
-import com.modelsolv.reprezen.restapi.Documentable
 import com.modelsolv.reprezen.restapi.ObjectResource
 import com.modelsolv.reprezen.restapi.ResourceDefinition
 import com.modelsolv.reprezen.restapi.ZenModel
@@ -921,11 +872,11 @@ class MainTemplate extends ZenModelOutputItem {
     override generate(ZenModel model) {
         '''
             Name,Type,Parent,ParentType,Model,Documentation
-            «model.name»,Model,,,«model.name»,
+            «model.name»,Model,,,«model.name»,«model.documentation?.text»,
             «FOR resourceAPI : model.resourceAPIs»
-                «resourceAPI.name»,ResourceAPI,«model.name»,Model,«model.name»,«resourceAPI.doc»
+                «resourceAPI.name»,ResourceAPI,«model.name»,Model,«model.name»,«resourceAPI.documentation?.text»
                 «FOR resource : resourceAPI.ownedResourceDefinitions»
-                    «resource.name»,«resource.type»,«resourceAPI.name»,ResourceAPI,«model.name»,«resource.doc»
+                    «resource.name»,«resource.type»,«resourceAPI.name»,ResourceAPI,«model.name»,«resource.documentation?.text»
                 «ENDFOR»
             «ENDFOR»
         '''
@@ -939,10 +890,6 @@ class MainTemplate extends ZenModelOutputItem {
                 »ObjectResource«
             ENDIF
         »'''
-    }
-
-    def getDoc(Documentable item) {
-        '''«IF item.documentation != null»«item.documentation.text»«ENDIF»'''
     }
 }</code></pre>
 </div>
@@ -989,8 +936,8 @@ MyModelCollection,CollectionResource,MyModelAPI,ResourceAPI,MyModel,</code></pre
 <td class="content">
 As mentioned earlier, the default model created by RepreZen API Studio does not include any documentation, so
 the <code>Documentation</code> column is empty in this file. However, if you were to add documentation to the
-<code>MyModelAPI</code> resource API or to either of its resources, you would see that documentation in the
-resulting file.
+model, or the <code>MyModelAPI</code> resource API, or to either of its resources, you would see that
+documentation in the resulting file.
 </td>
 </tr>
 </table>
@@ -1004,8 +951,10 @@ resulting file.
 <td class="content">
 We have not taken care to quote items in our generated CSV file, so if we had commas or
 multiple lines in any documentation string, we would end up with a broken or unreadable CSV file. We
-could quite easily extend our <code>getDoc</code> method to properly quote the documentation string no matter
-what its contents.
+could define a method to quote our documentation as required for inclusion in a CSV file, and invoke
+that method with something like <code>xxx.documentation?.text?.quote</code>. (Alternatively, we could define a
+method called <code>getDoc</code> that performs the <code>documentation?.text</code> access as well as quoting the result,
+and then replace our documentation expressions with <code>xxx.doc</code>.)
 </td>
 </tr>
 </table>
@@ -1018,13 +967,16 @@ what its contents.
 <div id="footnotes">
 <hr>
 <div class="footnote" id="_footnote_1">
-<a href="#_footnoteref_1">1</a>. Note that the Xtend language is very nearly a superset of Java, so if you are a Java programmer you can use most of what you know in your Xtend classes. And you can intermingle pure Java classes at will, and use all available Java libraries with without any compatibility issues. This is guaranteed by the fact that Xtend classes are not actually compiled, but are rather transformed into pure Java classes, which are then compiled by the Java compiler.
+<a href="#_footnoteref_1">1</a>. Note that the Xtend language is very nearly a superset of Java, so if you are a Java programmer you can use most of what you know in your Xtend classes. And you can intermingle pure Java classes at will, and use all available Java libraries without any compatibility issues. This is guaranteed by the fact that Xtend classes are not actually compiled, but are rather transformed into pure Java classes, which are then compiled by the Java compiler.
 </div>
 <div class="footnote" id="_footnote_2">
 <a href="#_footnoteref_2">2</a>. Building on the footnote regarding Xtend in the context of GenEngine, we can further point out that it is perfectly possible to code an Xtend GenTemplate completely in Java. Indeed, some of the GenTemplates built into RepreZen API Studio are pure Java.
 </div>
 <div class="footnote" id="_footnote_3">
-<a href="#_footnoteref_3">3</a>. The {cgfordev} explains how to change the name of our GenTemplate, as well as how to create additional GenTemplates in the same project. The wizard presently is not currently capable of adding a GenTemplate to an existing project.
+<a href="#_footnoteref_3">3</a>. The wizard is not currently capable of adding a new GenTemplate to an existing project, but that can be done manually.
+</div>
+<div class="footnote" id="_footnote_4">
+<a href="#_footnoteref_4">4</a>. The name <code>ZenModel</code> reflects old terminology related to RAPID-ML models. Some of our APIs have not yet been updated to reflect our new terminology.
 </div>
 </div>
 	</div>

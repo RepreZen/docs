@@ -46,3 +46,7 @@ li.video-series a {
     text-decoration: none;
 }
 
+/************ AsciiDoc Content ************/
+.imageblock img { /* shadows on image block images */
+    box-shadow: 10px 10px 5px #888;
+}
