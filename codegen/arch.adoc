@@ -12,7 +12,7 @@ generation technology, such as a templating engine. {RAS} currently comes with a
 which supports the http://xtend-lang.org[Xtend,window=_blank] templating language.footnote:[Note
 that the Xtend language is very nearly a superset of Java, so if you are a Java programmer you can
 use most of what you know in your Xtend classes. And you can intermingle pure Java classes at will,
-and use all available Java libraries with without any compatibility issues. This is guaranteed by
+and use all available Java libraries without any compatibility issues. This is guaranteed by
 the fact that Xtend classes are not actually compiled, but are rather transformed into pure Java
 classes, which are then compiled by the Java compiler.]
 +
