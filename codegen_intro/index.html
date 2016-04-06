@@ -25,28 +25,75 @@
   <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.js"></script>
 
   <link rel="stylesheet" href="/docs/css/asciidoc.css">
-  <link rel="stylesheet" href="/docs/css/toc.css">
+  <link rel="stylesheet" href="/docs/css/misc.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-
-  <script src="/docs/js/jquery.cookie.min.js"></script>
-  <script src="/docs/js/jquery.navgoco.min.js"></script>
-  <link rel="stylesheet" href="/docs/css/jquery.navgoco.css">
-
   <link rel="canonical" href="http://reprezen.github.io/docs/codegen_intro/">
   <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/docs/feed.xml">
 
-  <script src="/docs/js/ready.js"></script>
+  <script src="/docs/js/misc.js"></script>
 </head>
 
   <body data-spy="scroll" data-targets="#toc">
     <div class="container">
-      <div class="row">
-	<div class="col-sm-2 sidemenu nav">
-	  
-<ul><li><a href="#" >Code Generation</a><ul><li><a href="/docs/codegen_intro/" >Introduction</a></li></ul></li><li><a href="#" >Training Videos</a><ul><li><a href="https://www.youtube.com/channel/UCNwqDgngCot722zwHse5UTg" target="_blank">RepreZen YouTube Channel</a></li><li><a href="#" >Working with RepreZen API Studio</a><ul><li><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank"><em>Play All</em></a></li><li><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&index=1&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Introducing RepreZen API Studio</a></li><li><a href="https://www.youtube.com/watch?v=UsrsyEVO914&index=2&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RepreZen API Studio & Swagger</a></li><li><a href="https://www.youtube.com/watch?v=KX_tHp_KQkE&index=3&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Editing Swagger-OpenAPI in RepreZen API Studio</a></li><li><a href="https://www.youtube.com/watch?v=sSIX-A4ru7E&index=4&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Test-drive your Swagger-OpenAPI model in RepreZen API Studio</a></li><li><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=5&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RAPID-ML</a></li><li><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=6&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li><li><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=7&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Realization Modeling with RAPID-ML</a></li></ul></li><li><a href="#" >RAPID-ML</a><ul><li><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=1&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Getting Started with RAPID-ML</a></li><li><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=2&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li><li><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=3&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Realization Modeling with RAPID-ML</a></li><li><a href="https://www.youtube.com/watch?v=wYimccfMbAo&index=4&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Introducing the RAPID-ML Ready! API Plugin</a></li></ul></li></ul></li></ul>
+      <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand"><img src="/docs/images/reprezen-logo.png" height="10"/> Documentation Portal</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Core Documentation <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+	    <li><a href="http://rapid-api.org/rapid-ml/spec/current/desktop/" target="_blank">RAPID-ML Language Specification</a></li>
+<li><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf" target="_blank">RAPID-ML Quick Reference Guide</a></li>
 
-	</div>
-	<div class="col-sm-9">
+	  </ul>
+	</li>
+	<li class="dropdown">
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Code Gen<span class="caret"></span></a>
+	  <ul class="dropdown-menu">
+	    <li><a href="/docs/codegen_intro/">Introduction</a></li>
+
+	  </ul>
+	</li>
+	<li class="dropdown">
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Training Videos<span class="caret"></span></a>
+	  <ul class="dropdown-menu">
+	    <li><a href="https://www.youtube.com/channel/UCNwqDgngCot722zwHse5UTg" target="_blank">RepreZen YouTube Channel</a></li>
+<li role="separator" class="divider"></li>
+<li class="video-series"><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg">Play Series: Working with RepreZen API Studio</a></li>
+<li><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&index=1&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Introducing RepreZen API Studio</a></li>
+<li><a href="https://www.youtube.com/watch?v=UsrsyEVO914&index=2&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RepreZen API Studio & Swagger</a></li>
+<li><a href="https://www.youtube.com/watch?v=KX_tHp_KQkE&index=3&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Editing Swagger-OpenAPI in RepreZen API Studio</a></li>
+<li><a href="https://www.youtube.com/watch?v=sSIX-A4ru7E&index=4&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Test-drive your Swagger-OpenAPI model in RepreZen API Studio</a></li>
+<li><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=5&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RAPID-ML</a></li>
+<li><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=6&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+<li><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=7&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Realization Modeling with RAPID-ML</a></li>
+<li role="separator" class="divider"></li>
+<li class="video-series"><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO">Play Series: RAPID-ML</a></li>
+<li><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=1&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Getting Started with RAPID-ML</a></li>
+<li><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=2&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+<li><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=3&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Realization Modeling with RAPID-ML</a></li>
+<li><a href="https://www.youtube.com/watch?v=wYimccfMbAo&index=4&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Introducing the RAPID-ML Ready! API Plugin</a></li>
+
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+      <div class="row">
+	<div class="col-sm-10">
 	  <h1>Introduction to Code Generation in RepreZen API Studio</h1>
 	  <div id="preamble">
 <div class="sectionbody">
@@ -981,18 +1028,10 @@ what its contents.
 </div>
 </div>
 	</div>
-	<div class="col-sm-1">
+	<div class="col-sm-2">
 	  <nav id="sidetoc" data-spy="affix" data-toggle="toc"></nav>
 	</div>
       </div>
     </div>
-    <footer class="site-footer">
-
-  <div class="wrapper">
-
-  </div>
-
-</footer>
-
   </body>
 </html>
