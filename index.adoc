@@ -1,8 +1,18 @@
 ---
-title: RepreZen End-User Documentation
+title: RepreZen Documentation Portal
 type: homepage
-toc: false
 permalink: /
 ---
 
-Stay tuned as we begin to publish to this site, beginning with comprehensive documentation on the extensive Code Generation capabilities of RepreZen API Studio!
+Available Documentation:
+
+{% for area in site.data.content_tree.areas %}
+== {{ area.name }}
+{% for article in area.articles %}
+{% if article.type == "external" %}
+* link:{{ article.url }}[{{article.title}}^]
+{% elsif article.type == "internal" %}
+* link:{{ article.url | prepend: site.baseurl }}[{{ article.title }}]
+{% endif %}
+{% endfor %}
+{% endfor %}

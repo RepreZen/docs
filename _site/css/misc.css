@@ -25,27 +25,30 @@ nav[data-toggle='toc'] {
     margin-left: 15px
 }
 
-/************ Header Elements ****************/
+/************ Nav Bar  Elements ****************/
 li.video-series a {
     font-weight: bold;
     background-color: lightgray;
     color: white;
 }
 
-
 .navbar {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 .navbar-brand img {
     height: 35px;
-    margin-top: -4px;
-    display: inline;
+    margin-top: -7px;
+    padding-right: 5px;
+    float: left;
 }
 
 .navbar a {
     text-decoration: none;
 }
 
+body { /* make room for fixed navbar */
+    padding-top: 70px;
+}
 /************ AsciiDoc Content ************/
 .imageblock img { /* shadows on image block images */
     box-shadow: 10px 10px 5px #888;
