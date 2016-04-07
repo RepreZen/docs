@@ -13,6 +13,9 @@ areas:
   - title: Introduction
     url: /codegen_intro/
     type: internal
+  - title: Sharing GenTemplates
+    url: /codegen_sharing/
+    type: internal
 - name: Training Videos
   articles:
   - title: RepreZen YouTube Channel

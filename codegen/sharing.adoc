@@ -1,0 +1,72 @@
+---
+permalink: /codegen_sharing/
+---
+= Sharing GenTemplates
+:imagesdir: ../images/codegen
+:linkattrs:
+:docinfo2:
+:RAS: RepreZen API Studio 
+:RZ: RepreZen
+
+
+When you create a custom GenTemplate, you may wish to share it with others -- team members,
+customers, etc. This is easy to do with {RAS}. Currently, you can share GenTemplates by packaging
+them as jar files, or you can share your GenTemplate projects in external repositories like
+GitHub.
+
+In the future we intend to make it possible to use GenTemplates published to Maven repositories.
+
+== Sharing Jar Files
+
+One way to share a GenTemplate is to package it as a Java jar file and then share that jar file.
+
+To create a jar file, right click on the GenTemplate project folder in the Project Explorer pane,
+and select _Run As -> Maven build..._:
+
+image::maven-build.png[Running Maven build on a GenTemplate project,role=text-center]
+
+In the dialog that appears, type `package` in the _Goals_ field, and press _Run_.
+
+image::maven-build-dialog.png[Maven Build Dialog,role=text-center]
+
+TIP: If you are familiar with using Eclipse for Java development, you may wish to switch to the
+_Java_ perspective while working on GenTemplate projects. One benefit is that the standard _Run_
+tool will be present in the toolbar, making it easy to re-run this packaging step at any time.
+
+{RAS} will create a jar file in your project's `target` folder:
+
+image::maven-build-target-jar.png[Jar file produced by Maven,role=text-center]
+
+TIP: If you are unable to open your `target` folder, try refreshing it by typing _F5_ when the
+folder is selected.
+
+You can now copy the new jar file and paste a copy anywhere you'd like, either within the {RAS}
+Project Explorer or in your system's file explorer. You can also use drag-and-drop to copy the jar
+file, and there are many applications that can serve as drop targets, including many email
+applications, cloud storage solutions like Google Drive and Dropbox, and so on.
+
+== Using Packaged GenTemplates
+
+If you create or obtain a GenTemplate packaged as a Jar file and you want to use to create
+GenTargets in your model projects, you have two simple options:
+
+1. Copy the jar file into your model project's `lib` folder.
+2. Copy the jar file into a the `GenTemplates` folder in a project named `shared` in your {RAS} workspace.
+
+The first option makes the GenTemplates in the jar file available for use with all the models in
+that model project, but not models in other projects. The second option makes those GenTemplates
+available in all your model projects.
+
+Either way, you'll need to create the indicated project and/or folder if they don't already exist.
+
+TIP: If you need to create a `shared` project, select _File -> New -> Project_ in the menu bar, then
+choose _General -> Project_ in the New Project dialog.
+
+With your jar file in either location, {RAS} will find any GenTemplates it contains, and you will
+find those GenTemplates available for use.
+
+TIP: You can change the location of the shared folder in the RepreZen preferences. Select _Window ->
+Preferences_ in the menu bar, and then navigate to _RepreZen -> Code Generation_ and enter your
+desired path. If you start your path with `${workspace_loc}`, as with the factory default, your path
+will be resolved within your {RAS} workspace. But you can leave that off and specify a path anywhere
+in your system.
