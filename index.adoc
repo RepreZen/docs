@@ -13,6 +13,8 @@ Available Documentation:
 * link:{{ article.url }}[{{article.title}}^]
 {% elsif article.type == "internal" %}
 * link:{{ article.url | prepend: site.baseurl }}[{{ article.title }}]
+{% elsif article.type == "separator" %}
+'''
 {% endif %}
 {% endfor %}
 {% endfor %}
