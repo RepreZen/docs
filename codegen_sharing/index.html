@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>RepreZen Documentation Portal</title>
+  <title>Sharing GenTemplates</title>
   <meta name="description" content="">
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="/docs/css/asciidoc.css">
   <link rel="stylesheet" href="/docs/css/misc.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="canonical" href="http://reprezen.github.io/docs/">
+  <link rel="canonical" href="http://reprezen.github.io/docs/codegen_sharing/">
   <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/docs/feed.xml">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
@@ -180,98 +180,143 @@
 
       <div class="row">
 	<div class="col-sm-10">
-	  <h1>RepreZen Documentation Portal</h1>
-	  <div class="paragraph">
-<p>Available Documentation:</p>
-</div>
-<div class="sect1">
-<h2 id="core-docs">Core Docs</h2>
+	  <h1>Sharing GenTemplates</h1>
+	  <div id="preamble">
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="http://rapid-api.org/rapid-ml/spec/current/desktop/" target="_blank">RAPID-ML Language Specification</a></p>
-</li>
-<li>
-<p><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf" target="_blank">RAPID-ML Quick Reference Guide</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>When you create a custom GenTemplate, you may wish to share it with others&#8201;&#8212;&#8201;team members,
+customers, etc. This is easy to do with RepreZen API Studio. Currently, you can share GenTemplates by packaging
+them as jar files, or you can share your GenTemplate projects in external repositories like
+GitHub.</p>
+</div>
+<div class="paragraph">
+<p>In the future we intend to make it possible to use GenTemplates published to Maven repositories.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="code-gen">Code Gen</h2>
+<h2 id="sharing-jar-files">Sharing Jar Files</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="/docs/codegen_intro/">Introduction</a></p>
-</li>
-<li>
-<p><a href="/docs/codegen_sharing/">Sharing GenTemplates</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>One way to share a GenTemplate is to package it as a Java jar file and then share that jar file.</p>
+</div>
+<div class="paragraph">
+<p>To create a jar file, right click on the GenTemplate project folder in the Project Explorer pane,
+and select <em>Run As &#8594; Maven build&#8230;&#8203;</em>:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/maven-build.png" alt="Running Maven build on a GenTemplate project">
+</div>
+</div>
+<div class="paragraph">
+<p>In the dialog that appears, type <code>package</code> in the <em>Goals</em> field, and press <em>Run</em>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/maven-build-dialog.png" alt="Maven Build Dialog">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you are familiar with using Eclipse for Java development, you may wish to switch to the
+<em>Java</em> perspective while working on GenTemplate projects. One benefit is that the standard <em>Run</em>
+tool will be present in the toolbar, making it easy to re-run this packaging step at any time.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>RepreZen API Studio will create a jar file in your project&#8217;s <code>target</code> folder:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/maven-build-target-jar.png" alt="Jar file produced by Maven">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you are unable to open your <code>target</code> folder, try refreshing it by typing <em>F5</em> when the
+folder is selected.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can now copy the new jar file and paste a copy anywhere you&#8217;d like, either within the RepreZen API Studio
+Project Explorer or in your system&#8217;s file explorer. You can also use drag-and-drop to copy the jar
+file, and there are many applications that can serve as drop targets, including many email
+applications, cloud storage solutions like Google Drive and Dropbox, and so on.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="training-videos">Training Videos</h2>
+<h2 id="using-packaged-gentemplates">Using Packaged GenTemplates</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.youtube.com/channel/UCNwqDgngCot722zwHse5UTg" target="_blank">RepreZen YouTube Channel</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>If you create or obtain a GenTemplate packaged as a Jar file and you want to use to create
+GenTargets in your model projects, you have two simple options:</p>
 </div>
-<hr>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&amp;list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Play Series: Working with RepreZen API Studio</a></p>
+<p>Copy the jar file into your model project&#8217;s <code>lib</code> folder.</p>
 </li>
 <li>
-<p><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&amp;index=1&amp;list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Introducing RepreZen API Studio</a></p>
+<p>Copy the jar file into a the <code>GenTemplates</code> folder in a project named <code>shared</code> in your RepreZen API Studio workspace.</p>
 </li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=UsrsyEVO914&amp;index=2&amp;list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RepreZen API Studio &amp; Swagger</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=KX_tHp_KQkE&amp;index=3&amp;list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Editing Swagger-OpenAPI in RepreZen API Studio</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=sSIX-A4ru7E&amp;index=4&amp;list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Test-drive your Swagger-OpenAPI model in RepreZen API Studio</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&amp;index=5&amp;list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RAPID-ML</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=HeQrQje8lww&amp;index=6&amp;list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&amp;index=7&amp;list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Realization Modeling with RAPID-ML</a></p>
-</li>
-</ul>
+</ol>
 </div>
-<hr>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&amp;list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Play Series: RAPID-ML</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&amp;index=1&amp;list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Getting Started with RAPID-ML</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=HeQrQje8lww&amp;index=2&amp;list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&amp;index=3&amp;list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Realization Modeling with RAPID-ML</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=wYimccfMbAo&amp;index=4&amp;list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Introducing the RAPID-ML Ready! API Plugin</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>The first option makes the GenTemplates in the jar file available for use with all the models in
+that model project, but not models in other projects. The second option makes those GenTemplates
+available in all your model projects.</p>
+</div>
+<div class="paragraph">
+<p>Either way, you&#8217;ll need to create the indicated project and/or folder if they don&#8217;t already exist.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you need to create a <code>shared</code> project, select <em>File &#8594; New &#8594; Project</em> in the menu bar, then
+choose <em>General &#8594; Project</em> in the New Project dialog.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With your jar file in either location, RepreZen API Studio will find any GenTemplates it contains, and you will
+find those GenTemplates available for use.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can change the location of the shared folder in the RepreZen preferences. Select <em>Window &#8594;
+Preferences</em> in the menu bar, and then navigate to <em>RepreZen &#8594; Code Generation</em> and enter your
+desired path. If you start your path with <code>${workspace_loc}</code>, as with the factory default, your path
+will be resolved within your RepreZen API Studio workspace. But you can leave that off and specify a path anywhere
+in your system.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
