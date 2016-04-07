@@ -320,6 +320,93 @@ in your system.
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="using-gentemplate-projects-pulished-to-github">Using GenTemplate Projects Pulished to GitHub</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Many developers now use GitHub to maintain source code for their projects and, in some cases, to
+make that code available to others. If you publish a RepreZen API Studio GenTemplate project on GitHub, others
+have the option of importing your project into their own workspace, thereby making your GenTemplates
+available for use on all models in that workspace.</p>
+</div>
+<div class="paragraph">
+<p>If you are the publisher of a GenTemplate project in this scenario, you are presumably familiar with
+the steps necessary to set up and publish to GitHub, so we will focus on the steps required to
+import such a project.</p>
+</div>
+<div class="paragraph">
+<p>You can follow along with the steps below to import the GenTemplate that is developed in <a href="/docs/codegen_intro/">Introduction to Code Generation in RepreZen API Studio</a></p>
+</div>
+<div class="paragraph">
+<p>Everything starts with <em>File &#8594; Import&#8230;&#8203;</em> in the RepreZen API Studio menu bar. Select <em>Git &#8594; Projects from Git</em>
+in the dialog that appears, then click <em>Next</em>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/import-git-project.png" alt="Import Dialog">
+</div>
+</div>
+<div class="paragraph">
+<p>In the next panel, select <em>Clone URI</em> and click <em>Next</em>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/import-git-clone-uri.png" alt="Import Dialog Step 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Next, in the <em>URI</em> field, enter the URI for the GitHub repository that contains the project you want
+to use. In our case we&#8217;ll use the repository that contains all the source material for this
+documentation portal, including the an example GenTemplate project. After you enter the URI, click
+<em>Next</em>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/import-git-enter-uri.png" alt="Import Dialog Step 3">
+</div>
+</div>
+<div class="paragraph">
+<p>Note that in the above dialog, when you fill in the <em>URI</em> field, the other fields are filled in automatically.</p>
+</div>
+<div class="paragraph">
+<p>The next panel allows you to select which branches of the repository you want to download. You will
+usually need only the "master" branch, but it is harmless to download other branches. Make your
+selection and click <em>Next</em>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/import-git-choose-branches.png" alt="Import Dialog Step 4">
+</div>
+</div>
+<div class="paragraph">
+<p>The next panel is where you can decide where you want to copy the repository on your local
+system. There will generally be an acceptable default location, and you probably don&#8217;t need to
+change anything else. Click <em>Next</em>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/import-git-choose-dest.png" alt="Import Dialog Step 5">
+</div>
+</div>
+<div class="paragraph">
+<p>Use the default option in the next panel, and click <em>Next</em>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/import-git-import-type.png" alt="Import Dialog Step 6">
+</div>
+</div>
+<div class="paragraph">
+<p>In the next panel, RepreZen API Studio shows you a list of the importable projects it was able to find in the
+downloaded repository. If you&#8217;re following along with this example, you&#8217;ll see only one project -
+<code>LexiconGentemplates</code>. Make your selections and press <em>Finish</em> (finally)!</p>
+</div>
+<div class="paragraph">
+<p>After a few moments, while RepreZen API Studio automatically builds the project, the imported GenTemplates will be
+available for your use.</p>
+</div>
+</div>
+</div>
 	</div>
 	<div class="col-sm-2 ">
 	  <nav id="sidetoc" data-spy="affix" data-toggle="toc" class="hidden-xs"></nav>
