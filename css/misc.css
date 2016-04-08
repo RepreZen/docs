@@ -1,0 +1,55 @@
+/********** Bidirectionally Synced TOC **********/
+nav[data-toggle='toc'] {
+  margin-top: 30px;
+}
+
+/* small screens */
+@media (max-width: 768px) {
+  /* override the Affix plugin so that the navigation isn't sticky */
+  nav.affix[data-toggle='toc'] {
+    position: static;
+  }
+  nav[data-toggle='toc'] .nav .nav {
+    display: block;
+  }
+}
+
+#sidetoc .nav li a {
+    padding-bottom: 2px;
+    border-bottom: 1px solid #eee;
+    padding-left: 10px;
+    border-radius: 3px;
+}
+
+#sidetoc .nav ul {
+    margin-left: 15px
+}
+
+/************ Nav Bar  Elements ****************/
+li.video-series a {
+    font-weight: bold;
+    background-color: lightgray;
+    color: white;
+}
+
+.navbar {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.navbar-brand img {
+    height: 35px;
+    margin-top: -7px;
+    padding-right: 5px;
+    float: left;
+}
+
+.navbar a {
+    text-decoration: none;
+}
+
+body { /* make room for fixed navbar */
+    padding-top: 70px;
+}
+/************ AsciiDoc Content ************/
+.imageblock img { /* shadows on image block images */
+    box-shadow: 10px 10px 5px #888;
+}

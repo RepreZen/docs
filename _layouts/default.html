@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body data-spy="scroll" data-targets="#toc">
+    <div class="container">
+      {% include header.html %}
+      <div class="row">
+	<div class="col-sm-10">
+	  <h1>{{ page.title }}</h1>
+	  {{ content }}
+	</div>
+	<div class="col-sm-2 ">
+	  <nav id="sidetoc" data-spy="affix" data-toggle="toc" class="hidden-xs"></nav>
+	</div>
+      </div>
+    </div>
+  </body>
+</html>

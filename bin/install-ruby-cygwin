@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+function install_cyg_package() {
+    /bin/setup-x86_64 -q -P curl
+}
+
+cd /tmp
+echo Downloading Ruby Installer for Windows > /dev/tty
+if ! hash curl 2>/dev/null; then
+    install_cyg_package curl
+fi
+
+RUBYINST_URL=http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.2.4-x64.exe
+RUBYINST_FILE=$(basename $RUBYINST_URL)
+curl -L -O $RUBYINST_URL
+chmod +x $RUBYINST_FILE
+echo Installing Ruby > /dev/tty
+echo > /dev/tty
+echo ======= Please check the box adding Ruby to your PATH ======= > /dev/tty
+echo > /dev/tty
+./$RUBYINST_FILE
+
+echo Linking \cygdrive\c to c:\ so '#!ruby' files will work > /dev/tty
+mkdir -p /cygdrive/c/cygdrive
+if [[ ! -e /cygdrive/c/cygdrive/c ]] ; then
+    cmd /c mklink /J c:\\cygdrive\\c c:\\
+fi
+
+winpath="$(reg query \
+   'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' \
+   /v PATH \
+   | grep PATH |  sed -r -e 's/^ *[^ ]+ +[^ ]+ +//')"
+echo "$PATH":$(cygpath -pu "$winpath")

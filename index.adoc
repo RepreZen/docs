@@ -1,0 +1,20 @@
+---
+title: RepreZen Documentation Portal
+type: homepage
+permalink: /
+---
+
+Available Documentation:
+
+{% for area in site.data.content_tree.areas %}
+== {{ area.name }}
+{% for article in area.articles %}
+{% if article.type == "external" %}
+* link:{{ article.url }}[{{article.title}}^]
+{% elsif article.type == "internal" %}
+* link:{{ article.url | prepend: site.baseurl }}[{{ article.title }}]
+{% elsif article.type == "separator" %}
+'''
+{% endif %}
+{% endfor %}
+{% endfor %}

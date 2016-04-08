@@ -1,0 +1,9 @@
+.sass-cache/
+.jekyll-metadata
+_pdf
+.idea/
+*~
+\#*
+Gemfile.lock
+setup.log
+setup.log.full
