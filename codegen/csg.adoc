@@ -34,15 +34,16 @@ performed outside for {RAS} using a system command shell. In the future, we inte
 entire process in a wizard.
 
 The steps, detailed below, are:
+
 1. Use the SCG command line interface to create a skeleton for your new module.
 2. Import that skeleton into {RAS} as a new Java project.
 3. Modify the skeleton Java code and Mustache templates to suit your needs.
-4. See that your new module is now listed with the standard SCG modules in the New GenTempalte
+4. See that your new module is now listed with the standard SCG modules in the New GenTemplate
 wizard.
 
 We will, in the course of describing these steps in detail, work through an example that will mimic
 the `LexiconGenTemplates` custom GenTemplate created in {%link cg_intro#createGenTemplate%}. Please
-review see that document to learn the motivating hypothetical scenario.
+review that document to learn the motivating hypothetical scenario.
 
 WARNING: Some of the details in this section apply to version 2.1.4 of SCG, and include information
 from available documentation and also from code inspection. {RAS} currently uses release 2.1.4 but
@@ -51,9 +52,9 @@ will soon migrate to release 2.1.5. At that time we will update this document as
 === Creating the SCG Skeleton
 
 The SCG Command Line interface (CLI) includes a command, `meta`, which can be used to create the
-skeleton for a new SCG module. The CLI is, in reality embedded inthe Java command line, with the SCG
+skeleton for a new SCG module. The CLI is, in reality embedded in the Java command line, with the SCG
 executable jar file and the class that implements the selected SCG module as command-line
-arguments.footnote[Although SCG is published with several convenience scripts that invoke the CLI on
+arguments.footnote:[Although SCG is published with several convenience scripts that invoke the CLI on
 specific sample models embedded in the project, it does not provide a general-purpose script to
 invoke the CLI. Such a script would be simple to create, but in this guide we will show the full
 Java command lines.]
@@ -73,7 +74,7 @@ include:
    character upper-cased, concatenated with `Generator`. E.g. `-n myModule` would generate a class
    named `MyModuleGenerator`.
 ** It is incorporated into the advertised description of the model (the value returned by
-   `CodegenConfig#getHelp()).
+   `CodegenConfig#getHelp()`).
 ** It is incorporated into the name of the default output folder used by the module. (This is
    unused when the module is executed in {RAS} as a GenTemplate, since the output directory is in
    that case specified in the GenTarget.)
@@ -89,10 +90,10 @@ git repo], checking out version 2.1.4 (using the git tag `v2.1.4`) and then runn
 from the working tree root. This will build the needed jar file in
 [.nowrap]`modules/swagger-codegen-cli/target/swagger-codegen-cli.jar`.
 
-We'll execute this step by starting a command shell for our system and navigating to a directory
-that will hold the skeleton as a subdirectory. For simplicity we'll assume that parent directory is
-the user's home directory, designated in the linux style as `~`, and that the swagger-codegen git
-clone is located in `~/git/swagger-codegen`.
+To execute this step we'll need to launch a command shell for our system. For simplicity, we'll
+specify paths relative to our home directory using the linux `~` designator. Modify the paths in
+your command as needed, depending on where your `swagger-codegen` git clone is located, and where
+you want the skeleton to be created.
 
 After all the foregoing, this step finally comes down to a single command, which will create our
 skeleton:
@@ -121,10 +122,9 @@ project.
 image::import-maven-step-3.png[Import Skeleton Project Step 3,role=text-center]
 
 At this point your skeleton is complete, but not quite functional. The problem is that the Java
-class that implements your new generator configures a "supporting" template to run on
-your model, but the skeleton does not actually include the needed module. You can fix this by
-removing or commenting out the problematic java code. In the following image we show the code
-commented out.
+class that implements your new generator configures a "supporting" template to run on your model,
+but the skeleton does not actually include the needed template file. You can fix this by removing or
+commenting out the problematic java code. In the following image we show the code commented out.
 
 image::fixed-skeleton.png[Fixed Skeleton Class,role=text-center]
 
@@ -133,12 +133,12 @@ executing it with a Swagger model of your choice, by creating and running a GenT
 
 === Modifying the Skeleton
 
-Now we'll modify our skeleton project so that it generates a CSV file listing all the paths defined
-by the Swagger model.
+Now we'll modify our skeleton project so that it generates a CSV file listing all the operations
+defined by the Swagger model.
 
 We won't be creating any API or model files, for which the skeleton makes special provision, so
-we'll comment out the lines the corresponding templates. You can delete these lines, but we'll
-comment them out to make our screen shots understandable.
+we'll comment out the lines that declare the corresponding templates. You can delete these lines,
+but we'll comment them out to make our screen shots understandable.
 
 image::skeleton-comment-standard-templates.png[Suppress Standard Templates,role=text-center]
 
@@ -156,16 +156,19 @@ image::skeleton-create-lexicon-template.png[Create Lexicon Template File,role=te
 Finally, we'll enter code into the new template file so as to produce our desired output. We will
 not go into any details of the Mustache templating language, or the structure in which the Swagger
 model is presented to the template by the Swagger Codegen framework. You can read about Mustache
-link:https://mustache.github.io/[here], and probably the structure on which it operates does not
-appear to be documented, and it differs dramatically from both the structure of a Swagger Spec and
-from that presented by the
+link:https://mustache.github.io/[here].
+
+The structures passed to the Mustache templates do not appear to be documented, and they differ
+considerably from both the structure of a Swagger Spec and from that presented by the
 link:https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-models[Swagger Models]
 Java API. To get some insight into the structure, one helpful resource is the console output created
-when an SCG module is executed under with the `debugModels`, `debugOperations`, and
-`debugSupportingFiles` Java system properties set. The output shows the precise JSON structure on
-which the model, api, and supporting templates, respectively, will see.footnote:[Recall that in
-{RAS} you can arrange for system properties to be set when executing an SCG-based GenTemplate by
-providing a value for the `swaggerCodegenSystemProperties` parameter in the GenTarget file.]
+when an SCG module is executed with the `debugModels`, `debugOperations`, and `debugSupportingFiles`
+Java system properties set. The output shows the precise JSON structure on which the model, api, and
+supporting templates, respectively, will operate.footnote:[Recall that in {RAS} you can arrange for
+system properties to be set when executing an SCG-based GenTemplate by providing a value for the
+`swaggerCodegenSystemProperties` parameter in the GenTarget file.]
+
+Here is our final template:
 
 [source%nowrap,mustache]
 --
@@ -179,7 +182,8 @@ Name,Type,Parent,ParentType,Model,Documentation
 Note that this template looks particularly cramped compared to most that you'll see in SCG
 modules. The reason is the care that we must take to avoid unintended whitespace from appearing in
 our output, including blank lines. We had some similar difficulties in the Xtend template we created
-in {%link cg_intro#createGenTemplate%}.
+in {%link cg_intro#createGenTemplate%}. This focus on whitespace reflects an unusual requirement of
+our hypothetical use-case.
 
 === Using Your New SCG Module
 

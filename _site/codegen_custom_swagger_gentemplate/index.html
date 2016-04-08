@@ -239,17 +239,29 @@ performed outside for RepreZen API Studio using a system command shell. In the f
 entire process in a wizard.</p>
 </div>
 <div class="paragraph">
-<p>The steps, detailed below, are:
-1. Use the SCG command line interface to create a skeleton for your new module.
-2. Import that skeleton into RepreZen API Studio as a new Java project.
-3. Modify the skeleton Java code and Mustache templates to suit your needs.
-4. See that your new module is now listed with the standard SCG modules in the New GenTempalte
+<p>The steps, detailed below, are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Use the SCG command line interface to create a skeleton for your new module.</p>
+</li>
+<li>
+<p>Import that skeleton into RepreZen API Studio as a new Java project.</p>
+</li>
+<li>
+<p>Modify the skeleton Java code and Mustache templates to suit your needs.</p>
+</li>
+<li>
+<p>See that your new module is now listed with the standard SCG modules in the New GenTemplate
 wizard.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>We will, in the course of describing these steps in detail, work through an example that will mimic
 the <code>LexiconGenTemplates</code> custom GenTemplate created in <a href="/docs/codegen_intro/#createGenTemplate">Introduction to Code Generation in RepreZen API Studio</a>. Please
-review see that document to learn the motivating hypothetical scenario.</p>
+review that document to learn the motivating hypothetical scenario.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -269,12 +281,9 @@ will soon migrate to release 2.1.5. At that time we will update this document as
 <h3 id="creating-the-scg-skeleton">Creating the SCG Skeleton</h3>
 <div class="paragraph">
 <p>The SCG Command Line interface (CLI) includes a command, <code>meta</code>, which can be used to create the
-skeleton for a new SCG module. The CLI is, in reality embedded inthe Java command line, with the SCG
+skeleton for a new SCG module. The CLI is, in reality embedded in the Java command line, with the SCG
 executable jar file and the class that implements the selected SCG module as command-line
-arguments.footnote[Although SCG is published with several convenience scripts that invoke the CLI on
-specific sample models embedded in the project, it does not provide a general-purpose script to
-invoke the CLI. Such a script would be simple to create, but in this guide we will show the full
-Java command lines.]</p>
+arguments.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>Our first step invokes the SCG <code>meta</code> command to create a skeleton project. The command arguments we
@@ -304,7 +313,7 @@ named <code>MyModuleGenerator</code>.</p>
 </li>
 <li>
 <p>It is incorporated into the advertised description of the model (the value returned by
-`CodegenConfig#getHelp()).</p>
+<code>CodegenConfig#getHelp()</code>).</p>
 </li>
 <li>
 <p>It is incorporated into the name of the default output folder used by the module. (This is
@@ -333,10 +342,10 @@ from the working tree root. This will build the needed jar file in
 <code class="nowrap">modules/swagger-codegen-cli/target/swagger-codegen-cli.jar</code>.</p>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll execute this step by starting a command shell for our system and navigating to a directory
-that will hold the skeleton as a subdirectory. For simplicity we&#8217;ll assume that parent directory is
-the user&#8217;s home directory, designated in the linux style as <code>~</code>, and that the swagger-codegen git
-clone is located in <code>~/git/swagger-codegen</code>.</p>
+<p>To execute this step we&#8217;ll need to launch a command shell for our system. For simplicity, we&#8217;ll
+specify paths relative to our home directory using the linux <code>~</code> designator. Modify the paths in
+your command as needed, depending on where your <code>swagger-codegen</code> git clone is located, and where
+you want the skeleton to be created.</p>
 </div>
 <div class="paragraph">
 <p>After all the foregoing, this step finally comes down to a single command, which will create our
@@ -380,10 +389,9 @@ project.</p>
 </div>
 <div class="paragraph">
 <p>At this point your skeleton is complete, but not quite functional. The problem is that the Java
-class that implements your new generator configures a "supporting" template to run on
-your model, but the skeleton does not actually include the needed module. You can fix this by
-removing or commenting out the problematic java code. In the following image we show the code
-commented out.</p>
+class that implements your new generator configures a "supporting" template to run on your model,
+but the skeleton does not actually include the needed template file. You can fix this by removing or
+commenting out the problematic java code. In the following image we show the code commented out.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -398,13 +406,13 @@ executing it with a Swagger model of your choice, by creating and running a GenT
 <div class="sect2">
 <h3 id="modifying-the-skeleton">Modifying the Skeleton</h3>
 <div class="paragraph">
-<p>Now we&#8217;ll modify our skeleton project so that it generates a CSV file listing all the paths defined
-by the Swagger model.</p>
+<p>Now we&#8217;ll modify our skeleton project so that it generates a CSV file listing all the operations
+defined by the Swagger model.</p>
 </div>
 <div class="paragraph">
 <p>We won&#8217;t be creating any API or model files, for which the skeleton makes special provision, so
-we&#8217;ll comment out the lines the corresponding templates. You can delete these lines, but we&#8217;ll
-comment them out to make our screen shots understandable.</p>
+we&#8217;ll comment out the lines that declare the corresponding templates. You can delete these lines,
+but we&#8217;ll comment them out to make our screen shots understandable.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -434,14 +442,19 @@ also delete the existing templates, but we&#8217;ll leave them in place.</p>
 <p>Finally, we&#8217;ll enter code into the new template file so as to produce our desired output. We will
 not go into any details of the Mustache templating language, or the structure in which the Swagger
 model is presented to the template by the Swagger Codegen framework. You can read about Mustache
-<a href="https://mustache.github.io/">here</a>, and probably the structure on which it operates does not
-appear to be documented, and it differs dramatically from both the structure of a Swagger Spec and
-from that presented by the
+<a href="https://mustache.github.io/">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>The structures passed to the Mustache templates do not appear to be documented, and they differ
+considerably from both the structure of a Swagger Spec and from that presented by the
 <a href="https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-models">Swagger Models</a>
 Java API. To get some insight into the structure, one helpful resource is the console output created
-when an SCG module is executed under with the <code>debugModels</code>, <code>debugOperations</code>, and
-<code>debugSupportingFiles</code> Java system properties set. The output shows the precise JSON structure on
-which the model, api, and supporting templates, respectively, will see.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
+when an SCG module is executed with the <code>debugModels</code>, <code>debugOperations</code>, and <code>debugSupportingFiles</code>
+Java system properties set. The output shows the precise JSON structure on which the model, api, and
+supporting templates, respectively, will operate.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
+</div>
+<div class="paragraph">
+<p>Here is our final template:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -456,7 +469,8 @@ which the model, api, and supporting templates, respectively, will see.<sup clas
 <p>Note that this template looks particularly cramped compared to most that you&#8217;ll see in SCG
 modules. The reason is the care that we must take to avoid unintended whitespace from appearing in
 our output, including blank lines. We had some similar difficulties in the Xtend template we created
-in <a href="/docs/codegen_intro/#createGenTemplate">Introduction to Code Generation in RepreZen API Studio</a>.</p>
+in <a href="/docs/codegen_intro/#createGenTemplate">Introduction to Code Generation in RepreZen API Studio</a>. This focus on whitespace reflects an unusual requirement of
+our hypothetical use-case.</p>
 </div>
 </div>
 <div class="sect2">
@@ -484,7 +498,10 @@ showPetById,Operation,Swagger Petstore,Model,Info for a specific pet</code></pre
 <div id="footnotes">
 <hr>
 <div class="footnote" id="_footnote_1">
-<a href="#_footnoteref_1">1</a>. Recall that in RepreZen API Studio you can arrange for system properties to be set when executing an SCG-based GenTemplate by providing a value for the <code>swaggerCodegenSystemProperties</code> parameter in the GenTarget file.
+<a href="#_footnoteref_1">1</a>. Although SCG is published with several convenience scripts that invoke the CLI on specific sample models embedded in the project, it does not provide a general-purpose script to invoke the CLI. Such a script would be simple to create, but in this guide we will show the full Java command lines.
+</div>
+<div class="footnote" id="_footnote_2">
+<a href="#_footnoteref_2">2</a>. Recall that in RepreZen API Studio you can arrange for system properties to be set when executing an SCG-based GenTemplate by providing a value for the <code>swaggerCodegenSystemProperties</code> parameter in the GenTarget file.
 </div>
 </div>
 	</div>
