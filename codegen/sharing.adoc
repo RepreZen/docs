@@ -1,0 +1,127 @@
+---
+permalink: /codegen_sharing/
+---
+= Sharing GenTemplates
+:imagesdir: ../images/codegen
+:linkattrs:
+:docinfo2:
+:RAS: RepreZen API Studio 
+:RZ: RepreZen
+
+
+When you create a custom GenTemplate, you may wish to share it with others -- team members,
+customers, etc. This is easy to do with {RAS}. Currently, you can share GenTemplates by packaging
+them as jar files, or you can share your GenTemplate projects in external repositories like
+GitHub.
+
+In the future we intend to make it possible to use GenTemplates published to Maven repositories.
+
+== Sharing Jar Files
+
+One way to share a GenTemplate is to package it as a Java jar file and then share that jar file.
+
+To create a jar file, right click on the GenTemplate project folder in the Project Explorer pane,
+and select _Run As -> Maven build..._:
+
+image::maven-build.png[Running Maven build on a GenTemplate project,role=text-center]
+
+In the dialog that appears, type `package` in the _Goals_ field, and press _Run_.
+
+image::maven-build-dialog.png[Maven Build Dialog,role=text-center]
+
+TIP: If you are familiar with using Eclipse for Java development, you may wish to switch to the
+_Java_ perspective while working on GenTemplate projects. One benefit is that the standard _Run_
+tool will be present in the toolbar, making it easy to re-run this packaging step at any time.
+
+{RAS} will create a jar file in your project's `target` folder:
+
+image::maven-build-target-jar.png[Jar file produced by Maven,role=text-center]
+
+TIP: If you are unable to open your `target` folder, try refreshing it by typing _F5_ when the
+folder is selected.
+
+You can now copy the new jar file and paste a copy anywhere you'd like, either within the {RAS}
+Project Explorer or in your system's file explorer. You can also use drag-and-drop to copy the jar
+file, and there are many applications that can serve as drop targets, including email
+applications, cloud storage solutions like Google Drive and Dropbox, and so on.
+
+== Using Packaged GenTemplates
+
+If you create or obtain a GenTemplate packaged as a Jar file and you want to use it to create
+GenTargets in your model projects, you have two simple options:
+
+1. Copy the jar file into your model project's `lib` folder.
+2. Copy the jar file into a `GenTemplates` folder in a project named `shared` in your {RAS} workspace.
+
+The first option makes the GenTemplates in the jar file available for use with all the models in
+that model project, but not models in other projects. The second option makes those GenTemplates
+available in all your model projects.
+
+Either way, you'll need to create the indicated project and/or folder if they don't already exist.
+
+TIP: If you need to create a `shared` project, select _File -> New -> Project_ in the menu bar, then
+choose _General -> Project_ in the New Project dialog.
+
+With your jar file in either location, {RAS} will find any GenTemplates it contains, and you will
+find those GenTemplates available for use.
+
+TIP: You can change the location of the shared folder in the RepreZen preferences. Select _Window ->
+Preferences_ in the menu bar, and then navigate to _RepreZen -> Code Generation_ and enter your
+desired path. If you start your path with `${workspace_loc}`, as with the factory default, your path
+will be resolved within your {RAS} workspace. But you can leave that off and specify a path anywhere
+in your system.
+
+== Using GenTemplate Projects Pulished to GitHub
+
+Many developers now use GitHub to maintain source code for their projects and, in some cases, to
+make that code available to others. If you publish a {RAS} GenTemplate project on GitHub, others
+have the option of importing your project into their own workspace, thereby making your GenTemplates
+available for use on all models in that workspace.
+
+If you are the publisher of a GenTemplate project in this scenario, you are presumably familiar with
+the steps necessary to set up and publish to GitHub, so we will focus on the steps required to
+import such a project.
+
+You can follow along with the steps below to import the GenTemplate that is developed in link:{{
+"/codegen_intro/" | prepend: site.baseurl }}[Introduction to Code Generation in {RAS}]
+
+Everything starts with _File -> Import..._ in the {RAS} menu bar. Select _Git -> Projects from Git_
+in the dialog that appears, then click _Next_.
+
+image::import-git-project.png[Import Dialog,role=text-center]
+
+In the next panel, select _Clone URI_ and click _Next_.
+
+image::import-git-clone-uri.png[Import Dialog Step 2,role=text-center]
+
+Next, in the _URI_ field, enter the URI for the GitHub repository that contains the project you want
+to use. In our case we'll use the repository that contains all the source material for this
+documentation portal, including the an example GenTemplate project. After you enter the URI, click
+_Next_.
+
+image::import-git-enter-uri.png[Import Dialog Step 3,role=text-center]
+
+Note that in the above dialog, when you fill in the _URI_ field, the other fields are filled in automatically.
+
+The next panel allows you to select which branches of the repository you want to download. You will
+usually need only the "master" branch, but it is harmless to download other branches. Make your
+selection and click _Next_.
+
+image::import-git-choose-branches.png[Import Dialog Step 4, role=text-center]
+
+The next panel is where you can decide where you want to copy the repository on your local
+system. There will generally be an acceptable default location, and you probably don't need to
+change anything else. Click _Next_.
+
+image::import-git-choose-dest.png[Import Dialog Step 5,role=text-center]
+
+Use the default option in the next panel, and click _Next_.
+
+image::import-git-import-type.png[Import Dialog Step 6,role=text-center]
+
+In the next panel, {RAS} shows you a list of the importable projects it was able to find in the
+downloaded repository. If you're following along with this example, you'll see only one project -
+`LexiconGentemplates`. Make your selections and press _Finish_ (finally)!
+
+After a few moments, while {RAS} automatically builds the project, the imported GenTemplates will be
+available for your use.
