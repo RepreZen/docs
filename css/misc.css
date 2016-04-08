@@ -39,7 +39,8 @@ li.video-series a {
     height: 35px;
     margin-top: -7px;
     padding-right: 5px;
-    float: left;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .navbar a {
@@ -52,4 +53,8 @@ body { /* make room for fixed navbar */
 /************ AsciiDoc Content ************/
 .imageblock img { /* shadows on image block images */
     box-shadow: 10px 10px 5px #888;
+}
+
+.nowrap {
+    white-space: nowrap;
 }
