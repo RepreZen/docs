@@ -58,3 +58,7 @@ body { /* make room for fixed navbar */
 .nowrap {
     white-space: nowrap;
 }
+
+pre.nowrap code { /* boostrap css stomps on asciidoc source block's nowrap option */
+    white-space: pre;
+}

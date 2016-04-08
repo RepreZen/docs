@@ -12,7 +12,9 @@
 module Jekyll
   class LinkTag  < Liquid::Tag
     def initialize(tag_name, markup, options)
-      @slug = markup.strip
+      match = markup.match(/^\s*([^#\s]+)(#(\S+))?\s*$/)
+      @slug = match[1]
+      @fragment=match[2]
       @permalink = "/#{@slug}/"
       @notext = tag_name == "linkx"
     end
@@ -26,6 +28,7 @@ module Jekyll
           if article['slug'] == @slug || (article['type'] == 'internal' && article['url'] == @permalink) then
             title = "[#{article['fullTitle'] || article['title']}]" unless @notext
             url = article['type'] == 'internal' ? "#{baseurl}#{article['url']}" : article['url']
+            url = url+@fragment if @fragment
             return "link:#{url}#{title}"
           end
         end
