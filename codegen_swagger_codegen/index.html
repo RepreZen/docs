@@ -45,7 +45,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/docs/"><img src="/docs/images/reprezen-logo.png"> Documentation Portal</a>
+      <a class="navbar-brand" href="/docs/"><img src="/docs/images/reprezen-logo.png">&nbsp;Documentation Portal</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -205,7 +205,7 @@
 <p>In <a href="/docs/codegen_intro/">Introduction to Code Generation in RepreZen API Studio</a> we discuss GenTemplates and GenTargets in the context of RAPID-ML models. But
 as you may know, RepreZen API Studio is a great platform for working with Swagger&#8201;&#8212;&#8201;a.k.a. OpenAPI&#8201;&#8212;&#8201;API
 specifications. This includes full access to the
-<a href="https://github.com/swagger-api/swagger-codegen">Swagger Codegen</a> framework.</p>
+<a href="https://github.com/swagger-api/swagger-codegen" target="_blank">Swagger Codegen</a> framework.</p>
 </div>
 <div class="paragraph">
 <p>If you&#8217;ve used Swagger Codegen (SCG), you&#8217;ll know that the implementation comes with several
@@ -283,7 +283,7 @@ SCG GenTarget. You can edit this file to provide values for any of the listed pa
 </div>
 </div>
 <div class="paragraph">
-<p>There are two additional parameters that are available with every SCG GenTempalte, as shown below:</p>
+<p>There are two additional parameters that are available with every SCG GenTemplate, as shown below:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -291,16 +291,58 @@ SCG GenTarget. You can edit this file to provide values for any of the listed pa
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>swaggerCodegenConfig</code> parameter is a convenience option when a complete config file is already
-available for the SCG module, as it might be if the same module had been used outside RepreZen API Studio, that
-file can simply be copied into the <code>.gen</code> file as the value of this parameter. However, the same
-parameters could be specified as individual parameters.</p>
+<p>The <code>swaggerCodegenConfig</code> parameter is a convenience option; when a complete config file is already
+available for the SCG module&#8201;&#8212;&#8201;as it might be if the same module had been used outside RepreZen API Studio&#8201;&#8212;&#8201;that file can simply be copied into the <code>.gen</code> file as the value of this parameter. However, the
+same effect could be achieved by copying values to individual parameters in the <code>.gen</code> file.</p>
 </div>
 <div class="paragraph">
 <p>The <code>swaggerCodegenSystemProperties</code> parameter sets Java system properties that may affect the way
 the SCG module operates. These are properties that would be set using the <code>-D</code> option using the
 Swagger Codegen command line interface.</p>
 </div>
+<div class="paragraph">
+<p>Unused parameters appearing in the wizard-created <code>.gen</code> file can be deleted to reduce clutter:
+because SCG lacks the ability to declare options as required or optional, all parameters in a
+corresponding GenTarget are, by definition, optional.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="support-for-additional-scg-modules">Support for Additional SCG Modules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RepreZen API Studio comes prepackaged with all of the standard SCG modules available as GenTargets, but you can
+also make use of non-standard modules that <a href="/docs/codegen_custom_swagger_gentemplate/">you create yourself</a> or that you
+obtain from other sources. In <a href="/docs/codegen_sharing/">Sharing GenTemplates</a> we describe the ways you can make a GenTemplate
+available for models in your workspace, namely:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Placing a Java jar file containing the GenTemplate implementation in a model project&#8217;s <code>lib</code>
+folder</p>
+</li>
+<li>
+<p>Placing the jar file in your workspace&#8217;s shared GenTemplates folder</p>
+</li>
+<li>
+<p>Importing a Java project that implements the GenTemplate into your workspace from a variety of
+sources, including GitHub</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The good news for SCG users is that the same mechanisms all work for non-standard SCG modules as
+well. As long as your module is properly configured to be discoverable by the SCG command line
+tool,<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup> it will also be discoverable by RepreZen API Studio, which will automatically, upon
+discovery, wrap it into a GenTemplate.</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnote_1">
+<a href="#_footnoteref_1">1</a>. Swagger Codegen uses Java&#8217;s <code>ServiceManager</code> class to discover available SCG modules. For a module to be discoverable, the fully-qualified class name of the implementing class must appear on a line by itself in a text resource named <span class="nowrap"><code>META-INF/services/io.swagger.codegen.CodegenConfig</code></span>. This resource is typically packaged as part of any SCG module.
 </div>
 </div>
 	</div>
