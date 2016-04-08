@@ -1,0 +1,11 @@
+---
+permalink: /codegen_custom_swagger_gentemplate/
+---
+= Creating a Custom Swagger GenTemplate
+:imagesdir: ../images/codegen
+:linkattrs:
+:docinfo2:
+:RAS: RepreZen API Studio 
+:RZ: RepreZen
+
+In {%link codegen_intro%}

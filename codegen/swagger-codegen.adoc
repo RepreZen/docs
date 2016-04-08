@@ -1,0 +1,65 @@
+---
+permalink: /codegen_swagger_codegen/
+---
+= Using Swagger Codegen in {RAS}
+:imagesdir: ../images/codegen
+:linkattrs:
+:docinfo2:
+:RAS: RepreZen API Studio 
+:RZ: RepreZen
+
+In {%link cg_intro%} we discuss GenTemplates and GenTargets in the context of RAPID-ML models. But
+as you may know, {RAS} is a great platform for working with Swagger -- a.k.a. OpenAPI -- API
+specifications. This includes full access to the
+link:https://github.com/swagger-api/swagger-codegen[Swagger Codegen] framework.
+
+If you've used Swagger Codegen (SCG), you'll know that the implementation comes with several
+out-of-the-box modules that generate documentation, client libraries for a variety of languages, and
+service scaffolding, also geared toward a variety of languages and underlying frameworks. You'll be
+glad to know that all of these standard SCG modules are available as GenTemplates in {RAS}.
+
+== Model Type Determines GenTemplates
+As the following screenshots demonstrate, the list of available GenTemplates shown in the New
+GenTarget wizard depends on the type of the selected model file - Swagger or RAPID-ML.
+
+image::swagger-gentemplates.png[Swagger GenTemplates,role=text-center]
+[.text-center]
+Swagger GenTemplates
+
+image::rapidml-gentemplates.png[RAPID-ML GenTemplates,role=text-center]
+[.text-center]
+RAPID-ML GenTemplates
+
+== Swagger Codegen Parameters
+
+The GenTarget (`.gen`) files that define GenTargets in a model project are JSON files that, among
+other things, provide values for parameters that may be used by the GenTemplate. In general, a
+GenTemplate declares its parameters including the following information for each parameter:
+
+Name:: The name of the parameter
+Description:: A description of how the parameter will be used
+Required:: True or false, depending on whether the GenTarget is required to supply a value for the
+parameter
+Default:: A default value for the parameter, which is copied into the GenTarget file by the New
+GenTarget wizard
+
+In the Swagger Codegen framework, SCG modules can declare _options_ which are analagous to
+GenTemplate parameters, but without _required_ and _default_ properties. The GenTemplates offered by
+{RAS} for SCG modules automatically define an optional parameter with no default value for each
+option declared by the SCG module. For example, here is a portion of a GenTarget based on the _Java_
+SCG GenTarget. You can edit this file to provide values for any of the listed parameters.
+
+image::scg-parameters.png[Swagger Codegen GenTemplate Parameters,role=text-center]
+
+There are two additional parameters that are available with every SCG GenTempalte, as shown below:
+
+image::scg-common-parameters.png[Swagger Codegen GenTemplate Common Parameters,role=text-center]
+
+The `swaggerCodegenConfig` parameter is a convenience option when a complete config file is already
+available for the SCG module, as it might be if the same module had been used outside {RAS}, that
+file can simply be copied into the `.gen` file as the value of this parameter. However, the same
+parameters could be specified as individual parameters.
+
+The `swaggerCodegenSystemProperties` parameter sets Java system properties that may affect the way
+the SCG module operates. These are properties that would be set using the `-D` option using the
+Swagger Codegen command line interface.
