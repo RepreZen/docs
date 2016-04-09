@@ -16,3 +16,4 @@ asciidoctor:
     - hardbreaks!
 exclude:
 - LexiconGenTemplates
+- bin
