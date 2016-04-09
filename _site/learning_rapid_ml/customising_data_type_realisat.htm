@@ -1,0 +1,237 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <!-- Original title below -->
+   <!--title>Customizing Data Type Realization</title-->
+   <!-- Add title to each page followed by topic title -->
+   <title>RepreZen API Studio Quick Start Guide &raquo; Customizing Data Type Realization</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="canonical data model realization,Cardinality Overrides,contextual constraint,Property subsets,URI" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <link type="text/css" href="custom.css" rel="stylesheet">
+
+   <style TYPE="text/css" media="screen"> 
+      html, body { margin:0; 
+             padding:0; 
+             overflow: hidden; 
+             background: #FFFFFF; 
+       } 
+
+      div#printheader { display: none; }
+      #idheader { width:100%; 
+                  height:auto; 
+                  padding: 0; 
+                  margin: 0; 
+       } 
+      #idcontent { position:relative }                                               
+      #callout-table, #overview-table {display:block; position:relative; top:0; left:0;}
+      #callout-icon {display:block; position:absolute; top:-11px; left:-11px;}
+      #callout-icon-flag {display:block; position:absolute; top:-11px; left:-8px;}
+      #callout-table a {text-decoration: none; color: blue;}
+      #callout-table a:visited {text-decoration: none; color: blue;}
+      #overview-table a {text-decoration: none; color: black;}
+      #overview-table a:visited {text-decoration: none; color: black;}
+      #callout-table a:hover, #overview-table a:hover {text-decoration: underline;}      
+      #switchtoggles { text-align: right; padding: 0 5px 0 0; font-size: 90%; } 
+      p.help-url { margin: 20px 0 5px 0; text-align: center; font-size: 80%; text-decoration: none }
+      .sync-toc { color: #ffffff; font-size: 8pt; font-weight: bold; display: none; }
+      .sync-toc a { color: #ffffff; text-decoration: none; font-weight: bold;}
+      .sync-toc a:visited { color: #ffffff; }
+      .sync-toc a:hover { text-decoration: underline; }
+      #footer {position: relative;
+	margin-top: -100px; /* negative value of footer height */
+	height: 100px;
+	clear:both;} 
+   </style>
+   <noscript>
+   <style type="text/css">
+   html, body { overflow: auto; }
+   </style> 
+   </noscript>
+   <style type="text/css" media="print">
+      span.f_Heading1 { color: black; }
+      #idheader, #printheader img { display:none; }
+      #printheader { display: block; margin-top: 20px; }
+      #idcontent { margin-top: 10px; position:relative }
+   </style>   
+
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="nsh.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "customising_data_type_realisat.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<div id="printheader"><h1 class="p_Heading1"><span class="f_Heading1">Customizing Data Type Realization</span></h1>
+</div>
+<div id="idheader">
+<div id="idheaderbg">
+<table style="width:100%;border:none;margin:0px;background:url(background.jpg)" cellspacing="0" cellpadding="0"> 
+  <tr valign="bottom">
+    <td align="left" valign="bottom" class="topichead">
+   <p class="sync-toc">&lt;&lt; <a rel="nofollow" href="index.html?customising_data_type_realisat.htm" target="_top">Click to Display Table of Contents</a> &gt;&gt;</p>
+   <p class="crumbs" id="idnav"><b>Navigation:</b>&nbsp;
+   &raquo;No topics above this level&laquo;
+   </p>
+   <h1 class="p_Heading1"><span class="f_Heading1">Customizing Data Type Realization</span></h1>
+
+    </td>
+    <td align="right" width="120" valign="middle" class="topichead" id="idnav">
+    <!-- Navigation Buttons ~ previous and next -->
+    
+    
+     <a href="sharing_and_reusing_data_models.htm"
+        onmouseover="document.images.prev.src='hm_btn_navigate_prev_orange.png'" 
+        onmouseout="document.images.prev.src='hm_btn_navigate_prev.png'"
+        ><img name="prev" src="hm_btn_navigate_prev.png" border=0 alt="Previous page"
+        ></a><a href="introduction.htm"
+        onmouseover="document.images.main.src='hm_btn_navigate_top_orange.png'" 
+        onmouseout="document.images.main.src='hm_btn_navigate_top.png'"><img name=main src="hm_btn_navigate_top.png" border=0 alt="Return to chapter overview"
+        ></a><a href="resolving_ambiguous_data_type_references.htm"
+        onmouseover="document.images.next.src='hm_btn_navigate_next_orange.png'" 
+        onmouseout="document.images.next.src='hm_btn_navigate_next.png'"><img name=next src="hm_btn_navigate_next.png" border=0 alt="Next page"
+        ></a>
+    
+    </td>
+  </tr>  
+</table>
+<!-- The following code displays Expand All/Collapse All links  below the header in topics containing toggles -->
+  
+</div>
+</div>  
+
+<div id="idcontent"><div id="innerdiv">
+<!-- Ask Internet Explorer 6.users to update their obsolete and dangerous browser --> 
+<!--[if lt IE 7]><div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div><![endif]-->
+
+<!--ZOOMRESTART-->
+<p>This section describes basic canonical data model <span class="f_DefinedTerm">realization</span> beyond decorated hyperlinks<span class="f_DefinedTerm">.</span></p>
+<p>UML defines <span class="f_DefinedTerm">realization</span> as the relationship between a specification and its implementation. &nbsp;In RepreZen API Studio, a data structure serves as an abstract specification, and the first step towards implementation is to adapt that structure to the context in which it is used. &nbsp;This topic describes some of the specific ways in which we can customize the canonical data types in the context of API resources:</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:11pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Property Subsets - when we only want to use a subset of a structure's properties</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:11pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">Cadinality Overrides - when the cardinality of a structure's property needs restricting</td></tr></table></div><p>The important thing to note, here, is that data type realizations really become useful, and make the most sense, when data models are shared across APIs. &nbsp;In these cases, the data model we are using is not owned by us, and does not reside in the same <span class="f_Keyword">rapidModel</span> with our API, but is being imported from some central location. Such data models are abstract and, in the best case, are really models of the business domain. In an ideal world, shared models won't be specific to an application, service or technology; they will be more or less generic descriptions of the business domain we are working in. They may be very detailed in the information they describe, but they should be technology independent and, as much as we can make them so, they should be context-neutral, which maximizes their potential value for reuse. &nbsp;However, to unlock this potential, we need to be able to tailor these data models for a variety of specific uses.</p>
+<p>We'll start off by looking at <span class="f_DefinedTerm">property subsets</span> - a realization technique that enables us to use a limited collection of properties from a <span class="f_Keyword">structure</span> in our data model. </p>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Property subsets</span></p>
+<p>At this point in our <span class="f_ModelElementName">TaxBlaster</span> demo we have defined the following data types: <span class="f_ModelElementName">TaxFiling</span>, <span class="f_ModelElementName">Person</span> and <span class="f_ModelElementName">Index</span>. We also have some resources that are bound to the types we have defined. &nbsp;But there are some cases where we want to be able to customize this a little bit. For instance, the <span class="f_ModelElementName">Person</span> data type may be too detailed for our particular use case, or too broad in its definition. And although our <span class="f_ModelElementName">TaxFiling</span> <span class="f_Keyword">structure</span> so far only contains seven or eight properties, in a real situation we might find that a <span class="f_ModelElementName">TaxFiling</span> has 70, 80, or more. In our particular service it may be overkill to include all those things. It may even be worse than overkill because some of that information could be sensitive and therefore inappropriate to expose to the people who are using this service, or there could be properties that we don't want to make available for modification.</p>
+<p>To make this more interesting, let's add a new structure to our common <span class="f_Keyword">dataModel</span> called <span class="f_ModelElementName">Address</span>:</p>
+<p class="p_Syntax-ModelElementName"><span class="f_Syntax-keyword">structure</span><span class="f_Syntax-ModelElementName">&nbsp;Address</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample">street1&nbsp;:&nbsp;string</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample">street2&nbsp;:&nbsp;string</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample">city&nbsp;:&nbsp;string</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample">stateOrProvince&nbsp;:&nbsp;string</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample">postalCode&nbsp;:&nbsp;string</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample">country&nbsp;:&nbsp;string</span></p>
+<p>Next, we'll add a list of addresses as a property to our <span class="f_ModelElementName">Person</span> <span class="f_Keyword">structure</span>. (The <span style="font-weight: bold;">*</span> cardinality indicator denotes that a <span class="f_ModelElementName">Person</span> can have zero or more instances of <span class="f_ModelElementName">Address.</span>)</p>
+<p class="p_CodeExample"><span class="f_Syntax-keyword">structure</span><span class="f_CodeExample">&nbsp;Person</span></p>
+<p class="p_Syntax-documentation"><span style="width:18px">&nbsp;</span><span class="f_Syntax-documentation">/**&nbsp;A&nbsp;unique,&nbsp;system-assigned&nbsp;identifier&nbsp;for&nbsp;the&nbsp;user.&nbsp;*/</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample">id&nbsp;:&nbsp;string</span></p>
+<p class="p_Syntax-documentation"><span style="width:18px">&nbsp;</span><span class="f_Syntax-documentation">/**&nbsp;Legal&nbsp;family&nbsp;name.&nbsp;*/</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample">lastName&nbsp;:&nbsp;string</span></p>
+<p class="p_Syntax-documentation"><span style="width:18px">&nbsp;</span><span class="f_Syntax-documentation">/**&nbsp;Legal&nbsp;first&nbsp;name.&nbsp;*/</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample">firstName&nbsp;:&nbsp;string</span></p>
+<p class="p_Syntax-documentation"><span style="width:18px">&nbsp;</span><span class="f_Syntax-documentation">/**&nbsp;Names&nbsp;previously&nbsp;used&nbsp;**/</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample">otherNames&nbsp;:&nbsp;string*</span></p>
+<p class="p_CodeExample"><span style="width:18px">&nbsp;</span><span class="f_CodeExample" style="background-color: #ffff00;">addresses&nbsp;:&nbsp;</span><span class="f_Syntax-keyword" style="background-color: #ffff00;">as&nbsp;reference&nbsp;to</span><span class="f_CodeExample" style="background-color: #ffff00;">&nbsp;Address</span><span class="f_CodeExample" style="font-weight: bold; background-color: #ffff00;">*&nbsp;</span></p>
+<p>Our common data model should now look like this:<br />
+&nbsp;<br />
+<img src="datatyperealization_01.png" width="689" height="515" alt="DataTypeRealization_01" style="width:689px;height:515px;border:none" /></p>
+<p>And the relationship between <span class="f_ModelElementName">TaxFilingObject</span> and <span class="f_ModelElementName">PersonObject</span> in our diagram will now look like this:<br />
+&nbsp;<br />
+<img src="datatyperealization_02.png" width="520" height="481" alt="DataTypeRealization_02" style="width:520px;height:481px;border:none" /></p>
+<p><span style="font-weight: bold;">Note: </span>the new <span class="f_ModelElementName">addresses</span> property of <span class="f_ModelElementName">Person</span> is fully embedded within the <span class="f_ModelElementName">PersonObject</span> resource rather than being depicted as a hyperlink. This is because there is no resource (yet) for specifically accessing <span class="f_ModelElementName">Address</span> type data. What's more we see all the properties of the <span class="f_ModelElementName">Address</span> structure are present.</p>
+<p>Now, let's add an itemized property set to the <span class="f_ModelElementName">TaxFilingObject</span> resource so that we only get the properties of Address we actually need in this context. </p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none"> In the <span class="f_ModelElementName">TaxFilingObject</span> resource put a few newlines between the <span class="f_Keyword">URI</span> and <span class="f_Keyword">referenceLink</span> elements, place the cursor in the resulting space at the same indent level as URI. Press <span class="f_Keystroke">Ctrl+Space</span> and select property set (itemized) from the list of code assist templates:<br />
+&nbsp;<br />
+<img src="datatyperealization_03.png" width="689" height="515" alt="DataTypeRealization_03" style="width:689px;height:515px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none">When the template expands press <span class="f_Keystroke">Enter</span> to accept the default. Then press <span class="f_Keystroke">Ctrl + Space</span> again and select the full list of properties:<br />
+&nbsp;<br />
+<img src="datatyperealization_04.png" width="689" height="515" alt="DataTypeRealization_04" style="width:689px;height:515px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">3.</span></td><td style="border:none">Now press <span class="f_Keystroke">Ctrl+Shift+F</span> to reformat the code and put the properties each on a newline:<br />
+&nbsp;<br />
+<img src="datatyperealization_05.png" width="689" height="515" alt="DataTypeRealization_05" style="width:689px;height:515px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">4.</span></td><td style="border:none"> Now we'll remove the <span class="f_Comment">properties we don't care about, or wish to omit, in this context. So delete </span><span class="f_CodeExample">jurisdiction</span><span class="f_Comment">, </span><span class="f_CodeExample">currency</span><span class="f_Comment"> and </span><span class="f_CodeExample">taxLiability</span><span class="f_Comment"> from the list. (You can use </span><span class="f_Keystroke">Ctrl+D</span><span class="f_Comment"> in the editor to delete the current line.) </span>If we look at our <span class="f_ModelElementName">TaxFilingObject</span> in the API diagram now it should look like this:<br />
+&nbsp;<br />
+<img src="datatyperealization_06.png" width="210" height="367" alt="DataTypeRealization_06" style="width:210px;height:367px;border:none" /></td></tr></table></div><p>We can further refine the use of property subsets using <span style="font-style: italic;">embedded representations</span>. Below the subset we just created is a <span class="f_Keyword">referenceLink</span> we added earlier. &nbsp;With a <span class="f_Keyword">referenceLink</span> we realize a reference (in this case <span class="f_ModelElementName">taxpayer</span>) as a hyperlink to the resource that's bound to the target data type (in this case <span class="f_ModelElementName">Person</span>).<span class="f_Comment"> </span> On the other hand, if we just want to embed the data directly, with no hyperlink, we can use a <span class="f_Keyword">referenceEmbed</span> element instead. </p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none"> Let's change the <span class="f_ModelElementName">taxpayer</span> <span class="f_Keyword">referenceLink</span> to a <span class="f_Keyword">referenceEmbed</span> so that goes from looking like this:<br />
+&nbsp;<br />
+<span class="f_Syntax-keyword">referenceLink</span><span class="f_CodeExample"> &gt; taxpayer</span><br />
+ &nbsp; &nbsp; &nbsp; &nbsp;<span class="f_Syntax-keyword">targetResource</span><span class="f_CodeExample"> PersonObject</span><br />
+ &nbsp; &nbsp; &nbsp; &nbsp;<span class="f_Syntax-keyword">targetProperties</span><br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="f_CodeExample">firstName</span><br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="f_CodeExample">lastName</span><br />
+<span class="f_CodeExample">&nbsp;</span><br />
+to looking like this:<br />
+&nbsp;<br />
+<span class="f_Syntax-keyword">referenceEmbed</span><span class="f_CodeExample"> &gt; taxpayer</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none"> The <span class="f_ModelElementName">TaxFilingObject</span> in our diagram now looks like this:<br />
+&nbsp;<br />
+<img src="datatyperealization_07.png" width="296" height="588" alt="DataTypeRealization_07" style="width:296px;height:588px;border:none" /><br />
+&nbsp;<br />
+Instead of being a decorated hyperlink to the <span class="f_ModelElementName">PersonObject</span> resource, the <span class="f_ModelElementName">Person</span> <span class="f_Keyword">structure</span> is now an embedded object with its complete property set. &nbsp;Notice that, because <span class="f_ModelElementName">Person</span> includes a reference to a list of <span class="f_ModelElementName">Address</span> type properties, we can see another level of embedding here, too.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">3.</span></td><td style="border:none"> Let's refine this still further by adding a <span class="f_Keyword">targetProperties</span> element to our <span class="f_Keyword">referenceEmbed</span> to trim the list of <span class="f_ModelElementName">Person</span> properties down a bit. Using code completion, start again with the full list of attributes from <span class="f_ModelElementName">Person</span>:<br />
+&nbsp;<br />
+<img src="datatyperealization_08.png" width="507" height="63" alt="DataTypeRealization_08" style="width:507px;height:63px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">4.</span></td><td style="border:none">Press <span class="f_Keystroke">Ctrl+Shift+F</span> again to reformat the code, which makes it easier to trim out the properties we don't want.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">5.</span></td><td style="border:none"> Let's say that, in this context, we don't care about the <span class="f_PlainName">otherNames</span> property, so we'll remove it from the list, leaving our diagram like this:<br />
+&nbsp;<br />
+<img src="datatyperealization_09.png" width="289" height="560" alt="DataTypeRealization_09" style="width:289px;height:560px;border:none" /><br />
+&nbsp;<br />
+This seems reasonable. But let's say that <span class="f_ModelElementName">addresses</span> is actually more detailed than we need. We can now do a <span style="font-style: italic;">recursive</span> <span class="f_Keyword">referenceEmbed</span> that can include a <span class="f_Keyword">targetProperties</span> specification where we can get rid of the <span class="f_ModelElementName">Address</span> properties we don't want.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">6.</span></td><td style="border:none"> Put the cursor at the bottom right hand corner of the <span class="f_Keyword">targetProperties</span> element we just added to the <span class="f_PlainName">taxpayer</span> <span class="f_Keyword">referenceEmbed</span>, press <span class="f_Keystroke">Enter</span>, then <span class="f_Keystroke">Backspace</span> to leave the cursor here:<br />
+&nbsp;<br />
+<img src="datatyperealization_10.png" width="234" height="135" alt="DataTypeRealization_10" style="width:234px;height:135px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">7.</span></td><td style="border:none"> Use Code Assist to add another <span class="f_Keyword">referenceEmbed</span> at this location, inside the first one, like so:<br />
+&nbsp;<br />
+<img src="datatyperealization_11.png" width="234" height="135" alt="DataTypeRealization_11" style="width:234px;height:135px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">8.</span></td><td style="border:none"> Add a <span class="f_Keystroke">Space</span> and use Code Assist, twice, to complete the line like this:<br />
+&nbsp;<br />
+<img src="datatyperealization_12.png" width="279" height="136" alt="DataTypeRealization_12" style="width:279px;height:136px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">9.</span></td><td style="border:none">Now we'll filter out the properties we don't want from <span class="f_ModelElementName">Address</span> in this context using <span class="f_Keyword">targetProperties</span> again. For instance, <span class="f_PlainName">city</span>, <span class="f_PlainName">stateOrProvince</span> and <span class="f_PlainName">country</span> may be the level of detail that is appropriate here:<br />
+&nbsp;<br />
+<img src="datatyperealization_13.png" width="284" height="213" alt="DataTypeRealization_13" style="width:284px;height:213px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">10.</span></td><td style="border:none"> The diagram, again, allows us to sanity check our model after these changes: <br />
+&nbsp;<br />
+<img src="datatyperealization_14.png" width="290" height="495" alt="DataTypeRealization_14" style="width:290px;height:495px;border:none" /></td></tr></table></div><p><span style="font-weight: bold;">Note:</span> The customizations we have just applied only affect the realization of <span class="f_ModelElementName">Person</span> type data in the context of the <span class="f_ModelElementName">TaxFilingObject</span> resource. If you look at <span class="f_ModelElementName">Person</span> and <span class="f_ModelElementName">Address</span> data in the <span class="f_ModelElementName">PersonObjectResource</span> you can still see the full set of properties.</p>
+<p>Now, let's review the nested structure we have just created: </p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none">Our root object, here, is <span class="f_ModelElementName">TaxFiling</span>. </td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none">We use a property subset to include the <span class="f_ModelElementName">TaxFiling</span> properties we want, one of which is <span class="f_PlainName">taxpayer</span>.  </td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">3.</span></td><td style="border:none">Then we use a <span class="f_Keyword">referenceEmbed</span> with <span class="f_Keyword">targetProperties</span> to specify the subset of <span class="f_ModelElementName">Person</span> properties that we want to include for a <span class="f_PlainName">taxpayer</span>.  </td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">4.</span></td><td style="border:none">Finally, we go one level deeper and say that, with the <span class="f_PlainName">addresses</span> included for a <span class="f_PlainName">taxpayer</span>, we only want a subset of three properties. </td></tr></table></div><p>The RepreZen API Studio language allows us to customize the realization of data types like this, to whatever level of detail is needed for a specific application,<span style="font-style: italic;"> right down to the leaf level</span>.</p>
+<p>Property subsets are one way in which we can customize the realization of data types. In the next section we'll look at another important example: cardinality overrides.</p>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Cardinality Overrides</span></p>
+<p class="p_DefinedTerm"><span class="f_DefinedTerm" style="font-style: normal;">Sometimes we have contextual constraints. The <a href="cardinality.htm" class="topiclink">cardinality indicator</a> on the </span><span class="f_PlainName">addresses</span><span class="f_DefinedTerm" style="font-style: normal;"> reference property in the </span><span class="f_ModelElementName">Person</span><span class="f_DefinedTerm" style="font-style: normal;"> type is 'zero or more' but it could be that, in our particular service, we need at </span><span class="f_DefinedTerm">least</span><span class="f_DefinedTerm" style="font-style: normal;"> one address for a taxpayer, or things just won't work correctly. To achieve this we simply specify a property set in our </span><span class="f_ModelElementName">PersonObject</span><span class="f_DefinedTerm" style="font-style: normal;"> resource, and override the cardinality on the </span><span class="f_PlainName">addresses</span><span class="f_DefinedTerm" style="font-style: normal;"> attribute like this:</span><br />
+<span class="f_DefinedTerm" style="font-style: normal;">&nbsp;</span><br />
+<img src="datatyperealization_15.png" width="439" height="212" alt="DataTypeRealization_15" style="width:439px;height:212px;border:none" /></p>
+<p class="p_DefinedTerm"><span class="f_DefinedTerm" style="font-style: normal; font-weight: bold;">Note: </span><span class="f_DefinedTerm" style="font-style: normal;">In this release of RepreZen API Studio</span><span class="f_DefinedTerm" style="font-style: normal;">, we can perform cardinality overrides in the context of the resource bound to the data type in question. We cannot yet, for instance, do this from within the </span><span class="f_PlainName">taxpayer</span><span class="f_DefinedTerm" style="font-style: normal;"> </span><span class="f_Keyword">referenceEmbed</span> we added to the <span class="f_ModelElementName">TaxFilingObject</span> resource.</p>
+<p class="p_Heading3_atocs_"><span class="f_Heading3_atocs_">You may bend the rules (but not break them)</span></p>
+<p class="p_DefinedTerm">Data type realization techniques enable us to <span style="font-style: italic;">adapt</span> a data type for our purposes <span style="font-style: italic;">within logical limits</span>. So, cardinality overrides may be used to <span style="font-style: italic;">narrow</span> existing constraints but they cannot be used to broaden them, as this would break the rules of the underlying data type.</p>
+<p class="p_DefinedTerm">The default constraint on all attributes is <span style="font-style: italic;">'zero or more', </span>which makes for flexibility. If we update the <a href="cardinality.htm" class="topiclink">cardinality</a> of the <span class="f_PlainName">lastName</span> property in our Person structure to 'exactly one'<br />
+&nbsp;<br />
+<img src="datatyperealization_16.png" width="378" height="212" alt="DataTypeRealization_16" style="width:378px;height:212px;border:none" /></p>
+<p class="p_DefinedTerm">and then try to make the <span class="f_PlainName">lastName</span> property in our <span class="f_ModelElementName">PersonObject</span> resource optional, we will get an error:<br />
+&nbsp;<br />
+<img src="datatyperealization_17.png" width="449" height="64" alt="DataTypeRealization_17" style="width:449px;height:64px;border:none" /></p>
+<p class="p_DefinedTerm">If we were trying, for example, to insert a new <span class="f_ModelElementName">Person</span> record without a <span class="f_PlainName">lastName</span> we would be violating the rules of the canonical model.</p>
+<p class="p_DefinedTerm"><span style="font-weight: bold;">Note: </span>RepreZen API Studio supports other forms of contextual constraint beyond cardinality overrides. To find out about these, and where they can be used, please see the Language Specification and/or Quick Reference Card which are accessible from the Help menu.</p>
+
+<table width="100%">
+       <tr />
+       <tr>
+           <td style="font-size:small">
+             Copyright © 2016 ModelSolv, Inc. &nbsp;All rights reserved. RepreZen and RAPID-ML are trademarks of ModelSolv, Inc. Swagger is a registered trademark of SmartBear Software, Inc. RepreZen API Studio is not associated with nor endorsed by SmartBear Software, Inc.
+           </td>
+       </tr>  
+<table>
+<!--ZOOMSTOP-->
+</div></div>
+<script type="text/javascript">
+
+var lastSlashPos = document.URL.lastIndexOf("/") > document.URL.lastIndexOf("\\") ? document.URL.lastIndexOf("/") : document.URL.lastIndexOf("\\");
+if( document.URL.substring(lastSlashPos + 1, lastSlashPos + 4).toLowerCase() != "~hh" )
+{
+ if (document.all) setTimeout(function() {nsrInit();},20); 
+    else nsrInit();
+ } 
+
+if ((!parent.hmNavigationFrame) && (parent.location) && (parent.location.href)) { $('.sync-toc').show();$('p.crumbs').hide();}
+var baseurl = document.URL.substring(0,document.URL.lastIndexOf("/")+1); 
+$('#idcontent').append('<p class="help-url"><b>URL of this page:&nbsp;</b><a href="'+baseurl+'index.html' +
+'?customising_data_type_realisat.htm" target="_top">'+baseurl+'index.html?customising_data_type_realisat.htm</a></p>');
+
+</script>
+</body>
+</html>

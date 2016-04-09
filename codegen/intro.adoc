@@ -159,7 +159,7 @@ button. Then we can also click "Finish" on the WADL GenTarget dialog. When we're
 see that both the WADL GenTarget we originally requested and the XML Schema GenTarget it depends on
 have been added to our model project for the `MyModel` model.
 
-=== Creating a Gen Template
+=== [[createGenTemplate]]Creating a Gen Template
 
 So far we have seen how to set up built-in GenTargets to generate various types of output in our
 model projects. But how about if we have a special need. For example, imagine we work at a company
