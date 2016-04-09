@@ -29,11 +29,7 @@ Swagger Codegen (SCG) module in a Java project within the {RAS} workspace. Any s
 automatically be discovered and "wrapped" as a GenTemplate by {RAS}, and you can apply them to your
 Swagger models by creating GenTargets.
 
-Currently, the process for creating a custom SCG module in {RAS} involves some steps that must be
-performed outside for {RAS} using a system command shell. In the future, we intend to capture the
-entire process in a wizard.
-
-The steps, detailed below, are:
+The steps for creating a custom SCG module, detailed below, are:
 
 1. Use the SCG command line interface to create a skeleton for your new module.
 2. Import that skeleton into {RAS} as a new Java project.
@@ -45,14 +41,14 @@ We will, in the course of describing these steps in detail, work through an exam
 the `LexiconGenTemplates` custom GenTemplate created in {%link cg_intro#createGenTemplate%}. Please
 review that document to learn the motivating hypothetical scenario.
 
-WARNING: Some of the details in this section apply to version 2.1.4 of SCG, and include information
+NOTE: Some of the details in this section apply to version 2.1.4 of SCG, and include information
 from available documentation and also from code inspection. {RAS} currently uses release 2.1.4 but
 will soon migrate to release 2.1.5. At that time we will update this document as needed.
 
 === Creating the SCG Skeleton
 
 The SCG Command Line interface (CLI) includes a command, `meta`, which can be used to create the
-skeleton for a new SCG module. The CLI is, in reality embedded in the Java command line, with the SCG
+skeleton for a new SCG module. The CLI is embedded in the Java command line, with the SCG
 executable jar file and the class that implements the selected SCG module as command-line
 arguments.footnote:[Although SCG is published with several convenience scripts that invoke the CLI on
 specific sample models embedded in the project, it does not provide a general-purpose script to
@@ -62,7 +58,8 @@ Java command lines.]
 Our first step invokes the SCG `meta` command to create a skeleton project. The command arguments we
 will use are:
 
-`-o dir`:: Specifies the directory where the skeleton project will be created; default is current directory.
+`-o dir`:: Specifies the directory where the skeleton project will be created; default is the current
+directory.
 
 `-n name`:: Specifies the name for the new SCG module, which is put to many uses in the skeleton,
 some of which imply restrictions on the name that are not enforced by SCG. These
