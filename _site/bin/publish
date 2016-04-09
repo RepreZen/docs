@@ -1,6 +1,9 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 if [[ $1 == "-f" ]] ; then
+    force=true
+elif [[ $1 == "-qa" ]] ; then
+    repo=${2-docs-qa}
     force=true
 fi
 
@@ -41,6 +44,31 @@ function check-git-state() {
     fi
 }
 
+function copyrepo() {
+    mkdir -p /tmp/git
+    rm -rf "/tmp/git/$repo"
+    (   
+	cd /tmp/git/
+	git clone "git@github.com:RepreZen/$repo"
+	cd "$repo"
+	for x in * .??* ; do
+	    if [[ "$x" != .git ]] ; then rm -rf $x ; fi
+	done
+	if [[ "$(git branch --list dummy)" ]] ; then git branch -D dummy ; fi
+	if [[ "$(git ls-remote origin dummy)" ]] ; then git push origin :dummy ; fi
+	if [[ "$(git ls-remote origin gh-pages)" ]] ; then git push origin :gh-pages ; fi
+	git checkout -b dummy
+    )
+    git archive $(git rev-parse @) | tar xCfp "/tmp/git/$repo" -
+    (
+	cd "/tmp/git/$repo"
+	jekyll build
+	git add .
+	git commit -m 'site copy'
+	git push --set-upstream origin dummy
+    )
+}
+
 cd $(git rev-parse --show-toplevel)
 
 check-git-state
@@ -49,5 +77,10 @@ rm -rf _site
 jekyll build
 
 check-git-state
+
+if [[ $repo ]] ; then
+    copyrepo $repo
+    cd "/tmp/git/$repo"
+fi
 
 git subtree push --prefix _site origin gh-pages
