@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>RAPID-ML™ - Quick Start Guide</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">   
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="helpman_settings.js"></script>
+  <script type="text/javascript" src="helpman_navigation.js"></script>
+  <script type="text/javascript" src="reprezenquickstartguide_contextids.js"></script>
+
+  <link type="text/css" href="default.css" rel="stylesheet" />
+
+  <style type="text/css">
+    html {
+      overflow: hidden;
+    }
+    body { 
+      margin:0;
+      padding:0;
+      height:100%;
+      overflow:hidden; 
+      background: #15487F url('background.jpg') top left repeat-x;
+    }
+
+    #hmheadbox {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      top: 5px;
+      height: 50px;
+      background:url(background-logo.png) top left no-repeat;
+      z-index: 998; /* header to front -> menus overlap topic frame */  
+      }
+    #navbar {
+      margin:70px 0 0 15px;
+      z-index: 999;  
+      }
+    #navbar img {
+      border:none;      
+      margin-right:10px;
+      }             
+    #hmnavbox {
+      position: absolute;
+      left: 10px;
+      width: 245px;
+      min-width: 50px;
+      top: 110px;
+      bottom: 10px;                                    
+      /* Navigation panel background, remove for transparent: */
+      background: url('background-white50.png');  
+      }
+
+    #hmcontentbox {
+      position: absolute;
+      top: 0px;
+      right: 10px;
+      bottom: 10px;
+      left: 260px;      
+      background: #FFF;
+      box-shadow: 0px 4px 12px #777;
+      z-index: 1000;
+      }
+
+      #footer {position: relative;
+	margin-top: -100px; /* negative value of footer height */
+	height: 100px;
+	clear:both;} 
+
+    iframe {
+      position: absolute;left:0;top:0;width:100%;height:100%;border:none;
+      }
+  
+    
+  </style>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      if (!hmSupportsAbspos()) {
+      	$(window).bind("resize", function() {
+      	  hmNoAbsposResize($("#hmheadbox"), true, false);
+      	  hmNoAbsposResize($("#hmnavbox"), false, true);
+      	  hmNoAbsposResize($("#hmcontentbox"), true, true);
+	    });
+	    $(window).trigger("resize");
+	  }
+      hmCreateVSplitter($("#hmnavbox"),$("#hmcontentbox"));
+    });
+  </script>
+
+</head>
+<body>
+<div id="hmheadbox">
+  
+  <div style="width:50%;float:right">
+  </div>    
+
+  
+</div>
+<div id="navbar">
+  <a class="selected" href="reprezenquickstartguide_content.htm" title="Table of Contents" target="hmnavigation"><img src="hm_btn_toc.png" alt="Table of Contents"
+      onmouseover="this.src='hm_btn_toc_orange.png'" 
+      onmouseout="this.src='hm_btn_toc.png'"/></a>
+<a href="reprezenquickstartguide_kwindex.htm" title="Keyword Index" target="hmnavigation"><img src="hm_btn_index.png" alt="Keyword Index"
+      onmouseover="this.src='hm_btn_index_orange.png'" 
+      onmouseout="this.src='hm_btn_index.png'"/></a>
+<a href="reprezenquickstartguide_ftsearch.htm" title="Search" target="hmnavigation"><img src="hm_btn_search.png" alt="Search"
+      onmouseover="this.src='hm_btn_search_orange.png'" 
+      onmouseout="this.src='hm_btn_search.png'"/></a>
+</div>
+<div id="hmnavbox">
+  <iframe name="hmnavigation" id="hmnavigation" src="reprezenquickstartguide_content.htm" seamless="seamless" title="Navigation Pane" frameborder="0">
+  <div id="footer">
+    <table width="100%">
+       <tr>
+           <td style="font-size:small">© 2015 ModelSolv, Inc.  RepreZen™, ModelSolv™, the ModelSolv wordmark and insignia are trademarks of ModelSolv, Inc.  All rights reserved.</td>
+       </tr>  
+    <table>
+  </div>
+  </iframe>
+</div>
+
+<div id="hmcontentbox" >
+  <script type="text/javascript">
+    var defaulttopic="introduction.htm";
+    var query = window.location.search.substring(1), hash = window.location.hash, xssTest = /javascript|:|&#58;|&#x3a;|%3a|3a;|58;|\//i;
+    if (query !== "") query = (xssTest.test(query)) ? "" : query;
+    if (hash !== "") hash = (xssTest.test(hash)) ? "" : hash;
+    if (query != "") {
+      if (typeof(hmGetContextId) != "undefined") {
+        var tmpCntx = hmGetContextId(query);
+        if (tmpCntx != "") {
+          defaulttopic = tmpCntx;
+        } else {
+          defaulttopic = query + hash;
+        }
+      }
+    }
+    document.write('<iframe name="hmcontent" id="hmcontent" src="'+defaulttopic+'" seamless="seamless" title="Content Page" frameborder="0"></iframe>');
+  </script>
+  <noscript>
+    <iframe name="hmcontent" id="hmcontent" src="introduction.htm" seamless="seamless" title="Content Page" frameborder="0"></iframe>
+  </noscript>
+</div>
+</body>
+</html>
+

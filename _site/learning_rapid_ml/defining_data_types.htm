@@ -1,0 +1,219 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <!-- Original title below -->
+   <!--title>Defining Data Types</title-->
+   <!-- Add title to each page followed by topic title -->
+   <title>RepreZen API Studio Quick Start Guide &raquo; Defining Data Types</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="cardinality,Code Assist,Optional Fluency" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <link type="text/css" href="custom.css" rel="stylesheet">
+
+   <style TYPE="text/css" media="screen"> 
+      html, body { margin:0; 
+             padding:0; 
+             overflow: hidden; 
+             background: #FFFFFF; 
+       } 
+
+      div#printheader { display: none; }
+      #idheader { width:100%; 
+                  height:auto; 
+                  padding: 0; 
+                  margin: 0; 
+       } 
+      #idcontent { position:relative }                                               
+      #callout-table, #overview-table {display:block; position:relative; top:0; left:0;}
+      #callout-icon {display:block; position:absolute; top:-11px; left:-11px;}
+      #callout-icon-flag {display:block; position:absolute; top:-11px; left:-8px;}
+      #callout-table a {text-decoration: none; color: blue;}
+      #callout-table a:visited {text-decoration: none; color: blue;}
+      #overview-table a {text-decoration: none; color: black;}
+      #overview-table a:visited {text-decoration: none; color: black;}
+      #callout-table a:hover, #overview-table a:hover {text-decoration: underline;}      
+      #switchtoggles { text-align: right; padding: 0 5px 0 0; font-size: 90%; } 
+      p.help-url { margin: 20px 0 5px 0; text-align: center; font-size: 80%; text-decoration: none }
+      .sync-toc { color: #ffffff; font-size: 8pt; font-weight: bold; display: none; }
+      .sync-toc a { color: #ffffff; text-decoration: none; font-weight: bold;}
+      .sync-toc a:visited { color: #ffffff; }
+      .sync-toc a:hover { text-decoration: underline; }
+      #footer {position: relative;
+	margin-top: -100px; /* negative value of footer height */
+	height: 100px;
+	clear:both;} 
+   </style>
+   <noscript>
+   <style type="text/css">
+   html, body { overflow: auto; }
+   </style> 
+   </noscript>
+   <style type="text/css" media="print">
+      span.f_Heading1 { color: black; }
+      #idheader, #printheader img { display:none; }
+      #printheader { display: block; margin-top: 20px; }
+      #idcontent { margin-top: 10px; position:relative }
+   </style>   
+
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="nsh.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "defining_data_types.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<div id="printheader"><h1 class="p_Heading1"><span class="f_Heading1">Defining Data Types</span></h1>
+</div>
+<div id="idheader">
+<div id="idheaderbg">
+<table style="width:100%;border:none;margin:0px;background:url(background.jpg)" cellspacing="0" cellpadding="0"> 
+  <tr valign="bottom">
+    <td align="left" valign="bottom" class="topichead">
+   <p class="sync-toc">&lt;&lt; <a rel="nofollow" href="index.html?defining_data_types.htm" target="_top">Click to Display Table of Contents</a> &gt;&gt;</p>
+   <p class="crumbs" id="idnav"><b>Navigation:</b>&nbsp;
+   &raquo;No topics above this level&laquo;
+   </p>
+   <h1 class="p_Heading1"><span class="f_Heading1">Defining Data Types</span></h1>
+
+    </td>
+    <td align="right" width="120" valign="middle" class="topichead" id="idnav">
+    <!-- Navigation Buttons ~ previous and next -->
+    
+    
+     <a href="creating_project_and_model.htm"
+        onmouseover="document.images.prev.src='hm_btn_navigate_prev_orange.png'" 
+        onmouseout="document.images.prev.src='hm_btn_navigate_prev.png'"
+        ><img name="prev" src="hm_btn_navigate_prev.png" border=0 alt="Previous page"
+        ></a><a href="introduction.htm"
+        onmouseover="document.images.main.src='hm_btn_navigate_top_orange.png'" 
+        onmouseout="document.images.main.src='hm_btn_navigate_top.png'"><img name=main src="hm_btn_navigate_top.png" border=0 alt="Return to chapter overview"
+        ></a><a href="defining_resources.htm"
+        onmouseover="document.images.next.src='hm_btn_navigate_next_orange.png'" 
+        onmouseout="document.images.next.src='hm_btn_navigate_next.png'"><img name=next src="hm_btn_navigate_next.png" border=0 alt="Next page"
+        ></a>
+    
+    </td>
+  </tr>  
+</table>
+<!-- The following code displays Expand All/Collapse All links  below the header in topics containing toggles -->
+  
+</div>
+</div>  
+
+<div id="idcontent"><div id="innerdiv">
+<!-- Ask Internet Explorer 6.users to update their obsolete and dangerous browser --> 
+<!--[if lt IE 7]><div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div><![endif]-->
+
+<!--ZOOMRESTART-->
+<p>RepreZen™ API Studio uses a simple data definition language to define the structured data types used in our API. &nbsp;These data types are technology-independent. &nbsp;The RepreZen API Studio code generator will adapt them to the media types supported by our API.</p>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Defining the first Data Type</span></p>
+<p><span class="f_Number1">The </span><span class="f_Keyword">dataModel</span><span class="f_Number1"> in our</span> <span class="f_Keyword">rapidModel </span><span class="f_Number1">currently contains a generated data </span><span class="f_Keyword">structure</span><span class="f_Number1"> called </span><span class="f_ModelElementName">TaxBlaster.</span> We'll rename and customize this now to suit our purposes:</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none"><span class="f_Number1">First, we'll use code folding to fold the two generated resource definitions. This will make it easier to see what's going on. Press the little minus icons to the left of the </span><span class="f_Keyword">objectResource</span><span class="f_Number1"> and </span><span class="f_Keyword">collectionResource</span><span class="f_Number1"> elements so that they turn into little pluses, and the code looks like this:</span><br />
+<span class="f_Number1">&nbsp;</span><br />
+<img src="definedatatypes_01.png" width="661" height="505" alt="DefineDataTypes_01" style="width:661px;height:505px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none"><span class="f_Number1">Next, we'll rename the </span><span class="f_ModelElementName">TaxBlaster</span><span class="f_Number1"> data type to something more useful. Find the word </span><span class="f_ModelElementName">TaxBlaster</span> just <span class="f_Number1">after the keyword </span><span class="f_Keyword">structure</span><span class="f_Number1"> in the </span><span class="f_Keyword">dataModel</span><span class="f_Number1"> and &nbsp;press </span><span class="f_Keystroke">Alt+Shift+R</span><span class="f_Number1"> to initiate a Rename refactoring operation: </span><br />
+<span class="f_Number1">&nbsp;</span><br />
+<img src="definedatatypes_02.png" width="661" height="505" alt="DefineDataTypes_02" style="width:661px;height:505px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">3.</span></td><td style="border:none"><span style="font-size: 12pt; font-family: Arial;">Type in the new name, </span><span class="f_ModelElementName">TaxFiling</span><span style="font-size: 12pt; font-family: Arial;">, and press </span><span class="f_Keystroke">Enter</span><span style="font-size: 12pt; font-family: Arial;"> to complete the refactoring.  </span><br />
+<span class="f_Keyword" style="font-size: 12pt; font-family: Arial;">Note:</span><span class="f_Keyword" style="font-size: 12pt; font-family: Arial; font-weight: normal;"> References to </span><span class="f_ModelElementName">TaxFiling</span><span class="f_Keyword" style="font-size: 12pt; font-family: Arial; font-weight: normal;"> in the </span><span class="f_Keyword">objectResource</span><span class="f_Keyword" style="font-size: 12pt; font-family: Arial; font-weight: normal;"> and </span><span class="f_Keyword">collectionResource</span><span class="f_Keyword" style="font-size: 12pt; font-family: Arial; font-weight: normal;"> are also renamed to preserve consistency in the model:</span><br />
+<span class="f_Keyword" style="font-size: 12pt; font-family: Arial; font-weight: normal;">&nbsp;</span><br />
+<img src="definedatatypes_03.png" width="661" height="505" alt="DefineDataTypes_03" style="width:661px;height:505px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">4.</span></td><td style="border:none">Now, we'll rename the <span class="f_ModelElementName">id</span> property of the generated structure to <span class="f_ModelElementName">filingID</span> using the same process:<br />
+&nbsp;<br />
+<img src="definedatatypes_04.png" width="661" height="505" alt="DefineDataTypes_04" style="width:661px;height:505px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">5.</span></td><td style="border:none">RepreZen API Studio data structures allow multiple, newline separated properties. We'll flesh out the <span class="f_ModelElementName">TaxFiling</span><span style="font-style: italic;"> </span><span class="f_Keyword">structure</span> now as follows: <br />
+&nbsp;<br />
+<span class="f_Syntax-keyword">structure</span><span class="f_CodeExample"> TaxFiling</span><br />
+<span class="f_CodeExample"> &nbsp; filingID : string</span><br />
+<span class="f_CodeExample"> &nbsp; jurisdiction : string</span><br />
+<span class="f_CodeExample"> &nbsp; year : gYear</span><br />
+<span class="f_CodeExample"> &nbsp; period : int</span><br />
+<span class="f_CodeExample"> &nbsp; currency : string</span><br />
+<span class="f_CodeExample"> &nbsp; grossIncome : decimal</span><br />
+<span class="f_CodeExample"> &nbsp; taxLiability : decimal</span><br />
+<span class="f_CodeExample">&nbsp;</span><br />
+<img src="definedatatypes_05.png" width="661" height="505" alt="DefineDataTypes_05" style="width:661px;height:505px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; line-height: 1.20; padding: 0px 0px 0px 0px; margin: 12px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:30px; padding:12px;"><p style="line-height: 1.15; margin: 0px 0px 17px 0px;"><img src="clip0007_zoom17.png" width="66" height="66" alt="clip0007" style="width:66px;height:66px;border:none" /></p>
+</td>
+<td style="vertical-align:top; background-color:#99ccff; padding:12px;"><p class="p_TableHeading3"><span class="f_TableHeading3">Hint - Use Code Assist</span></p>
+<p style="margin: 12px 0px 0px 0px;">As you are editing the model, you can get context-sensitive syntax help by pressing <span class="f_Keystroke">Ctrl+Space</span>. &nbsp;This opens a list of available code completions. You can use the mouse or the keyboard to navigate and select lines in the list. &nbsp;Double-clicking or pressing <span class="f_Keystroke">Enter</span> on a selected line in the list inserts the selection in the editor.</p>
+</td>
+</tr>
+</table>
+</div>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Defining a Person Data Type</span></p>
+<p>Next, using a code assist template, we'll define another data type to describe a person associated with a tax filing as a taxpayer, dependent, or tax accountant.</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none">Position the cursor on the bottom right-hand corner of the TaxFililing structure, press <span class="f_Keystroke">Enter</span> and press <span class="f_Keystroke">Backspace</span> once to put the cursor at the correct indent level for creating a new <span class="f_Keyword">structure</span>:<br />
+&nbsp;<br />
+<img src="definedatatypes_06.png" width="661" height="505" alt="DefineDataTypes_06" style="width:661px;height:505px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none">Press <span class="f_Keystroke">Ctrl+Space</span> to open Code Assist and find the <span class="f_UIControlName">structure</span> template in the suggestion list. &nbsp;This is the option at the bottom, with a green circle icon (indicating that this is a template):<br />
+&nbsp;<br />
+<img src="definedatatypes_07.png" width="661" height="505" alt="DefineDataTypes_07" style="width:661px;height:505px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">3.</span></td><td style="border:none">Double-click the <span class="f_UIControlName">structure</span> template in the list (or select it with the keyboard and press <span class="f_Keystroke">Enter</span>) to apply the template:<br />
+&nbsp;<br />
+<img src="definedatatypes_08.png" width="661" height="505" alt="DefineDataTypes_08" style="width:661px;height:505px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">4.</span></td><td style="border:none">The name of the new structure is highlighted. Overwrite this by typing <span class="f_ModelElementName">Person</span> and press <span class="f_Keystroke">Enter</span>:<br />
+&nbsp;<br />
+<img src="definedatatypes_09.png" width="661" height="505" alt="DefineDataTypes_09" style="width:661px;height:505px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">5.</span></td><td style="border:none"><span style="font-size: 12pt; font-family: Arial;">Add the following properties to the </span><span class="f_ModelElementName">Person</span><span style="font-size: 12pt; font-family: Arial;"> </span><span class="f_Keyword">structure</span><span style="font-size: 12pt; font-family: Arial;">:</span><br />
+<span style="font-size: 12pt; font-family: Arial;">&nbsp;</span><br />
+<span class="f_CodeExample">id : string</span><br />
+<span class="f_CodeExample">lastName : string</span><br />
+<span class="f_CodeExample">firstName : string</span><br />
+<span class="f_CodeExample">otherNames : string*</span><br />
+<span class="f_CodeExample">&nbsp;</span><br />
+<img src="definedatatypes_10.png" width="661" height="505" alt="DefineDataTypes_10" style="width:661px;height:505px;border:none" /><br />
+<span class="f_CodeExample">&nbsp;</span><br />
+<span style="font-size: 12pt; font-family: Arial;">Note that the </span><span class="f_ModelElementName">otherNames</span><span style="font-size: 12pt; font-family: Arial;"> property has a data type of </span><span class="f_ModelElementName">string*</span><span style="font-size: 12pt; font-family: Arial;">, with a star suffix. &nbsp;This is the <a href="cardinality.htm" class="topiclink">cardinality</a> indicator.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">6.</span></td><td style="border:none">Tax filings are made by, or on behalf of, taxpayers, so now we'll add another property to the <span class="f_ModelElementName">TaxFiling</span><span style="font-style: italic;"> </span>data <span class="f_Keyword">structure </span>using the <span class="f_Keyword">reference</span> keyword to cover this. Insert a new line below the <span class="f_ModelElementName">filingID</span> property, press <span class="f_Keystroke">Ctrl+Space</span> to open Code Assist, double-click <span class="f_UIControlName">reference property</span> (or select it with the keyboard and press <span class="f_Keystroke">Enter</span>): <br />
+&nbsp;<br />
+<img src="definedatatypes_11.png" width="661" height="505" alt="DefineDataTypes_11" style="width:661px;height:505px;border:none" /><br />
+&nbsp;</td></tr></table></div><div style="text-align: left; text-indent: 0px; line-height: 1.20; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:30px; padding:12px;"><p style="line-height: 1.15; margin: 0px 0px 17px 0px;"><img src="clip0007_zoom17.png" width="66" height="66" alt="clip0007" style="width:66px;height:66px;border:none" /></p>
+</td>
+<td style="vertical-align:top; background-color:#99ccff; padding:12px;"><p class="p_TableHeading3"><span class="f_TableHeading3">Note: Optional Fluency</span></p>
+<p>To aid fluency, and readability, the RAPID-ML™ language has optional keywords that may be used with normal keywords. (Optional keywords are denoted with a normal rather than a <span style="font-weight: bold;">bold</span> type face.) The <span class="f_Keyword">reference</span> keyword, for example, may be accompanied by the optional keywords <span class="f_OptionalKeyword">as</span> and <span class="f_OptionalKeyword">to</span> like this:<span class="f_OptionalKeyword"> </span></p>
+<p><span class="f_LiteralValue">&lt;name&gt;</span> <span class="f_OptionalKeyword">as</span> <span class="f_Keyword">reference </span><span class="f_OptionalKeyword">to</span> <span class="f_LiteralValue">&lt;type&gt;</span><br />
+or <span class="f_LiteralValue">&lt;name&gt;</span> <span class="f_Keyword">reference </span><span class="f_OptionalKeyword">to</span><span class="f_LiteralValue"> &lt;type&gt;</span>. </p>
+<p>You will see these different forms used in the guide. </p>
+</td>
+</tr>
+</table>
+</div>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">7.</span></td><td style="border:none"><span class="f_Number1">Type </span><span class="f_ModelElementName">taxpayer</span><span class="f_Number1"> in the </span><span class="f_ModelElementName">propertyName</span><span class="f_Number1"> field, then press the tab key to move to the </span><span class="f_Keyword">reference</span><span class="f_Number1"> data type field. Note that a list of data types appears:</span><br />
+<span class="f_Number1">&nbsp;</span><br />
+<img src="definedatatypes_12.png" width="661" height="505" alt="DefineDataTypes_12" style="width:661px;height:505px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">8.</span></td><td style="border:none"><span class="f_Number1">Double-click&nbsp;</span><span class="f_ModelElementName" style="font-style: italic;">Person</span>,&nbsp;or&nbsp;use&nbsp;the&nbsp;keyboard&nbsp;to&nbsp;select&nbsp;it,&nbsp;and&nbsp;press&nbsp;<span class="f_Keystroke">Enter</span><span class="f_ModelElementName">:</span><br />
+<span class="f_ModelElementName">&nbsp;</span><br />
+<img src="definedatatypes_13.png" width="661" height="505" alt="DefineDataTypes_13" style="width:661px;height:505px;border:none" /></td></tr></table></div><p>Now we have defined the basic data model that our API will provide access to. In the next topic, we'll define resources bound to these data types. </p>
+
+<table width="100%">
+       <tr />
+       <tr>
+           <td style="font-size:small">
+             Copyright © 2016 ModelSolv, Inc. &nbsp;All rights reserved. RepreZen and RAPID-ML are trademarks of ModelSolv, Inc. Swagger is a registered trademark of SmartBear Software, Inc. RepreZen API Studio is not associated with nor endorsed by SmartBear Software, Inc.
+           </td>
+       </tr>  
+<table>
+<!--ZOOMSTOP-->
+</div></div>
+<script type="text/javascript">
+
+var lastSlashPos = document.URL.lastIndexOf("/") > document.URL.lastIndexOf("\\") ? document.URL.lastIndexOf("/") : document.URL.lastIndexOf("\\");
+if( document.URL.substring(lastSlashPos + 1, lastSlashPos + 4).toLowerCase() != "~hh" )
+{
+ if (document.all) setTimeout(function() {nsrInit();},20); 
+    else nsrInit();
+ } 
+
+if ((!parent.hmNavigationFrame) && (parent.location) && (parent.location.href)) { $('.sync-toc').show();$('p.crumbs').hide();}
+var baseurl = document.URL.substring(0,document.URL.lastIndexOf("/")+1); 
+$('#idcontent').append('<p class="help-url"><b>URL of this page:&nbsp;</b><a href="'+baseurl+'index.html' +
+'?defining_data_types.htm" target="_top">'+baseurl+'index.html?defining_data_types.htm</a></p>');
+
+</script>
+</body>
+</html>

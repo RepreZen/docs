@@ -62,3 +62,18 @@ body { /* make room for fixed navbar */
 pre.nowrap code { /* boostrap css stomps on asciidoc source block's nowrap option */
     white-space: pre;
 }
+
+/************ Footer ************/
+.footer {
+    font-size: small;
+    color: gray;
+    text-align: center;
+}
+.footer::before {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 40%;
+    margin: 10px auto;
+    background: gray;
+}
