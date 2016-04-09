@@ -10,6 +10,7 @@
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -25,12 +26,16 @@
   <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.js"></script>
 
   <link rel="stylesheet" href="/docs/css/asciidoc.css">
-  <link rel="stylesheet" href="/docs/css/misc.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="canonical" href="http://reprezen.github.io/docs/">
   <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/docs/feed.xml">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
+
+  <link rel="stylesheet" href="/docs/css/misc.css">
+  <script src="/docs/js/misc.js"></script>
+
 </head>
 
   <body data-spy="scroll" data-targets="#toc">
@@ -45,15 +50,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/docs/"><img src="/docs/images/reprezen-logo.png"> Documentation Portal</a>
+      <a class="navbar-brand" href="/docs/"><img src="/docs/images/reprezen-logo.png">&nbsp;Documentation</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
   
+  
+
+  
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Core Docs <span class="caret"></span></a>
     <ul class="dropdown-menu">
+      
+      
       
       
       
@@ -62,32 +72,65 @@
       
       
       
-      <li class=""><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf" target="_blank">RAPID-ML Quick Reference Guide</a></li>
+      
+      
+      <li class=""><a href="/docs/learning_rapid_ml/" target="_blank">Learning RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf" target="_blank">RepreZen API Studio Reference Card</a></li>
       
       
     </ul>
   </li>
 
+
+  
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Code Gen <span class="caret"></span></a>
     <ul class="dropdown-menu">
       
       
       
-      <li class=""><a href="/docs/codegen_intro/">Introduction</a></li>
+      
+      
+      <li class=""><a href="/docs/codegen_intro/" target="_self">Introduction</a></li>
       
       
       
       
-      <li class=""><a href="/docs/codegen_sharing/">Sharing GenTemplates</a></li>
+      
+      
+      <li class=""><a href="/docs/codegen_swagger_codegen/" target="_self">Using Swagger Codegen in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/codegen_custom_swagger_gentemplate/" target="_self">Creating a Custom Swagger GenTemplate</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/codegen_sharing/" target="_self">Sharing GenTemplates</a></li>
       
       
     </ul>
   </li>
 
+
+  
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Training Videos <span class="caret"></span></a>
     <ul class="dropdown-menu">
+      
+      
       
       
       
@@ -96,7 +139,11 @@
       
       
       
+      
+      
       <li class="divider" role="separator"></li>
+      
+      
       
       
       
@@ -106,7 +153,11 @@
       
       
       
+      
+      
       <li class=""><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&index=1&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Introducing RepreZen API Studio</a></li>
+      
+      
       
       
       
@@ -116,7 +167,11 @@
       
       
       
+      
+      
       <li class=""><a href="https://www.youtube.com/watch?v=KX_tHp_KQkE&index=3&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Editing Swagger-OpenAPI in RepreZen API Studio</a></li>
+      
+      
       
       
       
@@ -126,7 +181,11 @@
       
       
       
+      
+      
       <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=5&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
       
       
       
@@ -136,7 +195,11 @@
       
       
       
+      
+      
       <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=7&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
       
       
       
@@ -146,7 +209,11 @@
       
       
       
+      
+      
       <li class="video-series"><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Play Series: RAPID-ML</a></li>
+      
+      
       
       
       
@@ -156,7 +223,11 @@
       
       
       
+      
+      
       <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=2&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
       
       
       
@@ -166,11 +237,14 @@
       
       
       
+      
+      
       <li class=""><a href="https://www.youtube.com/watch?v=wYimccfMbAo&index=4&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Introducing the RAPID-ML Ready! API Plugin</a></li>
       
       
     </ul>
   </li>
+
 
 </ul>
 
@@ -185,6 +259,18 @@
 <p>Available Documentation:</p>
 </div>
 <div class="sect1">
+<h2 id="home">Home</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="/docs/">RepreZen Documentation Portal</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="core-docs">Core Docs</h2>
 <div class="sectionbody">
 <div class="ulist">
@@ -193,7 +279,10 @@
 <p><a href="http://rapid-api.org/rapid-ml/spec/current/desktop/" target="_blank">RAPID-ML Language Specification</a></p>
 </li>
 <li>
-<p><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf" target="_blank">RAPID-ML Quick Reference Guide</a></p>
+<p><a href="/docs/learning_rapid_ml/" target="_blank">Learning RAPID-ML</a></p>
+</li>
+<li>
+<p><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf" target="_blank">RepreZen API Studio Reference Card</a></p>
 </li>
 </ul>
 </div>
@@ -206,6 +295,12 @@
 <ul>
 <li>
 <p><a href="/docs/codegen_intro/">Introduction</a></p>
+</li>
+<li>
+<p><a href="/docs/codegen_swagger_codegen/">Using Swagger Codegen in RepreZen API Studio</a></p>
+</li>
+<li>
+<p><a href="/docs/codegen_custom_swagger_gentemplate/">Creating a Custom Swagger GenTemplate</a></p>
 </li>
 <li>
 <p><a href="/docs/codegen_sharing/">Sharing GenTemplates</a></p>
@@ -280,6 +375,10 @@
 	  <nav id="sidetoc" data-spy="affix" data-toggle="toc" class="hidden-xs"></nav>
 	</div>
       </div>
+      <div class="footer">
+  &copy; 2016 ModelSolv, Inc. All rights reserved.
+</div>
+
     </div>
   </body>
 </html>
