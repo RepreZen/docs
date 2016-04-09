@@ -139,7 +139,7 @@ but we'll comment them out to make our screen shots understandable.
 
 image::skeleton-comment-standard-templates.png[Suppress Standard Templates,role=text-center]
 
-Next we'll uncomment that code we commented out earlier, becuase a "supporting" template is a good
+Next we'll uncomment that code we commented out earlier, because a "supporting" template is a good
 choice for our CSV file generator. After reviving that code, we'll change the template and output
 file names to choices that are appropriate for our task.
 
@@ -150,7 +150,7 @@ also delete the existing templates, but we'll leave them in place.
 
 image::skeleton-create-lexicon-template.png[Create Lexicon Template File,role=text-center]
 
-Finally, we'll enter code into the new template file so as to produce our desired output. We will
+Finally, we'll enter code into the new template file to produce our desired output. We will
 not go into any details of the Mustache templating language, or the structure in which the Swagger
 model is presented to the template by the Swagger Codegen framework. You can read about Mustache
 link:https://mustache.github.io/[here].
