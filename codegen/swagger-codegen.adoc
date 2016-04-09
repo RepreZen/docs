@@ -9,8 +9,8 @@ permalink: /codegen_swagger_codegen/
 :RZ: RepreZen
 
 In {%link cg_intro%} we discuss GenTemplates and GenTargets in the context of RAPID-ML models. But
-as you may know, {RAS} is a great platform for working with Swagger -- a.k.a. OpenAPI -- API
-specifications. This includes full access to the
+as you may know, {RAS} is a great platform for working with API specifications in Swagger, now 
+officially the link:https://openapis.org[OpenAPI Specification^]. This includes full access to the
 link:https://github.com/swagger-api/swagger-codegen[Swagger Codegen^] framework.
 
 If you've used Swagger Codegen (SCG), you'll know that the implementation comes with several
@@ -32,7 +32,7 @@ RAPID-ML GenTemplates
 
 == Swagger Codegen Parameters
 
-The GenTarget (`.gen`) files that define GenTargets in a model project are JSON files that, among
+The GenTarget (`.gen`) files that define GenTargets in a model project are YAML files that, among
 other things, provide values for parameters that may be used by the GenTemplate. In general, a
 GenTemplate declares its parameters including the following information for each parameter:
 
