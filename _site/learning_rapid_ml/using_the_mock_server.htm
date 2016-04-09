@@ -1,0 +1,191 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <!-- Original title below -->
+   <!--title>Trying the API with the Mock Service</title-->
+   <!-- Add title to each page followed by topic title -->
+   <title>RepreZen API Studio Quick Start Guide &raquo; Trying the API with the Mock Service</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="example data,Mock Service" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <link type="text/css" href="custom.css" rel="stylesheet">
+
+   <style TYPE="text/css" media="screen"> 
+      html, body { margin:0; 
+             padding:0; 
+             overflow: hidden; 
+             background: #FFFFFF; 
+       } 
+
+      div#printheader { display: none; }
+      #idheader { width:100%; 
+                  height:auto; 
+                  padding: 0; 
+                  margin: 0; 
+       } 
+      #idcontent { position:relative }                                               
+      #callout-table, #overview-table {display:block; position:relative; top:0; left:0;}
+      #callout-icon {display:block; position:absolute; top:-11px; left:-11px;}
+      #callout-icon-flag {display:block; position:absolute; top:-11px; left:-8px;}
+      #callout-table a {text-decoration: none; color: blue;}
+      #callout-table a:visited {text-decoration: none; color: blue;}
+      #overview-table a {text-decoration: none; color: black;}
+      #overview-table a:visited {text-decoration: none; color: black;}
+      #callout-table a:hover, #overview-table a:hover {text-decoration: underline;}      
+      #switchtoggles { text-align: right; padding: 0 5px 0 0; font-size: 90%; } 
+      p.help-url { margin: 20px 0 5px 0; text-align: center; font-size: 80%; text-decoration: none }
+      .sync-toc { color: #ffffff; font-size: 8pt; font-weight: bold; display: none; }
+      .sync-toc a { color: #ffffff; text-decoration: none; font-weight: bold;}
+      .sync-toc a:visited { color: #ffffff; }
+      .sync-toc a:hover { text-decoration: underline; }
+      #footer {position: relative;
+	margin-top: -100px; /* negative value of footer height */
+	height: 100px;
+	clear:both;} 
+   </style>
+   <noscript>
+   <style type="text/css">
+   html, body { overflow: auto; }
+   </style> 
+   </noscript>
+   <style type="text/css" media="print">
+      span.f_Heading1 { color: black; }
+      #idheader, #printheader img { display:none; }
+      #printheader { display: block; margin-top: 20px; }
+      #idcontent { margin-top: 10px; position:relative }
+   </style>   
+
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="nsh.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "using_the_mock_server.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<div id="printheader"><h1 class="p_Heading1"><span class="f_Heading1">Trying the API with the Mock Service</span></h1>
+</div>
+<div id="idheader">
+<div id="idheaderbg">
+<table style="width:100%;border:none;margin:0px;background:url(background.jpg)" cellspacing="0" cellpadding="0"> 
+  <tr valign="bottom">
+    <td align="left" valign="bottom" class="topichead">
+   <p class="sync-toc">&lt;&lt; <a rel="nofollow" href="index.html?using_the_mock_server.htm" target="_top">Click to Display Table of Contents</a> &gt;&gt;</p>
+   <p class="crumbs" id="idnav"><b>Navigation:</b>&nbsp;
+   &raquo;No topics above this level&laquo;
+   </p>
+   <h1 class="p_Heading1"><span class="f_Heading1">Trying the API with the Mock Service</span></h1>
+
+    </td>
+    <td align="right" width="120" valign="middle" class="topichead" id="idnav">
+    <!-- Navigation Buttons ~ previous and next -->
+    
+    
+     <a href="resolving_ambiguous_data_type_references.htm"
+        onmouseover="document.images.prev.src='hm_btn_navigate_prev_orange.png'" 
+        onmouseout="document.images.prev.src='hm_btn_navigate_prev.png'"
+        ><img name="prev" src="hm_btn_navigate_prev.png" border=0 alt="Previous page"
+        ></a><a href="introduction.htm"
+        onmouseover="document.images.main.src='hm_btn_navigate_top_orange.png'" 
+        onmouseout="document.images.main.src='hm_btn_navigate_top.png'"><img name=main src="hm_btn_navigate_top.png" border=0 alt="Return to chapter overview"
+        ></a><a href="generating_code_documentation.htm"
+        onmouseover="document.images.next.src='hm_btn_navigate_next_orange.png'" 
+        onmouseout="document.images.next.src='hm_btn_navigate_next.png'"><img name=next src="hm_btn_navigate_next.png" border=0 alt="Next page"
+        ></a>
+    
+    </td>
+  </tr>  
+</table>
+<!-- The following code displays Expand All/Collapse All links  below the header in topics containing toggles -->
+  
+</div>
+</div>  
+
+<div id="idcontent"><div id="innerdiv">
+<!-- Ask Internet Explorer 6.users to update their obsolete and dangerous browser --> 
+<!--[if lt IE 7]><div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div><![endif]-->
+
+<!--ZOOMRESTART-->
+<p>This section introduces the RepreZen™ API Studio Mock Service - what it is, why we need it and how to use it.</p>
+<p>RepreZen API Studio enables us to define RESTful APIs - a set of resources with their supported HTTP methods that provide an interface to a service of some kind. &nbsp;The Mock Service enables us to play with an API we are designing <span style="font-style: italic;">without having to implement it first</span>. &nbsp;It's good for basic testing, especially by a group of people who might be consumers of the API, and whose feedback you want. The basic steps for using the Mock Service are:</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none">Add static, example response data to the <span class="f_Keyword">rapidModel</span> we wish to test.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none">Run a local Mock Service for this <span class="f_Keyword">rapidModel</span>.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">3.</span></td><td style="border:none">Exercise the mocked API using an HTTP client of some kind (e.g. <a href="http://en.wikipedia.org/wiki/CURL" target="_blank" class="weblink">curl</a>, the <a href="http://www.getpostman.com/" target="_blank" class="weblink">Postman chrome extension</a> or a plain web browser).</td></tr></table></div><p>In this way we get a chance to test drive our API, to experience and evolve the design from the outside, perhaps see how it integrates with other services, before making further development efforts.</p>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Adding example data to our rapidModel</span></p>
+<p>To demonstrate this we'll add some simple XML data to our <span class="f_Keyword">rapidModel</span> using the <span class="f_Keyword">example</span> keyword in our <span class="f_ModelElementName">PersonObject</span> resource.</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none"> Go to the bottom right hand corner of <span class="f_ModelElementName">PersonObject</span><span class="f_PlainName"> &gt; </span><span class="f_ModelElementName">getPersonObject</span><span class="f_PlainName"> &gt; </span><span class="f_Keyword">response</span>. Press <span class="f_Keystroke">Enter</span>, <span class="f_Keystroke">tab</span> in once and use Code Assist to select <span class="f_Keyword">example</span>:<br />
+&nbsp;<br />
+<img src="mockserver_01.png" width="424" height="363" alt="MockServer_01" style="width:424px;height:363px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none"><span class="f_ModelElementName"> </span>Add a space and use Code Assist again to add the <span class="f_ModelElementName">''' '''</span> within which the example XML will sit:<br />
+&nbsp;<br />
+<img src="mockserver_02.png" width="374" height="79" alt="MockServer_02" style="width:374px;height:79px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">3.</span></td><td style="border:none"> And finally, paste in the following XML fragment: <br />
+&nbsp;<br />
+<span class="f_CodeExample">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br />
+<span class="f_CodeExample">&lt;person&gt;</span><br />
+ &nbsp; &nbsp; &nbsp; &nbsp;<span class="f_CodeExample">&lt;firstName&gt;John&lt;/firstName&gt;</span><br />
+ &nbsp; &nbsp; &nbsp; &nbsp;<span class="f_CodeExample">&lt;lastName&gt;Smith&lt;/lastName&gt;</span><br />
+ &nbsp; &nbsp; &nbsp; &nbsp;<span class="f_CodeExample">&lt;otherNames&gt;</span><br />
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="f_CodeExample">&lt;element&gt;Jean Poupon&lt;/element&gt;</span><br />
+ &nbsp; &nbsp; &nbsp; &nbsp;<span class="f_CodeExample">&lt;/otherNames&gt;</span><br />
+ &nbsp; &nbsp; &nbsp; &nbsp;<span class="f_CodeExample">&lt;id&gt;user1&lt;/id&gt;</span><br />
+<span class="f_CodeExample">&lt;/person&gt;</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">4.</span></td><td style="border:none"> Your code will now look like this:<br />
+&nbsp;<br />
+<img src="mockserver_03.png" width="659" height="231" alt="MockServer_03" style="width:659px;height:231px;border:none" /></td></tr></table></div><p><span style="font-weight: bold;">Note:</span> The primary purpose of a RepreZen API Studio <span class="f_Keyword">rapidModel</span> is to fully represent, and document, all salient aspects of our API. The <span class="f_Keyword">example</span> keyword enables us to extend this documentation to show how the data passing back and forth across the API will look, given the supported media types and the data structures involved. The code highlighted above is therefore the equivalent of saying, &quot;This is what a response from this method will look like.&quot; Such examples can then be used to Mock the service described by our model for purposes of testing and demonstration.</p>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Running the local Mock Service</span></p>
+<p>We can now make our API live to testing purposes by simply turning on the Mock Service for the <span class="f_Keyword">rapidModel</span> clicking the<span class="f_UIControlName"> ON/OFF</span> button at the top:<br />
+&nbsp;<br />
+<img src="mockserver_04.png" width="733" height="316" alt="MockServer_04" style="width:733px;height:316px;border:none" /><br />
+&nbsp;<br />
+<img src="mockserver_05.png" width="733" height="316" alt="MockServer_05" style="width:733px;height:316px;border:none" /></p>
+<p>The Mock Service console should now open in the panel under the main code view. (If it does not we can open it manually from <span class="f_UIControlName">Window &gt; Show View &gt; Other...</span> and then select <span class="f_UIControlName">Console</span>.) The URI for the resource we just loaded with example data is highlighted:<br />
+&nbsp;<br />
+<img src="mockserver_06.png" width="627" height="394" alt="MockServer_06" style="width:627px;height:394px;border:none" /></p>
+<p><span style="font-weight: bold;">Note:</span> As a convenience, the Mock Service finds the first available port on the host computer and runs on this. The port is then displayed in the console header.</p>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Exercising the API</span></p>
+<p>We can now try the API and see how it looks, for example by using a web browser:<br />
+&nbsp;<br />
+<img src="mockserver_07.png" width="433" height="321" alt="MockServer_07" style="width:433px;height:321px;border:none" /></p>
+<p><span style="font-weight: bold;">Note: </span>To be well-formed, the URI of this request has to contain an <span class="f_ModelElementName">{id}</span> clause, but the value is irrelevant because the Mock Service always returns the same, statically defined example response.</p>
+<p>You can also try the API using the Swagger UI view:</p>
+<p><img src="mockserver_08.png" width="658" height="339" alt="MockServer_08" style="width:658px;height:339px;border:none" /></p>
+<p>Scroll down to find the GET method on <span class="f_ModelElementName">PersonObjectResource</span> to which we just added an example message:</p>
+<p><img src="mockserver_09.png" width="658" height="339" alt="MockServer_09" style="width:658px;height:339px;border:none" /></p>
+<p>Press the GET button, enter a <span class="f_ModelElementName">Person</span> id, press the <span class="f_UIControlName">Try it out!</span> button and see the example response data appear in the UI:</p>
+<p><img src="mockserver_10.png" width="658" height="512" alt="MockServer_10" style="width:658px;height:512px;border:none" /></p>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Additional Notes</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.50;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:11pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">To turn the Mock Service on or off for a particular <span class="f_ModelElementName">rapidModel</span> use the ON/OFF switch at the top of the model editor.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.50;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:11pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">You cannot run the Mock Service for multiple models simultaneously. The Mock Service for one model will be shut down if you start a Mock Service for another model. </td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.50;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:11pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The Mock Service will continue running even if no Mock Services are running. To terminate this service use the red button in the console:<br />
+<img src="mockserver_11.png" width="627" height="394" alt="MockServer_11" style="width:627px;height:394px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.50;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:11pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">An <span class="f_Keyword">example</span> data element can be added to all methods supported by a resource, or it can be added to the root level.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.50;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:11pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">An <span class="f_Keyword">example</span> data element added to the root level of a resource will apply to all methods in that resource except those that define their own <span class="f_Keyword">example</span> data.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.50;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:13px"><span style="font-size:11pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none">The Mock Service will only use <span class="f_Keyword">example</span> data to Mock methods where the <span class="f_Keyword">response</span> includes a payload.</td></tr></table></div>
+<table width="100%">
+       <tr />
+       <tr>
+           <td style="font-size:small">
+             Copyright © 2016 ModelSolv, Inc. &nbsp;All rights reserved. RepreZen and RAPID-ML are trademarks of ModelSolv, Inc. Swagger is a registered trademark of SmartBear Software, Inc. RepreZen API Studio is not associated with nor endorsed by SmartBear Software, Inc.
+           </td>
+       </tr>  
+<table>
+<!--ZOOMSTOP-->
+</div></div>
+<script type="text/javascript">
+
+var lastSlashPos = document.URL.lastIndexOf("/") > document.URL.lastIndexOf("\\") ? document.URL.lastIndexOf("/") : document.URL.lastIndexOf("\\");
+if( document.URL.substring(lastSlashPos + 1, lastSlashPos + 4).toLowerCase() != "~hh" )
+{
+ if (document.all) setTimeout(function() {nsrInit();},20); 
+    else nsrInit();
+ } 
+
+if ((!parent.hmNavigationFrame) && (parent.location) && (parent.location.href)) { $('.sync-toc').show();$('p.crumbs').hide();}
+var baseurl = document.URL.substring(0,document.URL.lastIndexOf("/")+1); 
+$('#idcontent').append('<p class="help-url"><b>URL of this page:&nbsp;</b><a href="'+baseurl+'index.html' +
+'?using_the_mock_server.htm" target="_top">'+baseurl+'index.html?using_the_mock_server.htm</a></p>');
+
+</script>
+</body>
+</html>

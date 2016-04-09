@@ -27,9 +27,11 @@ module Jekyll
         area['articles'].each do |article|
           if article['slug'] == @slug || (article['type'] == 'internal' && article['url'] == @permalink) then
             title = "[#{article['fullTitle'] || article['title']}]" unless @notext
+            new_window = article['new_window'] || (article['type'] == 'external')
+            caret = "^" if new_window
             url = article['type'] == 'internal' ? "#{baseurl}#{article['url']}" : article['url']
             url = url+@fragment if @fragment
-            return "link:#{url}#{title}"
+            return "link:#{url}#{title}#{caret}"
           end
         end
       end

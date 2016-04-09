@@ -1,0 +1,313 @@
+/* Text Styles */
+hr { color: #000000}
+body, table, tr, th /* Normal */
+{
+ font-size: 11pt;
+ font-family: Verdana;
+ font-style: normal;
+ font-weight: normal;
+ color: #000000;
+ text-decoration: none;
+}
+span.f_Bullet1 /* Bullet 1 */
+{
+}
+span.f_CodeExample /* Code Example */
+{
+ font-size: 10pt;
+ font-family: Consolas;
+}
+span.f_Comment /* Comment */
+{
+}
+span.f_ConsoleOutput /* Console Output */
+{
+ font-family: Consolas;
+}
+span.f_DefinedTerm /* Defined Term */
+{
+ font-style: italic;
+}
+span.f_Heading2_atoc_ /* Heading 2_atoc_ */
+{
+ font-size: 14pt;
+ font-weight: bold;
+}
+span.f_Heading3_atocs_ /* Heading 3_atocs_ */
+{
+ font-size: 12pt;
+ font-weight: bold;
+}
+span.f_Heading1 /* Heading1 */
+{
+ font-size: 18pt;
+ font-weight: bold;
+}
+span.f_ImageCaption /* Image Caption */
+{
+ font-size: 8pt;
+ font-weight: bold;
+}
+span.f_Keystroke /* Keystroke */
+{
+ font-size: 10pt;
+ font-weight: bold;
+ background-color: #dddddd;
+}
+span.f_Keyword /* Keyword */
+{
+ font-family: Consolas;
+ font-weight: bold;
+}
+span.f_LiteralValue /* LiteralValue */
+{
+ font-family: Consolas;
+}
+span.f_ModelElementName /* ModelElementName */
+{
+ font-family: Consolas;
+ font-weight: bold;
+}
+span.f_NamedElement /* NamedElement */
+{
+ font-style: italic;
+}
+span.f_Notes /* Notes */
+{
+}
+span.f_Number1 /* Number 1 */
+{
+}
+span.f_OptionalKeyword /* Optional Keyword */
+{
+ font-family: Consolas;
+}
+span.f_Output /* Output */
+{
+}
+span.f_PlainName /* PlainName */
+{
+ font-family: Consolas;
+}
+span.f_ProcedureHeading /* Procedure Heading */
+{
+ font-size: 12pt;
+ font-style: italic;
+ font-weight: bold;
+}
+span.f_Screenshot /* Screenshot */
+{
+}
+span.f_Syntax-comment /* Syntax - comment */
+{
+ font-size: 10pt;
+ font-family: Consolas;
+}
+span.f_Syntax-documentation /* Syntax - documentation */
+{
+ font-size: 10pt;
+ font-family: Consolas;
+}
+span.f_Syntax-keyword /* Syntax - keyword */
+{
+ font-size: 10pt;
+ font-family: Consolas;
+ font-weight: bold;
+}
+span.f_Syntax-ModelElementName /* Syntax - ModelElementName */
+{
+ font-size: 10pt;
+ font-family: Consolas;
+ font-weight: bold;
+}
+span.f_Syntax-stringLiteral /* Syntax - string Literal */
+{
+ font-size: 10pt;
+ font-family: Consolas;
+}
+span.f_TableHeading3 /* Table Heading 3 */
+{
+ font-size: 12pt;
+ font-weight: bold;
+}
+span.f_UIControlName /* UIControlName */
+{
+ font-style: italic;
+}
+span.f_WindowName /* WindowName */
+{
+ font-style: italic;
+ font-weight: bold;
+}
+/* Paragraph styles */
+p /* Normal */
+{
+ text-align: left;
+ text-indent: 0px;
+ line-height: 1.20;
+ padding: 0px 0px 0px 0px;
+ margin: 10px 0px 10px 0px;
+}
+.p_Bullet1 /* Bullet 1 */
+{
+ text-indent: -17px;
+ margin: 6px 0px 6px 17px;
+}
+.p_CodeExample /* Code Example */
+{
+ line-height: 1.0;
+ white-space: nowrap;
+ margin: 0px 0px 0px 30px;
+}
+.p_Comment /* Comment */
+{
+}
+.p_ConsoleOutput /* Console Output */
+{
+ margin: 10px 0px 10px 30px;
+}
+.p_DefinedTerm /* Defined Term */
+{
+}
+.p_Heading2_atoc_ /* Heading 2_atoc_ */
+{
+ margin: 24px 0px 10px 0px;
+}
+.p_Heading3_atocs_ /* Heading 3_atocs_ */
+{
+}
+.p_Heading1 /* Heading1 */
+{
+ font-size: 100%;
+ font-weight: normal;
+ text-align: left;
+ text-indent: 0px;
+ line-height: 1.20;
+ padding: 0px 0px 0px 0px;
+ margin: 10px 0px 10px 0px;
+}
+.p_ImageCaption /* Image Caption */
+{
+}
+.p_Keystroke /* Keystroke */
+{
+}
+.p_Keyword /* Keyword */
+{
+ white-space: nowrap;
+}
+.p_LiteralValue /* LiteralValue */
+{
+ white-space: nowrap;
+}
+.p_ModelElementName /* ModelElementName */
+{
+ white-space: nowrap;
+}
+.p_NamedElement /* NamedElement */
+{
+ white-space: nowrap;
+}
+.p_Notes /* Notes */
+{
+}
+.p_Number1 /* Number 1 */
+{
+}
+.p_OptionalKeyword /* Optional Keyword */
+{
+ white-space: nowrap;
+}
+.p_Output /* Output */
+{
+}
+.p_PlainName /* PlainName */
+{
+ white-space: nowrap;
+}
+.p_ProcedureHeading /* Procedure Heading */
+{
+}
+.p_Screenshot /* Screenshot */
+{
+ margin: 24px 0px 10px 0px;
+}
+.p_Syntax-comment /* Syntax - comment */
+{
+ line-height: 1.0;
+ white-space: nowrap;
+ margin: 0px 0px 0px 30px;
+}
+.p_Syntax-documentation /* Syntax - documentation */
+{
+ line-height: 1.0;
+ white-space: nowrap;
+ margin: 0px 0px 0px 30px;
+}
+.p_Syntax-keyword /* Syntax - keyword */
+{
+ line-height: 1.0;
+ white-space: nowrap;
+ margin: 0px 0px 0px 30px;
+}
+.p_Syntax-ModelElementName /* Syntax - ModelElementName */
+{
+ line-height: 1.0;
+ white-space: nowrap;
+ margin: 0px 0px 0px 30px;
+}
+.p_Syntax-stringLiteral /* Syntax - string Literal */
+{
+ line-height: 1.0;
+ white-space: nowrap;
+ margin: 0px 0px 0px 30px;
+}
+.p_TableHeading3 /* Table Heading 3 */
+{
+ margin: 0px 0px 10px 0px;
+}
+.p_UIControlName /* UIControlName */
+{
+ white-space: nowrap;
+}
+.p_WindowName /* WindowName */
+{
+ white-space: nowrap;
+}
+
+
+#hmpopupdiv /* used for javascript text popups */
+{
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  background-color: #FFFFFF;
+  padding: 6px;
+  border:1px solid #000000;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #888;
+}
+
+#hmlightbox /* image lightbox */
+{
+  border: none;
+  padding: 8px;
+  background: #FFF;
+  font-size: 110%;
+  font-weight: bold;
+  color: #777;
+  box-shadow: 5px 5px 5px #888;
+}
+
+a.dropdown-toggle /* dropdown toggle caption */
+{
+  cursor: pointer;
+}
+a.inline-toggle /* inline toggle caption */
+{
+  cursor: pointer;
+}
+img.dropdown-toggle-icon /* toggle icon */
+{
+  cursor: pointer;
+}

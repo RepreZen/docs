@@ -1,0 +1,95 @@
+﻿<!DOCTYPE HTML>
+<html><head>
+   <title>RAPID-ML™ - Quick Start Guide</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+   <!-- This line includes the general project style sheet (not required) -->
+   <link type="text/css" href="default.css" rel="stylesheet" />
+
+   <!-- This block defines the styles of the TOC headings, change them as needed -->
+   <style type="text/css">
+       body { }
+       .heading1 { font-size: 10pt; color: #000000; text-decoration: none; }
+       .heading2 { font-size: 10pt; color: #000000; text-decoration: none; }
+       .heading3 { font-size: 10pt; color: #000000; text-decoration: none; }
+       .heading4 { font-size: 10pt; color: #000000; text-decoration: none; }
+       .heading5 { font-size: 10pt; color: #000000; text-decoration: none; }
+       .heading6 { font-size: 10pt; color: #000000; text-decoration: none; }
+
+       .hilight1 { font-size: 10pt; color: #FFFFFF; background: #194E84; text-decoration: none; }
+       .hilight2 { font-size: 10pt; color: #FFFFFF; background: #194E84; text-decoration: none; }
+       .hilight3 { font-size: 10pt; color: #FFFFFF; background: #194E84; text-decoration: none; }
+       .hilight4 { font-size: 10pt; color: #FFFFFF; background: #194E84; text-decoration: none; }
+       .hilight5 { font-size: 10pt; color: #FFFFFF; background: #194E84; text-decoration: none; }
+       .hilight6 { font-size: 10pt; color: #FFFFFF; background: #194E84; text-decoration: none; }
+
+       /* TOC LIST CSS */
+       #toc    { padding:0; margin:0 }
+       #toc li { margin-top:2px; margin-left:0; padding:1px }
+       #toc ul { padding-left:0; margin-left:0px }       
+       /* TOC LIST CSS */
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript">
+     var parentScope = (parent.hmNavigationFrame);
+     if (!parentScope) {
+		      var s = document.createElement("script");
+		      s.setAttribute("type","text/javascript");
+		      s.setAttribute("src", "helpman_navigation.js");
+		      document.getElementsByTagName("head")[0].appendChild(s);
+	    }
+     else {
+       if (initialtocstate != "expandall") parent.hmAddCss(document, "#toc li ul { display: none }");
+     }
+     function loadicons() { var icons = new Array(); for (i=0; i<arguments.length; i++) { icons[i] = new Image(); icons[i].src = arguments[i]; } }
+     function loadtoc() { if (parentScope) parent.loadstate(document.getElementById("toc")); else loadstate(document.getElementById("toc")); }
+     function savetoc() { if (parentScope) parent.savestate(document.getElementById("toc")); else savestate(document.getElementById("toc")); }
+     function clicked(node, event) { deselect(); if (parentScope) parent.hmNodeClicked(node, event); else hmNodeClicked(node, event); }
+     function dblclicked(node) { if (parentScope) parent.hmNodeDblclicked(node); else hmNodeDblclicked(node); }
+     function deselect() { if (window.getSelection) window.getSelection().removeAllRanges(); else if (document.selection) document.selection.empty(); }
+     $(document).ready(function(){
+       loadtoc();
+       $(window).onunload = savetoc;
+     });
+   </script>
+</head>
+<body>
+<ul id="toc" style="list-style-type:none;display:block;padding-left:0">
+<li class="heading1" id="i1" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a1" href="introduction.htm" target="hmcontent"><span class="heading1" id="s1">Introduction</span></a>
+</li>
+<li class="heading1" id="i2" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a2" href="introducing_rapid-ml.htm" target="hmcontent"><span class="heading1" id="s2">Introducing RAPID-ML</span></a>
+</li>
+<li class="heading1" id="i3" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a3" href="launching.htm" target="hmcontent"><span class="heading1" id="s3">Launching</span></a>
+</li>
+<li class="heading1" id="i4" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a4" href="creating_project_and_model.htm" target="hmcontent"><span class="heading1" id="s4">Creating a Project and RAPID Model</span></a>
+</li>
+<li class="heading1" id="i5" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a5" href="defining_data_types.htm" target="hmcontent"><span class="heading1" id="s5">Defining Data Types</span></a>
+</li>
+<li class="heading1" id="i6" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a6" href="defining_resources.htm" target="hmcontent"><span class="heading1" id="s6">Defining Resources</span></a>
+</li>
+<li class="heading1" id="i7" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a7" href="inspecting_the_model.htm" target="hmcontent"><span class="heading1" id="s7">Inspecting the Model</span></a>
+</li>
+<li class="heading1" id="i8" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a8" href="documenting_model_elements.htm" target="hmcontent"><span class="heading1" id="s8">Documenting Model Elements</span></a>
+</li>
+<li class="heading1" id="i9" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a9" href="adding_collection_and_index_resources.htm" target="hmcontent"><span class="heading1" id="s9">Adding Collection and Index Resources</span></a>
+</li>
+<li class="heading1" id="i10" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a10" href="customizing_referencelinks.htm" target="hmcontent"><span class="heading1" id="s10">Customizing Reference Links</span></a>
+</li>
+<li class="heading1" id="i11" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a11" href="sharing_and_reusing_data_models.htm" target="hmcontent"><span class="heading1" id="s11">Sharing and Reusing Data Models</span></a>
+</li>
+<li class="heading1" id="i12" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a12" href="customising_data_type_realisat.htm" target="hmcontent"><span class="heading1" id="s12">Customizing Data Type Realization</span></a>
+</li>
+<li class="heading1" id="i13" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a13" href="resolving_ambiguous_data_type_references.htm" target="hmcontent"><span class="heading1" id="s13">Resolving Ambiguous Data Type References</span></a>
+</li>
+<li class="heading1" id="i14" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a14" href="using_the_mock_server.htm" target="hmcontent"><span class="heading1" id="s14">Trying the API with the Mock Service</span></a>
+</li>
+<li class="heading1" id="i15" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a15" href="generating_code_documentation.htm" target="hmcontent"><span class="heading1" id="s15">Generating Code and Documentation</span></a>
+</li>
+<li class="heading1" id="i16" style="background:url(cicon9.gif) no-repeat;padding-left:20px" onclick="return clicked(this,event)"><a class="heading1" id="a16" href="conclusion.htm" target="hmcontent"><span class="heading1" id="s16">Conclusion</span></a>
+</li>
+</ul>
+<script type="text/javascript">loadicons('cicon9.gif');</script>
+</body>
+</html>
