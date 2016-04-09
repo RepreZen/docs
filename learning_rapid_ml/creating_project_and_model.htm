@@ -1,0 +1,188 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <!-- Original title below -->
+   <!--title>Creating a Project and RAPID Model</title-->
+   <!-- Add title to each page followed by topic title -->
+   <title>RepreZen API Studio Quick Start Guide &raquo; Creating a Project and RAPID Model</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="collectionResource,dataModel,Diagram View,Editbox plugin,objectResource,resourceAPI,Show Whitespace Characters,structure" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <link type="text/css" href="custom.css" rel="stylesheet">
+
+   <style TYPE="text/css" media="screen"> 
+      html, body { margin:0; 
+             padding:0; 
+             overflow: hidden; 
+             background: #FFFFFF; 
+       } 
+
+      div#printheader { display: none; }
+      #idheader { width:100%; 
+                  height:auto; 
+                  padding: 0; 
+                  margin: 0; 
+       } 
+      #idcontent { position:relative }                                               
+      #callout-table, #overview-table {display:block; position:relative; top:0; left:0;}
+      #callout-icon {display:block; position:absolute; top:-11px; left:-11px;}
+      #callout-icon-flag {display:block; position:absolute; top:-11px; left:-8px;}
+      #callout-table a {text-decoration: none; color: blue;}
+      #callout-table a:visited {text-decoration: none; color: blue;}
+      #overview-table a {text-decoration: none; color: black;}
+      #overview-table a:visited {text-decoration: none; color: black;}
+      #callout-table a:hover, #overview-table a:hover {text-decoration: underline;}      
+      #switchtoggles { text-align: right; padding: 0 5px 0 0; font-size: 90%; } 
+      p.help-url { margin: 20px 0 5px 0; text-align: center; font-size: 80%; text-decoration: none }
+      .sync-toc { color: #ffffff; font-size: 8pt; font-weight: bold; display: none; }
+      .sync-toc a { color: #ffffff; text-decoration: none; font-weight: bold;}
+      .sync-toc a:visited { color: #ffffff; }
+      .sync-toc a:hover { text-decoration: underline; }
+      #footer {position: relative;
+	margin-top: -100px; /* negative value of footer height */
+	height: 100px;
+	clear:both;} 
+   </style>
+   <noscript>
+   <style type="text/css">
+   html, body { overflow: auto; }
+   </style> 
+   </noscript>
+   <style type="text/css" media="print">
+      span.f_Heading1 { color: black; }
+      #idheader, #printheader img { display:none; }
+      #printheader { display: block; margin-top: 20px; }
+      #idcontent { margin-top: 10px; position:relative }
+   </style>   
+
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="nsh.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "creating_project_and_model.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<div id="printheader"><h1 class="p_Heading1"><span class="f_Heading1">Creating a Project and RAPID model</span></h1>
+</div>
+<div id="idheader">
+<div id="idheaderbg">
+<table style="width:100%;border:none;margin:0px;background:url(background.jpg)" cellspacing="0" cellpadding="0"> 
+  <tr valign="bottom">
+    <td align="left" valign="bottom" class="topichead">
+   <p class="sync-toc">&lt;&lt; <a rel="nofollow" href="index.html?creating_project_and_model.htm" target="_top">Click to Display Table of Contents</a> &gt;&gt;</p>
+   <p class="crumbs" id="idnav"><b>Navigation:</b>&nbsp;
+   &raquo;No topics above this level&laquo;
+   </p>
+   <h1 class="p_Heading1"><span class="f_Heading1">Creating a Project and RAPID model</span></h1>
+
+    </td>
+    <td align="right" width="120" valign="middle" class="topichead" id="idnav">
+    <!-- Navigation Buttons ~ previous and next -->
+    
+    
+     <a href="launching.htm"
+        onmouseover="document.images.prev.src='hm_btn_navigate_prev_orange.png'" 
+        onmouseout="document.images.prev.src='hm_btn_navigate_prev.png'"
+        ><img name="prev" src="hm_btn_navigate_prev.png" border=0 alt="Previous page"
+        ></a><a href="introduction.htm"
+        onmouseover="document.images.main.src='hm_btn_navigate_top_orange.png'" 
+        onmouseout="document.images.main.src='hm_btn_navigate_top.png'"><img name=main src="hm_btn_navigate_top.png" border=0 alt="Return to chapter overview"
+        ></a><a href="defining_data_types.htm"
+        onmouseover="document.images.next.src='hm_btn_navigate_next_orange.png'" 
+        onmouseout="document.images.next.src='hm_btn_navigate_next.png'"><img name=next src="hm_btn_navigate_next.png" border=0 alt="Next page"
+        ></a>
+    
+    </td>
+  </tr>  
+</table>
+<!-- The following code displays Expand All/Collapse All links  below the header in topics containing toggles -->
+  
+</div>
+</div>  
+
+<div id="idcontent"><div id="innerdiv">
+<!-- Ask Internet Explorer 6.users to update their obsolete and dangerous browser --> 
+<!--[if lt IE 7]><div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div><![endif]-->
+
+<!--ZOOMRESTART-->
+<p class="p_Number1">RepreZen™ API Studio organizes API and data type definitions in a <span class="f_DefinedTerm">RAPID model</span>. &nbsp;RAPID models are contained within <span class="f_DefinedTerm">Projects</span>. &nbsp;We'll start by using the <span class="f_WindowName">New Project Wizard</span> to create a project with a <span class="f_DefinedTerm">RAPID model</span>.</p>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Creating a RepreZen API Studio Project and RAPID model</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none"><span class="f_Number1">From the toolbar, click the </span><span class="f_Number1" style="font-style: italic;">New Project</span><span class="f_Number1"> button:</span><br />
+<span class="f_Number1">&nbsp;</span><br />
+<img src="creatingproject-newprojecttool.png" width="699" height="209" alt="CreatingProject-NewProjectTool" style="width:699px;height:209px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none"><span class="f_Number1">The </span><span class="f_WindowName">RepreZen API Studio Project</span><span class="f_Number1"> dialog box displays with Project name and Model Name text fields:</span><br />
+<span class="f_Number1">&nbsp;</span><br />
+<img src="creatingproject-newprojectdialogue.png" width="525" height="729" alt="CreatingProject-NewProjectDialogue" style="width:525px;height:729px;border:none" /></td></tr></table></div><p style="margin: 6px 0px 10px 18px;"><span style="font-size: 12pt; font-family: Arial;">For this example, enter the project name </span><span class="f_LiteralValue">TaxBlasterAPI</span><span style="font-size: 12pt; font-family: Arial;">, select the </span><span class="f_UIControlName">Create an API Model</span><span style="font-size: 12pt; font-family: Arial;"> checkbox, choose </span><span style="font-size: 12pt; font-family: Arial; font-style: italic;">RAPID-ML</span><span style="font-size: 12pt; font-family: Arial;"> and enter the model name </span><span class="f_LiteralValue">TaxBlaster</span><span style="font-size: 12pt; font-family: Arial;">.  </span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-style:italic; font-size:11pt; font-family: 'Verdana';color:#000000;">3.</span></td><td style="border:none"><span class="f_Number1">Click Finish. &nbsp;RepreZen API Studio is populated by the new </span><span class="f_DefinedTerm">RAPID model:</span><br />
+<span class="f_DefinedTerm">&nbsp;</span><br />
+<img src="creatingproject-reprezenpopulated.png" width="1263" height="631" alt="CreatingProject-RepreZenPopulated" style="width:1263px;height:631px;border:none" /></td></tr></table></div><p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Inspecting the RAPID model</span></p>
+<p>When you create a new RAPID model RepreZen API Studio displays it immediately in a custom editor. &nbsp;The <span class="f_WindowName">Project Explorer</span> on the left shows that this project is named <span class="f_LiteralValue">TaxBlasterAPI. </span>Expanding the folder displays the project subfolders; <span class="f_LiteralValue">models</span> and <span class="f_LiteralValue">RepreZen-generated. </span>Expanding the <span class="f_LiteralValue">models</span> folder displays the newly created <span class="f_DefinedTerm">RAPID model</span> file; <span class="f_LiteralValue">TaxBlaster.rapid</span>:<br />
+&nbsp;<br />
+<img src="creatingproject-projectfolder.png" width="190" height="224" alt="CreatingProject-ProjectFolder" style="width:190px;height:224px;border:none" /></p>
+<p>The editor has keyword highlighting, code folding, code assist, refactoring and other features you'll recognize if you have worked with other language editors in the Eclipse IDE. </p>
+<p>The RAPID-ML™ language uses indentation to define code blocks, like Python. The Editbox plugin is used to give different colors to each block with the intent of making the code easier to read. The scope of the current block (the one over which the cursor is currently hovering) is highlighted in red:<br />
+&nbsp;<br />
+<img src="creatingproject-editbox01.png" width="661" height="505" alt="CreatingProject-EditBox01" style="width:661px;height:505px;border:none" /></p>
+<p>The Editbox feature can be toggled on/off via a button on the toolbar:<br />
+&nbsp;<br />
+<img src="creatingproject-editbox02.png" width="556" height="156" alt="CreatingProject-EditBox02" style="width:556px;height:156px;border:none" /></p>
+<p>And because white space is important in RAPID-ML, just to the left of this is the 'Show Whitespace Characters' button:<br />
+&nbsp;<br />
+<img src="creatingproject-togglewhitespace.png" width="556" height="156" alt="CreatingProject-ToggleWhiteSpace" style="width:556px;height:156px;border:none" /></p>
+<div style="text-align: left; text-indent: 0px; line-height: 1.20; padding: 0px 0px 0px 0px; margin: 12px 0px 0px 0px;"><table style="border:none; border-spacing:0px;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:30px; padding:12px;"><p style="line-height: 1.15; margin: 0px 0px 17px 0px;"><img src="clip0007_zoom17.png" width="66" height="66" alt="clip0007" style="width:66px;height:66px;border:none" /></p>
+</td>
+<td style="vertical-align:top; background-color:#99ccff; padding:12px;"><p class="p_TableHeading3"><span class="f_TableHeading3">Note: The significance of whitespace</span></p>
+<p style="margin: 12px 0px 0px 0px;">RAPID-ML uses tabs for indentation. A mixture of tabs and spaces may result in parser errors. If in doubt use the 'Show Whitespace Characters' button to take a look.</p>
+</td>
+</tr>
+</table>
+</div>
+<p>The editor also applies syntax coloration to all keywords. Hovering your mouse over a keyword displays a tooltip explaining its meaning and usage:<br />
+&nbsp;<br />
+<img src="creatingproject-editorkeyword.png" width="661" height="505" alt="CreatingProject-EditorKeyword" style="width:661px;height:505px;border:none" /></p>
+<p>The TaxBlaster <span class="f_Keyword">rapidModel</span> generated by the New Project Wizard has the following elements:</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 6px 0px 6px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:19px"><span style="font-size:11pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none"><span class="f_Keyword">resourceAPI </span><span class="f_Bullet1">defines an API that is organized around resources, whose methods conform to a uniform interface (GET, PUT, POST and so on). &nbsp;These are some essential characteristics of </span>REST<span class="f_Bullet1">. &nbsp;In a </span><span class="f_Keyword">resourceAPI</span><span class="f_Bullet1">, resources may be bound to data types, which further defines the meaning of certain methods defined on the resource.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 6px 0px 6px 19px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:19px"><span style="font-size:11pt; font-family: 'Courier New';color:#000000;">o</span></td><td style="border:none"><span class="f_Keyword">objectResource</span><span class="f_Bullet1"> is a resource bound to a single object of a specified data type. It has a URI and declares supported media types and methods.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 19px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: normal;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:19px"><span style="font-size:11pt; font-family: 'Courier New';color:#000000;">o</span></td><td style="border:none"><span class="f_Keyword">collectionResource </span><span class="f_Bullet1">is a resource bound to a collection of objects of a specified data type. It has a URI and declares supported media types and methods.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 6px 0px 6px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:19px"><span style="font-size:11pt; font-family: 'Arial Unicode MS','Lucida Sans Unicode','Arial';color:#000000;">&#8226;</span></td><td style="border:none"><span class="f_Keyword">dataModel</span><span class="f_Bullet1"> defines a set of data types that may be used in the API.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 6px 0px 6px 19px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:19px"><span style="font-size:11pt; font-family: 'Courier New';color:#000000;">o</span></td><td style="border:none"><span class="f_Keyword">structure</span><span class="f_Bullet1"> defines a structured data type. &nbsp;In the API, </span><span class="f_Keyword">objectResource</span><span class="f_Bullet1"> and </span><span class="f_Keyword">collectionResource</span><span class="f_Bullet1"> may be bound to a </span><span class="f_Keyword">structure</span><span class="f_Bullet1">.</span></td></tr></table></div><p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Inspecting the Model using the Diagram View</span></p>
+<p>A key feature of RepreZen API Studio is the <span class="f_WindowName">Diagram View</span>. This is found to the right of the main editor window and enables us to visually check and understand our API:<br />
+&nbsp;<br />
+<img src="creatingproject-diagramview.png" width="580" height="387" alt="CreatingProject-DiagramView" style="width:580px;height:387px;border:none" /></p>
+<p>Here we can see the resources in our API and their default relationship to one another (the collection resource is &nbsp;a list of references to the object resource). There's not a whole lot going on at the moment, but the <span class="f_WindowName">Diagram View</span> will become increasingly valuable as the design of our API becomes more elaborate.</p>
+
+<table width="100%">
+       <tr />
+       <tr>
+           <td style="font-size:small">
+             Copyright © 2016 ModelSolv, Inc. &nbsp;All rights reserved. RepreZen and RAPID-ML are trademarks of ModelSolv, Inc. Swagger is a registered trademark of SmartBear Software, Inc. RepreZen API Studio is not associated with nor endorsed by SmartBear Software, Inc.
+           </td>
+       </tr>  
+<table>
+<!--ZOOMSTOP-->
+</div></div>
+<script type="text/javascript">
+
+var lastSlashPos = document.URL.lastIndexOf("/") > document.URL.lastIndexOf("\\") ? document.URL.lastIndexOf("/") : document.URL.lastIndexOf("\\");
+if( document.URL.substring(lastSlashPos + 1, lastSlashPos + 4).toLowerCase() != "~hh" )
+{
+ if (document.all) setTimeout(function() {nsrInit();},20); 
+    else nsrInit();
+ } 
+
+if ((!parent.hmNavigationFrame) && (parent.location) && (parent.location.href)) { $('.sync-toc').show();$('p.crumbs').hide();}
+var baseurl = document.URL.substring(0,document.URL.lastIndexOf("/")+1); 
+$('#idcontent').append('<p class="help-url"><b>URL of this page:&nbsp;</b><a href="'+baseurl+'index.html' +
+'?creating_project_and_model.htm" target="_top">'+baseurl+'index.html?creating_project_and_model.htm</a></p>');
+
+</script>
+</body>
+</html>

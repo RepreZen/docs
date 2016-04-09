@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Creating a Custom Swagger GenTemplate</title>
+  <meta name="description" content="">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>  
+
+  <!-- add after bootstrap.min.css -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.css">
+  <!-- add after bootstrap.min.js -->
+  <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.js"></script>
+
+  <link rel="stylesheet" href="/docs/css/asciidoc.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="canonical" href="http://reprezen.github.io/docs/codegen_custom_swagger_gentemplate/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/docs/feed.xml">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
+
+  <link rel="stylesheet" href="/docs/css/misc.css">
+  <script src="/docs/js/misc.js"></script>
+
+</head>
+
+  <body data-spy="scroll" data-targets="#toc">
+    <div class="container">
+      <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/docs/"><img src="/docs/images/reprezen-logo.png">&nbsp;Documentation</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+  
+  
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Core Docs <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="http://rapid-api.org/rapid-ml/spec/current/desktop/" target="_blank">RAPID-ML Language Specification</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/learning_rapid_ml/" target="_blank">Learning RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf" target="_blank">RepreZen API Studio Reference Card</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Code Gen <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/codegen_intro/" target="_self">Introduction</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/codegen_swagger_codegen/" target="_self">Using Swagger Codegen in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/codegen_custom_swagger_gentemplate/" target="_self">Creating a Custom Swagger GenTemplate</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/codegen_sharing/" target="_self">Sharing GenTemplates</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Training Videos <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/channel/UCNwqDgngCot722zwHse5UTg" target="_blank">RepreZen YouTube Channel</a></li>
+      
+      
+      
+      
+      
+      
+      <li class="divider" role="separator"></li>
+      
+      
+      
+      
+      
+      
+      <li class="video-series"><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Play Series: Working with RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&index=1&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Introducing RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=UsrsyEVO914&index=2&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RepreZen API Studio & Swagger</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=KX_tHp_KQkE&index=3&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Editing Swagger-OpenAPI in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=sSIX-A4ru7E&index=4&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Test-drive your Swagger-OpenAPI model in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=5&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=6&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=7&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class="divider" role="separator"></li>
+      
+      
+      
+      
+      
+      
+      <li class="video-series"><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Play Series: RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=1&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=2&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=3&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=wYimccfMbAo&index=4&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Introducing the RAPID-ML Ready! API Plugin</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+</ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+      <div class="row">
+	<div class="col-sm-10">
+	  <h1>Creating a Custom Swagger GenTemplate</h1>
+	  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In <a href="/docs/codegen_intro/">Introduction to Code Generation in RepreZen API Studio</a> we walked through a scenario that included the creation of a custom
+GenTemplate using the <em>New GenTemplate</em> wizard. From a fully working "starter" implementation, we
+modified an Xtend template that formed the basis of the implementation, and we altered the output
+file extension configured for the GenTemplate from <code>.html</code> to <code>.csv</code>. In the end we had created a
+GenTemplate that captures model information in a CSV format.</p>
+</div>
+<div class="paragraph">
+<p>In that exercise, the GenTemplate was designed to operate on RAPID-ML models. The exact same
+approach can be used to create Xtext-based GenTemplates that operate on Swagger models. The starter
+implementation will differ in certain ways&#8201;&#8212;&#8201;most evidently in the Xtext template itself, which
+will reflect the
+<a href="https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-models">Swagger Models
+API</a> rather than the RAPID-ML Model API.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-the-swagger-codegen-framework">Using the Swagger Codegen Framework</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Another option, for those familiar with the
+<a href="https://github.com/swagger-api/swagger-codegen">Swagger Codegen</a> framework, is to build a custom
+Swagger Codegen (SCG) module in a Java project within the RepreZen API Studio workspace. Any such module will
+automatically be discovered and "wrapped" as a GenTemplate by RepreZen API Studio, and you can apply them to your
+Swagger models by creating GenTargets.</p>
+</div>
+<div class="paragraph">
+<p>Currently, the process for creating a custom SCG module in RepreZen API Studio involves some steps that must be
+performed outside for RepreZen API Studio using a system command shell. In the future, we intend to capture the
+entire process in a wizard.</p>
+</div>
+<div class="paragraph">
+<p>The steps, detailed below, are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Use the SCG command line interface to create a skeleton for your new module.</p>
+</li>
+<li>
+<p>Import that skeleton into RepreZen API Studio as a new Java project.</p>
+</li>
+<li>
+<p>Modify the skeleton Java code and Mustache templates to suit your needs.</p>
+</li>
+<li>
+<p>See that your new module is now listed with the standard SCG modules in the New GenTemplate
+wizard.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>We will, in the course of describing these steps in detail, work through an example that will mimic
+the <code>LexiconGenTemplates</code> custom GenTemplate created in <a href="/docs/codegen_intro/#createGenTemplate">Introduction to Code Generation in RepreZen API Studio</a>. Please
+review that document to learn the motivating hypothetical scenario.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Some of the details in this section apply to version 2.1.4 of SCG, and include information
+from available documentation and also from code inspection. RepreZen API Studio currently uses release 2.1.4 but
+will soon migrate to release 2.1.5. At that time we will update this document as needed.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="creating-the-scg-skeleton">Creating the SCG Skeleton</h3>
+<div class="paragraph">
+<p>The SCG Command Line interface (CLI) includes a command, <code>meta</code>, which can be used to create the
+skeleton for a new SCG module. The CLI is, in reality embedded in the Java command line, with the SCG
+executable jar file and the class that implements the selected SCG module as command-line
+arguments.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
+</div>
+<div class="paragraph">
+<p>Our first step invokes the SCG <code>meta</code> command to create a skeleton project. The command arguments we
+will use are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>-o dir</code></dt>
+<dd>
+<p>Specifies the directory where the skeleton project will be created; default is current directory.</p>
+</dd>
+<dt class="hdlist1"><code>-n name</code></dt>
+<dd>
+<p>Specifies the name for the new SCG module, which is put to many uses in the skeleton,
+some of which imply restrictions on the name that are not enforced by SCG. These
+include:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>It is the advertised name of the module (i.e. the value its <code>CodegenConfig#getName()</code> method
+returns). The CLI <code>generate</code> command&#8217;s <code>-l</code> (<code>--lang</code>) option maps to these names.</p>
+</li>
+<li>
+<p>It is incorporated into the name of the generator class, which is the name value with its first
+character upper-cased, concatenated with <code>Generator</code>. E.g. <code>-n myModule</code> would generate a class
+named <code>MyModuleGenerator</code>.</p>
+</li>
+<li>
+<p>It is incorporated into the advertised description of the model (the value returned by
+<code>CodegenConfig#getHelp()</code>).</p>
+</li>
+<li>
+<p>It is incorporated into the name of the default output folder used by the module. (This is
+unused when the module is executed in RepreZen API Studio as a GenTemplate, since the output directory is in
+that case specified in the GenTarget.)</p>
+</li>
+<li>
+<p>It is used as the template directory name. This directory will appear as a top-level Java
+resource directory in the generated project.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1"><code>-p package</code></dt>
+<dd>
+<p>Specifies the package in which the generator class will reside. The default is
+<code>io.swagger.codegen</code>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>In preparation for this step we need to install the Swagger Codegen Client jar file. One way to do
+that is to clone the <a href="https://github.com/swagger-api/swagger-codegen">swagger-api/swagger-codegen
+git repo</a>, checking out version 2.1.4 (using the git tag <code>v2.1.4</code>) and then running <code>mvn package</code>
+from the working tree root. This will build the needed jar file in
+<code class="nowrap">modules/swagger-codegen-cli/target/swagger-codegen-cli.jar</code>.</p>
+</div>
+<div class="paragraph">
+<p>To execute this step we&#8217;ll need to launch a command shell for our system. For simplicity, we&#8217;ll
+specify paths relative to our home directory using the linux <code>~</code> designator. Modify the paths in
+your command as needed, depending on where your <code>swagger-codegen</code> git clone is located, and where
+you want the skeleton to be created.</p>
+</div>
+<div class="paragraph">
+<p>After all the foregoing, this step finally comes down to a single command, which will create our
+skeleton:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code>java -jar ~/git/swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar meta -o ~/LexiconSCGentemplates -n lexiconSCGenTemplate -p my.org</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-the-skeleton-into-reprezen-api-studio">Importing the Skeleton into RepreZen API Studio</h3>
+<div class="paragraph">
+<p>The skeleton is configured as a Maven project, and RepreZen API Studio includes the capability of importing Maven
+projects into the workspace. From the menu bar, select <em>File &#8594; Import&#8230;&#8203;</em>, then select <em>Maven &#8594;
+Existing Maven Projects</em> in the dialog that appears. Click <em>Next</em>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/import-maven-step-1.png" alt="Import Skeleton Project Step 1">
+</div>
+</div>
+<div class="paragraph">
+<p>Browse to the output folder you specified for the SCG <code>meta</code> command, and you should see the Maven
+<code>pom.xml</code> file for the skeleton in the projects list. With that entry checked, click <em>Next</em>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/import-maven-step-2.png" alt="Import Skeleton Project Step 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Click <em>Finish</em> on the final panel, and RepreZen API Studio will complete the import and immediately build the new
+project.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/import-maven-step-3.png" alt="Import Skeleton Project Step 3">
+</div>
+</div>
+<div class="paragraph">
+<p>At this point your skeleton is complete, but not quite functional. The problem is that the Java
+class that implements your new generator configures a "supporting" template to run on your model,
+but the skeleton does not actually include the needed template file. You can fix this by removing or
+commenting out the problematic java code. In the following image we show the code commented out.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/fixed-skeleton.png" alt="Fixed Skeleton Class">
+</div>
+</div>
+<div class="paragraph">
+<p>With this change, your custom module is completely functional, if not very useful. Go ahead and try
+executing it with a Swagger model of your choice, by creating and running a GenTarget.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="modifying-the-skeleton">Modifying the Skeleton</h3>
+<div class="paragraph">
+<p>Now we&#8217;ll modify our skeleton project so that it generates a CSV file listing all the operations
+defined by the Swagger model.</p>
+</div>
+<div class="paragraph">
+<p>We won&#8217;t be creating any API or model files, for which the skeleton makes special provision, so
+we&#8217;ll comment out the lines that declare the corresponding templates. You can delete these lines,
+but we&#8217;ll comment them out to make our screen shots understandable.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/skeleton-comment-standard-templates.png" alt="Suppress Standard Templates">
+</div>
+</div>
+<div class="paragraph">
+<p>Next we&#8217;ll uncomment that code we commented out earlier, becuase a "supporting" template is a good
+choice for our CSV file generator. After reviving that code, we&#8217;ll change the template and output
+file names to choices that are appropriate for our task.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/skeleton-change-output-file.png" alt="Change Template Output File">
+</div>
+</div>
+<div class="paragraph">
+<p>Next, we&#8217;ll create a new Mustache template file in the <code>resources</code> source tree. Again, you could
+also delete the existing templates, but we&#8217;ll leave them in place.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/skeleton-create-lexicon-template.png" alt="Create Lexicon Template File">
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, we&#8217;ll enter code into the new template file so as to produce our desired output. We will
+not go into any details of the Mustache templating language, or the structure in which the Swagger
+model is presented to the template by the Swagger Codegen framework. You can read about Mustache
+<a href="https://mustache.github.io/">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>The structures passed to the Mustache templates do not appear to be documented, and they differ
+considerably from both the structure of a Swagger Spec and from that presented by the
+<a href="https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-models">Swagger Models</a>
+Java API. To get some insight into the structure, one helpful resource is the console output created
+when an SCG module is executed with the <code>debugModels</code>, <code>debugOperations</code>, and <code>debugSupportingFiles</code>
+Java system properties set. The output shows the precise JSON structure on which the model, api, and
+supporting templates, respectively, will operate.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
+</div>
+<div class="paragraph">
+<p>Here is our final template:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-mustache" data-lang="mustache">Name,Type,Parent,ParentType,Model,Documentation
+{{appName}},Model,,,{{appName}},{{appDescription}}
+{{#apiInfo}}{{#apis}}{{#operations}}{{#operation
+}}{{nickname}},Operation,{{appName}},Model,{{summary}}
+{{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that this template looks particularly cramped compared to most that you&#8217;ll see in SCG
+modules. The reason is the care that we must take to avoid unintended whitespace from appearing in
+our output, including blank lines. We had some similar difficulties in the Xtend template we created
+in <a href="/docs/codegen_intro/#createGenTemplate">Introduction to Code Generation in RepreZen API Studio</a>. This focus on whitespace reflects an unusual requirement of
+our hypothetical use-case.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-your-new-scg-module">Using Your New SCG Module</h3>
+<div class="paragraph">
+<p>If you&#8217;ve carefully followed the steps in this guide, you should now have a fully operational custom
+SCG module, and you should see it listed as an available GenTemplate in the New GenTarget wizard.</p>
+</div>
+<div class="paragraph">
+<p>Applying this new GenTemplate to the <em>PetStore</em> model (available from the RepreZen API Studio Examples Wizard)
+yields the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-csv" data-lang="csv">Name,Type,Parent,ParentType,Model,Documentation
+Swagger Petstore,Model,,,Swagger Petstore,
+listPets,Operation,Swagger Petstore,Model,List all pets
+createPets,Operation,Swagger Petstore,Model,Create a pet
+showPetById,Operation,Swagger Petstore,Model,Info for a specific pet</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnote_1">
+<a href="#_footnoteref_1">1</a>. Although SCG is published with several convenience scripts that invoke the CLI on specific sample models embedded in the project, it does not provide a general-purpose script to invoke the CLI. Such a script would be simple to create, but in this guide we will show the full Java command lines.
+</div>
+<div class="footnote" id="_footnote_2">
+<a href="#_footnoteref_2">2</a>. Recall that in RepreZen API Studio you can arrange for system properties to be set when executing an SCG-based GenTemplate by providing a value for the <code>swaggerCodegenSystemProperties</code> parameter in the GenTarget file.
+</div>
+</div>
+	</div>
+	<div class="col-sm-2 ">
+	  <nav id="sidetoc" data-spy="affix" data-toggle="toc" class="hidden-xs"></nav>
+	</div>
+      </div>
+      <div class="footer">
+  &copy; 2016 ModelSolv, Inc. All rights reserved.
+</div>
+
+    </div>
+  </body>
+</html>

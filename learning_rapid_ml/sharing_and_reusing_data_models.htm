@@ -1,0 +1,189 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+   <!-- Original title below -->
+   <!--title>Sharing and Reusing Data Models</title-->
+   <!-- Add title to each page followed by topic title -->
+   <title>RepreZen API Studio Quick Start Guide &raquo; Sharing and Reusing Data Models</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="import statements,import statements aliases,namespaces" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <link type="text/css" href="custom.css" rel="stylesheet">
+
+   <style TYPE="text/css" media="screen"> 
+      html, body { margin:0; 
+             padding:0; 
+             overflow: hidden; 
+             background: #FFFFFF; 
+       } 
+
+      div#printheader { display: none; }
+      #idheader { width:100%; 
+                  height:auto; 
+                  padding: 0; 
+                  margin: 0; 
+       } 
+      #idcontent { position:relative }                                               
+      #callout-table, #overview-table {display:block; position:relative; top:0; left:0;}
+      #callout-icon {display:block; position:absolute; top:-11px; left:-11px;}
+      #callout-icon-flag {display:block; position:absolute; top:-11px; left:-8px;}
+      #callout-table a {text-decoration: none; color: blue;}
+      #callout-table a:visited {text-decoration: none; color: blue;}
+      #overview-table a {text-decoration: none; color: black;}
+      #overview-table a:visited {text-decoration: none; color: black;}
+      #callout-table a:hover, #overview-table a:hover {text-decoration: underline;}      
+      #switchtoggles { text-align: right; padding: 0 5px 0 0; font-size: 90%; } 
+      p.help-url { margin: 20px 0 5px 0; text-align: center; font-size: 80%; text-decoration: none }
+      .sync-toc { color: #ffffff; font-size: 8pt; font-weight: bold; display: none; }
+      .sync-toc a { color: #ffffff; text-decoration: none; font-weight: bold;}
+      .sync-toc a:visited { color: #ffffff; }
+      .sync-toc a:hover { text-decoration: underline; }
+      #footer {position: relative;
+	margin-top: -100px; /* negative value of footer height */
+	height: 100px;
+	clear:both;} 
+   </style>
+   <noscript>
+   <style type="text/css">
+   html, body { overflow: auto; }
+   </style> 
+   </noscript>
+   <style type="text/css" media="print">
+      span.f_Heading1 { color: black; }
+      #idheader, #printheader img { display:none; }
+      #printheader { display: block; margin-top: 20px; }
+      #idcontent { margin-top: 10px; position:relative }
+   </style>   
+
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+   <script type="text/javascript" src="nsh.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "sharing_and_reusing_data_models.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<div id="printheader"><h1 class="p_Heading1"><span class="f_Heading1">Sharing and Reusing Data Models</span></h1>
+</div>
+<div id="idheader">
+<div id="idheaderbg">
+<table style="width:100%;border:none;margin:0px;background:url(background.jpg)" cellspacing="0" cellpadding="0"> 
+  <tr valign="bottom">
+    <td align="left" valign="bottom" class="topichead">
+   <p class="sync-toc">&lt;&lt; <a rel="nofollow" href="index.html?sharing_and_reusing_data_models.htm" target="_top">Click to Display Table of Contents</a> &gt;&gt;</p>
+   <p class="crumbs" id="idnav"><b>Navigation:</b>&nbsp;
+   &raquo;No topics above this level&laquo;
+   </p>
+   <h1 class="p_Heading1"><span class="f_Heading1">Sharing and Reusing Data Models</span></h1>
+
+    </td>
+    <td align="right" width="120" valign="middle" class="topichead" id="idnav">
+    <!-- Navigation Buttons ~ previous and next -->
+    
+    
+     <a href="customizing_referencelinks.htm"
+        onmouseover="document.images.prev.src='hm_btn_navigate_prev_orange.png'" 
+        onmouseout="document.images.prev.src='hm_btn_navigate_prev.png'"
+        ><img name="prev" src="hm_btn_navigate_prev.png" border=0 alt="Previous page"
+        ></a><a href="introduction.htm"
+        onmouseover="document.images.main.src='hm_btn_navigate_top_orange.png'" 
+        onmouseout="document.images.main.src='hm_btn_navigate_top.png'"><img name=main src="hm_btn_navigate_top.png" border=0 alt="Return to chapter overview"
+        ></a><a href="customising_data_type_realisat.htm"
+        onmouseover="document.images.next.src='hm_btn_navigate_next_orange.png'" 
+        onmouseout="document.images.next.src='hm_btn_navigate_next.png'"><img name=next src="hm_btn_navigate_next.png" border=0 alt="Next page"
+        ></a>
+    
+    </td>
+  </tr>  
+</table>
+<!-- The following code displays Expand All/Collapse All links  below the header in topics containing toggles -->
+  
+</div>
+</div>  
+
+<div id="idcontent"><div id="innerdiv">
+<!-- Ask Internet Explorer 6.users to update their obsolete and dangerous browser --> 
+<!--[if lt IE 7]><div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div><![endif]-->
+
+<!--ZOOMRESTART-->
+<p>RESTful APIs present interfaces across which data can be exchanged, and in order to communicate with them we need to know both the media type(s) and the data types 'spoken' by the API in question. The common pattern is for each API to define its own data types, its own data language or way of saying things, in isolation. Clients of an API then have to learn the words of its language, and how they relate to each other, in order to be able to use it. Replicate this across a burgeoning number of APIs and you begin to see the scope of the challenge this presents both to API consumers, who have to learn the unique idiosyncrasies of each API's data dialect, and for API producers, who have to concoct the same kinds of data models over and over again. This is a fragmented and highly entropic state of affairs that makes it harder to get the most from the RESTful approach.</p>
+<p>An important feature of RepreZen™ API Studio is that it enables and, in fact, encourages the sharing and reuse of data models <span style="font-style: italic;">across</span> APIs. It thus helps oppose the tendency towards data model divergence (a babel of different data languages). <span class="f_Comment">We'll now look at how this reuse is achieved in the context of our </span><span class="f_ModelElementName">TaxBlaster</span><span class="f_Comment"> example.</span></p>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Extracting the common data type(s)</span></p>
+<p>We have now created a <span class="f_Keyword">rapidModel</span> that has two parts: </p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">a)</span></td><td style="border:none"> A <span class="f_Keyword">resourceAPI</span> defining our RESTful API and</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">b)</span></td><td style="border:none"> A <span class="f_Keyword">dataModel</span> defining the data types used by our API.</td></tr></table></div><p>There are parts of this <span class="f_Keyword">dataModel</span> that may be useful beyond the context of the TaxBlaster API, and we can share these by extracting them and making them accessible via some central location. We'll do this as follows:</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none">Create a new <span class="f_Keyword">rapidModel</span> in the current project called <span class="f_ModelElementName">CommonDataModel</span> and de-select <span class="f_UIControlName">Create GenTargets</span> since we won't be generating anything from this model:<br />
+&nbsp;<br />
+<img src="sharingandreusingdatamodels_01.png" width="556" height="229" alt="SharingAndReusingDataModels_01" style="width:556px;height:229px;border:none" /><br />
+&nbsp;<br />
+<img src="sharingandreusingdatamodels_02.png" width="525" height="712" alt="SharingAndReusingDataModels_02" style="width:525px;height:712px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none"> The new <span class="f_Keyword">rapidModel</span> is just going to be a container for the <span class="f_Keyword">dataModel</span>, so we can delete the generated <span class="f_Keyword">resourceAPI</span> definition, and we can delete the generated <span class="f_Keyword">structure</span> because we will be moving <span class="f_Keyword">structure</span>s over from the previous <span class="f_Keyword">rapidModel</span>. The resulting model will look like this:<br />
+&nbsp;<br />
+<img src="sharingandreusingdatamodels_03.png" width="688" height="400" alt="SharingAndReusingDataModels_03" style="width:688px;height:400px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">3.</span></td><td style="border:none"> Next, we need to rename the generated <span class="f_Keyword">dataModel</span> to something more meaningful, say <span class="f_ModelElementName">GeneralTypes:</span><br />
+<span class="f_ModelElementName">&nbsp;</span><br />
+<img src="sharingandreusingdatamodels_04.png" width="688" height="400" alt="SharingAndReusingDataModels_04" style="width:688px;height:400px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">4.</span></td><td style="border:none"> Now, by way of a basic demonstration, we'll pretend that the <span class="f_ModelElementName">Person</span> <span class="f_Keyword">structure</span> is reusable. Cut this from the <span class="f_ModelElementName">TaxBlaster</span> <span class="f_Keyword">rapidModel</span> and paste it into our <span class="f_ModelElementName">CommonDataModel</span>:<br />
+&nbsp;<br />
+<img src="sharingandreusingdatamodels_05.png" width="688" height="400" alt="SharingAndReusingDataModels_05" style="width:688px;height:400px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">5.</span></td><td style="border:none"><span style="font-weight: bold;"> Note:</span> This causes errors in the <span class="f_ModelElementName">TaxBlaster</span> model since the <span class="f_ModelElementName">Person</span> data type can no longer be resolved:<br />
+&nbsp;<br />
+<img src="sharingandreusingdatamodels_06.png" width="688" height="400" alt="SharingAndReusingDataModels_06" style="width:688px;height:400px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">6.</span></td><td style="border:none"> We'll fix these errors by importing our new <span class="f_ModelElementName">CommonDataModel</span> into our <span class="f_ModelElementName">TaxBlaster</span> model. Put the following at the top of the <span class="f_ModelElementName">TaxBlaster</span> <span class="f_Keyword">rapidModel</span> (import statements must always be at the top of the model file). The errors should disappear. <br />
+&nbsp;<br />
+<span class="f_Syntax-keyword">import</span><span class="f_CodeExample"> CommonDataModel.GeneralTypes </span><span class="f_Syntax-keyword">from</span><span class="f_CodeExample"> </span><span class="f_Syntax-stringLiteral">&quot;CommonDataModel.rapid&quot;</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">7.</span></td><td style="border:none"> We can check this import quickly by commenting out the import line (put the cursor in the left margin and press <span class="f_Keystroke">Ctrl+/</span>) and noticing that the errors reappear:<br />
+&nbsp;<br />
+<img src="sharingandreusingdatamodels_07.png" width="688" height="400" alt="SharingAndReusingDataModels_07" style="width:688px;height:400px;border:none" /></td></tr></table></div><p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Publishing our Common Data Model in a central location</span></p>
+<p>If we want to share our data model with other API developers we need to publish it in some central, accessible location. The simplest way of doing this is to put our CommonDataModel.rapid file in a location that is accessible via HTTP. </p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none">For speed, we'll do this using a public <a href="https://help.github.com/articles/about-gists/" target="_blank" class="weblink">Github gist</a> which you can find at the link below. Please feel free to use it.<br />
+&nbsp;<br />
+https://goo.gl/gGRP5P<br />
+&nbsp;<br />
+<img src="sharingandreusingdatamodels_08.png" width="695" height="336" alt="SharingAndReusingDataModels_08" style="width:695px;height:336px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none"> All we need to do now is add a line importing the data model from this URL. (Leave the local import commented out for now as we'll be needing that later.) The <span class="f_ModelElementName">Person</span> data type is then resolved from the remote <span class="f_Keyword">dataModel</span> and our errors disappear:<br />
+&nbsp;<br />
+<img src="sharingandreusingdatamodels_09.png" width="689" height="401" alt="SharingAndReusingDataModels_09" style="width:689px;height:401px;border:none" /></td></tr></table></div><p>Anybody with access to this URL is now able to reuse our <span class="f_ModelElementName">Person</span> data type and any other types we choose to add to this <span class="f_Keyword">rapidModel</span>.</p>
+<p class="p_Heading2_atoc_"><span class="f_Heading2_atoc_">Adding namespaces</span></p>
+<p>We are not just dependent on the <span class="f_Keyword">rapidModel</span> and <span class="f_Keyword">dataModel</span> names for our qualifiers. If needed we can go further by placing the <span class="f_Keyword">rapidModel</span> within a <span class="f_Keyword">namespace</span>. </p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">1.</span></td><td style="border:none">Add the following namespace declaration to the local copy of CommonDataModel.rapid: <br />
+&nbsp;<br />
+<span class="f_Syntax-keyword">namespace</span><span class="f_CodeExample"> com.modelsolv.quickstart</span><br />
+<span class="f_CodeExample">&nbsp;</span><br />
+<img src="sharingandreusingdatamodels_10.png" width="689" height="401" alt="SharingAndReusingDataModels_10" style="width:689px;height:401px;border:none" /><br />
+<span class="f_CodeExample">&nbsp;</span><br />
+<span style="font-weight: bold;">Note: </span>The use of namespaces allows us to scale all the way up to the enterprise, or even inter-enterprise, <span class="f_Keyword">dataModel</span> sharing and re-use. </td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">2.</span></td><td style="border:none"> For speed, we'll revert back to importing the local copy of our common data model. Simply comment out the remote import and uncomment the local one like so:<br />
+&nbsp;<br />
+<img src="sharingandreusingdatamodels_11.png" width="689" height="401" alt="SharingAndReusingDataModels_11" style="width:689px;height:401px;border:none" /></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 10px 0px 10px 0px;"><table border="0" cellpadding="0" cellspacing="0" style="border:none;border-spacing:0px;padding:0px;line-height: 1.20;"><tr valign="baseline" style="vertical-align:baseline"><td style="border:none;width:16px"><span style="font-size:11pt; font-family: 'Verdana';color:#000000;">3.</span></td><td style="border:none">The addition of a <span class="f_Keyword">namespace</span> in this example will cause errors in our <span class="f_Keyword">rapidModel</span> since the <span class="f_Keyword">import</span> statement now needs to include the <span class="f_Keyword">namespace</span>. We'll fix the <span class="f_Keyword">import</span> using Code Assist. Just delete <span class="f_LiteralValue">CommonDataModel.GeneralTypes, </span>press <span class="f_Keystroke">Ctrl+Space</span> and select the fully qualified name of our local data model:<br />
+&nbsp;<br />
+<img src="sharingandreusingdatamodels_12.png" width="689" height="401" alt="SharingAndReusingDataModels_12" style="width:689px;height:401px;border:none" /></td></tr></table></div><p>The <span class="f_ModelElementName">Person</span> data type can now be found so all the remaining errors will disappear from the model.</p>
+
+<table width="100%">
+       <tr />
+       <tr>
+           <td style="font-size:small">
+             Copyright © 2016 ModelSolv, Inc. &nbsp;All rights reserved. RepreZen and RAPID-ML are trademarks of ModelSolv, Inc. Swagger is a registered trademark of SmartBear Software, Inc. RepreZen API Studio is not associated with nor endorsed by SmartBear Software, Inc.
+           </td>
+       </tr>  
+<table>
+<!--ZOOMSTOP-->
+</div></div>
+<script type="text/javascript">
+
+var lastSlashPos = document.URL.lastIndexOf("/") > document.URL.lastIndexOf("\\") ? document.URL.lastIndexOf("/") : document.URL.lastIndexOf("\\");
+if( document.URL.substring(lastSlashPos + 1, lastSlashPos + 4).toLowerCase() != "~hh" )
+{
+ if (document.all) setTimeout(function() {nsrInit();},20); 
+    else nsrInit();
+ } 
+
+if ((!parent.hmNavigationFrame) && (parent.location) && (parent.location.href)) { $('.sync-toc').show();$('p.crumbs').hide();}
+var baseurl = document.URL.substring(0,document.URL.lastIndexOf("/")+1); 
+$('#idcontent').append('<p class="help-url"><b>URL of this page:&nbsp;</b><a href="'+baseurl+'index.html' +
+'?sharing_and_reusing_data_models.htm" target="_top">'+baseurl+'index.html?sharing_and_reusing_data_models.htm</a></p>');
+
+</script>
+</body>
+</html>
