@@ -1,19 +1,29 @@
 <ul class="nav navbar-nav">
   {% for area in site.data.content_tree.areas %}
+  {% unless area.invisible %}
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ area.name }} <span class="caret"></span></a>
     <ul class="dropdown-menu">
       {% for article in area.articles %}
       {% capture litag %}li class="{% if article.type == "separator" %}divider{% endif %}{{ article.class }}"{% endcapture %}
-      {% if article.type == "external" %}
-      <{{ litag }}><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></li>
-      {% elsif article.type == "internal" %}
-      <{{ litag }}><a href="{{ article.url | prepend: site.baseurl }}">{{ article.title }}</a></li>
-      {% elsif article.type == "separator" %}
+      {% if article.new_window or article.type == "external" %}
+        {% assign target="_blank" %}
+      {% else %}
+        {% assign target="_self" %}
+      {% endif %}
+      {% if article.type == "internal" %}
+        {% capture url %}{{ article.url | prepend: site.baseurl }}{% endcapture %}
+      {% else %}
+        {% assign url = article.url %}
+      {% endif %}
+      {% if article.type == "separator" %}
       <{{ litag }} role="separator"></li>
+      {% else %}
+      <{{ litag }}><a href="{{url}}" target="{{target}}">{{ article.title }}</a></li>
       {% endif %}
       {% endfor %}
     </ul>
   </li>
+{% endunless %}
 {% endfor %}
 </ul>

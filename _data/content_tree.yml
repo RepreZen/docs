@@ -1,19 +1,41 @@
 ---
 areas:
+- name: Home
+  invisible: true
+  articles:
+  - title: RepreZen Documentation Portal
+    slug: home
+    url: /
+    type: internal
 - name: Core Docs
   articles:
   - title: RAPID-ML Language Specification
     url: http://rapid-api.org/rapid-ml/spec/current/desktop/
     type: external
-  - title: RAPID-ML Quick Reference Guide
+  - title: Learning RAPID-ML
+    url: /learning_rapid_ml/
+    type: internal
+    new_window: true
+  - title: RepreZen API Studio Reference Card
     url: https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf
     type: external
 - name: Code Gen
   articles:
   - title: Introduction
+    fullTitle: Introduction to Code Generation in RepreZen API Studio
+    slug: cg_intro
     url: /codegen_intro/
     type: internal
+  - title: Using Swagger Codegen in RepreZen API Studio
+    slug: cg_scg
+    url: /codegen_swagger_codegen/
+    type: internal
+  - title: Creating a Custom Swagger GenTemplate
+    slug: cg_customSCG
+    url: /codegen_custom_swagger_gentemplate/
+    type: internal
   - title: Sharing GenTemplates
+    slug: cg_share
     url: /codegen_sharing/
     type: internal
 - name: Training Videos

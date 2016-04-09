@@ -82,8 +82,8 @@ If you are the publisher of a GenTemplate project in this scenario, you are pres
 the steps necessary to set up and publish to GitHub, so we will focus on the steps required to
 import such a project.
 
-You can follow along with the steps below to import the GenTemplate that is developed in link:{{
-"/codegen_intro/" | prepend: site.baseurl }}[Introduction to Code Generation in {RAS}]
+You can follow along with the steps below to import the GenTemplate that is developed in {%link
+cg_intro%}.
 
 Everything starts with _File -> Import..._ in the {RAS} menu bar. Select _Git -> Projects from Git_
 in the dialog that appears, then click _Next_.
