@@ -19,12 +19,12 @@ function check-git-state() {
 	return
     fi
 
-    branch=$(git rev-parse --abrev-ref HEAD)
+    branch=$(git rev-parse --abbrev-ref HEAD)
     if [[ $branch != master ]] ; then
 	fail "Must publish from master branch or use -f"
     fi
 
-    git update-index --refresh
+    git update-index -q --refresh
     if ! git diff-index --quiet HEAD ; then
 	fail "Your working tree has uncommitted changes; commit first or use -f"
     fi
