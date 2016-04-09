@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Using Swagger Codegen in RepreZen API Studio</title>
+  <meta name="description" content="">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>  
+
+  <!-- add after bootstrap.min.css -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.css">
+  <!-- add after bootstrap.min.js -->
+  <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.js"></script>
+
+  <link rel="stylesheet" href="/docs/css/asciidoc.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="canonical" href="http://reprezen.github.io/docs/codegen_swagger_codegen/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/docs/feed.xml">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
+
+  <link rel="stylesheet" href="/docs/css/misc.css">
+  <script src="/docs/js/misc.js"></script>
+
+</head>
+
+  <body data-spy="scroll" data-targets="#toc">
+    <div class="container">
+      <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/docs/"><img src="/docs/images/reprezen-logo.png">&nbsp;Documentation</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+  
+  
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Core Docs <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="http://rapid-api.org/rapid-ml/spec/current/desktop/" target="_blank">RAPID-ML Language Specification</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/learning_rapid_ml/" target="_blank">Learning RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf" target="_blank">RepreZen API Studio Reference Card</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Code Gen <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/codegen_intro/" target="_self">Introduction</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/codegen_swagger_codegen/" target="_self">Using Swagger Codegen in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/codegen_custom_swagger_gentemplate/" target="_self">Creating a Custom Swagger GenTemplate</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/docs/codegen_sharing/" target="_self">Sharing GenTemplates</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Training Videos <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/channel/UCNwqDgngCot722zwHse5UTg" target="_blank">RepreZen YouTube Channel</a></li>
+      
+      
+      
+      
+      
+      
+      <li class="divider" role="separator"></li>
+      
+      
+      
+      
+      
+      
+      <li class="video-series"><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Play Series: Working with RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&index=1&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Introducing RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=UsrsyEVO914&index=2&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RepreZen API Studio & Swagger</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=KX_tHp_KQkE&index=3&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Editing Swagger-OpenAPI in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=sSIX-A4ru7E&index=4&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Test-drive your Swagger-OpenAPI model in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=5&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=6&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=7&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class="divider" role="separator"></li>
+      
+      
+      
+      
+      
+      
+      <li class="video-series"><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Play Series: RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=1&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=2&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=3&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=wYimccfMbAo&index=4&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Introducing the RAPID-ML Ready! API Plugin</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+</ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+      <div class="row">
+	<div class="col-sm-10">
+	  <h1>Using Swagger Codegen in RepreZen API Studio</h1>
+	  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In <a href="/docs/codegen_intro/">Introduction to Code Generation in RepreZen API Studio</a> we discuss GenTemplates and GenTargets in the context of RAPID-ML models. But
+as you may know, RepreZen API Studio is a great platform for working with Swagger&#8201;&#8212;&#8201;a.k.a. OpenAPI&#8201;&#8212;&#8201;API
+specifications. This includes full access to the
+<a href="https://github.com/swagger-api/swagger-codegen" target="_blank">Swagger Codegen</a> framework.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;ve used Swagger Codegen (SCG), you&#8217;ll know that the implementation comes with several
+out-of-the-box modules that generate documentation, client libraries for a variety of languages, and
+service scaffolding, also geared toward a variety of languages and underlying frameworks. You&#8217;ll be
+glad to know that all of these standard SCG modules are available as GenTemplates in RepreZen API Studio.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="model-type-determines-gentemplates">Model Type Determines GenTemplates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As the following screenshots demonstrate, the list of available GenTemplates shown in the New
+GenTarget wizard depends on the type of the selected model file - Swagger or RAPID-ML.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/swagger-gentemplates.png" alt="Swagger GenTemplates">
+</div>
+</div>
+<div class="paragraph text-center">
+<p>Swagger GenTemplates</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/rapidml-gentemplates.png" alt="RAPID-ML GenTemplates">
+</div>
+</div>
+<div class="paragraph text-center">
+<p>RAPID-ML GenTemplates</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="swagger-codegen-parameters">Swagger Codegen Parameters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The GenTarget (<code>.gen</code>) files that define GenTargets in a model project are JSON files that, among
+other things, provide values for parameters that may be used by the GenTemplate. In general, a
+GenTemplate declares its parameters including the following information for each parameter:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Name</dt>
+<dd>
+<p>The name of the parameter</p>
+</dd>
+<dt class="hdlist1">Description</dt>
+<dd>
+<p>A description of how the parameter will be used</p>
+</dd>
+<dt class="hdlist1">Required</dt>
+<dd>
+<p>True or false, depending on whether the GenTarget is required to supply a value for the
+parameter</p>
+</dd>
+<dt class="hdlist1">Default</dt>
+<dd>
+<p>A default value for the parameter, which is copied into the GenTarget file by the New
+GenTarget wizard</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>In the Swagger Codegen framework, SCG modules can declare <em>options</em> which are analagous to
+GenTemplate parameters, but without <em>required</em> and <em>default</em> properties. The GenTemplates offered by
+RepreZen API Studio for SCG modules automatically define an optional parameter with no default value for each
+option declared by the SCG module. For example, here is a portion of a GenTarget based on the <em>Java</em>
+SCG GenTarget. You can edit this file to provide values for any of the listed parameters.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/scg-parameters.png" alt="Swagger Codegen GenTemplate Parameters">
+</div>
+</div>
+<div class="paragraph">
+<p>There are two additional parameters that are available with every SCG GenTemplate, as shown below:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/scg-common-parameters.png" alt="Swagger Codegen GenTemplate Common Parameters">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>swaggerCodegenConfig</code> parameter is a convenience option; when a complete config file is already
+available for the SCG module&#8201;&#8212;&#8201;as it might be if the same module had been used outside RepreZen API Studio&#8201;&#8212;&#8201;that file can simply be copied into the <code>.gen</code> file as the value of this parameter. However, the
+same effect could be achieved by copying values to individual parameters in the <code>.gen</code> file.</p>
+</div>
+<div class="paragraph">
+<p>The <code>swaggerCodegenSystemProperties</code> parameter sets Java system properties that may affect the way
+the SCG module operates. These are properties that would be set using the <code>-D</code> option using the
+Swagger Codegen command line interface.</p>
+</div>
+<div class="paragraph">
+<p>Unused parameters appearing in the wizard-created <code>.gen</code> file can be deleted to reduce clutter:
+because SCG lacks the ability to declare options as required or optional, all parameters in a
+corresponding GenTarget are, by definition, optional.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="support-for-additional-scg-modules">Support for Additional SCG Modules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RepreZen API Studio comes prepackaged with all of the standard SCG modules available as GenTargets, but you can
+also make use of non-standard modules that <a href="/docs/codegen_custom_swagger_gentemplate/">you create yourself</a> or that you
+obtain from other sources. In <a href="/docs/codegen_sharing/">Sharing GenTemplates</a> we describe the ways you can make a GenTemplate
+available for models in your workspace, namely:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Placing a Java jar file containing the GenTemplate implementation in a model project&#8217;s <code>lib</code>
+folder</p>
+</li>
+<li>
+<p>Placing the jar file in your workspace&#8217;s shared GenTemplates folder</p>
+</li>
+<li>
+<p>Importing a Java project that implements the GenTemplate into your workspace from a variety of
+sources, including GitHub</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The good news for SCG users is that the same mechanisms all work for non-standard SCG modules as
+well. As long as your module is properly configured to be discoverable by the SCG command line
+tool,<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup> it will also be discoverable by RepreZen API Studio, which will automatically, upon
+discovery, wrap it into a GenTemplate.</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnote_1">
+<a href="#_footnoteref_1">1</a>. Swagger Codegen uses Java&#8217;s <code>ServiceManager</code> class to discover available SCG modules. For a module to be discoverable, the fully-qualified class name of the implementing class must appear on a line by itself in a text resource named <span class="nowrap"><code>META-INF/services/io.swagger.codegen.CodegenConfig</code></span>. This resource is typically packaged as part of any SCG module.
+</div>
+</div>
+	</div>
+	<div class="col-sm-2 ">
+	  <nav id="sidetoc" data-spy="affix" data-toggle="toc" class="hidden-xs"></nav>
+	</div>
+      </div>
+      <div class="footer">
+  &copy; 2016 ModelSolv, Inc. All rights reserved.
+</div>
+
+    </div>
+  </body>
+</html>
