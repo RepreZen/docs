@@ -42,16 +42,16 @@ folder is selected.
 
 You can now copy the new jar file and paste a copy anywhere you'd like, either within the {RAS}
 Project Explorer or in your system's file explorer. You can also use drag-and-drop to copy the jar
-file, and there are many applications that can serve as drop targets, including many email
+file, and there are many applications that can serve as drop targets, including email
 applications, cloud storage solutions like Google Drive and Dropbox, and so on.
 
 == Using Packaged GenTemplates
 
-If you create or obtain a GenTemplate packaged as a Jar file and you want to use to create
+If you create or obtain a GenTemplate packaged as a Jar file and you want to use it to create
 GenTargets in your model projects, you have two simple options:
 
 1. Copy the jar file into your model project's `lib` folder.
-2. Copy the jar file into a the `GenTemplates` folder in a project named `shared` in your {RAS} workspace.
+2. Copy the jar file into a `GenTemplates` folder in a project named `shared` in your {RAS} workspace.
 
 The first option makes the GenTemplates in the jar file available for use with all the models in
 that model project, but not models in other projects. The second option makes those GenTemplates
