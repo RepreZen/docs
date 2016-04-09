@@ -1,8 +1,8 @@
 ---
-title: RepreZen Documentation Portal
 type: homepage
 permalink: /
 ---
+= RepreZen Documentation 
 
 Available Documentation:
 
