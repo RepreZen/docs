@@ -21,7 +21,7 @@ module Jekyll
       
     def render(context) 
       site = context.find_variable('site')
-      baseurl = site['baseurl']
+      baseurl = site['data']['baseurl']
       content_areas  = site['data']['content_tree']['areas']
       content_areas.each do |area|
         area['articles'].each do |article|

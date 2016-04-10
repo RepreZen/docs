@@ -23,15 +23,15 @@
   <!-- add after bootstrap.min.js -->
   <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.js"></script>
 
-  <link rel="stylesheet" href="{{ "/css/asciidoc.css" | prepend: site.baseurl }}">
+  <link rel="stylesheet" href="{{ "/css/asciidoc.css" | prepend: site.data.baseurl }}">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.data.baseurl | prepend: site.url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.data.baseurl | prepend: site.url }}">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 
-  <link rel="stylesheet" href="{{ "/css/misc.css" | prepend: site.baseurl }}">
-  <script src="{{"/js/misc.js" | prepend: site.baseurl }}"></script>
+  <link rel="stylesheet" href="{{ "/css/misc.css" | prepend: site.data.baseurl }}">
+  <script src="{{"/js/misc.js" | prepend: site.data.baseurl }}"></script>
 
 </head>
