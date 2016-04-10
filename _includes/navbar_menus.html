@@ -12,7 +12,7 @@
         {% assign target="_self" %}
       {% endif %}
       {% if article.type == "internal" %}
-        {% capture url %}{{ article.url | prepend: site.baseurl }}{% endcapture %}
+        {% capture url %}{{ article.url | prepend: site.data.baseurl }}{% endcapture %}
       {% else %}
         {% assign url = article.url %}
       {% endif %}

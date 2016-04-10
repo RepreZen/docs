@@ -7,6 +7,7 @@ permalink: /
 Available Documentation:
 
 {% for area in site.data.content_tree.areas %}
+{% unless area.invisible %}
 == {{ area.name }}
 {% for article in area.articles %}
 {% if article.new_window or article.type == "external" %}
@@ -17,9 +18,10 @@ Available Documentation:
 {% if article.type == "external" %}
 * link:{{ article.url }}[{{article.title}}{{caret}}]
 {% elsif article.type == "internal" %}
-* link:{{ article.url | prepend: site.baseurl }}[{{ article.title }}{{caret}}]
+* link:{{ article.url | prepend: site.data.baseurl }}[{{ article.title }}{{caret}}]
 {% elsif article.type == "separator" %}
 '''
 {% endif %}
 {% endfor %}
+{% endunless %}
 {% endfor %}

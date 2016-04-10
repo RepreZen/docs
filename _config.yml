@@ -8,7 +8,7 @@
 # Site settings
 title: RepreZen End-User Documentation
 email: info@reprezen.com
-baseurl: "/docs"
+baseurl: /docs
 url: "http://reprezen.github.io"
 asciidoctor:
   attributes:
