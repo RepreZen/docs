@@ -1,0 +1,255 @@
+---
+permalink: /swagger_normalizer/
+---
+= Using the Swagger Normalizer GenTemplate
+:imagesdir: ../images/codegen
+:linkattrs:
+:docinfo2:
+:RAS: RepreZen API Studio 
+:RZ: RepreZen
+
+Swagger Normalizer is a core component of the Swagger Multi-File
+Support in {RAS}, and as such it is used by each of the three "live"
+views - Documentation View, Diagram View, and Swagger UI View - that
+appear by default in the right-hand pane of the {RAS} GUI, as well as
+by all Swagger GenTemplates that the user may invoke. It is also
+available directly to end-users in the form of a built-in GenTemplate,
+which appears under the name "Swagger [Normalized YAML]" in the
+GenTarget Wizard.
+
+The primary function of the normalizer is to render a multi-file Swagger spec as a functionally
+equivalent single-file spec. In this way it can simplify the use of other tools and libraries in the
+evolving Swagger ecosystem, where external references are not always handled consistently.
+
+Additionally, the normalizer can perform other transformations of the
+Swagger spec, which may be helpful for some circumstances, especially
+when feeding the spec to downstream systems.
+
+The normalizer is not yet avaailable in an externally usable Java
+library, but we intend to make it so in the future. If this is of
+immediate interest to you, please let us know so that we can
+prioritize the work appropriately.
+
+== Basic Use
+
+The Normalizer is used like any other Swagger GenTemplate:
+
+1. Create a GenTarget (a `.gen` file) in your model folder, linking
+your Swagger model file (`.yaml` file) to the GenTemplate. The
+internal id of this GenTemplate is:
++
+[source%nowrap]
+--
+com.modelsolv.reprezen.gentemplates.swaggernorm.SwaggerNormalizerGenTemplate
+--
++
+The name listed in the drop-down list in the GenTarget wizard is
+"Swagger [Normalizezd YAML]."
+
+2. Configure the GenTarget as desired (see below).
+
+3. Execute the GenTarget
+
+4. Find the generated YAML file in the `generated` folder that appears
+in the GenTarget folder.
+
+// Should have images walking through this process
+
+== Multifile Processing
+
+The one thing that the normalizer will always do is resolve external
+references and leave you with a single-file Swagger Spec. The other
+things it may do depend on options, described below.
+
+The normalizer treates external references in one of two ways:
+
+Swagger References:: If the reference is one of the approved Swagger
+references - i.e. its URI fragment is begins with `\#/paths/` or
+`#/parameters/` or `\#/responses/` or `#/definitions/` - the
+non-fragment portion of the reference must be a URI from which a
+complete, valid Swagger spec may be obtained. The fragment appearing
+in the reference is then used as a JSON Pointer to address a path,
+parameter, response, or definition appearing in that spec.
++
+The treatment of this reference depends on options that are in effect.
++
+[TIP]
+--
+The document addressed by the non-fragment part of a Swagger
+reference must be a complete, valid Swagger spec, containing all of
+the following required top-level properties:
+
+* a `swagger` string-valued property identifing the Swagger versin (`"2.0"`)
+* an `info` object-valued property containing:
+** a `title' string-valued sub-property, and
+** a `version` string-valued sub-property
+* a `paths` object-valued property (`{}` if this spec has no paths)
+
+A minimal compliant Swagger spec might look like this:
+[source%nowrap]
+===
+---
+swagger: "2.0"
+info:
+  title: My title
+  version: "1.0"
+paths: {}
+===
+--
+Fragment References:: In all other cases, the non-fragment portion of
+the reference must refer to a YAML or JSON document, and the fragment,
+if present, is used as a JSON Pointer to refer to a value contained in
+that document. (If there is no fragment in the reference string, then
+the reference is to the document as a whole).
++ 
+The normalizer always replaces the original reference object with the
+resolved value in the case of fragment references.
+
+In the above situations, if the reference turns out to be unresolvable
+for any reason, it is left as-is in the normalized output.
+
+WARNING: Fragment references are not permitted in a fully compliant
+Swagger spec. Their use is not recommended.
+
+=== Reference Localization and Inlining
+
+As mentioned above, fragment references are always replaced by the
+referenced content. We call this _inlining_.
+
+Swagger references are sometimes, but not always, inlined, depending
+options in effect. The other possibility is _localization_.
+
+When a Swagger reference is inlined, the original reference is
+replaced with the referenced content, just as for fragment
+references.
+
+When a Swagger reference is localized, the referenced object is
+incorporated into the normalized spec as a local object, and the
+original external reference is transformed into a local reference.
+
+==== Name Collisions
+
+Localization of a Swagger reference may lead to a name
+collision. For example, a Swagger spec with a local definition named
+"Foo" might include an external reference to a definition, also named
+"Foo", appearing in an extenal spec. In this case, the localized
+version of that second definition named "Foo" will be named "Foo_1" in
+the normalized spec. A third such definition would be named "Foo_2",
+and so on.
+
+Renaming is done only where necessary due to a conflict, and the names
+appearing in the top-level spec are never modified.
+
+==== Recursive References
+
+It is possible to set up recursive structures in Swagger specs,
+through the use of references.
+
+For Swagger references that would normally be inlined, localization is
+performed when a recursive reference is encountered. For example, if a
+response object is defined whose schema is a reference to a recursive
+definition, then that definition will be inlined into the reference
+itself, but the recursive reference encountered while inlining the
+definition will be localized instead.
+
+For fragment references, recursive references are not currently
+permitted and will cause the normalizer to fail.
+
+== Normalizer Options
+
+Options are configured in the GenTarget file (the `.gen` file created
+by the GenTarget wizard). Each option can be set to either `true` or
+`false` as desired.
+
+Options are as follows:
+
+INLINE_ALL:: Enable all the other INLINE options.
+
+INLINE_DEFS:: Inline all definitions references. (See discussion
+regarding recursive references above.)
+
+INLINE_PARAMS:: Inline all parameter references.
+
+INLINE_RESPONSES:: Inline all response references.
+
+TIP: Note that there is no `INLINE_PATHS` option, since the only
+meaningful handling of a path reference is to inline it.
+
+REWRITE_SIMPLE_REFS:: In former versions of the Swagger specification,
+reference strings were allowed to take a simple form like "Pet." These
+would be treated as internal references based on the context in which
+the reference appears. For example, in old pet-store examples,
+references to the `Pet` schema appeared simply as `$ref: Pet` and this
+would be equivalent to `$ref: #/definitions/Pet`.
++
+While these "simple references" are no longer supported by the Swagger
+specification, they are still processed by some existing
+tools. Enabling this option will cause the normalizer to rewrite
+simple references to fully compliant internal
+references.footnote:[Simple reference strings are recognized only
+if they start with an alphabetic character or "\_" and consist solely
+of alpha-numeric characters and "_".]
+
+CREATE_DEF_TITLES:: This option causes the normalizer to add `title`
+properties to definitions that do not already have them. The title for
+such a definition is set to its property name in the `definitions`
+object of its containing Swagger spec. This is particularly helpful
+when name collisions occur during localization, as the titles then
+reflect the original names of the definitions, prior to renaming.
+
+HOIST_MEDIA_TYPES:: This option causes the normalizer to copy
+top-level `consumes` and `produces` property values into all
+operations that do not supply their own values. The top-level lists
+are removed from the normalized spec.
+
+HOIST_PATH_PARAMETERS:: This option causes parameters defined at
+path-level to be copied into all that path's operations, except where
+the operation directly defines a parameter with the same name and `in`
+value. The path-level parameter definitions are removed from the
+normalized spec.
+
+PRUNE_UNREFED_OBJECTS:: If the normalized spec defines at least one
+path object, this option causes all non-path objects that are not
+referenced in the normalized spec to be removed. When inlining options
+are in effect, this means that inlined object will be removed as
+free-standing objects, except in the case of recursive use.
+
+INSTANTIATE_NULL_COLLECTIONS:: There are many optional properties in
+teh Swagger specification, and the Swagger Java parser creates
+structures in which omitted properties generally appear with `null`
+values. This forces a great deal of null-checking in Java code that
+processes parsed Swagger specs. This option causes such null values
+for either array-valued or object-valued properties to be replaced
+with empty arrays and objects, respectively, where doing so would not
+alter the meaning of the spec.footnote:[An example of where such
+replacement would chnage the spec is the `consumes` and `produces`
+arrays in operation definition. For these, an empty array would
+prevent inheriting the corresponding global defaults.]
+
+FIX_MISSING_TYPES:: The Swagger Java parser accepts Swagger specs in
+which some object schemas are missing their `type` property. This is
+allowed when the schema contains either a `properties` or
+`additionalProperties` property. This option causes the normalize to
+fill in `type: object` in these cases.
+
+USE_CODEGEN_OPTIONS:: Enabling this option causes the overall options
+set to be configured as they would be for a normal GenTarget
+execution. This option, unlike all other options, defauts to true.
++
+The options implied by this option include: 
++
+* REWRITE_SIMPLE_REFS
+* INSTANTIATE_NULL_COLLECTIONS
+* INLINE_PARAMS
+* INLINE_REPSONSES
+* HOIST_PATH_PARMS
+* FIX_MISSING_TYPES
+
+USE_DOC_OPTIONS:: Enabling this option casues the overall options set
+to be configured as they would be for the Live Documentation view. The
+options implied by this option include all those listed above for
+*USE_CODEGEN_OPTIONS*, and also:
++
+* CREATE_DEF_TITLES
+* HOIST_MEDIA_TYPES
+* PRUNE_UNREFED_OBJECTS

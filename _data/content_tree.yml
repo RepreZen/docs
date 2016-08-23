@@ -38,6 +38,13 @@ areas:
     slug: cg_share
     url: /codegen_sharing/
     type: internal
+- name: Swagger Features
+  articles:
+  - title: Swagger Normalizer
+    slug: swag_norm
+    fullTitle: Using the Swagger Normalizer GenTemplate
+    url: /swagger_normalizer/
+    type: internal
 - name: Training Videos
   articles:
   - title: RepreZen YouTube Channel
