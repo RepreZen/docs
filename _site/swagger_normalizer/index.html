@@ -275,12 +275,12 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>Swagger Normalizer is a core component of the Swagger Multi-File
-Support in RepreZen API Studio, and as such it is used by each of the three "live"
+Support in RepreZen API Studio, and as such it is used by each of the three &#8220;live&#8221;
 views - Documentation View, Diagram View, and Swagger UI View - that
 appear by default in the right-hand pane of the RepreZen API Studio GUI, as well as
 by all Swagger GenTemplates that the user may invoke. It is also
 available directly to end-users in the form of a built-in GenTemplate,
-which appears under the name "Swagger [Normalized YAML]" in the
+which appears under the name &#8220;Swagger [Normalized YAML]&#8221; in the
 GenTarget Wizard.</p>
 </div>
 <div class="paragraph">
@@ -320,7 +320,7 @@ internal id of this GenTemplate is:</p>
 </div>
 <div class="paragraph">
 <p>The name listed in the drop-down list in the GenTarget wizard is
-"Swagger [Normalizezd YAML]."</p>
+&#8220;Swagger [Normalizezd YAML].&#8221;</p>
 </div>
 </li>
 <li>
@@ -346,14 +346,15 @@ references and leave you with a single-file Swagger Spec. The other
 things it may do depend on options, described below.</p>
 </div>
 <div class="paragraph">
-<p>The normalizer treates external references in one of two ways:</p>
+<p>The normalizer treats every external reference it encounters in one of
+two ways:</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Swagger References</dt>
 <dd>
 <p>If the reference is one of the approved Swagger
-references - i.e. its URI fragment is begins with <code>#/paths/</code> or
+references - i.e. its URI fragment begins with <code>#/paths/</code> or
 <code>#/parameters/</code> or <code>#/responses/</code> or <code>#/definitions/</code> - the
 non-fragment portion of the reference must be a URI from which a
 complete, valid Swagger spec may be obtained. The fragment appearing
@@ -361,60 +362,6 @@ in the reference is then used as a JSON Pointer to address a path,
 parameter, response, or definition appearing in that spec.</p>
 <div class="paragraph">
 <p>The treatment of this reference depends on options that are in effect.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The document addressed by the non-fragment part of a Swagger
-reference must be a complete, valid Swagger spec, containing all of
-the following required top-level properties:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>a <code>swagger</code> string-valued property identifing the Swagger versin (<code>"2.0"</code>)</p>
-</li>
-<li>
-<p>an <code>info</code> object-valued property containing:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>a `title' string-valued sub-property, and</p>
-</li>
-<li>
-<p>a <code>version</code> string-valued sub-property</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>a <code>paths</code> object-valued property (<code>{}</code> if this spec has no paths)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>A minimal compliant Swagger spec might look like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code>===
----
-swagger: "2.0"
-info:
-  title: My title
-  version: "1.0"
-paths: {}
-===</code></pre>
-</div>
-</div>
-</td>
-</tr>
-</table>
 </div>
 </dd>
 <dt class="hdlist1">Fragment References</dt>
@@ -448,6 +395,28 @@ Swagger spec. Their use is not recommended.
 </tr>
 </table>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Valid Swagger:</strong> A valid Swagger spec, as required for Swagger references, must
+include: (1) a string-valued <code>swagger</code> property (value should be
+<code>2.0</code>); (2) an object-valued <code>info</code> property that includes (3) a
+string-valued <code>title</code> property and (4) a string-valued <code>version</code>
+property; and an object-valued <code>paths</code> object, which may be empty
+(<code>{}</code>). A minimal compliant Swagger spec might look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>---
+swagger: "2.0"
+info:
+  title: My title
+  version: "1.0"
+paths: {}</code></pre>
+</div>
+</div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="reference-localization-and-inlining">Reference Localization and Inlining</h3>
 <div class="paragraph">
@@ -473,10 +442,10 @@ original external reference is transformed into a local reference.</p>
 <div class="paragraph">
 <p>Localization of a Swagger reference may lead to a name
 collision. For example, a Swagger spec with a local definition named
-"Foo" might include an external reference to a definition, also named
-"Foo", appearing in an extenal spec. In this case, the localized
-version of that second definition named "Foo" will be named "Foo_1" in
-the normalized spec. A third such definition would be named "Foo_2",
+<code>Foo</code> might include an external reference to a definition, also named
+<code>Foo</code>, appearing in an extenal spec. In this case, the localized
+version of that second definition named <code>Foo</code> will be named <code>Foo_1</code> in
+the normalized spec. A third such definition would be named <code>Foo_2</code>,
 and so on.</p>
 </div>
 <div class="paragraph">
@@ -556,13 +525,13 @@ meaningful handling of a path reference is to inline it.
 <dt class="hdlist1">REWRITE_SIMPLE_REFS</dt>
 <dd>
 <p>In former versions of the Swagger specification,
-reference strings were allowed to take a simple form like "Pet." These
+reference strings were allowed to take a simple form like <code>Pet</code>. These
 would be treated as internal references based on the context in which
 the reference appears. For example, in old pet-store examples,
 references to the <code>Pet</code> schema appeared simply as <code>$ref: Pet</code> and this
 would be equivalent to <code>$ref: #/definitions/Pet</code>.</p>
 <div class="paragraph">
-<p>While these "simple references" are no longer supported by the Swagger
+<p>While these &#8220;simple references&#8221; are no longer supported by the Swagger
 specification, they are still processed by some existing
 tools. Enabling this option will cause the normalizer to rewrite
 simple references to fully compliant internal
@@ -598,13 +567,13 @@ normalized spec.</p>
 <p>If the normalized spec defines at least one
 path object, this option causes all non-path objects that are not
 referenced in the normalized spec to be removed. When inlining options
-are in effect, this means that inlined object will be removed as
+are in effect, this means that inlined objects will be removed as
 free-standing objects, except in the case of recursive use.</p>
 </dd>
 <dt class="hdlist1">INSTANTIATE_NULL_COLLECTIONS</dt>
 <dd>
 <p>There are many optional properties in
-teh Swagger specification, and the Swagger Java parser creates
+the Swagger specification, and the Swagger Java parser creates
 structures in which omitted properties generally appear with <code>null</code>
 values. This forces a great deal of null-checking in Java code that
 processes parsed Swagger specs. This option causes such null values
@@ -617,7 +586,7 @@ alter the meaning of the spec.<sup class="footnote">[<a id="_footnoteref_2" clas
 <p>The Swagger Java parser accepts Swagger specs in
 which some object schemas are missing their <code>type</code> property. This is
 allowed when the schema contains either a <code>properties</code> or
-<code>additionalProperties</code> property. This option causes the normalize to
+<code>additionalProperties</code> property. This option causes the normalizer to
 fill in <code>type: object</code> in these cases.</p>
 </dd>
 <dt class="hdlist1">USE_CODEGEN_OPTIONS</dt>
@@ -678,10 +647,10 @@ options implied by this option include all those listed above for
 <div id="footnotes">
 <hr>
 <div class="footnote" id="_footnote_1">
-<a href="#_footnoteref_1">1</a>. Simple reference strings are recognized only if they start with an alphabetic character or "_" and consist solely of alpha-numeric characters and "_".
+<a href="#_footnoteref_1">1</a>. Simple reference strings are recognized only if they start with an alphabetic character or &#8220;_&#8221; and consist solely of alpha-numeric characters and &#8220;_&#8221;.
 </div>
 <div class="footnote" id="_footnote_2">
-<a href="#_footnoteref_2">2</a>. An example of where such replacement would chnage the spec is the <code>consumes</code> and <code>produces</code> arrays in operation definition. For these, an empty array would prevent inheriting the corresponding global defaults.
+<a href="#_footnoteref_2">2</a>. An example of where such replacement would chnage the spec is the <code>consumes</code> and <code>produces</code> arrays in operation definitions. For these, an empty array would prevent inheriting the corresponding global defaults.
 </div>
 </div>
 	</div>

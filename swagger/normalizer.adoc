@@ -9,12 +9,12 @@ permalink: /swagger_normalizer/
 :RZ: RepreZen
 
 Swagger Normalizer is a core component of the Swagger Multi-File
-Support in {RAS}, and as such it is used by each of the three "live"
+Support in {RAS}, and as such it is used by each of the three "`live`"
 views - Documentation View, Diagram View, and Swagger UI View - that
 appear by default in the right-hand pane of the {RAS} GUI, as well as
 by all Swagger GenTemplates that the user may invoke. It is also
 available directly to end-users in the form of a built-in GenTemplate,
-which appears under the name "Swagger [Normalized YAML]" in the
+which appears under the name "`Swagger [Normalized YAML]`" in the
 GenTarget Wizard.
 
 The primary function of the normalizer is to render a multi-file Swagger spec as a functionally
@@ -44,7 +44,7 @@ com.modelsolv.reprezen.gentemplates.swaggernorm.SwaggerNormalizerGenTemplate
 --
 +
 The name listed in the drop-down list in the GenTarget wizard is
-"Swagger [Normalizezd YAML]."
+"`Swagger [Normalizezd YAML].`"
 
 2. Configure the GenTarget as desired (see below).
 
@@ -61,10 +61,11 @@ The one thing that the normalizer will always do is resolve external
 references and leave you with a single-file Swagger Spec. The other
 things it may do depend on options, described below.
 
-The normalizer treates external references in one of two ways:
+The normalizer treats every external reference it encounters in one of
+two ways:
 
 Swagger References:: If the reference is one of the approved Swagger
-references - i.e. its URI fragment is begins with `\#/paths/` or
+references - i.e. its URI fragment begins with `\#/paths/` or
 `#/parameters/` or `\#/responses/` or `#/definitions/` - the
 non-fragment portion of the reference must be a URI from which a
 complete, valid Swagger spec may be obtained. The fragment appearing
@@ -72,30 +73,7 @@ in the reference is then used as a JSON Pointer to address a path,
 parameter, response, or definition appearing in that spec.
 +
 The treatment of this reference depends on options that are in effect.
-+
-[TIP]
---
-The document addressed by the non-fragment part of a Swagger
-reference must be a complete, valid Swagger spec, containing all of
-the following required top-level properties:
 
-* a `swagger` string-valued property identifing the Swagger versin (`"2.0"`)
-* an `info` object-valued property containing:
-** a `title' string-valued sub-property, and
-** a `version` string-valued sub-property
-* a `paths` object-valued property (`{}` if this spec has no paths)
-
-A minimal compliant Swagger spec might look like this:
-[source%nowrap]
-===
----
-swagger: "2.0"
-info:
-  title: My title
-  version: "1.0"
-paths: {}
-===
---
 Fragment References:: In all other cases, the non-fragment portion of
 the reference must refer to a YAML or JSON document, and the fragment,
 if present, is used as a JSON Pointer to refer to a value contained in
@@ -110,6 +88,28 @@ for any reason, it is left as-is in the normalized output.
 
 WARNING: Fragment references are not permitted in a fully compliant
 Swagger spec. Their use is not recommended.
+
+****
+
+*Valid Swagger:* A valid Swagger spec, as required for Swagger references, must
+include: (1) a string-valued `swagger` property (value should be
+`2.0`); (2) an object-valued `info` property that includes (3) a
+string-valued `title` property and (4) a string-valued `version`
+property; and an object-valued `paths` object, which may be empty
+(`{}`). A minimal compliant Swagger spec might look like this:
+
+```
+
+---
+swagger: "2.0"
+info: 
+  title: My title 
+  version: "1.0" 
+paths: {}
+
+```
+
+****
 
 === Reference Localization and Inlining
 
@@ -131,10 +131,10 @@ original external reference is transformed into a local reference.
 
 Localization of a Swagger reference may lead to a name
 collision. For example, a Swagger spec with a local definition named
-"Foo" might include an external reference to a definition, also named
-"Foo", appearing in an extenal spec. In this case, the localized
-version of that second definition named "Foo" will be named "Foo_1" in
-the normalized spec. A third such definition would be named "Foo_2",
+`Foo` might include an external reference to a definition, also named
+`Foo`, appearing in an extenal spec. In this case, the localized
+version of that second definition named `Foo` will be named `Foo_1` in
+the normalized spec. A third such definition would be named `Foo_2`,
 and so on.
 
 Renaming is done only where necessary due to a conflict, and the names
@@ -176,19 +176,19 @@ TIP: Note that there is no `INLINE_PATHS` option, since the only
 meaningful handling of a path reference is to inline it.
 
 REWRITE_SIMPLE_REFS:: In former versions of the Swagger specification,
-reference strings were allowed to take a simple form like "Pet." These
+reference strings were allowed to take a simple form like `Pet`. These
 would be treated as internal references based on the context in which
 the reference appears. For example, in old pet-store examples,
 references to the `Pet` schema appeared simply as `$ref: Pet` and this
 would be equivalent to `$ref: #/definitions/Pet`.
 +
-While these "simple references" are no longer supported by the Swagger
+While these "`simple references`" are no longer supported by the Swagger
 specification, they are still processed by some existing
 tools. Enabling this option will cause the normalizer to rewrite
 simple references to fully compliant internal
 references.footnote:[Simple reference strings are recognized only
-if they start with an alphabetic character or "\_" and consist solely
-of alpha-numeric characters and "_".]
+if they start with an alphabetic character or "`\_`" and consist solely
+of alpha-numeric characters and "`_`".]
 
 CREATE_DEF_TITLES:: This option causes the normalizer to add `title`
 properties to definitions that do not already have them. The title for
@@ -211,11 +211,11 @@ normalized spec.
 PRUNE_UNREFED_OBJECTS:: If the normalized spec defines at least one
 path object, this option causes all non-path objects that are not
 referenced in the normalized spec to be removed. When inlining options
-are in effect, this means that inlined object will be removed as
+are in effect, this means that inlined objects will be removed as
 free-standing objects, except in the case of recursive use.
 
 INSTANTIATE_NULL_COLLECTIONS:: There are many optional properties in
-teh Swagger specification, and the Swagger Java parser creates
+the Swagger specification, and the Swagger Java parser creates
 structures in which omitted properties generally appear with `null`
 values. This forces a great deal of null-checking in Java code that
 processes parsed Swagger specs. This option causes such null values
@@ -223,13 +223,13 @@ for either array-valued or object-valued properties to be replaced
 with empty arrays and objects, respectively, where doing so would not
 alter the meaning of the spec.footnote:[An example of where such
 replacement would chnage the spec is the `consumes` and `produces`
-arrays in operation definition. For these, an empty array would
+arrays in operation definitions. For these, an empty array would
 prevent inheriting the corresponding global defaults.]
 
 FIX_MISSING_TYPES:: The Swagger Java parser accepts Swagger specs in
 which some object schemas are missing their `type` property. This is
 allowed when the schema contains either a `properties` or
-`additionalProperties` property. This option causes the normalize to
+`additionalProperties` property. This option causes the normalizer to
 fill in `type: object` in these cases.
 
 USE_CODEGEN_OPTIONS:: Enabling this option causes the overall options
