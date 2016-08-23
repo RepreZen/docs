@@ -63,6 +63,7 @@ function copyrepo() {
     (
 	cd "/tmp/git/$repo"
 	echo "/$repo" > _data/baseurl.yml
+	rm -f CNAME
 	jekyll build
 	git add .
 	git commit -m 'site copy'
