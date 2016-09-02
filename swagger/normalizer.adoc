@@ -12,23 +12,19 @@ Swagger Normalizer is a core component of the Swagger Multi-File
 Support in {RAS}, and as such it is used by each of the three "`live`"
 views - Documentation View, Diagram View, and Swagger UI View - that
 appear by default in the right-hand pane of the {RAS} GUI, as well as
-by all Swagger GenTemplates that the user may invoke. It is also
-available directly to end-users in the form of a built-in GenTemplate,
-which appears under the name "`Swagger [Normalized YAML]`" in the
-GenTarget Wizard.
+by all Swagger GenTemplates. You can also use it directly as its own
+GenTemplate, named "`Swagger [Normalized YAML]`" in the GenTarget
+Wizard. 
 
-The primary function of the normalizer is to render a multi-file Swagger spec as a functionally
-equivalent single-file spec. In this way it can simplify the use of other tools and libraries in the
-evolving Swagger ecosystem, where external references are not always handled consistently.
+The primary function of the normalizer is to render a multi-file
+Swagger spec as a functionally equivalent single-file spec. In this
+way it can simplify the use of other tools and libraries in the
+evolving Swagger ecosystem, where external references are not always
+handled consistently.
 
 Additionally, the normalizer can perform other transformations of the
 Swagger spec, which may be helpful for some circumstances, especially
 when feeding the spec to downstream systems.
-
-The normalizer is not yet avaailable in an externally usable Java
-library, but we intend to make it so in the future. If this is of
-immediate interest to you, please let us know so that we can
-prioritize the work appropriately.
 
 == Basic Use
 
@@ -61,84 +57,157 @@ The one thing that the normalizer will always do is resolve external
 references and leave you with a single-file Swagger Spec. The other
 things it may do depend on options, described below.
 
-The normalizer treats every external reference it encounters in one of
-two ways:
+=== Swagger References
 
-Swagger References:: If the reference is one of the approved Swagger
-references - i.e. its URI fragment begins with `\#/paths/` or
-`#/parameters/` or `\#/responses/` or `#/definitions/` - the
-non-fragment portion of the reference must be a URI from which a
-complete, valid Swagger spec may be obtained. The fragment appearing
-in the reference is then used as a JSON Pointer to address a path,
-parameter, response, or definition appearing in that spec.
-+
-The treatment of this reference depends on options that are in effect.
-
-Fragment References:: In all other cases, the non-fragment portion of
-the reference must refer to a YAML or JSON document, and the fragment,
-if present, is used as a JSON Pointer to refer to a value contained in
-that document. (If there is no fragment in the reference string, then
-the reference is to the document as a whole).
-+ 
-The normalizer always replaces the original reference object with the
-resolved value in the case of fragment references.
-
-In the above situations, if the reference turns out to be unresolvable
-for any reason, it is left as-is in the normalized output.
-
-WARNING: Fragment references are not permitted in a fully compliant
-Swagger spec. Their use is not recommended.
-
-****
-
-*Valid Swagger:* A valid Swagger spec, as required for Swagger references, must
-include: (1) a string-valued `swagger` property (value should be
-`2.0`); (2) an object-valued `info` property that includes (3) a
-string-valued `title` property and (4) a string-valued `version`
-property; and an object-valued `paths` object, which may be empty
-(`{}`). A minimal compliant Swagger spec might look like this:
+Here's an example of what a typical _reference_ might look like in a
+Swagger spec:
 
 ```
+      responses:
+        200:
+          description: Default Response
+	  schema:
+	    $ref: "#/definitions/Pet"
+```
 
+This is part of the definition of an operation whose normal response
+will contain data about a pet. That information will be structured
+according to a schema named `Pet` defined elsewhere in this same
+Swagger spec, in the `definitions` section of the spec.
+
+The reference itself appears as the value of the `schema` property in
+the response. That property could appear with an "in-line" schema
+definition, but in this case the designer has opted to define the
+schema elsewhere and reference it here by name.
+
+If the definition of the `Pet` schema physically appeared in some
+other Swagger spec, the reference would need to include a URL to
+retrieve that spec, with a fragment identical to the reference string
+shown above:
+
+```
+      responses:
+        200:
+          description: Default Response
+	  schema:
+	    $ref: "http://models.example.com/petstore-schemas.yaml#/definitions/Pet"
+```
+
+
+TIP: Swagger's `$ref` syntax conforms to a separate standard known as
+"JSON Reference." That standard is available
+https://tools.ietf.org/html/draft-pbryan-zyp-json-ref-03[here].
+
+=== What the Normalizer Does With References
+
+References in a Swagger spec should all be of the variety specifically
+endorsed by the http://swagger.io/specification[Swagger
+Specification], namely those with URI fragments that begin with
+`\#/paths/` or `#/parameters/` or `\#/responses/` or
+`#/definitions/`. We'll call those _Swagger references_. All other
+references will be called _fragment references_. Swagger Normalizer
+does not treat these two varieties of reference identically.
+
+WARNING: Fragment references are not officially allowed in Swagger
+specs, but some tooling permits their use, and there are, confusingly,
+posted examples and tutorials from Swagger project contributors that
+feature them.
+
+====
+Note:: The document identified by the pre-fragment portion of an
+external Swagger reference _must_ be a valid Swagger spec. At a
+minimum this means that it must include: (1) a string-valued `swagger`
+property whose value is `2.0`; (2) an object-valued `info` property
+that includes (3) a string-valued `title` property and (4) a
+string-valued `version` property; and an object-valued `paths` object,
+which may be empty (`{}`). A minimal compliant Swagger spec
+footnote:[The {RAS} New Model Wizard offers a "Minimal" option that
+will create a (nearly) minimal Swagger spec as a starting point.]
+might look like this:
+
+```
 ---
-swagger: "2.0"
+swagger: "2.0" 
 info: 
-  title: My title 
-  version: "1.0" 
+  title: My title
+  version: "1.0"
 paths: {}
-
 ```
+====
 
-****
+For any given reference, there are two things that the normalizer
+might do to the reference:
 
-=== Reference Localization and Inlining
+Inline:: In this case, the normalizer retrieves the referenced value
+(e.g. the `Pet` schema definition object) and replaces the reference
+itself with that value.
 
-As mentioned above, fragment references are always replaced by the
-referenced content. We call this _inlining_.
+Localize:: In this case, the normalizer first adds the referenced
+object to the single-file schema that it is creating, if it is not
+already present, and then replaces the reference with a local
+reference to that object. So in the external reference example shown
+above, the `Pet` schema definition would appear directly in the
+Swagger spec produced by the normalizer, and references that were
+formerly external references would become local references.
 
-Swagger references are sometimes, but not always, inlined, depending
-options in effect. The other possibility is _localization_.
-
-When a Swagger reference is inlined, the original reference is
-replaced with the referenced content, just as for fragment
-references.
-
-When a Swagger reference is localized, the referenced object is
-incorporated into the normalized spec as a local object, and the
-original external reference is transformed into a local reference.
+The normalizer _always_ inlines fragment references. Any given Swagger
+reference may be inlined or localized, depending on options in effect.
 
 ==== Name Collisions
 
 Localization of a Swagger reference may lead to a name
-collision. For example, a Swagger spec with a local definition named
-`Foo` might include an external reference to a definition, also named
-`Foo`, appearing in an extenal spec. In this case, the localized
-version of that second definition named `Foo` will be named `Foo_1` in
-the normalized spec. A third such definition would be named `Foo_2`,
-and so on.
+collision. For example, imagine the the following excerpts from two
+Swagger specs:
+
+[source%nowrap]
+.main.yaml
+----
+defintions:
+  Address:
+    description: An address given by a speaker
+    type: object
+    properties:
+      speaker:
+         $ref: "#/definitions/Speaker"
+      title:
+        type: string
+      ...
+  Speaker:
+    name:
+       type: string
+    address:
+      $ref: "external.yaml#/definitions/Address"
+    ...
+----
+
+[source%nowrap]
+.external.yaml
+----
+defintions:
+  Address:
+    description: A postal address
+    type: object
+    properties:
+      street:
+        type: string
+      ...
+  PhoneInfo:
+    ... 
+----
+
+
+For example, a Swagger spec with a local definition named
+`Pet` might include an external reference to a definition, also named
+`Pet`, appearing in an extenal spec. In this case, the localized
+version of that second definition named `Pet` will be named `Pet_1` in
+the normalized spec. A third such definition referenced from some
+other external spec, would be named `Pet_2`, and so on.
 
 Renaming is done only where necessary due to a conflict, and the names
-appearing in the top-level spec are never modified.
+appearing in the top-level spec are always preserved as-is: if there
+is a colliding externally referenced object that needs to be
+localized, that object will be renamed, not the local object with
+which it collided.
 
 ==== Recursive References
 

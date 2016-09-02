@@ -278,26 +278,21 @@
 Support in RepreZen API Studio, and as such it is used by each of the three &#8220;live&#8221;
 views - Documentation View, Diagram View, and Swagger UI View - that
 appear by default in the right-hand pane of the RepreZen API Studio GUI, as well as
-by all Swagger GenTemplates that the user may invoke. It is also
-available directly to end-users in the form of a built-in GenTemplate,
-which appears under the name &#8220;Swagger [Normalized YAML]&#8221; in the
-GenTarget Wizard.</p>
+by all Swagger GenTemplates. You can also use it directly as its own
+GenTemplate, named &#8220;Swagger [Normalized YAML]&#8221; in the GenTarget
+Wizard.</p>
 </div>
 <div class="paragraph">
-<p>The primary function of the normalizer is to render a multi-file Swagger spec as a functionally
-equivalent single-file spec. In this way it can simplify the use of other tools and libraries in the
-evolving Swagger ecosystem, where external references are not always handled consistently.</p>
+<p>The primary function of the normalizer is to render a multi-file
+Swagger spec as a functionally equivalent single-file spec. In this
+way it can simplify the use of other tools and libraries in the
+evolving Swagger ecosystem, where external references are not always
+handled consistently.</p>
 </div>
 <div class="paragraph">
 <p>Additionally, the normalizer can perform other transformations of the
 Swagger spec, which may be helpful for some circumstances, especially
 when feeding the spec to downstream systems.</p>
-</div>
-<div class="paragraph">
-<p>The normalizer is not yet avaailable in an externally usable Java
-library, but we intend to make it so in the future. If this is of
-immediate interest to you, please let us know so that we can
-prioritize the work appropriately.</p>
 </div>
 </div>
 </div>
@@ -345,42 +340,73 @@ in the GenTarget folder.</p>
 references and leave you with a single-file Swagger Spec. The other
 things it may do depend on options, described below.</p>
 </div>
+<div class="sect2">
+<h3 id="swagger-references">Swagger References</h3>
 <div class="paragraph">
-<p>The normalizer treats every external reference it encounters in one of
-two ways:</p>
+<p>Here&#8217;s an example of what a typical <em>reference</em> might look like in a
+Swagger spec:</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Swagger References</dt>
-<dd>
-<p>If the reference is one of the approved Swagger
-references - i.e. its URI fragment begins with <code>#/paths/</code> or
-<code>#/parameters/</code> or <code>#/responses/</code> or <code>#/definitions/</code> - the
-non-fragment portion of the reference must be a URI from which a
-complete, valid Swagger spec may be obtained. The fragment appearing
-in the reference is then used as a JSON Pointer to address a path,
-parameter, response, or definition appearing in that spec.</p>
-<div class="paragraph">
-<p>The treatment of this reference depends on options that are in effect.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>      responses:
+        200:
+          description: Default Response
+	  schema:
+	    $ref: "#/definitions/Pet"</code></pre>
 </div>
-</dd>
-<dt class="hdlist1">Fragment References</dt>
-<dd>
-<p>In all other cases, the non-fragment portion of
-the reference must refer to a YAML or JSON document, and the fragment,
-if present, is used as a JSON Pointer to refer to a value contained in
-that document. (If there is no fragment in the reference string, then
-the reference is to the document as a whole).</p>
-<div class="paragraph">
-<p>The normalizer always replaces the original reference object with the
-resolved value in the case of fragment references.</p>
-</div>
-</dd>
-</dl>
 </div>
 <div class="paragraph">
-<p>In the above situations, if the reference turns out to be unresolvable
-for any reason, it is left as-is in the normalized output.</p>
+<p>This is part of the definition of an operation whose normal response
+will contain data about a pet. That information will be structured
+according to a schema named <code>Pet</code> defined elsewhere in this same
+Swagger spec, in the <code>definitions</code> section of the spec.</p>
+</div>
+<div class="paragraph">
+<p>The reference itself appears as the value of the <code>schema</code> property in
+the response. That property could appear with an "in-line" schema
+definition, but in this case the designer has opted to define the
+schema elsewhere and reference it here by name.</p>
+</div>
+<div class="paragraph">
+<p>If the definition of the <code>Pet</code> schema physically appeared in some
+other Swagger spec, the reference would need to include a URL to
+retrieve that spec, with a fragment identical to the reference string
+shown above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>      responses:
+        200:
+          description: Default Response
+	  schema:
+	    $ref: "http://models.example.com/petstore-schemas.yaml#/definitions/Pet"</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Swagger&#8217;s <code>$ref</code> syntax conforms to a separate standard known as
+"JSON Reference." That standard is available
+<a href="https://tools.ietf.org/html/draft-pbryan-zyp-json-ref-03">here</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="what-the-normalizer-does-with-references">What the Normalizer Does With References</h3>
+<div class="paragraph">
+<p>References in a Swagger spec should all be of the variety specifically
+endorsed by the <a href="http://swagger.io/specification">Swagger
+Specification</a>, namely those with URI fragments that begin with
+<code>#/paths/</code> or <code>#/parameters/</code> or <code>#/responses/</code> or
+<code>#/definitions/</code>. We&#8217;ll call those <em>Swagger references</em>. All other
+references will be called <em>fragment references</em>. Swagger Normalizer
+does not treat these two varieties of reference identically.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -389,21 +415,31 @@ for any reason, it is left as-is in the normalized output.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Fragment references are not permitted in a fully compliant
-Swagger spec. Their use is not recommended.
+Fragment references are not officially allowed in Swagger
+specs, but some tooling permits their use, and there are, confusingly,
+posted examples and tutorials from Swagger project contributors that
+feature them.
 </td>
 </tr>
 </table>
 </div>
-<div class="sidebarblock">
+<div class="exampleblock">
 <div class="content">
-<div class="paragraph">
-<p><strong>Valid Swagger:</strong> A valid Swagger spec, as required for Swagger references, must
-include: (1) a string-valued <code>swagger</code> property (value should be
-<code>2.0</code>); (2) an object-valued <code>info</code> property that includes (3) a
-string-valued <code>title</code> property and (4) a string-valued <code>version</code>
-property; and an object-valued <code>paths</code> object, which may be empty
-(<code>{}</code>). A minimal compliant Swagger spec might look like this:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Note</dt>
+<dd>
+<p>The document identified by the pre-fragment portion of an
+external Swagger reference <em>must</em> be a valid Swagger spec. At a
+minimum this means that it must include: (1) a string-valued <code>swagger</code>
+property whose value is <code>2.0</code>; (2) an object-valued <code>info</code> property
+that includes (3) a string-valued <code>title</code> property and (4) a
+string-valued <code>version</code> property; and an object-valued <code>paths</code> object,
+which may be empty (<code>{}</code>). A minimal compliant Swagger spec
+<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup>
+might look like this:</p>
+</dd>
+</dl>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -417,40 +453,91 @@ paths: {}</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="reference-localization-and-inlining">Reference Localization and Inlining</h3>
 <div class="paragraph">
-<p>As mentioned above, fragment references are always replaced by the
-referenced content. We call this <em>inlining</em>.</p>
+<p>For any given reference, there are two things that the normalizer
+might do to the reference:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Inline</dt>
+<dd>
+<p>In this case, the normalizer retrieves the referenced value
+(e.g. the <code>Pet</code> schema definition object) and replaces the reference
+itself with that value.</p>
+</dd>
+<dt class="hdlist1">Localize</dt>
+<dd>
+<p>In this case, the normalizer first adds the referenced
+object to the single-file schema that it is creating, if it is not
+already present, and then replaces the reference with a local
+reference to that object. So in the external reference example shown
+above, the <code>Pet</code> schema definition would appear directly in the
+Swagger spec produced by the normalizer, and references that were
+formerly external references would become local references.</p>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
-<p>Swagger references are sometimes, but not always, inlined, depending
-options in effect. The other possibility is <em>localization</em>.</p>
-</div>
-<div class="paragraph">
-<p>When a Swagger reference is inlined, the original reference is
-replaced with the referenced content, just as for fragment
-references.</p>
-</div>
-<div class="paragraph">
-<p>When a Swagger reference is localized, the referenced object is
-incorporated into the normalized spec as a local object, and the
-original external reference is transformed into a local reference.</p>
+<p>The normalizer <em>always</em> inlines fragment references. Any given Swagger
+reference may be inlined or localized, depending on options in effect.</p>
 </div>
 <div class="sect3">
 <h4 id="name-collisions">Name Collisions</h4>
 <div class="paragraph">
 <p>Localization of a Swagger reference may lead to a name
-collision. For example, a Swagger spec with a local definition named
-<code>Foo</code> might include an external reference to a definition, also named
-<code>Foo</code>, appearing in an extenal spec. In this case, the localized
-version of that second definition named <code>Foo</code> will be named <code>Foo_1</code> in
-the normalized spec. A third such definition would be named <code>Foo_2</code>,
-and so on.</p>
+collision. For example, imagine the the following excerpts from two
+Swagger specs:</p>
+</div>
+<div class="listingblock">
+<div class="title">main.yaml</div>
+<div class="content">
+<pre class="highlight nowrap"><code>defintions:
+  Address:
+    description: An address given by a speaker
+    type: object
+    properties:
+      speaker:
+         $ref: "#/definitions/Speaker"
+      title:
+        type: string
+      ...
+  Speaker:
+    name:
+       type: string
+    address:
+      $ref: "external.yaml#/definitions/Address"
+    ...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">external.yaml</div>
+<div class="content">
+<pre class="highlight nowrap"><code>defintions:
+  Address:
+    description: A postal address
+    type: object
+    properties:
+      street:
+        type: string
+      ...
+  PhoneInfo:
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, a Swagger spec with a local definition named
+<code>Pet</code> might include an external reference to a definition, also named
+<code>Pet</code>, appearing in an extenal spec. In this case, the localized
+version of that second definition named <code>Pet</code> will be named <code>Pet_1</code> in
+the normalized spec. A third such definition referenced from some
+other external spec, would be named <code>Pet_2</code>, and so on.</p>
 </div>
 <div class="paragraph">
 <p>Renaming is done only where necessary due to a conflict, and the names
-appearing in the top-level spec are never modified.</p>
+appearing in the top-level spec are always preserved as-is: if there
+is a colliding externally referenced object that needs to be
+localized, that object will be renamed, not the local object with
+which it collided.</p>
 </div>
 </div>
 <div class="sect3">
@@ -535,7 +622,7 @@ would be equivalent to <code>$ref: #/definitions/Pet</code>.</p>
 specification, they are still processed by some existing
 tools. Enabling this option will cause the normalizer to rewrite
 simple references to fully compliant internal
-references.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
+references.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
 </div>
 </dd>
 <dt class="hdlist1">CREATE_DEF_TITLES</dt>
@@ -579,7 +666,7 @@ values. This forces a great deal of null-checking in Java code that
 processes parsed Swagger specs. This option causes such null values
 for either array-valued or object-valued properties to be replaced
 with empty arrays and objects, respectively, where doing so would not
-alter the meaning of the spec.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
+alter the meaning of the spec.<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup></p>
 </dd>
 <dt class="hdlist1">FIX_MISSING_TYPES</dt>
 <dd>
@@ -647,10 +734,13 @@ options implied by this option include all those listed above for
 <div id="footnotes">
 <hr>
 <div class="footnote" id="_footnote_1">
-<a href="#_footnoteref_1">1</a>. Simple reference strings are recognized only if they start with an alphabetic character or &#8220;_&#8221; and consist solely of alpha-numeric characters and &#8220;_&#8221;.
+<a href="#_footnoteref_1">1</a>. The RepreZen API Studio New Model Wizard offers a "Minimal" option that will create a (nearly) minimal Swagger spec as a starting point.
 </div>
 <div class="footnote" id="_footnote_2">
-<a href="#_footnoteref_2">2</a>. An example of where such replacement would chnage the spec is the <code>consumes</code> and <code>produces</code> arrays in operation definitions. For these, an empty array would prevent inheriting the corresponding global defaults.
+<a href="#_footnoteref_2">2</a>. Simple reference strings are recognized only if they start with an alphabetic character or &#8220;_&#8221; and consist solely of alpha-numeric characters and &#8220;_&#8221;.
+</div>
+<div class="footnote" id="_footnote_3">
+<a href="#_footnoteref_3">3</a>. An example of where such replacement would chnage the spec is the <code>consumes</code> and <code>produces</code> arrays in operation definitions. For these, an empty array would prevent inheriting the corresponding global defaults.
 </div>
 </div>
 	</div>
