@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Using the Swagger Normalizer GenTemplate</title>
+  <meta name="description" content="">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>  
+
+  <!-- add after bootstrap.min.css -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.css">
+  <!-- add after bootstrap.min.js -->
+  <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.js"></script>
+
+  <link rel="stylesheet" href="/css/asciidoc.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="canonical" href="http://reprezen.github.io/swagger_normalizer/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/feed.xml">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
+
+  <link rel="stylesheet" href="/css/misc.css">
+  <script src="/js/misc.js"></script>
+
+</head>
+
+  <body data-spy="scroll" data-targets="#toc">
+    <div class="container">
+      <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="/images/reprezen-logo.png"><span class="hidden-xs">&nbsp;Documentation</span></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+  
+  
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Core Docs <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="http://rapid-api.org/rapid-ml/spec/current/desktop/" target="_blank">RAPID-ML Language Specification</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/learning_rapid_ml/" target="_blank">Learning RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf" target="_blank">RepreZen API Studio Reference Card</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Code Gen <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_intro/" target="_self">Introduction</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_swagger_codegen/" target="_self">Using Swagger Codegen in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_custom_swagger_gentemplate/" target="_self">Creating a Custom Swagger GenTemplate</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_sharing/" target="_self">Sharing GenTemplates</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Swagger Features <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="/swagger_normalizer/" target="_self">Swagger Normalizer</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Training Videos <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/channel/UCNwqDgngCot722zwHse5UTg" target="_blank">RepreZen YouTube Channel</a></li>
+      
+      
+      
+      
+      
+      
+      <li class="divider" role="separator"></li>
+      
+      
+      
+      
+      
+      
+      <li class="video-series"><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Play Series: Working with RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&index=1&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Introducing RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=UsrsyEVO914&index=2&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RepreZen API Studio & Swagger</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=KX_tHp_KQkE&index=3&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Editing Swagger-OpenAPI in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=sSIX-A4ru7E&index=4&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Test-drive your Swagger-OpenAPI model in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=5&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=6&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=7&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class="divider" role="separator"></li>
+      
+      
+      
+      
+      
+      
+      <li class="video-series"><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Play Series: RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=1&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=2&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=3&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=wYimccfMbAo&index=4&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Introducing the RAPID-ML Ready! API Plugin</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+</ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+      <div class="row">
+	<div class="col-sm-10">
+	  <h1>Using the Swagger Normalizer GenTemplate</h1>
+	  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Swagger Normalizer is a core component of the Swagger Multi-File
+Support in RepreZen API Studio, and as such it is used by each of the three &#8220;live&#8221;
+views - Documentation View, Diagram View, and Swagger UI View - that
+appear by default in the right-hand pane of the RepreZen API Studio GUI, as well as
+by all Swagger GenTemplates. You can also use it directly as its own
+GenTemplate, named &#8220;Swagger [Normalized YAML]&#8221; in the GenTarget
+Wizard.</p>
+</div>
+<div class="paragraph">
+<p>The primary function of the normalizer is to render a multi-file
+Swagger spec as a functionally equivalent single-file spec. In this
+way it can simplify the use of other tools and libraries in the
+evolving Swagger ecosystem, where external references are not always
+handled consistently.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, the normalizer can perform other transformations of the
+Swagger spec, which may be helpful for some circumstances, especially
+when feeding the spec to downstream systems.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="basic-use">Basic Use</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Normalizer is used like any other Swagger GenTemplate:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a GenTarget (a <code>.gen</code> file) in your model folder, linking
+your Swagger model file (<code>.yaml</code> file) to the GenTemplate. The
+internal id of this GenTemplate is:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code>com.modelsolv.reprezen.gentemplates.swaggernorm.SwaggerNormalizerGenTemplate</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The name listed in the drop-down list in the GenTarget wizard is
+&#8220;Swagger [Normalized YAML].&#8221;</p>
+</div>
+</li>
+<li>
+<p>Configure the GenTarget as desired (see below).</p>
+</li>
+<li>
+<p>Execute the GenTarget</p>
+</li>
+<li>
+<p>Find the generated YAML file in the <code>generated</code> folder that appears
+in the GenTarget folder.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="multifile-processing">Multifile Processing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The one thing that the normalizer will always do is resolve external
+references and leave you with a single-file Swagger Spec. The other
+things it may do depend on options, described below.</p>
+</div>
+<div class="sect2">
+<h3 id="references-in-swagger-specs">References in Swagger Specs</h3>
+<div class="paragraph">
+<p>Here&#8217;s an example of what a typical <em>reference</em> might look like in a
+Swagger spec:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>responses:
+  200:
+    description: Default Response
+    schema:
+      $ref: "#/definitions/Pet"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is part of the definition of an operation whose normal response
+will contain data about a pet. That information will be structured
+according to a schema named <code>Pet</code> defined elsewhere in this same
+Swagger spec, in the <code>definitions</code> section of the spec.</p>
+</div>
+<div class="paragraph">
+<p>The reference itself appears as the value of the <code>schema</code> property in
+the response. That property could appear with an "in-line" schema
+definition, but in this case the designer has opted to define the
+schema elsewhere and reference it here by name. The reference itself
+takes the form of an object with a string-valued property named
+<code>$ref</code>.</p>
+</div>
+<div class="paragraph">
+<p>If the definition of the <code>Pet</code> schema physically appeared in some
+other Swagger spec, the reference would need to include a URL to
+retrieve that spec, with a fragment identical to the reference string
+shown above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>responses:
+  200:
+    description: Default Response
+    schema:
+      $ref: "http://models.example.com/petstore-schemas.yaml#/definitions/Pet"</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Swagger&#8217;s <code>$ref</code> syntax conforms to a separate standard known as
+"JSON Reference." That standard is available
+<a href="https://tools.ietf.org/html/draft-pbryan-zyp-json-ref-03">here</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="swagger-references-vs-fragment-references">Swagger References vs. Fragment References</h4>
+<div class="paragraph">
+<p>References in a Swagger spec should all be of the variety specifically
+endorsed by the <a href="http://swagger.io/specification">Swagger
+Specification</a>, namely those with URI fragments that begin with
+<code>#/paths/</code> or <code>#/parameters/</code> or <code>#/responses/</code> or
+<code>#/definitions/</code>. We&#8217;ll call those <em>Swagger references</em>. All other
+references will be called <em>fragment references</em>. Swagger Normalizer
+does not treat these two varieties of reference identically.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Fragment references are not officially allowed in Swagger
+specs, but some tooling permits their use, and there are, confusingly,
+posted examples and tutorials from Swagger project contributors and
+others that feature them.
+</td>
+</tr>
+</table>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Note</dt>
+<dd>
+<p>The document identified by the pre-fragment portion of an
+external Swagger reference <em>must</em> be a valid Swagger spec. At a
+minimum this means that it must include: (1) a string-valued <code>swagger</code>
+property whose value is <code>2.0</code>; (2) an object-valued <code>info</code> property
+that includes (3) a string-valued <code>title</code> property and (4) a
+string-valued <code>version</code> property; and an object-valued <code>paths</code> object,
+which may be empty (<code>{}</code>). A minimal compliant Swagger spec
+<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup>
+might look like this:</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>---
+swagger: "2.0"     <i class="conum" data-value="1"></i><b>(1)</b>
+info:              <i class="conum" data-value="2"></i><b>(2)</b>
+  title: My title  <i class="conum" data-value="3"></i><b>(3)</b>
+  version: "1.0"   <i class="conum" data-value="4"></i><b>(4)</b>
+paths: {}          <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="what-swagger-normalizer-does-with-references">What Swagger Normalizer Does with References</h3>
+<div class="paragraph">
+<p>When the normalizer encounters any reference, there are two ways it
+may process the reference:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Inline</dt>
+<dd>
+<p>The normalizer retrieves the referenced value (e.g. the <code>Pet</code>
+schema definition object) and replaces the reference itself with that
+value.</p>
+</dd>
+<dt class="hdlist1">Localize</dt>
+<dd>
+<p>The normalizer first adds the referenced object to the
+normalized spec that it is creating, if it is not already present, and
+then replaces the reference with a local reference to that object. So
+in the external reference example shown above, the <code>Pet</code> schema
+definition would appear directly in the Swagger spec produced by the
+normalizer, and references that were formerly external references
+would become local references.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The normalizer <em>always</em> inlines fragment references. Any given Swagger
+reference might be inlined or localized, depending on options in
+effect.</p>
+</div>
+<div class="sect3">
+<h4 id="name-collisions">Name Collisions</h4>
+<div class="paragraph">
+<p>Localization of a Swagger reference may lead to a name collision. For
+example, imagine the following excerpts from two Swagger specs:</p>
+</div>
+<div class="listingblock">
+<div class="title">main.yaml</div>
+<div class="content">
+<pre class="highlight nowrap"><code>defintions:
+  Address:
+    description: An address given by a speaker
+    type: object
+    properties:
+      speaker:
+         $ref: "external.yaml#/definitions/Person"
+      title:
+        type: string
+      ...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">external.yaml</div>
+<div class="content">
+<pre class="highlight nowrap"><code>defintions:
+  Person:
+    name:
+       type: string
+    address:
+      $ref: "#/definitions/Address"
+  Address:
+    description: A postal address
+    type: object
+    properties:
+      street:
+        type: string
+      ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The main spec is apparently describing APIs related to events where
+speakers deliver addresses. The speakers themselves are represented
+using an externally referenced <code>Person</code> schema which itself makes use
+of a locally referenced <code>Address</code> schema.</p>
+</div>
+<div class="paragraph">
+<p>In a localizing scenario, the normalized spec created by the
+normalizer would look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">main-normalized.yaml</div>
+<div class="content">
+<pre class="highlight nowrap"><code>definitions:
+  Address:
+    description: An address given by a speaker
+    type: object
+    properties:
+      speaker:
+         $ref: "#/definitions/Person"   <i class="conum" data-value="1"></i><b>(1)</b>
+      title:
+        type: string
+      ...
+  Person:
+    name:
+       type: string
+    address:
+      $ref: "#/definitions/Address_1"   <i class="conum" data-value="2"></i><b>(2)</b>
+  Address_1:
+    description: A postal address
+    type: object
+    properties:
+      street:
+        type: string
+      ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The two <code>Address</code> schemas originally in <em>main.yaml</em> and
+<em>external.yaml</em> are both needed in the normalized spec, but their
+names collide. Therefore, the schema definition originally in
+<em>external.yaml</em> is renamed to <code>Address_1</code>.</p>
+</div>
+<div class="paragraph">
+<p>All references have been adjusted as required:</p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The former external reference to the <code>Person</code> schema is now a
+local reference.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>Person</code> schema&#8217;s <code>Address</code> reference now reflects the
+renaming that occurred.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Renaming is done only where necessary due to a conflict, and the names
+appearing in the top-level spec are always preserved as-is; that is,
+if there is a colliding externally referenced object that needs to be
+localized, that object will be renamed, not the local object with
+which it collided. In the above example, the <code>Address</code> schema
+occurring in <em>main.yaml</em> will always retain its original name, forcing
+any colliding objects to be renamed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="recursive-references">Recursive References</h4>
+<div class="paragraph">
+<p>It is possible to set up recursive schema definitions in Swagger
+specs, through the use of references. For example, consider the
+following schema:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>definitions:
+  Person:
+    type: object
+    properties:
+      name:
+        type: string
+      children:
+         $ref: "#/definitions/People"  <i class="conum" data-value="1"></i><b>(1)</b>
+  People:
+    type: array
+    items:
+      $ref: "#/definitions/Person"     <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>Person</code> schema has a <code>children</code> property of type <code>People</code>,
+and</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>the <code>People</code> schema defines an array of <code>Person</code> objects.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Naively attempting to inline a reference to a <code>Person</code> object would
+lead to a never-ending expansion like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">original</div>
+<div class="content">
+<pre class="highlight nowrap"><code>matriarch:
+  $ref: "#/definitions/Person"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">inlined</div>
+<div class="content">
+<pre class="highlight nowrap"><code>matriarch:
+  type: object                 # inline Person
+  properties:
+    name:
+      type: string
+    children:
+      type: array              # inline People
+      items:
+        type: object           # inline Person
+        properties:
+          name:
+            type: string
+          children:
+            type: array        # inline People
+            items:
+               type: object    # inline Person
+               ...             # inlining never ends</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We have cut off the inlining above with an ellipsis, but in reality it
+could never stop.</p>
+</div>
+<div class="paragraph">
+<p>To handle recursive references encountered during inlining, the
+normalizer stops inlining whenever a reference is encountered that is
+fully contained within another (inlined) instance of the referenced
+object. That recursive reference is localized rather than being
+inlined.</p>
+</div>
+<div class="paragraph">
+<p>In the above example, we would end up with something like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">partially-inlined</div>
+<div class="content">
+<pre class="highlight nowrap"><code>    matriarch:
+      type: object                            <i class="conum" data-value="1"></i><b>(1)</b>
+      properties:
+	name:
+	  type: string
+	children:
+	  type: array
+	  items:
+	    $ref: "#/definitions/Person"      <i class="conum" data-value="2"></i><b>(2)</b>
+...
+definitions:
+  Person:
+    type: object
+    properties:
+      name:
+        type: string
+      children:
+        type: array
+        items:
+          $ref: "#/definitions/Person"        <i class="conum" data-value="3"></i><b>(3)</b>
+  People:
+    type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          children:
+            $ref: "#/definitions/People"      <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we see:</p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>that the top-level reference to <code>Person</code> as the type of
+the <code>matriarch</code> property was inlined;</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>that the recursive reference to <code>Person</code> encountered while
+performing this inlining has been localized;</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>the <code>Person</code> schema itself was subjected to inlining, with
+localization of its recursive reference;</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>and likewise for the <code>People</code> schema.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+For fragment references, recursive references are not currently
+permitted and will cause the normalizer to fail.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="normalizer-options">Normalizer Options</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Options are configured in the GenTarget file (the <code>.gen</code> file created
+by the GenTarget wizard). Each option can be set to either <code>true</code> or
+<code>false</code> as desired.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+All options default to <code>false</code> except <strong>USE_CODEGEN_OPTIONS</strong>,
+which defaults to <code>true</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Options are as follows:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">INLINE_ALL</dt>
+<dd>
+<p>Enable all the other INLINE options (and ignore
+individual <strong>INLINE_xxx</strong> option settings).</p>
+</dd>
+<dt class="hdlist1">INLINE_DEFS</dt>
+<dd>
+<p>Inline all schema definition references.</p>
+</dd>
+<dt class="hdlist1">INLINE_PARAMS</dt>
+<dd>
+<p>Inline all parameter references.</p>
+</dd>
+<dt class="hdlist1">INLINE_RESPONSES</dt>
+<dd>
+<p>Inline all response references.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Note that there is no <strong>INLINE_PATHS</strong> option, since inlining is
+the only meaningful handling of a path reference.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">REWRITE_SIMPLE_REFS</dt>
+<dd>
+<p>In former versions of the Swagger specification,
+reference strings were allowed to take a simple form like <code>Pet</code>. These
+would be treated as internal references based on the context in which
+the reference appears. For example, in old pet-store examples,
+references to the <code>Pet</code> schema appeared simply as <code>$ref: Pet</code> and this
+would be equivalent to <code>$ref: #/definitions/Pet</code>.</p>
+<div class="paragraph">
+<p>While these &#8220;simple references&#8221; are no longer supported by the Swagger
+specification, they are still processed by some existing
+tools. Enabling this option will cause the normalizer to rewrite
+simple references to fully compliant internal
+references.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
+</div>
+</dd>
+<dt class="hdlist1">CREATE_DEF_TITLES</dt>
+<dd>
+<p>This option causes the normalizer to add <code>title</code>
+properties to definitions that do not already have them. The title for
+such a definition is set to its property name in the <code>definitions</code>
+object of its containing Swagger spec. This is particularly helpful
+when name collisions occur during localization, as the titles then
+reflect the original names of the definitions, prior to renaming.</p>
+</dd>
+<dt class="hdlist1">HOIST_MEDIA_TYPES</dt>
+<dd>
+<p>This option causes the normalizer to copy
+top-level <code>consumes</code> and <code>produces</code> property values into all
+operations that do not supply their own values. The top-level lists
+are removed from the normalized spec.</p>
+</dd>
+<dt class="hdlist1">HOIST_PATH_PARAMETERS</dt>
+<dd>
+<p>This option causes parameters defined at
+path-level to be copied into all that path&#8217;s operations, except where
+the operation directly defines a parameter with the same <code>name</code> and
+<code>in</code> values. The path-level parameter definitions are removed from the
+normalized spec.</p>
+</dd>
+<dt class="hdlist1">PRUNE_UNREFED_OBJECTS</dt>
+<dd>
+<p>If the normalized spec defines at least one
+path object, this option causes all non-path objects that are not
+reachable through reference chains starting in path objects to be
+removed. When inlining options are in effect, this means that inlined
+objects will be removed as free-standing objects, except in the case
+of recursion. This option has no effect in the absence of path
+objects, since the result would always be an empty spec.</p>
+</dd>
+<dt class="hdlist1">INSTANTIATE_NULL_COLLECTIONS</dt>
+<dd>
+<p>There are many optional properties in
+the Swagger specification, and the Swagger Java parser creates
+structures in which omitted properties generally appear with <code>null</code>
+values. This forces a great deal of null-checking in Java code that
+processes parsed Swagger specs. The <strong>INSTANTIATE_NULL_COLLECTIONS</strong>
+option causes such null values for either array-valued or
+object-valued properties to be replaced with empty arrays and objects,
+respectively, where doing so would not alter the meaning of the
+spec.<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup></p>
+</dd>
+<dt class="hdlist1">FIX_MISSING_TYPES</dt>
+<dd>
+<p>The Swagger Java parser accepts Swagger specs in
+which some object schemas are missing their <code>type</code> property. This is
+allowed when the schema contains either a <code>properties</code> or
+<code>additionalProperties</code> property. This option causes the normalizer to
+fill in <code>type: object</code> in these cases.</p>
+</dd>
+<dt class="hdlist1">USE_CODEGEN_OPTIONS</dt>
+<dd>
+<p>Enabling this option causes the overall options
+set to be configured as they would be for a normal GenTarget
+execution. This option, unlike all other options, defaults to <code>true</code>.</p>
+<div class="paragraph">
+<p>The options implied by this option include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>REWRITE_SIMPLE_REFS</strong></p>
+</li>
+<li>
+<p><strong>INSTANTIATE_NULL_COLLECTIONS</strong></p>
+</li>
+<li>
+<p><strong>INLINE_PARAMS</strong></p>
+</li>
+<li>
+<p><strong>INLINE_REPSONSES</strong></p>
+</li>
+<li>
+<p><strong>HOIST_PATH_PARMS</strong></p>
+</li>
+<li>
+<p><strong>FIX_MISSING_TYPES</strong></p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">USE_DOC_OPTIONS</dt>
+<dd>
+<p>Enabling this option causes the overall options set
+to be configured as they would be for the Live Documentation view. The
+options implied by this option include all those listed above for
+<strong>USE_CODEGEN_OPTIONS</strong>, and also:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>CREATE_DEF_TITLES</strong></p>
+</li>
+<li>
+<p><strong>HOIST_MEDIA_TYPES</strong></p>
+</li>
+<li>
+<p><strong>PRUNE_UNREFED_OBJECTS</strong></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnote_1">
+<a href="#_footnoteref_1">1</a>. The RepreZen API Studio New Model Wizard offers a "Minimal" option that will create a (nearly) minimal Swagger spec as a starting point.
+</div>
+<div class="footnote" id="_footnote_2">
+<a href="#_footnoteref_2">2</a>. Simple reference strings are recognized only if they start with an alphabetic character or &#8220;_&#8221; and consist solely of alpha-numeric characters and &#8220;_&#8221;.
+</div>
+<div class="footnote" id="_footnote_3">
+<a href="#_footnoteref_3">3</a>. An example of where such replacement would change the spec is the <code>consumes</code> and <code>produces</code> arrays in operation definitions. For these, an empty array would prevent inheriting the corresponding global defaults, while a null value would not.
+</div>
+</div>
+	</div>
+	<div class="col-sm-2 ">
+	  <nav id="sidetoc" data-spy="affix" data-toggle="toc" class="hidden-xs"></nav>
+	</div>
+      </div>
+      <div class="footer">
+  &copy; 2016 ModelSolv, Inc. All rights reserved.
+</div>
+
+    </div>
+  </body>
+</html>

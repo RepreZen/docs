@@ -62,7 +62,8 @@ function copyrepo() {
     git archive $(git rev-parse @) | tar xCfp "/tmp/git/$repo" -
     (
 	cd "/tmp/git/$repo"
-	echo "/$repo" > data/baseurl
+	echo "/$repo" > _data/baseurl.yml
+	rm -f CNAME
 	jekyll build
 	git add .
 	git commit -m 'site copy'
