@@ -367,7 +367,7 @@ the response. That property could appear with an "in-line" schema
 definition, but in this case the designer has opted to define the
 schema elsewhere and reference it here by name. The reference itself
 takes the form of an object with a string-valued property named
-<code>$ref</code>.</p>
+<code>$ref</code>. <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>If the definition of the <code>Pet</code> schema physically appeared in some
@@ -437,7 +437,7 @@ property whose value is <code>2.0</code>; (2) an object-valued <code>info</code>
 that includes (3) a string-valued <code>title</code> property and (4) a
 string-valued <code>version</code> property; and an object-valued <code>paths</code> object,
 which may be empty (<code>{}</code>). A minimal compliant Swagger spec
-<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup>
+<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup>
 might look like this:</p>
 </dd>
 </dl>
@@ -757,25 +757,103 @@ permitted and will cause the normalizer to fail.
 </div>
 </div>
 <div class="sect1">
+<h2 id="object-retention">Object Retention</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some of the normalizer options pertain to <em>object retention policy</em>:
+rules that decide which objects from the multifile spec will appear in
+the normalized output.</p>
+</div>
+<div class="paragraph">
+<p>The default retention policy is as follows:
+* All objects that appear in the top-level model file are retained.
+* All localized objects are retained.</p>
+</div>
+<div class="paragraph">
+<p>Currently, there are two options that affect retention policy:</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">RETENTION_SCOPE</dt>
+<dd>
+<p>Define the set of files from which objects are
+eligible for retention. This option&#8217;s value is a list of strings, each
+of which may be any of the following:</p>
+</dd>
+</dl>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+.TOP
+</td>
+<td class="hdlist2">
+<p>Objects appearing in the top-level model file are in scope.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+.ALL
+</td>
+<td class="hdlist2">
+<p>Objects appearing in the top-level model file, and any other
+model file that is reachable from the top-level model file via a
+chain of references, are all in scope.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<em>some URL</em>
+</td>
+<td class="hdlist2">
+<p>The model file identified by the URL is in scope, <em>even if
+that file is not reachable from the top-level file</em>. This is
+particularly helpful if your model includes <em>allOf</em> subtypes. If you
+collect all the subtypes in a separate file, you may find that none
+of them are actually referenced from elsewhere in your
+schema. Rather, each one references one or more supertypes, which
+may be referenced from your model. Adding such a model file to the
+retention scope directly ensures that the subtype schemas will
+appear in the normalized spec. <sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup></p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The default retention scope is <code>[".TOP"]</code>.</p>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">DROP_UNREACHABLE_OBJECTS</dt>
+<dd>
+<p>Indicates that if an object is not
+reachable by reference chain from a path in the top-level model file,
+it must not be retained - even if it came from the top-level model
+file. However, if the normalized spec contains no paths, this option&#8217;s
+effect is canceled.</p>
+<div class="paragraph">
+<p>When <strong>DROP_UNREACHABLE_OBEJCTS</strong> is in effect (its value is <em>true</em>, and
+the model has at least one path), it effectively forces the retention
+scope to its default of <code>[".TOP"]</code>, since objects in the declared
+scope but not in the default scope are provably unreachable.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="normalizer-options">Normalizer Options</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Options are configured in the GenTarget file (the <code>.gen</code> file created
-by the GenTarget wizard). Each option can be set to either <code>true</code> or
-<code>false</code> as desired.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-All options default to <code>false</code> except <strong>USE_CODEGEN_OPTIONS</strong>,
-which defaults to <code>true</code>.
-</td>
-</tr>
-</table>
+by the GenTarget wizard). Each option can be set to a value. Most
+options can be either <em>true</em> or <em>false</em>.</p>
 </div>
 <div class="paragraph">
 <p>Options are as follows:</p>
@@ -786,18 +864,30 @@ which defaults to <code>true</code>.
 <dd>
 <p>Enable all the other INLINE options (and ignore
 individual <strong>INLINE_xxx</strong> option settings).</p>
+<div class="paragraph">
+<p>Default: <em>false</em></p>
+</div>
 </dd>
 <dt class="hdlist1">INLINE_DEFS</dt>
 <dd>
 <p>Inline all schema definition references.</p>
+<div class="paragraph">
+<p>Default: <em>false</em></p>
+</div>
 </dd>
 <dt class="hdlist1">INLINE_PARAMS</dt>
 <dd>
 <p>Inline all parameter references.</p>
+<div class="paragraph">
+<p>Default: <em>true</em></p>
+</div>
 </dd>
 <dt class="hdlist1">INLINE_RESPONSES</dt>
 <dd>
 <p>Inline all response references.</p>
+<div class="paragraph">
+<p>Default: <em>true</em></p>
+</div>
 </dd>
 </dl>
 </div>
@@ -829,7 +919,10 @@ would be equivalent to <code>$ref: #/definitions/Pet</code>.</p>
 specification, they are still processed by some existing
 tools. Enabling this option will cause the normalizer to rewrite
 simple references to fully compliant internal
-references.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
+references.<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup></p>
+</div>
+<div class="paragraph">
+<p>Default: <em>true</em></p>
 </div>
 </dd>
 <dt class="hdlist1">CREATE_DEF_TITLES</dt>
@@ -840,6 +933,9 @@ such a definition is set to its property name in the <code>definitions</code>
 object of its containing Swagger spec. This is particularly helpful
 when name collisions occur during localization, as the titles then
 reflect the original names of the definitions, prior to renaming.</p>
+<div class="paragraph">
+<p>Default: <em>false</em></p>
+</div>
 </dd>
 <dt class="hdlist1">HOIST_MEDIA_TYPES</dt>
 <dd>
@@ -847,6 +943,9 @@ reflect the original names of the definitions, prior to renaming.</p>
 top-level <code>consumes</code> and <code>produces</code> property values into all
 operations that do not supply their own values. The top-level lists
 are removed from the normalized spec.</p>
+<div class="paragraph">
+<p>Default: <em>true</em></p>
+</div>
 </dd>
 <dt class="hdlist1">HOIST_PATH_PARAMETERS</dt>
 <dd>
@@ -855,8 +954,20 @@ path-level to be copied into all that path&#8217;s operations, except where
 the operation directly defines a parameter with the same <code>name</code> and
 <code>in</code> values. The path-level parameter definitions are removed from the
 normalized spec.</p>
+<div class="paragraph">
+<p>Default: <em>true</em></p>
+</div>
 </dd>
-<dt class="hdlist1">PRUNE_UNREFED_OBJECTS</dt>
+<dt class="hdlist1">HOIST_SECURITY_REQUIREMENTS</dt>
+<dd>
+<p>This option causes security requirements
+appearing at top-level to be copied to all operations that do not
+define their own security requirements.</p>
+<div class="paragraph">
+<p>Default: <em>true</em></p>
+</div>
+</dd>
+<dt class="hdlist1">DROP_UNREACHABLE_OBJECTS</dt>
 <dd>
 <p>If the normalized spec defines at least one
 path object, this option causes all non-path objects that are not
@@ -865,6 +976,9 @@ removed. When inlining options are in effect, this means that inlined
 objects will be removed as free-standing objects, except in the case
 of recursion. This option has no effect in the absence of path
 objects, since the result would always be an empty spec.</p>
+<div class="paragraph">
+<p>Default: <em>false</em></p>
+</div>
 </dd>
 <dt class="hdlist1">INSTANTIATE_NULL_COLLECTIONS</dt>
 <dd>
@@ -876,7 +990,10 @@ processes parsed Swagger specs. The <strong>INSTANTIATE_NULL_COLLECTIONS</strong
 option causes such null values for either array-valued or
 object-valued properties to be replaced with empty arrays and objects,
 respectively, where doing so would not alter the meaning of the
-spec.<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup></p>
+spec.<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</sup></p>
+<div class="paragraph">
+<p>Default: <em>true</em></p>
+</div>
 </dd>
 <dt class="hdlist1">FIX_MISSING_TYPES</dt>
 <dd>
@@ -885,72 +1002,78 @@ which some object schemas are missing their <code>type</code> property. This is
 allowed when the schema contains either a <code>properties</code> or
 <code>additionalProperties</code> property. This option causes the normalizer to
 fill in <code>type: object</code> in these cases.</p>
-</dd>
-<dt class="hdlist1">USE_CODEGEN_OPTIONS</dt>
-<dd>
-<p>Enabling this option causes the overall options
-set to be configured as they would be for a normal GenTarget
-execution. This option, unlike all other options, defaults to <code>true</code>.</p>
 <div class="paragraph">
-<p>The options implied by this option include:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>REWRITE_SIMPLE_REFS</strong></p>
-</li>
-<li>
-<p><strong>INSTANTIATE_NULL_COLLECTIONS</strong></p>
-</li>
-<li>
-<p><strong>INLINE_PARAMS</strong></p>
-</li>
-<li>
-<p><strong>INLINE_REPSONSES</strong></p>
-</li>
-<li>
-<p><strong>HOIST_PATH_PARMS</strong></p>
-</li>
-<li>
-<p><strong>FIX_MISSING_TYPES</strong></p>
-</li>
-</ul>
+<p>Default: <em>true</em></p>
 </div>
 </dd>
-<dt class="hdlist1">USE_DOC_OPTIONS</dt>
+<dt class="hdlist1">RETENTION_SCOPE</dt>
 <dd>
-<p>Enabling this option causes the overall options set
-to be configured as they would be for the Live Documentation view. The
-options implied by this option include all those listed above for
-<strong>USE_CODEGEN_OPTIONS</strong>, and also:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>CREATE_DEF_TITLES</strong></p>
-</li>
-<li>
-<p><strong>HOIST_MEDIA_TYPES</strong></p>
-</li>
-<li>
-<p><strong>PRUNE_UNREFED_OBJECTS</strong></p>
-</li>
-</ul>
+<p>A list of strings that identify model files whose
+objects may appear in the normalized spec. Objects that are localized -
+either by policy or to handle recursive inlining - are always
+retained, regardless of retention scope. Objects that appear in
+in-scope model files are also retained, unless retention is canceled
+by <strong>DROP_UNREACHABLE_OBJECTS</strong> or some future drop policy option.</p>
+<div class="paragraph">
+<p>Allowed values include:</p>
 </div>
 </dd>
 </dl>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+.TOP
+</td>
+<td class="hdlist2">
+<p>The top-level model file is in scope.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+.ALL
+</td>
+<td class="hdlist2">
+<p>The top-level model file, and any file containing an object
+reachable from a top-level path, are all in scope.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<em>some URL</em>
+</td>
+<td class="hdlist2">
+<p>The addressed file is in scope.</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Default: [".TOP"]</p>
 </div>
 </div>
 </div>
 <div id="footnotes">
 <hr>
 <div class="footnote" id="_footnote_1">
-<a href="#_footnoteref_1">1</a>. The RepreZen API Studio New Model Wizard offers a "Minimal" option that will create a (nearly) minimal Swagger spec as a starting point.
+<a href="#_footnoteref_1">1</a>. Local references like this one - that is references to an object in the same file - always start with a pound sign: "#". This happens to be the comment character in YAML syntax, so a common error is to omit quotes around the reference string. This will have the same effect as an empty string, which can lead to a variety of problems with consumers of the model. Be careful to always use quotes around your reference strings!
 </div>
 <div class="footnote" id="_footnote_2">
-<a href="#_footnoteref_2">2</a>. Simple reference strings are recognized only if they start with an alphabetic character or &#8220;_&#8221; and consist solely of alpha-numeric characters and &#8220;_&#8221;.
+<a href="#_footnoteref_2">2</a>. The RepreZen API Studio New Model Wizard offers a "Minimal" option that will create a (nearly) minimal Swagger spec as a starting point.
 </div>
 <div class="footnote" id="_footnote_3">
-<a href="#_footnoteref_3">3</a>. An example of where such replacement would change the spec is the <code>consumes</code> and <code>produces</code> arrays in operation definitions. For these, an empty array would prevent inheriting the corresponding global defaults, while a null value would not.
+<a href="#_footnoteref_3">3</a>. If the URL is relative, it will be interpreted relative to the top-level model file.
+</div>
+<div class="footnote" id="_footnote_4">
+<a href="#_footnoteref_4">4</a>. Simple reference strings are recognized only if they start with an alphabetic character or &#8220;_&#8221; and consist solely of alpha-numeric characters and &#8220;_&#8221;.
+</div>
+<div class="footnote" id="_footnote_5">
+<a href="#_footnoteref_5">5</a>. An example of where such replacement would change the spec is the <code>consumes</code> and <code>produces</code> arrays in operation definitions. For these, an empty array would prevent inheriting the corresponding global defaults, while a null value would not.
 </div>
 </div>
 	</div>

@@ -80,7 +80,13 @@ the response. That property could appear with an "in-line" schema
 definition, but in this case the designer has opted to define the
 schema elsewhere and reference it here by name. The reference itself
 takes the form of an object with a string-valued property named
-`$ref`.
+`$ref`. footnote:[Local references like this one - that is references
+to an object in the same file - always start with a pound sign:
+"#". This happens to be the comment character in YAML syntax, so a
+common error is to omit quotes around the reference string. This will
+have the same effect as an empty string, which can lead to a variety
+of problems with consumers of the model. Be careful to always use
+quotes around your reference strings!]
 
 If the definition of the `Pet` schema physically appeared in some
 other Swagger spec, the reference would need to include a URL to
@@ -366,25 +372,79 @@ localization of its recursive reference;
 WARNING: For fragment references, recursive references are not currently
 permitted and will cause the normalizer to fail.
 
+== Object Retention
+
+Some of the normalizer options pertain to _object retention policy_:
+rules that decide which objects from the multifile spec will appear in
+the normalized output.
+
+The default retention policy is as follows:
+* All objects that appear in the top-level model file are retained.
+* All localized objects are retained.
+
+Currently, there are two options that affect retention policy:
+
+--
+RETENTION_SCOPE:: Define the set of files from which objects are
+eligible for retention. This option's value is a list of strings, each
+of which may be any of the following:
+
+[horizontal]
+ .TOP::: Objects appearing in the top-level model file are in scope.
+
+ .ALL::: Objects appearing in the top-level model file, and any other
+model file that is reachable from the top-level model file via a
+chain of references, are all in scope.
+
+ _some URL_::: The model file identified by the URL is in scope, _even if
+that file is not reachable from the top-level file_. This is
+particularly helpful if your model includes _allOf_ subtypes. If you
+collect all the subtypes in a separate file, you may find that none
+of them are actually referenced from elsewhere in your
+schema. Rather, each one references one or more supertypes, which
+may be referenced from your model. Adding such a model file to the
+retention scope directly ensures that the subtype schemas will
+appear in the normalized spec. footnote:[If the URL is relative, it
+will be interpreted relative to the top-level model file.]
+
+The default retention scope is `[".TOP"]`.
+--
+
+DROP_UNREACHABLE_OBJECTS:: Indicates that if an object is not
+reachable by reference chain from a path in the top-level model file,
+it must not be retained - even if it came from the top-level model
+file. However, if the normalized spec contains no paths, this option's
+effect is canceled.
++
+When *DROP_UNREACHABLE_OBEJCTS* is in effect (its value is _true_, and
+the model has at least one path), it effectively forces the retention
+scope to its default of `[".TOP"]`, since objects in the declared
+scope but not in the default scope are provably unreachable.
+
 == Normalizer Options
 
 Options are configured in the GenTarget file (the `.gen` file created
-by the GenTarget wizard). Each option can be set to either `true` or
-`false` as desired.
-
-TIP: All options default to `false` except *USE_CODEGEN_OPTIONS*,
-which defaults to `true`.
+by the GenTarget wizard). Each option can be set to a value. Most
+options can be either _true_ or _false_.
 
 Options are as follows:
 
 INLINE_ALL:: Enable all the other INLINE options (and ignore
 individual *INLINE_xxx* option settings).
++
+Default: _false_
 
 INLINE_DEFS:: Inline all schema definition references.
++
+Default: _false_
 
 INLINE_PARAMS:: Inline all parameter references.
++
+Default: _true_
 
 INLINE_RESPONSES:: Inline all response references.
++
+Default: _true_
 
 TIP: Note that there is no *INLINE_PATHS* option, since inlining is
 the only meaningful handling of a path reference.
@@ -403,6 +463,8 @@ simple references to fully compliant internal
 references.footnote:[Simple reference strings are recognized only
 if they start with an alphabetic character or "`\_`" and consist solely
 of alpha-numeric characters and "`_`".]
++
+Default: _true_
 
 CREATE_DEF_TITLES:: This option causes the normalizer to add `title`
 properties to definitions that do not already have them. The title for
@@ -410,25 +472,39 @@ such a definition is set to its property name in the `definitions`
 object of its containing Swagger spec. This is particularly helpful
 when name collisions occur during localization, as the titles then
 reflect the original names of the definitions, prior to renaming.
++
+Default: _false_
 
 HOIST_MEDIA_TYPES:: This option causes the normalizer to copy
 top-level `consumes` and `produces` property values into all
 operations that do not supply their own values. The top-level lists
 are removed from the normalized spec.
++
+Default: _true_
 
 HOIST_PATH_PARAMETERS:: This option causes parameters defined at
 path-level to be copied into all that path's operations, except where
 the operation directly defines a parameter with the same `name` and
 `in` values. The path-level parameter definitions are removed from the
 normalized spec.
++
+Default: _true_
 
-PRUNE_UNREFED_OBJECTS:: If the normalized spec defines at least one
+HOIST_SECURITY_REQUIREMENTS:: This option causes security requirements
+appearing at top-level to be copied to all operations that do not
+define their own security requirements.
++
+Default: _true_
+
+DROP_UNREACHABLE_OBJECTS:: If the normalized spec defines at least one
 path object, this option causes all non-path objects that are not
 reachable through reference chains starting in path objects to be
 removed. When inlining options are in effect, this means that inlined
 objects will be removed as free-standing objects, except in the case
 of recursion. This option has no effect in the absence of path
 objects, since the result would always be an empty spec.
++
+Default: _false_
 
 INSTANTIATE_NULL_COLLECTIONS:: There are many optional properties in
 the Swagger specification, and the Swagger Java parser creates
@@ -442,31 +518,30 @@ spec.footnote:[An example of where such replacement would change the
 spec is the `consumes` and `produces` arrays in operation
 definitions. For these, an empty array would prevent inheriting the
 corresponding global defaults, while a null value would not.]
++
+Default: _true_
 
 FIX_MISSING_TYPES:: The Swagger Java parser accepts Swagger specs in
 which some object schemas are missing their `type` property. This is
 allowed when the schema contains either a `properties` or
 `additionalProperties` property. This option causes the normalizer to
 fill in `type: object` in these cases.
++
+Default: _true_
 
-USE_CODEGEN_OPTIONS:: Enabling this option causes the overall options
-set to be configured as they would be for a normal GenTarget
-execution. This option, unlike all other options, defaults to `true`.
+RETENTION_SCOPE:: A list of strings that identify model files whose
+objects may appear in the normalized spec. Objects that are localized -
+either by policy or to handle recursive inlining - are always
+retained, regardless of retention scope. Objects that appear in
+in-scope model files are also retained, unless retention is canceled
+by *DROP_UNREACHABLE_OBJECTS* or some future drop policy option.
 +
-The options implied by this option include: 
-+
-* *REWRITE_SIMPLE_REFS*
-* *INSTANTIATE_NULL_COLLECTIONS*
-* *INLINE_PARAMS*
-* *INLINE_REPSONSES*
-* *HOIST_PATH_PARMS*
-* *FIX_MISSING_TYPES*
-
-USE_DOC_OPTIONS:: Enabling this option causes the overall options set
-to be configured as they would be for the Live Documentation view. The
-options implied by this option include all those listed above for
-*USE_CODEGEN_OPTIONS*, and also:
-+
-* *CREATE_DEF_TITLES*
-* *HOIST_MEDIA_TYPES*
-* *PRUNE_UNREFED_OBJECTS*
+Allowed values include:
+--
+[horizontal]
+ .TOP::: The top-level model file is in scope.
+ .ALL::: The top-level model file, and any file containing an object
+reachable from a top-level path, are all in scope.
+ _some URL_::: The addressed file is in scope.
+--
+Default: [".TOP"]
