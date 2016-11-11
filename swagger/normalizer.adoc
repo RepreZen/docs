@@ -4,6 +4,7 @@ permalink: /swagger_normalizer/
 = Using the Swagger Normalizer GenTemplate
 :imagesdir: ../images/codegen
 :linkattrs:
+:sectlinks:
 :docinfo2:
 :RAS: RepreZen API Studio 
 :RZ: RepreZen
@@ -55,7 +56,9 @@ in the GenTarget folder.
 
 The one thing that the normalizer will always do is resolve external
 references and leave you with a single-file Swagger Spec. The other
-things it may do depend on options, described below.
+things it may do depend on options, described in
+// prevent line breaking section name
+<<Normalizer Options>>.
 
 === References in Swagger Specs
 
@@ -78,15 +81,15 @@ Swagger spec, in the `definitions` section of the spec.
 The reference itself appears as the value of the `schema` property in
 the response. That property could appear with an "in-line" schema
 definition, but in this case the designer has opted to define the
-schema elsewhere and reference it here by name. The reference itself
-takes the form of an object with a string-valued property named
-`$ref`. footnote:[Local references like this one - that is references
-to an object in the same file - always start with a pound sign:
-"#". This happens to be the comment character in YAML syntax, so a
-common error is to omit quotes around the reference string. This will
-have the same effect as an empty string, which can lead to a variety
-of problems with consumers of the model. Be careful to always use
-quotes around your reference strings!]
+schema elsewhere in the file and reference it here by name. The
+reference itself takes the form of an object with a string-valued
+property named `$ref`. footnote:[Local references like this one - that
+is references to an object in the same file - always start with a
+pound sign: "#". This happens to be the comment character in YAML
+syntax, so a common error is to omit quotes around the reference
+string. This will have the same effect as an empty string, which can
+lead to a variety of problems with consumers of the model. Be careful
+to always use quotes around your reference strings!]
 
 If the definition of the `Pet` schema physically appeared in some
 other Swagger spec, the reference would need to include a URL to
@@ -104,7 +107,7 @@ responses:
 
 TIP: Swagger's `$ref` syntax conforms to a separate standard known as
 "JSON Reference." That standard is available
-https://tools.ietf.org/html/draft-pbryan-zyp-json-ref-03[here].
+https://tools.ietf.org/html/draft-pbryan-zyp-json-ref-03[here^].
 
 ==== Swagger References vs. Fragment References
 
@@ -161,8 +164,9 @@ normalizer, and references that were formerly external references
 would become local references.
 
 The normalizer _always_ inlines fragment references. Any given Swagger
-reference might be inlined or localized, depending on options in
-effect.
+reference might be inlined or localized, depending on
+// prevent line-breaking section name
+<<Normalizer Options,options>> in effect.
 
 ==== Name Collisions
 
@@ -252,7 +256,7 @@ renaming that occurred.
 Renaming is done only where necessary due to a conflict, and the names
 appearing in the top-level spec are always preserved as-is; that is,
 if there is a colliding externally referenced object that needs to be
-localized, that object will be renamed, not the local object with
+localized, that object will be renamed, not the top-level object with
 which it collided. In the above example, the `Address` schema
 occurring in _main.yaml_ will always retain its original name, forcing
 any colliding objects to be renamed.
@@ -365,12 +369,16 @@ Here we see:
 the `matriarch` property was inlined;
 <2> that the recursive reference to `Person` encountered while
 performing this inlining has been localized;
-<3> the `Person` schema itself was subjected to inlining, with
+<3> that the `Person` schema itself was subjected to inlining, with
 localization of its recursive reference;
 <4> and likewise for the `People` schema.
 
-WARNING: For fragment references, recursive references are not currently
-permitted and will cause the normalizer to fail.
+When an object is inlined without encountering a recursive reference
+(so that the object is not also localized), we say that it is _fully
+inlined_.
+
+WARNING: For fragment references, recursion is not currently permitted
+and will cause the normalizer to fail.
 
 == Object Retention
 
@@ -378,83 +386,192 @@ Some of the normalizer options pertain to _object retention policy_:
 rules that decide which objects from the multifile spec will appear in
 the normalized output.
 
-The default retention policy is as follows:
-* All objects that appear in the top-level model file are retained.
-* All localized objects are retained.
+=== The Completeness Rule
 
-Currently, there are two options that affect retention policy:
+In all cases, the normalized spec must be _complete_, in the sense
+that all references appearing in the spec resolve to objects defined
+in the spec.footnote:[The only exception to this is references that
+could not be resolved in the original spec; these will be copied as-is
+into the normalized spec.] Thus, any object that is referenced in the
+normalized spec is also retained in the normalized spec.
 
+Objects that are _fully inlined_ are not covered by the completeness
+rule and may not be retained, depending on options in effect. An
+object that is _partially inlined_ because of recursive references
+_is_ covered by completeness, since recursive references are
+localized. It is therefore covered by completeness and must be
+retained.
+
+All other retention policy is subordinate to completeness: every
+referenced object is retained, even if other retention policy would
+cause it to be dropped.
+
+=== Root Objects
+
+Completeness presupposes a starting point: some set of objects that
+are retained for other reasons. References appearing in those objects
+are processed for completeness, and then objects that are retained for
+completeness are themselves processed for completeness, and so on.
+
+We call the objects that are retained for reasons other than
+completeness _root objects_. Root objects are determined according to
+_retention policy_ and _retention scope_, as governed by
+//
+<<Normalizer Options,options>>.
+
+==== Retention Policy
+
+Retention policy is determined according to RETAIN and DROP rules
+that select and reject individual objects. An object is retained if it
+matches at least one RETAIN rule and does not match any DROP rule.
+
+Currently, there is only one RETAIN rule, which specifies which object
+types - paths, definitions, parameters, and responses - are to be
+retained. There are not currently any DROP rules implemented. We
+anticipate implementing additional RETAIN and DROP rules in the future
+to provide additional flexibility.
+
+Object-type-based retention policy is specified with the *RETAIN*
+option.
+
+=== Retention Scope
+
+Retention policy is applied only to objects that appear in files that
+are considered _in scope_ for retention. The top-level file is always
+in scope.
+
+When processing a Swagger spec, other swagger specs may be loaded in
+order to satisfy references. By default, those other specs are not in
+scope. However, if the *RETENTION_SCOPE* option is set to ALL, specs
+that are loaded solely to resolve references will also be considered
+in scope, so that other objects in those files may be retained - even
+if they are not needed for completeness.
+
+It is also possible to identify other files to be treated as
+top-level, by listing them in the *ADDITIONAL_FILES*
+option.footnote:[The only difference between these files and the
+actual top-level file has to do with object renaming. As stated
+earlier, objects appearing in the top-level spec will never be
+renamed. However, it is possible for a name collision to occur when
+loading "additional" files, and such collisions will trigger object
+renaming. Additional files are loaded immediately after the top-level
+file, in the order in which they are specified, and naming priority
+always favors the earlier-loaded files.] All such files will be loaded
+and will be in-scope for retention, regardless of whether any objects
+they contain are otherwise required for completeness. And of course,
+retained references from those files will be processed for
+completeness.
+
+[TIP]
 --
-RETENTION_SCOPE:: Define the set of files from which objects are
-eligible for retention. This option's value is a list of strings, each
-of which may be any of the following:
+One important use-case for "additional files" involves `allOf`
+schema defintions. These are commonly used to express type
+hierarchies, and in such cases it is common for a _supertype_ to be
+referenced from the top-level spec (e.g. a list of `Animal`
+objects). The _subtypes_ themselves also reference the supertype in
+their _allOf_ property (e.g. `Dog` and `Cat` both reference
+`Animal`). However, it is common for the subtypes themselves _not_ to
+be directly referenced in the Swagger spec; they are _not_ typically
+referenced by the supertype itself (`Dog` references `Animal`, but not
+vice-versa).
 
-[horizontal]
- .TOP::: Objects appearing in the top-level model file are in scope.
-
- .ALL::: Objects appearing in the top-level model file, and any other
-model file that is reachable from the top-level model file via a
-chain of references, are all in scope.
-
- _some URL_::: The model file identified by the URL is in scope, _even if
-that file is not reachable from the top-level file_. This is
-particularly helpful if your model includes _allOf_ subtypes. If you
-collect all the subtypes in a separate file, you may find that none
-of them are actually referenced from elsewhere in your
-schema. Rather, each one references one or more supertypes, which
-may be referenced from your model. Adding such a model file to the
-retention scope directly ensures that the subtype schemas will
-appear in the normalized spec. footnote:[If the URL is relative, it
-will be interpreted relative to the top-level model file.]
-
-The default retention scope is `[".TOP"]`.
+If the subtypes are defined in a separate file, that file will not be
+loaded for reference resolution, and so those subtypes will not be
+loaded--let alone retained--by the normalizer. Configuring the file as
+an "additional file" would cause the file to be loaded, and subtype
+definitions would then be eligible for retention.
 --
-
-DROP_UNREACHABLE_OBJECTS:: Indicates that if an object is not
-reachable by reference chain from a path in the top-level model file,
-it must not be retained - even if it came from the top-level model
-file. However, if the normalized spec contains no paths, this option's
-effect is canceled.
-+
-When *DROP_UNREACHABLE_OBEJCTS* is in effect (its value is _true_, and
-the model has at least one path), it effectively forces the retention
-scope to its default of `[".TOP"]`, since objects in the declared
-scope but not in the default scope are provably unreachable.
 
 == Normalizer Options
 
-Options are configured in the GenTarget file (the `.gen` file created
-by the GenTarget wizard). Each option can be set to a value. Most
-options can be either _true_ or _false_.
+When the normalizer is used through its GenTemplate ("Swagger
+[Normalized Yaml]"), options are configured in the GenTarget file --
+the `.gen` file created by the GenTarget wizard. Each option can take
+on various values, as detailed below.
 
 Options are as follows:
 
-INLINE_ALL:: Enable all the other INLINE options (and ignore
-individual *INLINE_xxx* option settings).
+INLINE :: Specify which objects are inlined by the normalizer. The
+value of this option can be:
+
+* A list of object types, drawn from DEFINITION, PARAMETER,
+  RESPONSE.footnote:[PATH is not an option because paths are always
+  inlined; local path references are disallowed in Swagger specs.]
+
+* The value ALL, meaning that all objects are inlined.
+
+* The value COMPONENT, meaning that all objects except paths are
+  inlined.footnote:[The term "component object" is used in the
+  forthcoming OpenAPI v3.0 specification to denote non-path
+  objects.]footnote:[This option is really equivalent to ALL, since
+  paths are always inlined anyway; no other treatment is sensible
+  since local path references are not allowed in a Swagger spec.]
+
+* The value NONE, meaning that no objects are inlined.
+
+RETAIN :: Specify which object types will be retained from in-scope
+files. The value of this option can be:
+
+* A list of object types, drawn from PATH, DEFINITION, PARAMETER, and
+  RESPONSE.
+
+* The value ALL, meaning that all objects are retained.
+
+* The value COMPONENT, meaning that all objects except paths are
+  retained.
+
+* The value PATH_OR_COMPONENT footnote:[This option is needed for our
+  Reprezen HTML Documentation gen target, which inlines everything by
+  default and retains only top-level paths, except when there are no
+  paths; in that case it still inlines everything, but it also retains
+  everything.], meaning that:
+
+** If the top-level spec defines at least one path, then the PATH
+  option will be in effect.
+
+** Otherwise, the COMPONENT option will be in effect.
+
+RETENTION_SCOPE :: Determines which Swagger specs are considered
+in-scope for retention rules. Value is either:
+
+* ROOTS, meaning that only the top-level file and any files specified
+  in *ADDITIONAL_FILES* will be in scope; or
+
+* ALL, meaning that files loaded in order to resolve references will
+  also be considered in scope.
+
+ADDITIONAL_FILES :: Specifies additional files that should be treated
+as top-level, and are therefore always loaded and always in-scope. The
+value is a list of file names, or more generally URLs. Each URL, if it
+is relative, is resolved based on the URL that specifies the top-level
+file.
+
+HOIST :: Enables some or all of the _hoisting_ operations that can be
+performed by the normalizer. Hoisting refers to copying certain items
+appearing in a swagger spec into the contexts in which they apply. The
+option value is a list of hoistable items, drawn from:
 +
-Default: _false_
+--
+* MEDIA_TYPE: Global `consumes` and `produces` declarations are
+  copied into all operations that do not contain their own
+  declarations.
 
-INLINE_DEFS:: Inline all schema definition references.
+* PARAMETER: Parameters defined at path-level are copied into every
+  operation appearing in the path that does not already define a
+  parameter with the same name and the same `in` value.
+
+* SECURITY_REQUIREMENT: The global security requirements array is
+  copied into every operation that does not define its own.
+--
 +
-Default: _false_
+The *HOIST* option value may also be ALL or NONE.
 
-INLINE_PARAMS:: Inline all parameter references.
-+
-Default: _true_
-
-INLINE_RESPONSES:: Inline all response references.
-+
-Default: _true_
-
-TIP: Note that there is no *INLINE_PATHS* option, since inlining is
-the only meaningful handling of a path reference.
-
-REWRITE_SIMPLE_REFS:: In former versions of the Swagger specification,
-reference strings were allowed to take a simple form like `Pet`. These
-would be treated as internal references based on the context in which
-the reference appears. For example, in old pet-store examples,
-references to the `Pet` schema appeared simply as `$ref: Pet` and this
-would be equivalent to `$ref: #/definitions/Pet`.
+REWRITE_SIMPLE_REFS :: In former versions of the Swagger
+specification, reference strings were allowed to take a simple form
+like `Pet`. These would be treated as internal references based on the
+context in which the reference appears. For example, in old pet-store
+examples, references to the `Pet` schema appeared simply as `$ref:
+Pet` and this would be equivalent to `$ref: #/definitions/Pet`.
 +
 While these "`simple references`" are no longer supported by the Swagger
 specification, they are still processed by some existing
@@ -464,49 +581,20 @@ references.footnote:[Simple reference strings are recognized only
 if they start with an alphabetic character or "`\_`" and consist solely
 of alpha-numeric characters and "`_`".]
 +
-Default: _true_
+The REWRITE_SIMPLE_REFS option value should be either _true_ or _false_.
 
-CREATE_DEF_TITLES:: This option causes the normalizer to add `title`
+CREATE_DEF_TITLES :: This option causes the normalizer to add `title`
 properties to definitions that do not already have them. The title for
 such a definition is set to its property name in the `definitions`
-object of its containing Swagger spec. This is particularly helpful
-when name collisions occur during localization, as the titles then
-reflect the original names of the definitions, prior to renaming.
+object of its containing Swagger spec.
 +
-Default: _false_
-
-HOIST_MEDIA_TYPES:: This option causes the normalizer to copy
-top-level `consumes` and `produces` property values into all
-operations that do not supply their own values. The top-level lists
-are removed from the normalized spec.
+TIP: This is particularly helpful when name collisions occur during
+localization, as the titles then reflect the original names of the
+definitions, prior to renaming.
 +
-Default: _true_
+The CREATE_DEF_TITLES option value should be either _true_ or _false_.
 
-HOIST_PATH_PARAMETERS:: This option causes parameters defined at
-path-level to be copied into all that path's operations, except where
-the operation directly defines a parameter with the same `name` and
-`in` values. The path-level parameter definitions are removed from the
-normalized spec.
-+
-Default: _true_
-
-HOIST_SECURITY_REQUIREMENTS:: This option causes security requirements
-appearing at top-level to be copied to all operations that do not
-define their own security requirements.
-+
-Default: _true_
-
-DROP_UNREACHABLE_OBJECTS:: If the normalized spec defines at least one
-path object, this option causes all non-path objects that are not
-reachable through reference chains starting in path objects to be
-removed. When inlining options are in effect, this means that inlined
-objects will be removed as free-standing objects, except in the case
-of recursion. This option has no effect in the absence of path
-objects, since the result would always be an empty spec.
-+
-Default: _false_
-
-INSTANTIATE_NULL_COLLECTIONS:: There are many optional properties in
+INSTANTIATE_NULL_COLLECTIONS :: There are many optional properties in
 the Swagger specification, and the Swagger Java parser creates
 structures in which omitted properties generally appear with `null`
 values. This forces a great deal of null-checking in Java code that
@@ -519,29 +607,52 @@ spec is the `consumes` and `produces` arrays in operation
 definitions. For these, an empty array would prevent inheriting the
 corresponding global defaults, while a null value would not.]
 +
-Default: _true_
+The INSTANTIATE_NULL_COLLECTIONS option value should be either _true_
+or _false_.
 
-FIX_MISSING_TYPES:: The Swagger Java parser accepts Swagger specs in
+FIX_MISSING_TYPES :: The Swagger Java parser accepts Swagger specs in
 which some object schemas are missing their `type` property. This is
 allowed when the schema contains either a `properties` or
-`additionalProperties` property. This option causes the normalizer to
-fill in `type: object` in these cases.
+`additionalProperties` property, and the parser treats the schema as
+if it contained `type: object`. This option causes the normalizer to
+explicitly add `type: object` in these schemas.
 +
-Default: _true_
+The FIX_MISSING_TYPES option value should be either _true_ or _false_.
 
-RETENTION_SCOPE:: A list of strings that identify model files whose
-objects may appear in the normalized spec. Objects that are localized -
-either by policy or to handle recursive inlining - are always
-retained, regardless of retention scope. Objects that appear in
-in-scope model files are also retained, unless retention is canceled
-by *DROP_UNREACHABLE_OBJECTS* or some future drop policy option.
-+
-Allowed values include:
---
-[horizontal]
- .TOP::: The top-level model file is in scope.
- .ALL::: The top-level model file, and any file containing an object
-reachable from a top-level path, are all in scope.
- _some URL_::: The addressed file is in scope.
---
-Default: [".TOP"]
+=== Option Defaults
+
+The normalizer is used in {RAS} in the following scenarios:
+
+* Loading a Swagger spec for display in one of the _live views_:
+  Diagram, Documentation, and Swagger UI.
+
+* Loading a Swagger spec for processing by a GenTemplate other than that "Swagger
+[Normalized Yaml]" GenTemplate.
+
+* Loading a Swagger spec for processing by the "Swagger [Normalized Yaml]" GenTemplate.
+
+The following table specifies the option settings that are used in each case:
+
+|===
+| Option | Documentation Live View | All Other Scenarios 
+
+| INLINE | ALL| PARAMETER, RESPONSE 
+| RETAIN | PATH_OR_COMPONENT | ALL
+| RETENTION_SCOPE | ROOTS | ROOTS
+| ADDITIONAL_FILES | _empty_ | _empty_
+| HOIST | ALL | ALL
+| REWRITE_SIMPLE_REFS | _true_ | _true_
+| CREATE_DEF_TITLES | _true_ | _false_
+| INSTANTIATE_NULL_COLLECTIONS | _true_ | _true_
+| FIX_MISSING_TYPES | _true_ | _true_
+|===
+
+Note that the Document Live View defaults differ from all the rest,
+including other live views. 
+
+There is currently no way to alter the option settings for any
+scenario except the "Swagger [Normalized Yaml]" GenTemplate, where the
+GenTarget file explicitly sets all option values. The New GenTarget
+wizard in {RAS} creates a GenTarget with option values set initially
+according to the "All Other Scenarios" column above, and you may edit
+those options as desired.
