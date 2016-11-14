@@ -17,7 +17,7 @@ areas:
     type: internal
     new_window: true
   - title: RepreZen API Studio Reference Card
-    url: https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/RepreZen%20RAPID-ML%20QRC.pdf
+    url: https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/current/RepreZen%20API%20Studio%20QRC.pdf
     type: external
 - name: Code Gen
   articles:
