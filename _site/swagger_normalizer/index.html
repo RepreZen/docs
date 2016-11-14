@@ -937,7 +937,8 @@ RESPONSE.</p>
 retained.</p>
 </li>
 <li>
-<p>The value PATH_OR_COMPONENT <sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</sup>, meaning that:</p>
+<p>The value PATH_OR_COMPONENT <sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</sup>,
+meaning that:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1122,7 +1123,7 @@ Diagram, Documentation, and Swagger UI.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INLINE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ALL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PARAMETER, RESPONSE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PARAMETER, RESPONSE</p></td>
 </tr>
 <tr>
@@ -1206,7 +1207,7 @@ those options as desired.</p>
 <a href="#_footnoteref_7">7</a>. This option is really equivalent to ALL, since paths are always inlined anyway; no other treatment is sensible since local path references are not allowed in a Swagger spec.
 </div>
 <div class="footnote" id="_footnote_8">
-<a href="#_footnoteref_8">8</a>. This option is needed for our Reprezen HTML Documentation gen target, which inlines everything by default and retains only top-level paths, except when there are no paths; in that case it still inlines everything, but it also retains everything.
+<a href="#_footnoteref_8">8</a>. This option is needed for our Reprezen HTML Documentation gen target, which inlines everything by default and retains only top-level paths, except when there are no paths; in that case it still inlines everything, but it also retains everything. Note that due to a bug in the Swagger Parser from swagger.io, inlining of definitions is <em>not</em> performed by normalizer in this case, but rather by the documentation generator itself.
 </div>
 <div class="footnote" id="_footnote_9">
 <a href="#_footnoteref_9">9</a>. Simple reference strings are recognized only if they start with an alphabetic character or &#8220;_&#8221; and consist solely of alpha-numeric characters and &#8220;_&#8221;.

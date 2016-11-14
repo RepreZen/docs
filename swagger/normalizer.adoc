@@ -524,7 +524,10 @@ files. The value of this option can be:
   Reprezen HTML Documentation gen target, which inlines everything by
   default and retains only top-level paths, except when there are no
   paths; in that case it still inlines everything, but it also retains
-  everything.], meaning that:
+  everything. Note that due to a bug in the Swagger Parser from
+  swagger.io, inlining of definitions is _not_ performed by normalizer
+  in this case, but rather by the documentation generator itself.],
+  meaning that:
 
 ** If the top-level spec defines at least one path, then the PATH
   option will be in effect.
@@ -636,7 +639,7 @@ The following table specifies the option settings that are used in each case:
 |===
 | Option | Documentation Live View | All Other Scenarios 
 
-| INLINE | ALL| PARAMETER, RESPONSE 
+| INLINE | PARAMETER, RESPONSE| PARAMETER, RESPONSE 
 | RETAIN | PATH_OR_COMPONENT | ALL
 | RETENTION_SCOPE | ROOTS | ROOTS
 | ADDITIONAL_FILES | _empty_ | _empty_
