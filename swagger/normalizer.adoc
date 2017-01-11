@@ -109,29 +109,31 @@ TIP: Swagger's `$ref` syntax conforms to a separate standard known as
 "JSON Reference." That standard is available
 https://tools.ietf.org/html/draft-pbryan-zyp-json-ref-03[here^].
 
-==== Swagger References vs. Fragment References
+==== Conforming and Non-Conforming References
 
 References in a Swagger spec should all be of the variety specifically
 endorsed by the http://swagger.io/specification[Swagger
 Specification], namely those with URI fragments that begin with
 `\#/paths/` or `#/parameters/` or `\#/responses/` or
-`#/definitions/`. We'll call those _Swagger references_. All other
-references will be called _fragment references_. Swagger Normalizer
-does not treat these two varieties of reference identically.
+`#/definitions/`. We'll call those _conforming references_. All other
+references will be called _non-conforming references_. Swagger
+Normalizer does not treat these two varieties of reference
+identically.
 
-WARNING: Fragment references are not officially allowed in Swagger
-specs, but some tooling permits their use, and there are, confusingly,
-posted examples and tutorials from Swagger project contributors and
-others that feature them.
+WARNING: Non-conforming references are not officially allowed in
+Swagger specs, but some tooling permits their use, and there are,
+confusingly, posted examples and tutorials from Swagger project
+contributors and others that feature them.
 
 ====
+
 Note:: The document identified by the pre-fragment portion of an
-external Swagger reference _must_ be a valid Swagger spec. At a
+external conforming reference _must_ be a valid Swagger spec. At a
 minimum this means that it must include: (1) a string-valued `swagger`
 property whose value is `2.0`; (2) an object-valued `info` property
 that includes (3) a string-valued `title` property and (4) a
-string-valued `version` property; and an object-valued `paths` object,
-which may be empty (`{}`). A minimal compliant Swagger spec
+string-valued `version` property; and an object-valued `paths`
+property, which may be empty (`{}`). A minimal compliant Swagger spec
 footnote:[The {RAS} New Model Wizard offers a "Minimal" option that
 will create a (nearly) minimal Swagger spec as a starting point.]
 might look like this:
@@ -163,15 +165,16 @@ definition would appear directly in the Swagger spec produced by the
 normalizer, and references that were formerly external references
 would become local references.
 
-The normalizer _always_ inlines fragment references. Any given Swagger
-reference might be inlined or localized, depending on
-// prevent line-breaking section name
+The normalizer _always_ inlines non-conforming references. Any given
+conforming reference might be inlined or localized, depending on
+// 
 <<Normalizer Options,options>> in effect.
 
 ==== Name Collisions
 
-Localization of a Swagger reference may lead to a name collision. For
-example, imagine the following excerpts from two Swagger specs:
+Localization of a conforming reference may lead to a name
+collision. For example, imagine the following excerpts from two
+Swagger specs:
 
 [source%nowrap]
 .main.yaml
@@ -377,8 +380,8 @@ When an object is inlined without encountering a recursive reference
 (so that the object is not also localized), we say that it is _fully
 inlined_.
 
-WARNING: For fragment references, recursion is not currently permitted
-and will cause the normalizer to fail.
+WARNING: For non-conforming references, recursion is not currently
+permitted and will cause the normalizer to fail.
 
 == Object Retention
 
