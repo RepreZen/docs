@@ -400,15 +400,16 @@ Swagger&#8217;s <code>$ref</code> syntax conforms to a separate standard known a
 </table>
 </div>
 <div class="sect3">
-<h4 id="swagger-references-vs-fragment-references"><a class="link" href="#swagger-references-vs-fragment-references">Swagger References vs. Fragment References</a></h4>
+<h4 id="conforming-and-non-conforming-references"><a class="link" href="#conforming-and-non-conforming-references">Conforming and Non-Conforming References</a></h4>
 <div class="paragraph">
 <p>References in a Swagger spec should all be of the variety specifically
 endorsed by the <a href="http://swagger.io/specification">Swagger
 Specification</a>, namely those with URI fragments that begin with
 <code>#/paths/</code> or <code>#/parameters/</code> or <code>#/responses/</code> or
-<code>#/definitions/</code>. We&#8217;ll call those <em>Swagger references</em>. All other
-references will be called <em>fragment references</em>. Swagger Normalizer
-does not treat these two varieties of reference identically.</p>
+<code>#/definitions/</code>. We&#8217;ll call those <em>conforming references</em>. All other
+references will be called <em>non-conforming references</em>. Swagger
+Normalizer does not treat these two varieties of reference
+identically.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -417,10 +418,10 @@ does not treat these two varieties of reference identically.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Fragment references are not officially allowed in Swagger
-specs, but some tooling permits their use, and there are, confusingly,
-posted examples and tutorials from Swagger project contributors and
-others that feature them.
+Non-conforming references are not officially allowed in
+Swagger specs, but some tooling permits their use, and there are,
+confusingly, posted examples and tutorials from Swagger project
+contributors and others that feature them.
 </td>
 </tr>
 </table>
@@ -432,12 +433,12 @@ others that feature them.
 <dt class="hdlist1">Note</dt>
 <dd>
 <p>The document identified by the pre-fragment portion of an
-external Swagger reference <em>must</em> be a valid Swagger spec. At a
+external conforming reference <em>must</em> be a valid Swagger spec. At a
 minimum this means that it must include: (1) a string-valued <code>swagger</code>
 property whose value is <code>2.0</code>; (2) an object-valued <code>info</code> property
 that includes (3) a string-valued <code>title</code> property and (4) a
-string-valued <code>version</code> property; and an object-valued <code>paths</code> object,
-which may be empty (<code>{}</code>). A minimal compliant Swagger spec
+string-valued <code>version</code> property; and an object-valued <code>paths</code>
+property, which may be empty (<code>{}</code>). A minimal compliant Swagger spec
 <sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup>
 might look like this:</p>
 </dd>
@@ -484,15 +485,16 @@ would become local references.</p>
 </dl>
 </div>
 <div class="paragraph">
-<p>The normalizer <em>always</em> inlines fragment references. Any given Swagger
-reference might be inlined or localized, depending on
+<p>The normalizer <em>always</em> inlines non-conforming references. Any given
+conforming reference might be inlined or localized, depending on
 <a href="#normalizer-options">options</a> in effect.</p>
 </div>
 <div class="sect3">
 <h4 id="name-collisions"><a class="link" href="#name-collisions">Name Collisions</a></h4>
 <div class="paragraph">
-<p>Localization of a Swagger reference may lead to a name collision. For
-example, imagine the following excerpts from two Swagger specs:</p>
+<p>Localization of a conforming reference may lead to a name
+collision. For example, imagine the following excerpts from two
+Swagger specs:</p>
 </div>
 <div class="listingblock">
 <div class="title">main.yaml</div>
@@ -752,8 +754,8 @@ inlined</em>.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-For fragment references, recursion is not currently permitted
-and will cause the normalizer to fail.
+For non-conforming references, recursion is not currently
+permitted and will cause the normalizer to fail.
 </td>
 </tr>
 </table>
