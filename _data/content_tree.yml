@@ -1,6 +1,7 @@
 ---
 areas:
 - name: Home
+  shortName: Home
   invisible: true
   articles:
   - title: RepreZen Documentation Portal
@@ -8,6 +9,7 @@ areas:
     url: /
     type: internal
 - name: Core Docs
+  shortName: Core
   articles:
   - title: RAPID-ML Language Specification
     url: http://rapid-api.org/rapid-ml/spec/current/desktop/
@@ -20,6 +22,7 @@ areas:
     url: https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/current/RepreZen%20API%20Studio%20QRC.pdf
     type: external
 - name: Code Gen
+  shortName: CodeGen
   articles:
   - title: Introduction
     fullTitle: Introduction to Code Generation in RepreZen API Studio
@@ -39,6 +42,7 @@ areas:
     url: /codegen_sharing/
     type: internal
 - name: Swagger Features
+  shortName: Swagger
   articles:
   - title: Swagger Normalizer
     slug: swag_norm
@@ -46,6 +50,7 @@ areas:
     url: /swagger_normalizer/
     type: internal
 - name: Training Videos
+  shortName: Training
   articles:
   - title: RepreZen YouTube Channel
     url: https://www.youtube.com/channel/UCNwqDgngCot722zwHse5UTg
@@ -92,4 +97,23 @@ areas:
     type: external
   - title: Introducing the RAPID-ML Ready! API Plugin
     url: https://www.youtube.com/watch?v=wYimccfMbAo&index=4&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO
+    type: external
+- name: RepreZen Sites
+  shortName: RepreZen Sites
+  menuOnly: true
+  articles:
+  - title: RepreZen Company Website
+    url: http://reprezen.com
+    type: external
+  - title: Team Blog
+    url: http://reprezen.com/blog
+    type: external
+  - title: Support and Community Site
+    url: http://support.reprezen.com
+    type: external
+  - title: RepreZen on GitHub
+    url: https://github.com/reprezen
+    type: external
+  - title: RAPID-ML Home Page
+    url: http://rapid-api.org/rapid-ml
     type: external
