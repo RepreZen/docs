@@ -7,7 +7,7 @@ permalink: /
 Available Documentation:
 
 {% for area in site.data.content_tree.areas %}
-{% unless area.invisible %}
+{% unless area.invisible or area.menuOnly %}
 == {{ area.name }}
 {% for article in area.articles %}
 {% if article.new_window or article.type == "external" %}
