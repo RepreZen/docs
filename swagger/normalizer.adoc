@@ -698,18 +698,26 @@ indicated order:
    response code, with a `default` entry, if any, following all
    numeric entries.
 
-Even with *SORTED* treatment, reordering is restricted to the model
-contents specifically mentioned above. So, for example, tags,
-operation parameters, and the top-level structure of the swagger spec
-should mostly be as they are in the source spec, except where Swagger
+With both treatments - even *SORTED* - ordering is restricted to the
+model contents specifically mentioned above. So, for example, tags,
+operation parameters, object schema property lists, and the top-level
+structure of the swagger spec should mostly be as they are in the
+source spec under both ordering treatments, except where Swagger
 project software may disrupt things (e.g. in the ordering of top-level
-properties).
+model sections).
 
-In some cases these other areas are likely to become explicitly
-ordered by the normalizer in a future release, but we have explicitly
-chosen _not_ to reorder parameter lists in operations, since doing so
-could cause incompatible changes in the output of certain code
-generators (e.g. in generated method signatures).
+The way to interpret the above paragraph in the case of *AS_DECLARED*
+ordering is that the Normalizer will not record positional information
+for items not explicitly mentioned in the details of the *SORTED*
+ordering. Therefore, if these items are reorganized by Swagger
+software, it will not be possible to reconstruct the original
+ordering.
+
+In some cases these unaddressed orderings are likely to become
+addressed by the normalizer in a future release, but we have
+explicitly chosen _not_ to reorder parameter lists in operations,
+since doing so could cause incompatible changes in the output of
+certain code generators (e.g. in generated method signatures).
 
 === Option Defaults
 

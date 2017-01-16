@@ -1185,19 +1185,28 @@ numeric entries.</p>
 </dl>
 </div>
 <div class="paragraph">
-<p>Even with <strong>SORTED</strong> treatment, reordering is restricted to the model
-contents specifically mentioned above. So, for example, tags,
-operation parameters, and the top-level structure of the swagger spec
-should mostly be as they are in the source spec, except where Swagger
+<p>With both treatments - even <strong>SORTED</strong> - ordering is restricted to the
+model contents specifically mentioned above. So, for example, tags,
+operation parameters, object schema property lists, and the top-level
+structure of the swagger spec should mostly be as they are in the
+source spec under both ordering treatments, except where Swagger
 project software may disrupt things (e.g. in the ordering of top-level
-properties).</p>
+model sections).</p>
 </div>
 <div class="paragraph">
-<p>In some cases these other areas are likely to become explicitly
-ordered by the normalizer in a future release, but we have explicitly
-chosen <em>not</em> to reorder parameter lists in operations, since doing so
-could cause incompatible changes in the output of certain code
-generators (e.g. in generated method signatures).</p>
+<p>The way to interpret the above paragraph in the case of <strong>AS_DECLARED</strong>
+ordering is that the Normalizer will not record positional information
+for items not explicitly mentioned in the details of the <strong>SORTED</strong>
+ordering. Therefore, if these items are reorganized by Swagger
+software, it will not be possible to reconstruct the original
+ordering.</p>
+</div>
+<div class="paragraph">
+<p>In some cases these unaddressed orderings are likely to become
+addressed by the normalizer in a future release, but we have
+explicitly chosen <em>not</em> to reorder parameter lists in operations,
+since doing so could cause incompatible changes in the output of
+certain code generators (e.g. in generated method signatures).</p>
 </div>
 <div class="sect2">
 <h3 id="option-defaults"><a class="link" href="#option-defaults">Option Defaults</a></h3>
