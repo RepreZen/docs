@@ -331,6 +331,11 @@ by all Swagger GenTemplates. You can also use it directly as its own
 GenTemplate, named &#8220;Swagger [Normalized YAML]&#8221; in the GenTarget
 Wizard.</p>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/swagger/normalizer.png" alt="Swagger Normalizer">
+</div>
+</div>
 <div class="paragraph">
 <p>The primary function of the normalizer is to render a multi-file
 Swagger spec as a functionally equivalent single-file spec. In this
@@ -1033,26 +1038,26 @@ file.</p>
 <dt class="hdlist1">HOIST </dt>
 <dd>
 <p>Enables some or all of the <em>hoisting</em> operations that can be
-performed by the normalizer. Hoisting refers to copying certain items
-appearing in a swagger spec into the contexts in which they apply. The
-option value is a list of hoistable items, drawn from:</p>
+performed by the normalizer. Hoisting refers to extrapolating certain
+items appearing in a swagger spec into the contexts in which they
+apply. The option value is a list of hoistable items, drawn from:</p>
 <div class="openblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
 <p>MEDIA_TYPE: Global <code>consumes</code> and <code>produces</code> declarations are
-copied into all operations that do not contain their own
+extrapolated into all operations that do not contain their own
 declarations.</p>
 </li>
 <li>
-<p>PARAMETER: Parameters defined at path-level are copied into every
-operation appearing in the path that does not already define a
+<p>PARAMETER: Parameters defined at path-level are extrapolated into
+every operation appearing in the path that does not already define a
 parameter with the same name and the same <code>in</code> value.</p>
 </li>
 <li>
 <p>SECURITY_REQUIREMENT: The global security requirements array is
-copied into every operation that does not define its own.</p>
+extrapolated into every operation that does not define its own.</p>
 </li>
 </ul>
 </div>
