@@ -2,7 +2,7 @@
 permalink: /swagger_normalizer/
 ---
 = Using the Swagger Normalizer GenTemplate
-:imagesdir: ../images/codegen
+:imagesdir: ../images/swagger
 :linkattrs:
 :sectlinks:
 :docinfo2:
@@ -16,6 +16,8 @@ appear by default in the right-hand pane of the {RAS} GUI, as well as
 by all Swagger GenTemplates. You can also use it directly as its own
 GenTemplate, named "`Swagger [Normalized YAML]`" in the GenTarget
 Wizard. 
+
+image::normalizer.png[Swagger Normalizer,role=text-center]
 
 The primary function of the normalizer is to render a multi-file
 Swagger spec as a functionally equivalent single-file spec. In this
@@ -553,21 +555,21 @@ is relative, is resolved based on the URL that specifies the top-level
 file.
 
 HOIST :: Enables some or all of the _hoisting_ operations that can be
-performed by the normalizer. Hoisting refers to copying certain items
-appearing in a swagger spec into the contexts in which they apply. The
-option value is a list of hoistable items, drawn from:
+performed by the normalizer. Hoisting refers to extrapolating certain
+items appearing in a swagger spec into the contexts in which they
+apply. The option value is a list of hoistable items, drawn from:
 +
 --
 * MEDIA_TYPE: Global `consumes` and `produces` declarations are
-  copied into all operations that do not contain their own
+  extrapolated into all operations that do not contain their own
   declarations.
 
-* PARAMETER: Parameters defined at path-level are copied into every
-  operation appearing in the path that does not already define a
+* PARAMETER: Parameters defined at path-level are extrapolated into
+  every operation appearing in the path that does not already define a
   parameter with the same name and the same `in` value.
 
 * SECURITY_REQUIREMENT: The global security requirements array is
-  copied into every operation that does not define its own.
+  extrapolated into every operation that does not define its own.
 --
 +
 The *HOIST* option value may also be ALL or NONE.
