@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>A Deep Dive Into Custom GenTemplates</title>
+  <meta name="description" content="">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>  
+
+  <!-- add after bootstrap.min.css -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.css">
+  <!-- add after bootstrap.min.js -->
+  <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.js"></script>
+
+  <link rel="stylesheet" href="/css/asciidoc.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="canonical" href="http://reprezen.github.io/codegen_custom_gentemplate/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/feed.xml">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
+
+  <link rel="stylesheet" href="/css/misc.css">
+  <script src="/js/misc.js"></script>
+
+</head>
+
+  <body data-spy="scroll" data-targets="#toc">
+    <div class="container">
+      <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://reprezen.com" target="_blank">
+        <img src="/images/reprezen-logo.png">
+      </a>
+      <a class="navbar-brand" href="/">
+	<span class="hidden-xs">&nbsp;Documentation</span>
+      </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+  
+  
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Core <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="http://rapid-api.org/rapid-ml/spec/current/desktop/" target="_blank">RAPID-ML Language Specification</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/learning_rapid_ml/" target="_blank">Learning RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/current/RepreZen%20API%20Studio%20QRC.pdf" target="_blank">RepreZen API Studio Reference Card</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CodeGen <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_intro/" target="_self">Introduction</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_swagger_codegen/" target="_self">Using Swagger Codegen in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_custom_swagger_gentemplate/" target="_self">Creating a Custom Swagger GenTemplate</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_custom_gentemplate/" target="_self">A Deep Dive Into Custom GenTemplates</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_sharing/" target="_self">Sharing GenTemplates</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Swagger <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="/swagger_normalizer/" target="_self">Swagger Normalizer</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Training <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/channel/UCNwqDgngCot722zwHse5UTg" target="_blank">RepreZen YouTube Channel</a></li>
+      
+      
+      
+      
+      
+      
+      <li class="divider" role="separator"></li>
+      
+      
+      
+      
+      
+      
+      <li class="video-series"><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Play Series: Working with RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&index=1&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Introducing RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=UsrsyEVO914&index=2&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RepreZen API Studio & Swagger</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=KX_tHp_KQkE&index=3&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Editing Swagger-OpenAPI in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=sSIX-A4ru7E&index=4&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Test-drive your Swagger-OpenAPI model in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=5&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=6&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=7&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class="divider" role="separator"></li>
+      
+      
+      
+      
+      
+      
+      <li class="video-series"><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Play Series: RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=1&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=2&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=3&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=wYimccfMbAo&index=4&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Introducing the RAPID-ML Ready! API Plugin</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RepreZen Sites <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="http://reprezen.com" target="_blank">RepreZen Company Website</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="http://reprezen.com/blog" target="_blank">Team Blog</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="http://support.reprezen.com" target="_blank">Support and Community Site</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://github.com/reprezen" target="_blank">RepreZen on GitHub</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="http://rapid-api.org/rapid-ml" target="_blank">RAPID-ML Home Page</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+</ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+      <div class="row">
+	<div class="col-sm-10">
+	  <h1>A Deep Dive Into Custom GenTemplates</h1>
+	  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In <a href="/codegen_intro/">Introduction to Code Generation in RepreZen API Studio</a> we include a brief overview of the process of
+creating customized GenTemplates for use in RepreZen API Studio. Here we will
+explore this topic in much greater detail. We will examine the
+fundamental interfaces that a GenTemplate must implement, the
+bare-bones abstract implementations of those interfaces, and the
+highly structured <code>GenTemplate</code> class and the model it provides for
+GenTemplate construction.</p>
+</div>
+<div class="paragraph">
+<p>It should be noted that the term <code>GenTemplate</code> suggests a
+template-based approach to code generation. That said, the templating
+technology we have used&#8212;&#8203;and which we recommend&#8212;&#8203;is contained within a
+general-purpose programming language called Xtend. The
+<a href="https://www.eclipse.org/xtend/">Xtend Website</a> describes Xtend as
+"Java With Spice," and in fact, the Xtend compiler produces standard
+Java, which is then compiled to class files that can be freely
+intermingled with class files produced from primary Java source. The
+Xtend language includes a sophisticated templating facility in which
+templates form part of the Xtend language syntax and are not relegated
+to separate files, as is common in other templating
+facilities. Complete documentation is available
+<a href=":https://www.eclipse.org/xtend/documentation/index.html">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-code-igentemplate-code-interface">The <code>IGenTemplate</code> Interface</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The basic interface for all GenTemplates is very simple:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-java" data-lang="java">public interface IGenTemplate {
+
+    String getName();
+
+    String getId();
+
+    ISource&lt;?&gt; getPrimarySource() throws GenerationException;
+
+    List&lt;GenTemplateDependency&gt; getDependencies() throws GenerationException;
+
+    Generator getGenerator();
+
+    public boolean isSuppressed();
+
+    public interface Generator {
+
+        GenTemplateTrace generate(GenTarget target, GenTemplateTraces traces) throws GenerationException;
+
+        void attachLogger(Logger logger);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There is an interesting split of this API. The first batch of methods
+are part of <code>IGenTemplate</code>, while the final two are separated
+out into a separate <code>Generator</code> interface. The reason for this split
+is the two roles that a GenTemplate must play:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Within RepreZen API Studio, GenTemplates are instantiated in order to examine
+their declarative information. This information is used by wizards,
+menus, and other UI features of RepreZen API Studio.</p>
+<div class="paragraph">
+<p>The classpath in which these instantions occur is managed by the
+Eclipse OSGi implementation, based on the collection of OSGi bundles
+included in the environment and the access policies they declare. A
+GenTemplate that relies on software not accessible in that
+constrained environment will fail instantiation within RepreZen API Studio and
+therefore will be unusable.</p>
+</div>
+</li>
+<li>
+<p>The more obvious role is that of a code generator. A GenTemplate
+must also be instantiated so that it can perform the job for which
+it was created. Clearly, for this role, we cannot limit the software
+on which a GenTemplate can depend. GenTemplate execution always
+takes place in a separate JVM, outside of the RepreZen API Studio ecosystem, with
+a classpath managed by Maven or Gradle.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Our solution is to carefuly separate the methods required for a
+GenTemplate to exist within RepreZen API Studio from those required when it is
+executed. The separate <code>IGenTemplate.Generator</code> interface defines the
+latter, and the expected implementation structure is one in which
+separate classes implement the two interfaces. RepreZen API Studio will only ever
+instantiate and use a GenTemplate&#8217;s declarative API. Execution is
+managed by a launcher class that instantiates the GenTemplate and then
+uses its <code>IGenTemplate#getGenerator()</code> method to obtain an instance of
+the GenTemplate&#8217;s execution implementation.</p>
+</div>
+<div class="sect2">
+<h3 id="the-declarative-interface">The Declarative Interface</h3>
+<div class="paragraph">
+<p>Let&#8217;s look at how RepreZen API Studio uses the information available from the
+declarative GenTemplate interface.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>String getName()</code></dt>
+<dd>
+<p>This provides the name that is listed for the GenTemplate within
+RepreZen API Studio, e.g. in the drop-down list in the New GenTarget wizard.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This name is also used&#8212;&#8203;currently without modification&#8212;&#8203;as
+the default name of a directory to house new GenTargets created for
+this GenTemplate. Depending on your operating system, certain
+characters may cause difficulties.
+</td>
+</tr>
+</table>
+</div>
+</dd>
+<dt class="hdlist1"><code>String getId()</code></dt>
+<dd>
+<p>This provides a unique ID for the GenTemplate. It
+is copied into a GenTarget to identify the GenTemplate it is meant
+to execute.</p>
+</dd>
+<dt class="hdlist1"><code>ISource&lt;?&gt; getPrimarySource()</code></dt>
+<dd>
+<p>This declares the primary source, or
+input, that the GenTemplate will process. GenTemplates can also
+declare other <a href="#named-sources">[named-sources]</a>, but the primary source&#8212;&#8203;or rather
+its type&#8212;&#8203;is used by RepreZen API Studio to identify which GenTemplates to offer
+in the New GenTarget wizard, based on the selected model. RepreZen API Studio
+currently defines source types for RAPID-ML models, Swagger (aka
+OpenAPI v2) models, and OpenAPI v3 models.</p>
+</dd>
+<dt class="hdlist1"><code>List&lt;GenTemplateDependency&gt; getDependencies()</code></dt>
+<dd>
+<p>Dependencies are
+used by RepreZen API Studio when constructing the <code>.gen</code> files that comprise
+GenTargets. These are YAML files that can be edited within RepreZen API Studio as
+needed by the user. That editing generally focuses on the
+dependencies.</p>
+<div class="paragraph">
+<p>Dependencies come in four flavors:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Primary Source: The GenTarget provides a path to the file
+containing the primary source model.</p>
+</li>
+<li>
+<p>Named Sources: The GenTarget provides paths for other secondary
+sources used by this GenTemplate, each identified by a name defined
+by the GenTemplate.</p>
+</li>
+<li>
+<p>Parameters: The GenTarget supplies values for named parameters
+declared by the GenTemplate. In theory, parameter values can be
+arbitary Java objects, but in practice, since the GenTarget
+normally takes the form of a YAML file, only JSON values are
+available.</p>
+</li>
+<li>
+<p>PreRequisites: The GenTarget identifies other GenTargets that must
+be executed prior to this one. The GenTemplate declares a
+GenTemplate ID for each prerequisite. Each prerequisite must be
+satisfied by identifying another GenTarget that is based on the
+required GenTemplate.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Dependencies are all constructed purely from primitive values; where
+classes or complex values are called for (e.g. source declarations,
+parameter values), we use fully qualified class names and JSON
+strings, respectively. The use of class names is required for
+GenTemplate instantiation within RepreZen API Studio.</p>
+</div>
+</dd>
+<dt class="hdlist1"><code>Generator getGenerator</code></dt>
+<dd>
+<p>As discussed above, RepreZen API Studio never invokes
+this method internally. It is used by the GenTarget launcher, always
+in a separate JVM outside the RepreZen API Studio environment, when it comes time to
+execute a GenTarget.</p>
+</dd>
+<dt class="hdlist1"><code>public boolean isSuppressed()</code></dt>
+<dd>
+<p>If this method returns <code>true</code>, RepreZen API Studio
+will act as if the GenTemplate had not been discovered. We use this
+occasionally to control beta access to GenTemplates we are developing,
+by implementing <code>isSuppressed()</code> so that its result is based on some
+appropriate condition.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-execution-interface">The Execution Interface</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>GenTemplateTrace generate(GenTarget target, GenTemplateTraces traces)</code></dt>
+<dd>
+<p>This is the method that kicks off generation. The GenTemplate is
+supplied with access to its controlling GenTarget, which includes
+values bound to all the dependencies mentioned above.</p>
+<div class="paragraph">
+<p>In addition, the GenTemplate is provided with the
+<a href="#trace-information">[trace-information]</a> produced by all the GenTargets executed to
+satisfy its prerequisites.</p>
+</div>
+<div class="paragraph">
+<p>The GenTemplate is expected to produce its own trace information, for
+use by any downstream GenTargets that declared this GenTarget as a prerequisite.</p>
+</div>
+</dd>
+<dt class="hdlist1"><code>void attachLogger(Logger logger)</code></dt>
+<dd>
+<p>This is used by the launcher to
+supply the GenTarget with a logger it can use during its execution.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-code-abstractgentemplate-code-base-class">The <code>AbstractGenTemplate</code> Base Class</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All of the factory-default GenTemplates built into RepreZen API Studio are
+extensions of <code>AbstractGentemplate</code>, which is an abstract
+implementation of <code>IGenTemplate</code> that supplies some useful defaults
+and introduces the <a href="#context-object">[context-object]</a>. In truth, they are all
+extensions of the <a href="#gentemplate-class">GenTemplate Class</a>, which is an extension of
+<code>AbstractGenTemplate</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="declarative-defaults">Declarative Defaults</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>getId()</code></dt>
+<dd>
+<p>Returns the GenTemplate class' fully qualified class name.</p>
+</dd>
+<dt class="hdlist1"><code>getPrimarySource()</code></dt>
+<dd>
+<p>Returns null. GenTemplates are not <em>required</em> to
+have a primary source, but RepreZen API Studio support for GenTemplates that lack
+one is currently somewhat limited.</p>
+</dd>
+<dt class="hdlist1"><code>getDependencies()</code></dt>
+<dd>
+<p>Returns a list of dependencies stored in the
+<a href="#context-object">[context-object]</a>, which is instantiated by the <code>AbstractGenTemplate</code>
+constructor. This really just creates a convenient place for the
+GenTemplate to store its dependencies, that can be used both by RepreZen API Studio
+through the declarative interface and also later by the executing
+generator. There is nothing in <code>AbstractGenTarget</code> that actually fills
+in dependency information, but the <a href="#gentemplate-class">GenTemplate Class</a> does provide
+this capability.</p>
+</dd>
+<dt class="hdlist1"><code>isSuppressed()</code></dt>
+<dd>
+<p>Returns <code>false</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="execution-defaults">Execution Defaults</h3>
+<div class="paragraph">
+<p>The <code>AbstractGenTemplate</code> class declares two member classes:
+<code>Generator</code> and <code>StaticGenerator</code>. <code>Generator</code> is deprecated, and
+<code>StaticGenerator</code> should be used in all new GenTemplates. (See
+<a href="#static-generator">Why <code>Generator</code> and <code>StaticGenerator</code>?</a> for a detailed explanation of this.)</p>
+</div>
+<div class="paragraph">
+<p>Both <code>Generator</code> and <code>StaticGenerator</code> implement a single method from
+<code>IGenTemplate.Generator</code>.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>attachLogger(Logger logger)</code></dt>
+<dd>
+<p>Saves the logger into the context
+object.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The <code>StaticGenerator</code> class also declares a constructor (which
+<code>Generator</code> does not need because of its inherent access to the
+containing class instance and its members):</p>
+</div>
+<div class="paragraph">
+<p><code>StaticGenerator(GenTemplate genTemplate, Context context)</code></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gentemplate-class">The <code>GenTemplate</code> Class</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>GenTemplate</code> class extends <code>AbstractGenTemplate</code> and provides a
+number of sophisticated capabilities to ease the development of
+well-structured GenTemplate implementations. These capabilities come
+in two categories: <a href="#context-management">[context-management]</a> and
+<a href="#generator-management">Generator Management</a>. In both categories, some individual features
+are controlled by definitions appearing in the <code>configure()</code> method,
+which should be overridden in GenTemplate implementations.</p>
+</div>
+<div class="paragraph">
+<p>The general form of the <code>configure()</code> method is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>@Override
+public void configure() {
+  define(builder);
+  define(builder);
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are various types of builders for use in the <code>configure()</code>
+method, which are described in the following sections.</p>
+</div>
+<div class="paragraph">
+<p>The <code>GenTemplate</code> class itself is declared with a single type
+parameter, <code>&lt;PrimaryType&gt;</code>, which represents the type of object on
+which this GenTemplate will is designed to operate. This is usually
+the representation type of a model (e.g. <code>ZenModel</code> for RAPID-ML
+models, <code>Swagger</code> for Swagger models, etc.). Generally, a GenTemplate
+is defined with a <code>PrimaryType</code> that matches its delcared primary
+source dependency, but that is not strictly required.</p>
+</div>
+<div class="sect2">
+<h3 id="dependency-declaration">Dependency Declaration</h3>
+<div class="paragraph">
+<p>As described earlier, a GenTemplate declares various types of
+dependencies, which are then satisfied using information from a
+GenTarget file when the GenTemplate is executed. The <code>GenTemplate</code>
+class provides builders for use in the <code>configure</code> method that
+generate these dependency declarations.</p>
+</div>
+<div class="sect3">
+<h4 id="primary-source">Primary Source</h4>
+<div class="paragraph">
+<p>The <code>PrimarySourceBuilder</code> class is used to declare a primary source
+dependency for this GenTemplate. For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>define(primarySource() //
+    ofType(ZenModelSource.class) //
+    withDescription("Your RAPID-ML model"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ofType()</code> method is overloaded to accept any of:
+* An object that implemtns the <code>ISource</code> interface
+* The  <code>Class</code> object of a class that implements <code>ISource</code>
+* The fully qualified name of a class that implements <code>ISource</code></p>
+</div>
+<div class="paragraph">
+<p>The dependency information always comes in the form of a fully
+qualified class name, and the other forms converted to that. If you
+are using a custom source type, you may not be able to use the first
+two options, since RepreZen API Studio may not have access to your class and and so
+may not be able to derive the class name.</p>
+</div>
+<div class="paragraph">
+<p>The builder also supports <code>required()</code> (default) and <code>optional()</code>
+methods to indicate whether the dependency must be satisfied by a
+GenTarget.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="named-source">Named Source</h3>
+<div class="paragraph">
+<p>The <code>NamedSourceBuilder</code> works just like the <code>PrimarySourceBuilder</code>,
+but it attaches a name to the the source.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>define(namedSource().named("security") //
+    .ofType(FileSource.class) //
+    .withDescription("Security information"));
+
+In the above example, the completely generic `FileSource` source class
+is used, but a case like this might warrant the creation of a more
+specialized `ISource` implementation so that the security file could
+be parsed, validated, and presented in a more convenient form.
+
+=== Parameter
+
+The `ParameterBuilder` class declares GenTemplate parameters to be
+bound to values in the GenTarget file.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>define(parameter().named("packageName") //
+    .withDescription( //
+        "The package name to be used in",
+        "the generated Java classes") //
+    .withDefault("*") //
+    .required());</p>
+</div>
+<div class="paragraph">
+<p>As shown here, <code>withDescription</code> can take mulitiple strings, which
+will result in a multi-line comment in the generated GenTarget file.</p>
+</div>
+<div class="paragraph">
+<p>The <code>withDefault</code> method takes an arbitrary <code>Object</code>, which will be
+serialized as YAML into the <code>GenTarget</code> file. In most cases, you may
+want to use <code>withJsonDefault</code> instead, which takes a JSON String
+argument and parses it into a <code>JsonNode</code> value, which is then
+serialized into YAML in the GenTarget file. This avoids the
+possibility of a lossy or incorrect representation in the GenTarget
+file. However, you may safely use your own classes, as long as they
+can be safely serialized and deserialized using the Jackson library.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="prerequisite">Prerequisite</h3>
+<div class="paragraph">
+<p>The <code>PrerequisiteBuilder</code> class declares prerequisite GenTargets that
+must be satisfied by this GenTarget.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>define(prerequisite().named("xml") //
+    .on(XMLSchemaGentemplate.class) //
+   .description("Specify a gentarget that runs the XML Schema GenTemplate") //
+   .required());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>on()</code> method is overloaded to permit either a GenTemplate class
+instance, a GenTemplate class, or a GenTemplate ID string. The latter
+is what is actually stored in a GenTarget file. The former options can
+be used as long as the indicated GenTemplate uses its fully qualified
+class name as its ID value (which is the default implemented in
+<code>AbstractGenTarget</code>. As with source builders, use of a class name or
+instance may make the GenTemplate unusable within RepreZen API Studio.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="context-objet">Context Management</h3>
+<div class="paragraph">
+<p>The context object, of type <code>GenTemplateContext</code>, is instantiated but
+left mostly empty by the <code>AbstractGenTemplate</code> class. The
+<code>GenTemplate</code> class fills out the context object with information that
+is needed during execution, providing a one-stop location for all such
+information.</p>
+</div>
+<div class="paragraph">
+<p>The methods for accessing context information are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>public IGenTemplate getExecutingGenTemplate()</code></dt>
+<dd>
+<p>Returns the
+GenTemplate instance that is currently executing.</p>
+</dd>
+<dt class="hdlist1"><code>public GenTarget getControllingGenTarget()</code></dt>
+<dd>
+<p>Returns the GenTarget
+through which this GenTemplate is executing.</p>
+</dd>
+<dt class="hdlist1"><code>public ISource&lt;?&gt; getPrimarySource()</code></dt>
+<dd>
+<p>Returns the primary source
+instance associated with this GenTarget execution.</p>
+</dd>
+<dt class="hdlist1"><code>public Map&lt;String, Object&gt; getGenTargetParameters()</code></dt>
+<dd>
+<p>Returns a map
+associating GenTemplate parameter names to their values under the
+current GenTarget.</p>
+</dd>
+<dt class="hdlist1"><code>public File getOutputDirectory()</code></dt>
+<dd>
+<p>Returns the output directory to
+receive files generated by this GenTemplate.</p>
+</dd>
+<dt class="hdlist1"><code>public File getCurrentOutputFile()</code></dt>
+<dd>
+<p>When an output item is
+executing, this returns the file to which the generated content will
+be written.</p>
+</dd>
+<dt class="hdlist1"><code>public File resolveOutputPath(File path)</code></dt>
+<dd>
+<p>resolves a relative path
+against the output directory.</p>
+</dd>
+<dt class="hdlist1"><code>public GenTemplateDependencies getDependencies()</code></dt>
+<dd>
+<p>Returns the
+dependency information declared by the executing GenTemplate.</p>
+</dd>
+<dt class="hdlist1"><code>public Logger getLogger()</code></dt>
+<dd>
+<p>Returns the logger object attached to
+this GenTemplate.</p>
+</dd>
+<dt class="hdlist1"><code>public GenTemplateTraces getTemplateTraces()</code></dt>
+<dd>
+<p>Provides access to
+trace information from prerequisite GenTarget executions.</p>
+</dd>
+<dt class="hdlist1"><code>public GenTemplateTraceBuilder getTraceBuilder()</code></dt>
+<dd>
+<p>Provides various
+methods by which a GenTemplate can add to the trace information
+attached to this GenTarget execution.</p>
+</dd>
+<dt class="hdlist1"><code>public GenTemplateTrace getPrerequisiteTrace(String prerequisiteName)</code></dt>
+<dd>
+<p>Retrieves the trace information for one of this GenTemplates' declared
+prerequisites.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generator-management">Generator Management</h3>
+<div class="paragraph">
+<p>The <code>GenTemplate</code> class performs generation by executing individual
+generators that are configured for the GenTemplate. Configuration is
+done in the <code>configure</code> method override, using builders designed for
+generator configuration.</p>
+</div>
+<div class="paragraph">
+<p>Generators come in four varieties.</p>
+</div>
+<div class="sect3">
+<h4 id="output-item">Output Item</h4>
+<div class="paragraph">
+<p>An output item is an instance of a class that implements the
+<code>IOutputItem</code> interface. This inteface has two type parameters:
+<code>PrimaryType</code> and <code>ItemType</code>. We&#8217;ll discuss <code>ItemType</code> in
+<a href="#extract-output-item">Extract Output Item</a>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>PrimaryType</code> of an <code>OutputItem</code> should match the <code>PrimaryType</code> of
+any <code>GenTemplate</code> in which it is configured. Output item classes
+should generally extend <code>AbstractOutputItem</code>, or one of the
+type-specific extensions of that class.</p>
+</div>
+<div class="paragraph">
+<p>The purpose of an output item is to create a single file at a specific
+path relative to the GenTarget&#8217;s output directory. Its primary purpose
+is to generate the content of this file; the <code>GenTemplate</code> class will
+take care of actually writing the file, as well as recording basic
+trace information.</p>
+</div>
+<div class="paragraph">
+<p>Important methods to override in an output item implementation are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>String generate(PrimaryType primaryValue, ItemType itemValue)</code></dt>
+<dd>
+<p>Create the content for this output item&#8217;s file. If null is returned,
+no file is written.</p>
+</dd>
+<dt class="hdlist1"><code>File getOutputFile(PrimaryType primaryValue, ItemType itemValue)</code></dt>
+<dd>
+<p>Return the file to which this output item&#8217;s content should be
+written. If the value is not null, it will be used instead of anything
+specified in the output item&#8217;s configuration (via the
+<code>OutputItemBuilder.writing(String)</code> method, shown below).</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Configure an output item using the <code>OutputItemBuilder</code>, like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>define(outputItem().named("main") //
+    .using(MainGenerator.class) //
+    .writing("${model.name}.html") //
+    .withDescription("Main output") //
+    .when("${model.status == \"live\""));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>using</code> method is overloaded to accept an instance of an output
+item, a class that implemnts <code>IOutputItem</code>, or the fully qualified
+name of such a class. Use of class names or instances may cause the
+GenTemplate to be unusable in RepreZen API Studio.</p>
+</div>
+<div class="paragraph">
+<p>The <code>writing</code> and <code>when</code> methods take strings that use the MVEL syntax
+to produce a <code>String</code> or a <code>boolean</code> value, respectively. See
+<a href="https://github.com/imona/tutorial/wiki/MVEL-Guide">MVEL Guide</a> for
+information about MVEL, and see <a href="#mvel-bindings">MVEL Bindings</a> for details of
+variable bindings in effect when these strings are evaluated.</p>
+</div>
+<div class="paragraph">
+<p>The <code>writing</code> method defines a default file name for this output item;
+the output item itself can override this default.</p>
+</div>
+<div class="paragraph">
+<p>The <code>when</code> method provides conditional output item execution; if the
+condition evaluates to <code>false</code>, the output item will be skipped.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="extract-output-item">Extract Output Item</h4>
+<div class="paragraph">
+<p>An extract output item is just like an output item, but instead of
+operating on an entire model, it operates on a single "item" extracted
+from the model. This is where the <code>ItemType</code> type parameter in the
+<code>IOutputItem</code> interface comes into play.</p>
+</div>
+<div class="paragraph">
+<p>When an output item is configured, the <code>GenTemplate</code> class examines
+its bound types. If the types bound to <code>PrimaryType</code> and <code>ItemType</code>
+are the same type, the output item is treated as a whole-model output
+item. Otherwise, it is treated as an extract output item.</p>
+</div>
+<div class="paragraph">
+<p>Only specific types are allowed as the item type in an output item,
+and the list of allowed types depends on the model type. See
+<a href="#extract-item-types">[extract-item-types]</a> for currently supported types.</p>
+</div>
+<div class="paragraph">
+<p>An extract output item is configured exactly the same way as a
+whole-model output item. The <code>GenTemplate</code> recognizes the difference
+when it instantiates the output item and inspects its parameterized
+types.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="static-resources">Static Resources</h4>
+<div class="paragraph">
+<p>The <code>GenTemplate</code> class can be configured to copy static resources
+from your JAR file to the output folder as-is. You don&#8217;t need to
+implement anything to use this feature; you just add definitions to
+your <code>configure</code> method body, using the <code>StaticResourceBuilder</code>, as
+in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>define(staticResource().copying("css").to("artifacts/css"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>copying</code> argument may name a file or a directory, and can specify
+a path. Likewise for the <code>to</code> argument. Precise behavior depends on
+these varations:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">copying from a&#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">to a&#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">does this</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nonexisting path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">creates a file at the to-path</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">existing file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">replaces the existing file</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">existing directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">adds the file to the folder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nonexisting path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">creates a directory at to-path and
+recursively copies the from-directory contents there</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">existing file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">operation fails</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">existing directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">recursively copies the
+  from-directory contents to the to-directory</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The from-path is interpreted relative to the root of the
+class path entry (JAR file or file system directory) from which the
+GenTarget class was loaded. It is <em>not</em> relative to the GenTarget
+class&#8217;s location in that JAR file or directory.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you have multiple static resource definitions in your <code>configure</code>
+method body, the order may be important. For example, both might
+create the same file with different contents, with the second
+overwriting the first. Or consider this example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>define(staticResource().copying("a/b/c").to("x/y/z"));
+define(staticResource().copying("d/e/f").to("x/y/z"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Assume that the path <code>x/y/z</code> does not already exist in the output
+folder, and that <code>a/b/c</code> names a file, while <code>d/e/f</code> names a
+directory.</p>
+</div>
+<div class="paragraph">
+<p>In the order shown above, the second definition will fail at runtime,
+because the first will have created a file at <code>/d/e/f</code>. If the two
+were reversed, they would succeed, but <code>a/b/c</code> would be copied to
+<code>d/e/f/c</code> rather than <code>d/e/f</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="dynamic-generator">Dynamic Generator</h4>
+<div class="paragraph">
+<p>A dynamic generator is essentially a free-form generator. It can do
+whatever it wants, creating as many or as few files as it wants, based
+on the input model (or not &#8230;&#8203; really, you can do whatever you
+want!).</p>
+</div>
+<div class="paragraph">
+<p>Dynamic generators are useful when your needs are not well handled by
+the other options.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="overriding-code-gentemplate-getgenerator-code">Overriding <code>GenTemplate.getGenerator()</code></h4>
+<div class="paragraph">
+<p>Occasionally you may find that even dynamic generators don&#8217;t give you
+quite the flexibility you need. For example, you may want to write a
+generator that you can instantiate once and reuse with different
+inputs. Or perhaps your generator needs access to a database
+connection, and there&#8217;s no good way to pass such a
+thing.</p>
+</div>
+<div class="paragraph">
+<p>In a case like this you might choose to create your own implementation
+of <code>IGenTemplate.Generator</code> and override
+<code>GenTemplate.getStaticGenerator()</code> to return an instance of it. Your
+class could then do whatever is needed. If you defined your class as
+an extension of <code>GenTemplate.StaticGenerator&lt;PrimaryType&gt;</code>, you could
+still make use of all the capabilities described above, by calling
+<code>super.generate</code> from your own <code>generate</code> method.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="convenience-classes">Convenience Classes</h3>
+<div class="paragraph">
+<p>A number of convenience classes are created to make it easier to
+create GenTemplates by extending the <code>GenTemplate</code> class. They are:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Convenience Class</th>
+<th class="tableblock halign-left valign-top">Equivalent To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SwaggerGenTemplate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GenTemplate&lt;Swagger&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SwaggerOutputItem</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractOutputItem&lt;Swagger, Swagger&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SwaggerExtractOutputItem&lt;ItemType&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractOutputItem&lt;Swagger, ItemType&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SwaggerDynamicGenerator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractDynamicGenerator&lt;Swagger&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="2"><p class="tableblock"><code>- - - - - - - - -</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenApi3GenTemplate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GenTemplate&lt;OpenApi3&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenApi3OutputItem</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractOutputItem&lt;OpenApi3, OpenApi3&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenApi3ExtractOutputItem&lt;ItemType&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractOutputItem&lt;OpenApi3, ItemType&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenApi3DynamicGenerator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractDynamicGenerator&lt;OpenApi3&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="2"><p class="tableblock"><code>- - - - - - - - -</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZenModelGenTemplate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GenTemplate&lt;ZenModel&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZenModelOutputItem</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractOutputItem&lt;ZenModel, ZenModel&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZenModelExtractOutputItem&lt;ItemType extends EObject&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractOutputItem&lt;ZenModel, ItemType&gt;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZenModelDynamicGenerator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractDynamicGenerator&lt;ZenModel&gt;</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<h1 id="miscellaneous-details" class="sect0">Miscellaneous Details</h1>
+<div class="sect1">
+<h2 id="gentemplate-discovery">GenTemplate Discovery</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>RepreZen API Studio uses the Java <code>ServiceLoader</code> class to search for available
+GenTemplates. The classpath used in this search includes all the
+factory-default GenTemplate classes, as well as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All JAR files contained within the "Shared GenTemplate"
+location. This is <code>/shared/GenTemplates</code> in the workspace root
+directory by default, but it can be changed in the <strong>RepreZen &gt; Code
+Generation</strong> preference panel.</p>
+</li>
+<li>
+<p>The output directories associated with Java project in the
+workspace.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
+</li>
+<li>
+<p>All JAR files contained anywhere within a <code>/lib</code> folder in any open
+project in the workspace.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>ServiceManager</code> will search the classpath for all files (or JAR
+file entries) named
+<code>META-INF/services/com.modelsolv.reprezen.generators.api.template.GenTemplate</code>
+(the fully qualified class name of the <code>GenTemplate</code> class. Each such
+file should list one or more fully qualified names of GenTemplate
+classes. If the ServiceManager is able to instantiate a listed class,
+that class is treated as an available GenTemplate.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you rename a GenTemplate class or move it to a different
+package, its fully qualified class name in a
+<code>META-INF/services/com*GenTemplate</code> file will need to be updated
+accordingly. Otherwise, the GenTemplate will not be discovered, and it
+will not be available for use.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="gentemplate-groups">GenTemplate Groups</h3>
+<div class="paragraph">
+<p>In some cases, a list of GenTemplates is subject to change and can be
+determined dynamically at run-time. It can be difficult in a case like
+this to maintain an up-to-date set of service files containing all the
+GenTemplate class names.</p>
+</div>
+<div class="paragraph">
+<p>An alternative is to define a class that implements the
+<code>IGenTemplateGroup</code> interface. This interface contains a single
+method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>Iterable&lt;IGenTemplate&gt; getGenTemplates(ClassLoader)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The method should set its context classloader to the passed
+classloader, and then instantiate all the GenTemplates it wishes to
+make available, returning those instances. They will all be included
+in discovery.</p>
+</div>
+<div class="paragraph">
+<p>But how are the <code>IGenTemplateGroup</code> implementations discovered? Using
+the <code>ServiceLoader</code>, of course. Therefore, if you implement a
+<code>IGenTemplateGroup</code>, you must create a services file containing the
+fully qualified name of your implementing class. The service file is
+the same as for individual GenTemplates, but its final name component
+is <code>IGenTemplateGroup</code> instead of <code>IGenTemplate</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mvel-bindings">MVEL Bindings</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="static-generator">Why <code>Generator</code> and <code>StaticGenerator</code>?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As mentioned earlier, <code>AbstractGenTemplate</code> defines two member
+classes: <code>Generator</code> and <code>StaticGenerator</code>. They are identical, except
+that <code>Generator</code> is a (non-static) inner class, while
+<code>StaticGenerator</code> is static.</p>
+</div>
+<div class="paragraph">
+<p>The <code>GenTemplate</code> class similarly declares two member classes:
+non-static <code>Generator</code> that extends <code>AbstractGenTemplate.Generator</code>,
+and static <code>StaticGenerator</code> that extends
+<code>AbstractGenerator.StaticGenerator</code>.</p>
+</div>
+<div class="paragraph">
+<p>The reason for this is historical. Long ago, the entire <code>IGentemplate</code>
+interface was flat, in contrast to its current nested form. This led
+to problems, because there were cases in which RepreZen API Studio could not
+instantiate, and therefore could not discover, <code>GenTemplates</code> whose
+generators made use of libraries not available in the RepreZen API Studio runtime.</p>
+</div>
+<div class="paragraph">
+<p>To solve this problem we split the interface into its current
+form. However, when adapting existing GenTemplates, we took a
+short-sighted shortcut to ease our work: we made the <code>Generator</code>
+member classes inner classes, rather than static member classes. This
+was easiser because all access to the containing outer class members
+still worked!</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately, this structure is clumsy, and it makes it impossible to
+create generator classes that are reusable across multiple
+GenTemplates, since each generator class must be a non-static inner
+class member of any GenTemplate class that wishes to use it.</p>
+</div>
+<div class="paragraph">
+<p>There is no particular problem in locating the generator classes
+within the GenTemplate classes; the problem is that they are not
+static.</p>
+</div>
+<div class="paragraph">
+<p>We have now deprecated the non-static inner classes, but we retain
+them for backward compatibility. However, we also now create static
+versions of these classes, with constructors through which the
+GenTemplate instance and its context object are conveyed to the
+generator. The <code>GenTemplate.Generator</code> class is now a simple delegator
+to an instance of <code>GenTemplate.StaticGenerator</code> that it instantiates.</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnote_1">
+<a href="#_footnoteref_1">1</a>. More precisely, the resolved classpath for every such project is examined for entries that are not of kind <code>CPE_LIBRARY</code>. For each resulting entry that is of kind <code>CPE_SOURCE</code> that has a non-null output location, that location is added. For other entries, the entry&#8217;s path is added. Non-present locations are removed from the final collection.
+</div>
+</div>
+	</div>
+	<div class="col-sm-2 ">
+	  <nav id="sidetoc" data-spy="affix" data-toggle="toc" class="hidden-xs"></nav>
+	</div>
+      </div>
+      <div class="footer">
+  &copy; 2016 ModelSolv, Inc. All rights reserved.
+</div>
+
+    </div>
+  </body>
+</html>
