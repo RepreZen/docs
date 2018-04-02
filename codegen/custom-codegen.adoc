@@ -580,7 +580,7 @@ an extension of `GenTemplate.StaticGenerator<PrimaryType>`, you could
 still make use of all the capabilities described above, by calling
 `super.generate` from your own `generate` method.
 
-=== Convenience Classes
+=== Convenience Classes and Methods
 
 A number of convenience classes are created to make it easier to
 create GenTemplates by extending the `GenTemplate` class. They are:
@@ -603,6 +603,21 @@ create GenTemplates by extending the `GenTemplate` class. They are:
 | ZenModelExtractOutputItem<ItemType extends EObject> 
 | AbstractOutputItem<ZenModel, ItemType>
 | ZenModelDynamicGenerator | AbstractDynamicGenerator<ZenModel>
+|===
+
+In addition, convenience methods can be used to define primary sources
+for the supported primary types. These can all appear in `configure`
+method overrides in `GenTemplate`-derived classes.
+
+[cols="30m,70m",options="header"]
+|===
+| Convenience method | Equivalent long-form definition
+| defineZenModelSource() |
+  define(primarySource().ofType(ZenModel.class))
+| defineSwaggerSource() |
+  define(primarySource().ofType(Swagger.class))
+| defineOpenApi3Source() |
+  define(primarySource().ofType(OpenApi3.class))
 |===
 
 = Miscellaneous Details
@@ -673,11 +688,116 @@ is `IGenTemplateGroup` instead of `IGenTemplate`.
 
 == Extract Item Types
 
-TBA
+Currently supported extract types for our primary model types include:
+
+[cols="25,25,50",options="header"]
+|===
+| Primary Type | Extract Type | Comments
+.11+| ZenModel (a RAPID Model) | (various) | Any EObject type that is part
+  our ECore metamodel. In each case, the overall model is searched for
+  all instances of the given EObject type. Usefule examples are listed
+  in following rows.
+| ResourceAPI | A named collection of resource definitions
+| ServiceDataResource | A resource in a resource API
+| ObjectResource | An object resource in a resource API
+| CollectionResource | A collection resource in a resource API
+| Method | A method defined in a resource
+| TypedMessage | Any request or response definition
+| TypedRequest | Any method request definition
+| TypedResponse | Any method response definition
+| DatModel | A named collection of datatype definitions
+| Structure | A structure definition in a data model
+3+^|- - - - - - - -
+.8+| Swagger (OpenAPI v2),
+  link:https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-models[swagger-models
+  representation]| Path | Path objects listed in `/paths` object
+| Model | Schema definitions appearing in the `/definitions` object
+| Parameter | Parameter definition appearing in the top-level
+  `/parameters` object
+| Response | Response definitions appearing in the `/responses` object
+| NamedPath .4+| Named versions of the main extract types listed
+  above. Each supports `getName()` that returns the property name for
+  this object in the map in which it appears, and `getValue()` that
+  returns the object itself. These types work around an inherent
+  limitation of the Swagger representation that mapped types do not
+  know their own names.
+| NamedModel
+| NamedParameter
+| NamedResponse
+3+^|- - - - - - - -
+.10+| OpenAPIv3,
+  link:https://github.com/RepreZen/KaiZen-OpenApi-Parser[KaiZen
+  OpenApi Parser representation] | Path | Path objects listed in the
+  top-level `/paths` object
+| Schema | A schema listed in the `/components/schemas` object
+| Response | A response listed in the `/components/responses` object
+| Parameter | A parameter listed in the `/components/responses` object
+| Example | An example listed in the `/components/examples` object
+| RequestBody | A request body listed in the
+  `/components/requestBodies` object
+| Header | A header listed in the `/components/headers` object
+| SecurityScheme | A security scheme listed in the
+  `/components/securitySchemes` object
+| Link | A link listed in the `/components/links` object
+| Callback | A callback listed in the `/components/callbacks` object
+|===
+
 
 == MVEL Bindings
 
-TBA
+link:https://github.com/imona/tutorial/wiki/MVEL-Guide[MVEL] is used
+to construct output file names and `when` conditions for output
+items. For file names, the result should be a string, while a `when`
+condition should produce a boolean value.
+
+The following variables are bound during the evaluation of these
+expressions. They can appear in the MVEL expression, and their
+bean-like properties can be accessed using property syntax, as in
+`${swagger.info.title}` to obtain the title in a Swagger model.
+
+[cols="25m,75",options="header"]
+|===
+| Bound variable | Value
+| `zenModel` | The primary model for a `ZenModelGenTemplate`
+| `swagger` | The primary model for a `SwaggerGenTemplate`
+| `openApi3` | The primary model for an `OpenApi3GenTemplate`
+| `_model` | The primary model in any `GenTemplate`
+| primarySource | The primary source file, as a `FilePOJO` (see below;
+not available for `when` conditions)
+2+^|- - - - - - - -
+e| (modified type name) | The item value for an extract output item. The name
+  is computed by downcasing the character of the extract object's
+  simple type name
+| `_item`| The item value for any extract output item
+2+^|- - - - - - - -
+e| (GenTarget param name) | The value bound the the named GenTarget
+parameter
+|===
+
+=== The `FilePOJO` Class
+
+The `MVEL` expression for an output item file name can refer to
+`primarySource` to obtain information about the file containing the
+primary model for the executing GenTemplate. Its fields are as
+follows:
+
+[cols="m,,m", options="header"]
+|===
+| Expression | Value | Equivalent `File` or `FilenameUtils` method
+| primarySource.fileName | The model file name | File#getName()
+| primarySource.baseName | The model file name without its extension |
+  FilenameUtils.getBaseName(File)
+| primarySource.extension | The model file name extension |
+  FilenameUtils.getExtension(File)
+| primarySource.Path | The model file path | File#getPath()
+| primarySource.absolutePath | The absolute model file path |
+  File#getAbsolutePath()
+| primarySource.canonicalPath | The canonical model file path |
+  File#getCanonicalPath()
+| primarySource.parent | The parent directory of the model file | File#getParent()
+|===
+
+
 
 == Trace Information
 
