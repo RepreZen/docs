@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="/css/asciidoc.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="canonical" href="http://localhost:4000/codegen_custom_gentemplate/">
-  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://localhost:4000/feed.xml">
+  <link rel="canonical" href="http://reprezen.github.io/codegen_custom_gentemplate/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/feed.xml">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 
@@ -914,7 +914,7 @@ generator configuration.</p>
 <p>The <code>PrimaryType</code> of an <code>OutputItem</code> should match the <code>PrimaryType</code> of
 any <code>GenTemplate</code> in which it is configured. Output item classes
 should generally extend <code>AbstractOutputItem</code>, or one of the
-type-specific extensions of that class. (See <a href="#convenience-classes">Convenience Classes</a>.)</p>
+type-specific extensions of that class. (See <a href="#convenience-classes">[convenience-classes]</a>.)</p>
 </div>
 <div class="paragraph">
 <p>The purpose of an output item is to create a single file at a specific
@@ -1155,7 +1155,7 @@ still make use of all the capabilities described above, by calling
 </div>
 </div>
 <div class="sect2">
-<h3 id="convenience-classes">Convenience Classes</h3>
+<h3 id="convenience-classes-and-methods">Convenience Classes and Methods</h3>
 <div class="paragraph">
 <p>A number of convenience classes are created to make it easier to
 create GenTemplates by extending the <code>GenTemplate</code> class. They are:</p>
@@ -1225,6 +1225,37 @@ create GenTemplates by extending the <code>GenTemplate</code> class. They are:</
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ZenModelDynamicGenerator</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>AbstractDynamicGenerator&lt;ZenModel&gt;</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In addition, convenience methods can be used to define primary sources
+for the supported primary types. These can all appear in <code>configure</code>
+method overrides in <code>GenTemplate</code>-derived classes.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Convenience method</th>
+<th class="tableblock halign-left valign-top">Equivalent long-form definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>defineZenModelSource()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>define(primarySource().ofType(ZenModel.class))</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>defineSwaggerSource()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>define(primarySource().ofType(Swagger.class))</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>defineOpenApi3Source()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>define(primarySource().ofType(OpenApi3.class))</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1322,15 +1353,294 @@ is <code>IGenTemplateGroup</code> instead of <code>IGenTemplate</code>.</p>
 <h2 id="extract-item-types">Extract Item Types</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBA</p>
+<p>Currently supported extract types for our primary model types include:</p>
 </div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Primary Type</th>
+<th class="tableblock halign-left valign-top">Extract Type</th>
+<th class="tableblock halign-left valign-top">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="11"><p class="tableblock">ZenModel (a RAPID Model)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(various)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any EObject type that is part
+  our ECore metamodel. In each case, the overall model is searched for
+  all instances of the given EObject type. Usefule examples are listed
+  in following rows.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ResourceAPI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A named collection of resource definitions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ServiceDataResource</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A resource in a resource API</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ObjectResource</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An object resource in a resource API</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CollectionResource</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A collection resource in a resource API</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A method defined in a resource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TypedMessage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any request or response definition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TypedRequest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any method request definition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TypedResponse</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any method response definition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DatModel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A named collection of datatype definitions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Structure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A structure definition in a data model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock">- - - - - - - -</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="8"><p class="tableblock">Swagger (OpenAPI v2),
+  <a href="https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-models">swagger-models
+  representation</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path objects listed in <code>/paths</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schema definitions appearing in the <code>/definitions</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameter definition appearing in the top-level
+  <code>/parameters</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response definitions appearing in the <code>/responses</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NamedPath</p></td>
+<td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock">Named versions of the main extract types listed
+  above. Each supports <code>getName()</code> that returns the property name for
+  this object in the map in which it appears, and <code>getValue()</code> that
+  returns the object itself. These types work around an inherent
+  limitation of the Swagger representation that mapped types do not
+  know their own names.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NamedModel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NamedParameter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NamedResponse</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock">- - - - - - - -</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="10"><p class="tableblock">OpenAPIv3,
+  <a href="https://github.com/RepreZen/KaiZen-OpenApi-Parser">KaiZen
+  OpenApi Parser representation</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path objects listed in the
+  top-level <code>/paths</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A schema listed in the <code>/components/schemas</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A response listed in the <code>/components/responses</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A parameter listed in the <code>/components/responses</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Example</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An example listed in the <code>/components/examples</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RequestBody</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A request body listed in the
+  <code>/components/requestBodies</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Header</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A header listed in the <code>/components/headers</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SecurityScheme</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A security scheme listed in the
+  <code>/components/securitySchemes</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Link</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A link listed in the <code>/components/links</code> object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Callback</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A callback listed in the <code>/components/callbacks</code> object</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
 <h2 id="mvel-bindings">MVEL Bindings</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBA</p>
+<p><a href="https://github.com/imona/tutorial/wiki/MVEL-Guide">MVEL</a> is used
+to construct output file names and <code>when</code> conditions for output
+items. For file names, the result should be a string, while a <code>when</code>
+condition should produce a boolean value.</p>
+</div>
+<div class="paragraph">
+<p>The following variables are bound during the evaluation of these
+expressions. They can appear in the MVEL expression, and their
+bean-like properties can be accessed using property syntax, as in
+<code>${swagger.info.title}</code> to obtain the title in a Swagger model.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Bound variable</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>zenModel</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The primary model for a <code>ZenModelGenTemplate</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>swagger</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The primary model for a <code>SwaggerGenTemplate</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>openApi3</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The primary model for an <code>OpenApi3GenTemplate</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>_model</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The primary model in any <code>GenTemplate</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primarySource</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The primary source file, as a <code>FilePOJO</code> (see below;
+not available for <code>when</code> conditions)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="2"><p class="tableblock"><code>- - - - - - - -</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(modified type name)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The item value for an extract output item. The name
+  is computed by downcasing the character of the extract object&#8217;s
+  simple type name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>_item</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The item value for any extract output item</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="2"><p class="tableblock"><code>- - - - - - - -</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(GenTarget param name)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value bound the the named GenTarget
+parameter</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="the-code-filepojo-code-class">The <code>FilePOJO</code> Class</h3>
+<div class="paragraph">
+<p>The <code>MVEL</code> expression for an output item file name can refer to
+<code>primarySource</code> to obtain information about the file containing the
+primary model for the executing GenTemplate. Its fields are as
+follows:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Expression</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Equivalent <code>File</code> or <code>FilenameUtils</code> method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primarySource.fileName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The model file name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File#getName()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primarySource.baseName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The model file name without its extension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FilenameUtils.getBaseName(File)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primarySource.extension</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The model file name extension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FilenameUtils.getExtension(File)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primarySource.Path</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The model file path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File#getPath()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primarySource.absolutePath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The absolute model file path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File#getAbsolutePath()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primarySource.canonicalPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The canonical model file path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File#getCanonicalPath()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>primarySource.parent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The parent directory of the model file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>File#getParent()</code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
