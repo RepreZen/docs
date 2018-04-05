@@ -85,6 +85,12 @@ import such a project.
 You can follow along with the steps below to import the GenTemplate that is developed in {%link
 cg_intro%}.
 
+Before getting started, you'll save yourself some difficulty if you
+use the *Project* menu to turn off automated builds temporarily. We'll
+turn it back on later, and also explain why we did it.
+
+image::suppress-builds.png[Suppress Automatic Builds,role=text-center]
+
 Everything starts with _File -> Import..._ in the {RAS} menu bar. Select _Git -> Projects from Git_
 in the dialog that appears, then click _Next_.
 
@@ -99,7 +105,7 @@ contains the project you want to use. In our case we'll use the
 repository that contains all the source material for this
 documentation portal, including the an example GenTemplate
 project. The clone URI for that project is
-`git@github:RepreZen/docs.git`. After you enter the URI, click _Next_.
+`git@github.com:RepreZen/docs.git`. After you enter the URI, click _Next_.
 
 image::import-git-enter-uri.png[Import Dialog Step 3,role=text-center]
 
@@ -125,5 +131,22 @@ In the next panel, {RAS} shows you a list of the importable projects it was able
 downloaded repository. If you're following along with this example, you'll see only one project -
 `LexiconGentemplates`. Make your selections and press _Finish_ (finally)!
 
-After a few moments, while {RAS} automatically builds the project, the imported GenTemplates will be
-available for your use.
+Now we'll explain why we suppressed automatic builds at the outset. If
+we had not done that, {RAS} would immediately start trying to build
+the porject. Unfortunately, it would end up failing with some bizarre
+looking errors. The reason is that this project is structured as a
+particular type of Maven project. Maven is a widely used system to
+manage complex Java projects, and it has its own ideas about project
+layout and how projects should be built.
+
+So before we let {RAS} try to build this project, we'll clue it in
+about the fact that Maven should be managing the build, by
+right-clicking on the project name and using the *Maven > Update...*
+option in the context menu:
+
+image::maven-update.png[Maven Update,role=text-center]
+
+Click *OK* in the dialog that appears, and then turn automatic updates
+back on in the *Project* menu where you disabled it earlier. After a
+few moments, while {RAS} automatically builds the project, the
+imported GenTemplates will be available for your use.
