@@ -94,10 +94,12 @@ In the next panel, select _Clone URI_ and click _Next_.
 
 image::import-git-clone-uri.png[Import Dialog Step 2,role=text-center]
 
-Next, in the _URI_ field, enter the URI for the GitHub repository that contains the project you want
-to use. In our case we'll use the repository that contains all the source material for this
-documentation portal, including the an example GenTemplate project. After you enter the URI, click
-_Next_.
+Next, in the _URI_ field, enter the URI for the GitHub repository that
+contains the project you want to use. In our case we'll use the
+repository that contains all the source material for this
+documentation portal, including the an example GenTemplate
+project. The clone URI for that project is
+`git@github:RepreZen/docs.git`. After you enter the URI, click _Next_.
 
 image::import-git-enter-uri.png[Import Dialog Step 3,role=text-center]
 
