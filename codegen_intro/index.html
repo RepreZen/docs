@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="/css/asciidoc.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="canonical" href="http://reprezen.github.io/codegen_intro/">
-  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/codegen_intro/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://localhost:4000/feed.xml">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 
@@ -330,22 +330,32 @@
 	  <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The code generation features of RepreZen API Studio create the bridge between richly specifying an API and building systems that use that API properly.</p>
+<p>The code generation features of RepreZen API Studio create the bridge between richly
+specifying an API and building systems that use that API properly.</p>
 </div>
 <div class="paragraph">
-<p>A number of generators are built into the product and can be used immediately in any model project. Examples include (HTML) Documentation, Diagram,
-Swagger, JSON Schema, XML Schema, and many others. And since our goal is to make RepreZen&#8217;s unique approach to modeling as widely adoptable as possible,
-we will be adding more built-in generators in the future.</p>
+<p>A number of generators are built into the product and can be used
+immediately in any model project. Examples include (HTML)
+Documentation, Diagram, Swagger, JSON Schema, XML Schema, and many
+others. And since our goal is to make RepreZen&#8217;s unique approach to
+modeling as widely adoptable as possible, we will be adding more
+built-in generators in the future.</p>
 </div>
 <div class="paragraph">
-<p>However, it is also possible&#8201;&#8212;&#8201;and relatively straightforward&#8201;&#8212;&#8201;to create and share custom generators for your own needs.</p>
+<p>However, it is also possible&#8201;&#8212;&#8201;and relatively straightforward&#8201;&#8212;&#8201;to
+create and share custom generators for your own needs.</p>
 </div>
 <div class="paragraph">
-<p>In this document we will cover basic concepts and see how to use code generation in RepreZen API Studio. We&#8217;ll cover how to perform common tasks using wizards and
-other features of RepreZen API Studio, and we&#8217;ll create a custom code generator to address a fictional but plausible requirement in a large enterprise.</p>
+<p>In this document we will cover basic concepts and see how to use code
+generation in RepreZen API Studio. We&#8217;ll cover how to perform common tasks using
+wizards and other features of RepreZen API Studio, and we&#8217;ll create a custom code
+generator to address a fictional but plausible requirement in a large
+enterprise.</p>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll finish with a brief run-down of some advanced features that will allow experienced Java developers to create more powerful generators.</p>
+<p>We&#8217;ll finish with a brief run-down of some advanced features that will
+allow experienced Java developers to create their own powerful
+generators.</p>
 </div>
 </div>
 </div>
@@ -426,11 +436,13 @@ by selecting <em>RepreZen Project</em> in the <em>New</em>  menu.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that we have selected the option to create a RAPID-ML or Swagger Model as part of the project
-creation. We therefore have the opportunity to equip that model with an initial set of GenTargets by
-checking the "Create GenTargets" option. Which GenTargets? Those named in the box: <em>Documentation</em>
-and <em>Swagger</em>, in this example. We used the <em>Remove</em> button to remove a few other options that are
-included in the factory-default settings.</p>
+<p>Note that we have selected the option to create a Swagger, OpenApiv3,
+or RAPID-ML Model as part of the project creation. We also have the
+opportunity to equip that model with an initial set of GenTargets by
+checking the "Create GenTargets" option. Which GenTargets? Those named
+in the box: <em>JSON Schema</em>, <em>Documentation</em> and a few others, in this
+example. You can use the <em>Add</em> and <em>Remove</em> buttons to change this
+list to suit your needs.</p>
 </div>
 <div class="paragraph">
 <p>Once we click <em>OK</em> to crate the project, we can fully expand its folder tree in the Project
@@ -444,7 +456,7 @@ Explorer:</p>
 <div class="paragraph">
 <p>Within the <code>MyProject</code> project folder we see two top-level folders named <code>gentargets</code> and
 <code>models</code>. Naturally enough, the <code>MyModel.zen</code> file, which is where we will define our model, landed
-in the <code>models</code> folder, and we see both of our initial GenTargets in the <code>MyModel</code> sub-folder of
+in the <code>models</code> folder, and we see all of our initial GenTargets in the <code>MyModel</code> sub-folder of
 <code>gentargets</code>. The reason for the sub-folder is that each GenTarget applies to a specific model, and
 there might be multiple models in a single RepreZen project. In this case, we only have a single model
 named <code>MyModel</code>, and both targets apply to it.</p>
@@ -485,8 +497,9 @@ Explorer.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s run the Swagger GenTarget and see what happens to our project. Here&#8217;s the fully-expanded
-Project Explorer pane after the GenTarget has completed:</p>
+<p>Let&#8217;s run the Swagger GenTarget and see what happens to our
+project. Here&#8217;s the Project Explorer pane after the GenTarget has
+completed:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -536,7 +549,8 @@ starting with the GenTarget&#8217;s output folder, which by default is named <co
 <div class="paragraph">
 <p>Now let&#8217;s look at how we can add GenTargets to an existing model. The easiest way is to click on the
 "Create a New Generation Target" tool in the RepreZen API Studio tool bar while we&#8217;re editing a model file or when
-a model file is active in the Project Explorer pane.</p>
+a model file is active in the Project Explorer pane. You can also use
+the final entry in the <em>Generate</em> menu.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -552,22 +566,25 @@ a model file is active in the Project Explorer pane.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll select the WADL GenTemplate for our new GenTarget, and when we do that we notice that the
+<p>We&#8217;ll select the JAX-RS GenTemplate for our new GenTarget, and when we do that we notice that the
 "Next" button in the dialog box suddenly became active. That won&#8217;t happen with every GenTemplate,
 and we can see what it means by clicking on the "Next" button, leading to another dialog:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/codegen/WADL-dependencies-dialog.png" alt="WADL Dependencies Dialog">
+<img src="../images/codegen/JAXRS-dependencies-dialog.png" alt="WADL Dependencies Dialog">
 </div>
 </div>
 <div class="paragraph">
-<p>This dialog is alerting us to the fact that the WADL GenTarget requires an XML Schema GenTemplate on
-the same model as a prerequisite. This is an example of GenTarget chaining mentioned earlier. In
-this case, the WADL GenTemplate has been designed to make use of trace information created by the
-standard XML Schema GenTemplate. To fully configure a WADL GenTarget, therefore, we must <em>resolve</em>
-the dependency by specifying an XML Schema GenTarget whose trace information will be used by the
-WADL GenTarget.</p>
+<p>This dialog is alerting us to the fact that the JAX-RS GenTemplate
+requires a Java XML Bindings GenTemplate on the same model as a
+prerequisite. This is an example of GenTarget chaining mentioned
+earlier. In this case, the JAX-RS GenTemplate has been designed to
+make use of trace information created by the standard Java XML
+Bindings GenTemplate. To fully configure a JAX-RS GenTarget,
+therefore, we must <em>resolve</em> the dependency by specifying a Java XML
+Bindings GenTarget whose trace information will be used by the JAX-RS
+GenTarget.</p>
 </div>
 <div class="paragraph">
 <p>There are three possible resolution strategies that may appear in the selection menu appearing for
@@ -577,49 +594,58 @@ each dependency listed in the GenTarget dependency dialog:</p>
 <dl>
 <dt class="hdlist1">New GenTarget </dt>
 <dd>
-<p>This option causes the creation of a new GenTarget to resolve the
-dependency. Selecting this option will cause another instance of the New Generation Target dialog to
-pop up immediately, already configured with the correct GenTemplate and other defaults. If that
-GenTarget also has dependencies, the new dialog will itself have an active "Next" button that could
-be used to create yet more new GenTargets, and so forth.</p>
+<p>This option causes the creation of a new GenTarget to
+resolve the dependency. Selecting this option will cause another
+instance of the New Generation Target dialog to pop up immediately,
+already configured with the correct GenTemplate and other defaults. If
+that GenTarget also has dependencies, the new dialog will itself have
+an active "Next" button that could be used to create yet more new
+GenTargets, and so forth.</p>
 </dd>
 <dt class="hdlist1">Do Not Resolve </dt>
 <dd>
-<p>This is an advanced option that should not be used by most users.</p>
+<p>This is an advanced option that should not be used
+by most users.</p>
 </dd>
 <dt class="hdlist1">Use an Existing GenTarget </dt>
 <dd>
-<p>If a GenTarget already exists for the model that is of the type
-required by some dependency, that GenTarget will also appear as a resolution option for that
-dependency.</p>
+<p>If a GenTarget already exists for the
+model that is of the type required by the dependency, that GenTarget
+will also appear as a resolution option for the dependency.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll select the "New GenTarget" option in the selection menu. When we do that, we will immediately
-see new a dialog box that will allow us create a new XML Schema GenTarget. The existing dialog for
-the WADL GenTarget is still visible, but it is inoperable until the new dialog closes out. We will
-accept all the default settings for our new XML Schema GenTarget by clicking its "Finish"
-button. Then we can also click "Finish" on the WADL GenTarget dialog. When we&#8217;re finished, we will
-see that both the WADL GenTarget we originally requested and the XML Schema GenTarget it depends on
-have been added to our model project for the <code>MyModel</code> model.</p>
+<p>We&#8217;ll select the "New GenTarget" option in the selection menu. When we
+do that, we will immediately see new a dialog box that will allow us
+create a new Java XML Bindings GenTarget. The existing dialog for the
+JAX-RS GenTarget is still visible, but it is inoperable until the new
+dialog closes out. We will accept all the default settings for our new
+Java XML Bindings GenTarget by clicking its "Finish" button. Then we
+can also click "Finish" on the JAX-RS GenTarget dialog. When we&#8217;re
+finished, we will see that both the JAX-RS GenTarget we originally
+requested and the Java XML Bindings GenTarget it depends on have been
+added to our model project for the <code>MyModel</code> model.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="a-id-creategentemplate-a-creating-a-gen-template"><a id="createGenTemplate"></a>Creating a Gen Template</h3>
 <div class="paragraph">
-<p>So far we have seen how to set up built-in GenTargets to generate various types of output in our
-model projects. But how about if we have a special need. For example, imagine we work at a company
-that maintains a proprietary lexicon of named elements appearing in APIs throughout the
-organization, including data types, resources, properties, etc. Perhaps this lexicon is richly
-linked, and consumes CSV files submitted by various projects. We&#8217;d like to contribute information
-about our RepreZen models. We could automate the creation of our CSV files by creating a custom
-GenTemplate.</p>
+<p>So far we have seen how to set up built-in GenTargets to generate
+various types of output in our model projects. But how about if we
+have a special need. For example, imagine we work at a company that
+maintains a proprietary lexicon of named elements appearing in APIs
+throughout the organization, including data types, resources,
+properties, etc. Perhaps this lexicon is richly linked, and consumes
+CSV files submitted by various projects. We&#8217;d like to contribute
+information about our RepreZen models. We could automate the creation of
+our CSV files by creating a custom GenTemplate.</p>
 </div>
 <div class="paragraph">
-<p>To get started, we&#8217;ll use the <code>Xtend Generation Template</code> wizard in RepreZen API Studio. Select <em>New</em> &#8594;
-<em>Other&#8230;&#8203;</em>, and then choose <em>RepreZen API Studio</em> / <em>Generation Templates</em> / <em>Xtend Generation Template</em>. The
-following dialog will appear:</p>
+<p>To get started, we&#8217;ll use the <code>Xtend Generation Template</code> wizard in
+RepreZen API Studio. Select <em>New</em> &#8594; <em>Other&#8230;&#8203;</em>, and then choose <em>RepreZen API Studio</em> /
+<em>Generation Templates</em> / <em>Xtend Generation Template</em>. The following
+dialog will appear:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -645,10 +671,12 @@ code that it creates for us. Let&#8217;s see what the project looks like:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The only thing we&#8217;re going to pay attention to right now is <code>MainTemplate.xtend</code>. This is the file
-that will define the "meat" of our GenTemplate. Nearly all the rest of the project content is
-boilerplate that you won&#8217;t need to worry about unless you choose to modify your GenTemplate in ways
-that go beyond what the wizard provides.</p>
+<p>The only thing we&#8217;re going to pay attention to right now is
+<code>MainGenerator.xtend</code>. This is the file that will define the "meat" of
+our GenTemplate. Nearly all the rest of the project content is
+boilerplate that you won&#8217;t need to worry about unless you choose to
+modify your GenTemplate in ways that go beyond what the wizard
+provides.</p>
 </div>
 <div class="paragraph">
 <p><code>MainTemplate.xtend</code> is an Xtend source file. As stated earlier, Xtend is a programming language
@@ -687,7 +715,18 @@ guillemets to enclose code comments, e.g.:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«««This is an Xtend comment and will have no impact on the template output»»»</code></pre>
+<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">««« This is an Xtend comment and will have no impact on the template output</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This file has many comments, since it&#8217;s intended to be instructive to
+the person who is developing the GenTemplate. We&#8217;ll remove those
+comments for the purpose of this walk-through. Here&#8217;s the template
+without its initial comments:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/xtend-template-no-comments.png" alt="Initial Template Without Comments">
 </div>
 </div>
 <div class="paragraph">
@@ -708,20 +747,24 @@ variable named <code>model</code> will represent the model itself, in the form o
 a number of properties, one of which is the model&#8217;s name. The Xtend expression <code>model.name</code> yields
 the model&#8217;s name, and that name is what replaces <code>&laquo;model.name&raquo;</code> in the output
 file. Therefore, if we use this GenTemplate on the model we created above, the generated HTML file
-will have as its title "Sample Generated HTML for MyModel," thanks to the interpolation construct on
+will have as its title "Methods of MyModel," thanks to the interpolation construct on
 line 12.</p>
 </div>
 <div class="paragraph">
-<p>Next, we have two instances of the Xtend loop construct, one covering lines 18-22, and another
-nested within the first, spanning lines 19-21. Let&#8217;s look at these two loops in detail:</p>
+<p>Next, we have three instances of the Xtend loop construct: one
+covering lines 18-24; a second one nested within the first, spanning
+lines 19-23; a third, inner-most loop on lines 20-23. Lets look at
+these loops in detail.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«FOR resourceAPI : model.resourceAPIs»                      <i class="conum" data-value="1"></i><b>(1)</b>
-  «FOR resource : resourceAPI.ownedResourceDefinitions»     <i class="conum" data-value="2"></i><b>(2)</b>
-    &lt;li&gt;«resource.name»&lt;/li&gt;                                <i class="conum" data-value="3"></i><b>(3)</b>
-  «ENDFOR»                                                  <i class="conum" data-value="4"></i><b>(4)</b>
-«ENDFOR»                                                    <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«FOR api : model.resourceAPIs»	                        <i class="conum" data-value="1"></i><b>(1)</b>
+  «FOR resource : api.ownedResourceDefinitions»	        <i class="conum" data-value="2"></i><b>(2)</b>
+    «FOR method : resource.methods»     	        <i class="conum" data-value="3"></i><b>(3)</b>
+      &lt;li&gt;«method.httpMethod» «method.httpMethod»&lt;/li&gt;  <i class="conum" data-value="4"></i><b>(4)</b>
+    «ENDFOR»                                            <i class="conum" data-value="5"></i><b>(5)</b>
+  «ENDFOR»                                              <i class="conum" data-value="6"></i><b>(6)</b>
+«ENDFOR»                                                <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all spread">
@@ -731,9 +774,9 @@ nested within the first, spanning lines 19-21. Let&#8217;s look at these two loo
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="1"></strong> thru <strong class="conum" data-value="5"></strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="1"></strong> thru <strong class="conum" data-value="7"></strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>The outer loop introduces the variable <code>resourceAPI</code> and binds it in turn to each of the values
+<p>The outer loop introduces the variable <code>api</code> and binds it in turn to each of the values
 appearing in the collection represented by <code>model.resourceAPIs</code>. Just like <code>name</code>, <code>resourceAPIs</code> is
 a property of the <code>ZenModel</code> class, and <code>model.resourceAPIs</code> is an expression that accesses it. The
 property&#8217;s vlaue is a collection of values of type <code>ResourceAPI</code>, and the collection includes all
@@ -754,10 +797,10 @@ created it as a working sample model with one resource API, named <code>MyModelA
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="2"></strong> thru <strong class="conum" data-value="4"></strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="2"></strong> thru <strong class="conum" data-value="6"></strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>The second loop introduces a new variable, <code>resource</code>, that will represent, in turn, each of the
-Resources defined in whichever Resource API is currently represented by the <code>resourceAPI</code>
+Resources defined in whichever Resource API is currently represented by the <code>api</code>
 variable. These are obtained via the <code>ownedResourceDefinitions</code> property of the <code>ResourceAPI</code> class.</p>
 </div>
 <div class="admonitionblock note">
@@ -775,33 +818,54 @@ an object resource named <code>MyModelObject</code>, and a collection resource n
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="3"></strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="3"></strong> thru <strong class="conum" data-value="5"></strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Finally, we have an interpolation construct that emits the name of whichever resource is currently
- bound to the <code>resource</code> variable, in an HTML list item.</p>
+<p>The third loop introduces a new variable, <code>method</code>, that will represent, in turn, each of the
+methods defined in whichever Resource is currently represented by the <code>resource</code>
+variable. These are obtained via the <code>methods</code> property of the <code>ResourceDefinition</code> class.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In the sample model created by RepreZen API Studio, defines a <code>GET</code> method and
+a <code>POST</code> method for each of its two resources.
+</td>
+</tr>
+</table>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="4"></strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Finally, we have an interpolation construct that emits the HTTP
+ operation name and the resource URL for each method encountered.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The upshot of these two loops is that the names of all the Resources defined by all the Resource
-APIs in our model will appear in an itemized list. In our case, in our untouched model, we have a
-single resource API named <code>MyModelAPI</code>, with two resources named <code>objectResource</code> and
-<code>collectionResource</code>. Our itemized list will contain those two resource names.</p>
+<p>The upshot of these three loops is that the information about every
+method defined our model will appear in an itemized list. In our case,
+in our untouched model, we would see four methods&#8212;&#8203;two each for our
+two defined resources.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="but-what-about-our-lexicon">But What About Our Lexicon?</h4>
 <div class="paragraph">
-<p>Our goal was not to create an HTML list of resource names, but to generate data to be fed into our
-enterprise lexicon. So let&#8217;s remove the initial template created for us by the wizard, and create
-the template we really want.</p>
+<p>Our goal was not to create an HTML list of resource names, but to
+generate data to be fed into our enterprise lexicon. So let&#8217;s remove
+the initial template created for us by the wizard, and create the
+template we really want.</p>
 </div>
 <div class="paragraph">
-<p>Our first job is to remove the contents of the existing template&#8201;&#8212;&#8201;that is, everything between the
-opening triple-apostrophe and the closing triple-apostrophe. We can also remove the comment that the
-GenTemplate Wizard left us pointing at the Xtend documentation.  We&#8217;re left with something that
-looks like this:</p>
+<p>Our first job is to remove the contents of the existing template&#8201;&#8212;&#8201;that is, everything between the opening triple-apostrophe and the
+closing triple-apostrophe. We&#8217;re left with something that looks like
+this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -812,44 +876,50 @@ looks like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Before we go any further, we should change the configuration of our GenTemplate so that it will
-generate files with names like <code>MyModel.csv</code> instead of <code>MyModel.html</code>. That&#8217;s specified in a file
-named <code>config.json</code> that appears in the same folder as the <code>MainTemplate.xtend</code> file that we&#8217;ve been
-working on. Go ahead and open it in RepreZen API Studio.</p>
+<p>Before we go any further, we should change the configuration of our
+GenTemplate so that it will generate files with names like
+<code>MyModel.csv</code> instead of <code>MyModel.html</code>. That&#8217;s specified in a file
+named <code>LexiconGenTemplatesGenTemplate.java</code> that appears in the same
+folder as the <code>MainTemplate.xtend</code> file that we&#8217;ve been working on. Go
+ahead and open it in RepreZen API Studio. Here&#8217;s what it looks like with comments
+removed:</p>
 </div>
-<div class="paragraph">
-<p>The <code>config.json</code> file provides configuration information for our GenTemplate, in a format known as
-<a href="http://www.json.org/">JSON</a>. Our output file name is configured on the following line:</p>
-</div>
-<div class="listingblock java">
+<div class="imageblock text-center">
 <div class="content">
-<pre class="highlight nowrap"><code>"outputFile": "${zenModel.name}.html"</code></pre>
+<img src="../images/codegen/gentemplate-no-comments.png" alt="GenTemplate Class Without Comments">
 </div>
 </div>
 <div class="paragraph">
-<p>You can directly change the <code>html</code> at the end of this lineto <code>csv</code>, being careful not to dirsupt
-anything else in the line, including the final quote. In the end the file should look like this.</p>
+<p>This class illustrates features we&#8217;re not using, so we&#8217;ll also remove
+the struck-out lines in the image above, leaving us with this:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/pruned-gentemplate.png" alt="Pruned GenTemplate Class">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>configure</code> method in this class provides information about
+individual generators that should be run when the GenTemplate is
+executed. Our <code>MainGenerator</code> Xtend class is the only one we need
+to run.</p>
+</div>
+<div class="paragraph">
+<p>You can see where this generator is configured with an output file
+name ending with <code>.html</code>. We&#8217;ll change that to <code>.csv</code> so the file will
+be understood by our lexicon system. Here&#8217;s how that code ends up
+looking:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-java" data-lang="java">{
-    "primarySource": {
-        "type": "com.modelsolv.reprezen.generators.api.zenmodel.ZenModelSource",
-        "description": "RAPID-ML model for generation"
-    },
-    "outputItems": [
-        {
-            "name": "MainTemplate",
-            "type": "com.modelsolv.reprezen.generators.xtend.template.lexicongentemplates.MainTemplate",
-	        "outputFile": "${zenModel.name}.csv"
-        }
-    ]
-}</code></pre>
+<pre>define(outputItem().named("main") //
+	.using(MainGenerator.class) //
+	.writing("${zenModel.name}.csv"));</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Once you are finished, save your changes and go back to the editor where we were working on
-<code>MainTemplate.xtend</code>.</p>
+<code>MainGenerator.xtend</code>.</p>
 </div>
 <div class="paragraph">
 <p>Now let&#8217;s start filling in what we really intend to show up in our generated CSV file. For starters,
@@ -913,7 +983,7 @@ appears is, of course, our model; so we repeat the model name in the "Model" col
 </div>
 <div class="paragraph">
 <p>There is one problem with this line: If the model lacks top-level documentation, this GenTemplate
-will fail. The problem isthat in that case, <code>model.documentation</code> will have a null value, and
+will fail. The problem is that in that case, <code>model.documentation</code> will have a null value, and
 therefore, trying to retrieve its <code>text</code> property will fail.</p>
 </div>
 <div class="paragraph">
@@ -957,8 +1027,8 @@ elements, and they will be picked up by our template.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«FOR resourceAPI: model.resourceAPIs»
-  «resourceAPI.name»,ResourceAPI,«model.name»,Model,«model.name»,«resourceAPI.documentation?.text»
+<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«FOR api : model.resourceAPIs»
+  «api.name»,ResourceAPI,«model.name»,Model,«model.name»,«api.documentation?.text»
 «ENDFOR»</code></pre>
 </div>
 </div>
@@ -972,8 +1042,8 @@ template. We&#8217;ll use something like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«FOR resource: resourceAPI.ownedResourceDefinitions»
-  «resource.name»,???,«resourceAPI.name»,ResourceAPI,«model.name»,«resource.documentation?.text»
+<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">«FOR resource: api.ownedResourceDefinitions»
+  «resource.name»,???,«api.name»,ResourceAPI,«model.name»,«resource.documentation?.text»
 «ENDFOR»</code></pre>
 </div>
 </div>
@@ -1031,22 +1101,18 @@ that looks in Xtend:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">def getType(ResourceDefinition resource) {
-  '''«
-    IF resource instanceof CollectionResource
-      »CollectionResource«
-    ELSEIF resource instanceof ObjectResource
-      »ObjectResource«
-    ENDIF
-  »'''
+    if (resource instanceof ObjectResource) {
+       return "ObjectResource"
+    } else {
+       return "CollectionResource"
+    }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We&#8217;ve now created a method called <code>getType</code> that we can apply to any resource, and it will yield the
-type string that we&#8217;re after. The method itself is defined using an Xtend template, but the result
-of evaluating the template is not written directly to our output file, as is the case with our main
-template. Instead, this method will apply the template and return the results, which we can
-incorporate in our main template via interpolation:</p>
+<p>We&#8217;ve now created a method called <code>getType</code> that we can apply to any
+resource, and it will yield the type string that we&#8217;re after. We can
+use this new method in our template via interpolation :</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1090,7 +1156,7 @@ case you want to use it to try things out in RepreZen API Studio:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">package com.modelsolv.reprezen.generators.xtend.template.lexicongentemplates
+<pre class="highlight nowrap"><code class="language-xtend" data-lang="xtend">package com.example.lexiconGenTemplates
 
 import com.modelsolv.reprezen.generators.api.zenmodel.ZenModelOutputItem
 import com.modelsolv.reprezen.restapi.CollectionResource
@@ -1098,7 +1164,7 @@ import com.modelsolv.reprezen.restapi.ObjectResource
 import com.modelsolv.reprezen.restapi.ResourceDefinition
 import com.modelsolv.reprezen.restapi.ZenModel
 
-class MainTemplate extends ZenModelOutputItem {
+class MainGenerator extends ZenModelOutputItem {
     override generate(ZenModel model) {
         '''
             Name,Type,Parent,ParentType,Model,Documentation
@@ -1113,13 +1179,11 @@ class MainTemplate extends ZenModelOutputItem {
     }
 
     def getType(ResourceDefinition resource) {
-        '''«
-            IF resource instanceof CollectionResource
-                »CollectionResource«
-            ELSEIF resource instanceof ObjectResource
-                »ObjectResource«
-            ENDIF
-        »'''
+        if (resource instanceof ObjectResource) {
+        	return "ObjectResource"
+        } else {
+        	return "CollectionResource"
+        }
     }
 }</code></pre>
 </div>
