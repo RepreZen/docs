@@ -297,7 +297,7 @@ GenTarget.
 ==== Named Source
 
 The `NamedSourceBuilder` works just like the `PrimarySourceBuilder`,
-but it attaches a name to the the source.
+but it attaches a name to the source.
 
 ```
 define(namedSource().named("security") //
@@ -770,7 +770,7 @@ e| (modified type name) | The item value for an extract output item. The name
   simple type name
 | `_item`| The item value for any extract output item
 2+^|- - - - - - - -
-e| (GenTarget param name) | The value bound the the named GenTarget
+e| (GenTarget param name) | The value bound the named GenTarget
 parameter
 |===
 
