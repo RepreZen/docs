@@ -484,6 +484,16 @@ import such a project.</p>
 <p>You can follow along with the steps below to import the GenTemplate that is developed in <a href="/codegen_intro/">Introduction to Code Generation in RepreZen API Studio</a>.</p>
 </div>
 <div class="paragraph">
+<p>Before getting started, you&#8217;ll save yourself some difficulty if you
+use the <strong>Project</strong> menu to turn off automated builds temporarily. We&#8217;ll
+turn it back on later, and also explain why we did it.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/suppress-builds.png" alt="Suppress Automatic Builds">
+</div>
+</div>
+<div class="paragraph">
 <p>Everything starts with <em>File &#8594; Import&#8230;&#8203;</em> in the RepreZen API Studio menu bar. Select <em>Git &#8594; Projects from Git</em>
 in the dialog that appears, then click <em>Next</em>.</p>
 </div>
@@ -506,7 +516,7 @@ contains the project you want to use. In our case we&#8217;ll use the
 repository that contains all the source material for this
 documentation portal, including the an example GenTemplate
 project. The clone URI for that project is
-<code>git@github:RepreZen/docs.git</code>. After you enter the URI, click <em>Next</em>.</p>
+<code>git@github.com:RepreZen/docs.git</code>. After you enter the URI, click <em>Next</em>.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -550,8 +560,30 @@ downloaded repository. If you&#8217;re following along with this example, you&#8
 <code>LexiconGentemplates</code>. Make your selections and press <em>Finish</em> (finally)!</p>
 </div>
 <div class="paragraph">
-<p>After a few moments, while RepreZen API Studio automatically builds the project, the imported GenTemplates will be
-available for your use.</p>
+<p>Now we&#8217;ll explain why we suppressed automatic builds at the outset. If
+we had not done that, RepreZen API Studio would immediately start trying to build
+the porject. Unfortunately, it would end up failing with some bizarre
+looking errors. The reason is that this project is structured as a
+particular type of Maven project. Maven is a widely used system to
+manage complex Java projects, and it has its own ideas about project
+layout and how projects should be built.</p>
+</div>
+<div class="paragraph">
+<p>So before we let RepreZen API Studio try to build this project, we&#8217;ll clue it in
+about the fact that Maven should be managing the build, by
+right-clicking on the project name and using the <strong>Maven &gt; Update&#8230;&#8203;</strong>
+option in the context menu:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/codegen/maven-update.png" alt="Maven Update">
+</div>
+</div>
+<div class="paragraph">
+<p>Click <strong>OK</strong> in the dialog that appears, and then turn automatic updates
+back on in the <strong>Project</strong> menu where you disabled it earlier. After a
+few moments, while RepreZen API Studio automatically builds the project, the
+imported GenTemplates will be available for your use.</p>
 </div>
 </div>
 </div>
