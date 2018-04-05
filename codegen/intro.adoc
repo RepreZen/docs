@@ -8,18 +8,28 @@ permalink: /codegen_intro/
 :RAS: RepreZen API Studio 
 :RZ: RepreZen
 
-The code generation features of {RAS} create the bridge between richly specifying an API and building systems that use that API properly.
+The code generation features of {RAS} create the bridge between richly
+specifying an API and building systems that use that API properly.
 
-A number of generators are built into the product and can be used immediately in any model project. Examples include (HTML) Documentation, Diagram,
-Swagger, JSON Schema, XML Schema, and many others. And since our goal is to make {RZ}'s unique approach to modeling as widely adoptable as possible,
-we will be adding more built-in generators in the future.
+A number of generators are built into the product and can be used
+immediately in any model project. Examples include (HTML)
+Documentation, Diagram, Swagger, JSON Schema, XML Schema, and many
+others. And since our goal is to make {RZ}'s unique approach to
+modeling as widely adoptable as possible, we will be adding more
+built-in generators in the future.
 
-However, it is also possible -- and relatively straightforward -- to create and share custom generators for your own needs.
+However, it is also possible -- and relatively straightforward -- to
+create and share custom generators for your own needs.
 
-In this document we will cover basic concepts and see how to use code generation in {RAS}. We'll cover how to perform common tasks using wizards and
-other features of {RAS}, and we'll create a custom code generator to address a fictional but plausible requirement in a large enterprise.
+In this document we will cover basic concepts and see how to use code
+generation in {RAS}. We'll cover how to perform common tasks using
+wizards and other features of {RAS}, and we'll create a custom code
+generator to address a fictional but plausible requirement in a large
+enterprise.
 
-We'll finish with a brief run-down of some advanced features that will allow experienced Java developers to create more powerful generators.
+We'll finish with a brief run-down of some advanced features that will
+allow experienced Java developers to create their own powerful
+generators.
 
 include::codegen/arch.adoc[]
 
@@ -36,11 +46,13 @@ by selecting _RepreZen Project_ in the _New_  menu.
 image::new-project-menu.png[{RZ} New Project Menu,role=text-center]
 image::rep-proj-wizard.png[{RZ} Project Wizard,role=text-center]
 
-Note that we have selected the option to create a RAPID-ML or Swagger Model as part of the project
-creation. We therefore have the opportunity to equip that model with an initial set of GenTargets by
-checking the "Create GenTargets" option. Which GenTargets? Those named in the box: _Documentation_
-and _Swagger_, in this example. We used the _Remove_ button to remove a few other options that are
-included in the factory-default settings.
+Note that we have selected the option to create a Swagger, OpenApiv3,
+or RAPID-ML Model as part of the project creation. We also have the
+opportunity to equip that model with an initial set of GenTargets by
+checking the "Create GenTargets" option. Which GenTargets? Those named
+in the box: _JSON Schema_, _Documentation_ and a few others, in this
+example. You can use the _Add_ and _Remove_ buttons to change this
+list to suit your needs.
 
 Once we click _OK_ to crate the project, we can fully expand its folder tree in the Project
 Explorer:
@@ -49,7 +61,7 @@ image::proj-structure.png[{RZ} Project Structure,role=text-center]
 
 Within the `MyProject` project folder we see two top-level folders named `gentargets` and
 `models`. Naturally enough, the `MyModel.zen` file, which is where we will define our model, landed
-in the `models` folder, and we see both of our initial GenTargets in the `MyModel` sub-folder of
+in the `models` folder, and we see all of our initial GenTargets in the `MyModel` sub-folder of
 `gentargets`. The reason for the sub-folder is that each GenTarget applies to a specific model, and
 there might be multiple models in a single {RZ} project. In this case, we only have a single model
 named `MyModel`, and both targets apply to it.
@@ -77,8 +89,9 @@ Explorer.
 
 image::gen-target-context-menu.png[GenTarget Context Menu,role=text-center]
 
-Let's run the Swagger GenTarget and see what happens to our project. Here's the fully-expanded
-Project Explorer pane after the GenTarget has completed:
+Let's run the Swagger GenTarget and see what happens to our
+project. Here's the Project Explorer pane after the GenTarget has
+completed:
 
 image::proj-structure-after-gentarget.png[Project Structure After GenTarget,role=text-center]
 
@@ -115,7 +128,8 @@ starting with the GenTarget's output folder, which by default is named `generate
 
 Now let's look at how we can add GenTargets to an existing model. The easiest way is to click on the
 "Create a New Generation Target" tool in the {RAS} tool bar while we're editing a model file or when
-a model file is active in the Project Explorer pane. 
+a model file is active in the Project Explorer pane. You can also use
+the final entry in the _Generate_ menu.
 
 image::new-gentarget-tool.png[Create a New Generation Target Tool,role=text-center]
 
@@ -123,55 +137,67 @@ The following dialog box apperas, where we can choose which GenTarget we wish to
 
 image::new-gentarget-dialog.png[New Generation Target Dialog,role=text-center]
 
-We'll select the WADL GenTemplate for our new GenTarget, and when we do that we notice that the
+We'll select the JAX-RS GenTemplate for our new GenTarget, and when we do that we notice that the
 "Next" button in the dialog box suddenly became active. That won't happen with every GenTemplate,
 and we can see what it means by clicking on the "Next" button, leading to another dialog:
 
-image::WADL-dependencies-dialog.png[WADL Dependencies Dialog,role=text-center]
+image::JAXRS-dependencies-dialog.png[WADL Dependencies Dialog,role=text-center]
 
-This dialog is alerting us to the fact that the WADL GenTarget requires an XML Schema GenTemplate on
-the same model as a prerequisite. This is an example of GenTarget chaining mentioned earlier. In
-this case, the WADL GenTemplate has been designed to make use of trace information created by the
-standard XML Schema GenTemplate. To fully configure a WADL GenTarget, therefore, we must _resolve_
-the dependency by specifying an XML Schema GenTarget whose trace information will be used by the
-WADL GenTarget.
+This dialog is alerting us to the fact that the JAX-RS GenTemplate
+requires a Java XML Bindings GenTemplate on the same model as a
+prerequisite. This is an example of GenTarget chaining mentioned
+earlier. In this case, the JAX-RS GenTemplate has been designed to
+make use of trace information created by the standard Java XML
+Bindings GenTemplate. To fully configure a JAX-RS GenTarget,
+therefore, we must _resolve_ the dependency by specifying a Java XML
+Bindings GenTarget whose trace information will be used by the JAX-RS
+GenTarget.
 
 There are three possible resolution strategies that may appear in the selection menu appearing for
 each dependency listed in the GenTarget dependency dialog:
 
-New GenTarget :: This option causes the creation of a new GenTarget to resolve the
-dependency. Selecting this option will cause another instance of the New Generation Target dialog to
-pop up immediately, already configured with the correct GenTemplate and other defaults. If that
-GenTarget also has dependencies, the new dialog will itself have an active "Next" button that could
-be used to create yet more new GenTargets, and so forth.
+New GenTarget :: This option causes the creation of a new GenTarget to
+resolve the dependency. Selecting this option will cause another
+instance of the New Generation Target dialog to pop up immediately,
+already configured with the correct GenTemplate and other defaults. If
+that GenTarget also has dependencies, the new dialog will itself have
+an active "Next" button that could be used to create yet more new
+GenTargets, and so forth.
 
-Do Not Resolve :: This is an advanced option that should not be used by most users.
+Do Not Resolve :: This is an advanced option that should not be used
+by most users.
 
-Use an Existing GenTarget :: If a GenTarget already exists for the model that is of the type
-required by some dependency, that GenTarget will also appear as a resolution option for that
-dependency.
+Use an Existing GenTarget :: If a GenTarget already exists for the
+model that is of the type required by the dependency, that GenTarget
+will also appear as a resolution option for the dependency.
 
-We'll select the "New GenTarget" option in the selection menu. When we do that, we will immediately
-see new a dialog box that will allow us create a new XML Schema GenTarget. The existing dialog for
-the WADL GenTarget is still visible, but it is inoperable until the new dialog closes out. We will
-accept all the default settings for our new XML Schema GenTarget by clicking its "Finish"
-button. Then we can also click "Finish" on the WADL GenTarget dialog. When we're finished, we will
-see that both the WADL GenTarget we originally requested and the XML Schema GenTarget it depends on
-have been added to our model project for the `MyModel` model.
+We'll select the "New GenTarget" option in the selection menu. When we
+do that, we will immediately see new a dialog box that will allow us
+create a new Java XML Bindings GenTarget. The existing dialog for the
+JAX-RS GenTarget is still visible, but it is inoperable until the new
+dialog closes out. We will accept all the default settings for our new
+Java XML Bindings GenTarget by clicking its "Finish" button. Then we
+can also click "Finish" on the JAX-RS GenTarget dialog. When we're
+finished, we will see that both the JAX-RS GenTarget we originally
+requested and the Java XML Bindings GenTarget it depends on have been
+added to our model project for the `MyModel` model.
 
 === [[createGenTemplate]]Creating a Gen Template
 
-So far we have seen how to set up built-in GenTargets to generate various types of output in our
-model projects. But how about if we have a special need. For example, imagine we work at a company
-that maintains a proprietary lexicon of named elements appearing in APIs throughout the
-organization, including data types, resources, properties, etc. Perhaps this lexicon is richly
-linked, and consumes CSV files submitted by various projects. We'd like to contribute information
-about our {RZ} models. We could automate the creation of our CSV files by creating a custom
-GenTemplate.
+So far we have seen how to set up built-in GenTargets to generate
+various types of output in our model projects. But how about if we
+have a special need. For example, imagine we work at a company that
+maintains a proprietary lexicon of named elements appearing in APIs
+throughout the organization, including data types, resources,
+properties, etc. Perhaps this lexicon is richly linked, and consumes
+CSV files submitted by various projects. We'd like to contribute
+information about our {RZ} models. We could automate the creation of
+our CSV files by creating a custom GenTemplate.
 
-To get started, we'll use the `Xtend Generation Template` wizard in {RAS}. Select _New_ ->
-_Other..._, and then choose _{RAS}_ / _Generation Templates_ / _Xtend Generation Template_. The
-following dialog will appear:
+To get started, we'll use the `Xtend Generation Template` wizard in
+{RAS}. Select _New_ -> _Other..._, and then choose _{RAS}_ /
+_Generation Templates_ / _Xtend Generation Template_. The following
+dialog will appear:
 
 image::new-gen-template-dialog.png[New Gen Template Wizard,role=text-center]
 
@@ -189,10 +215,12 @@ code that it creates for us. Let's see what the project looks like:
 
 image::gen-template-project-structure.png[Gen Template Project Structure,role=text-center]
 
-The only thing we're going to pay attention to right now is `MainTemplate.xtend`. This is the file
-that will define the "meat" of our GenTemplate. Nearly all the rest of the project content is
-boilerplate that you won't need to worry about unless you choose to modify your GenTemplate in ways
-that go beyond what the wizard provides.
+The only thing we're going to pay attention to right now is
+`MainGenerator.xtend`. This is the file that will define the "meat" of
+our GenTemplate. Nearly all the rest of the project content is
+boilerplate that you won't need to worry about unless you choose to
+modify your GenTemplate in ways that go beyond what the wizard
+provides.
 
 `MainTemplate.xtend` is an Xtend source file. As stated earlier, Xtend is a programming language
 that is based on Java but includes numerous extensions. Here we will be looking at only one of those
@@ -224,8 +252,14 @@ guillemets to enclose code comments, e.g.:
 
 [source%nowrap,xtend]
 --
-«««This is an Xtend comment and will have no impact on the template output»»»
+««« This is an Xtend comment and will have no impact on the template output
 --
+This file has many comments, since it's intended to be instructive to
+the person who is developing the GenTemplate. We'll remove those
+comments for the purpose of this walk-through. Here's the template
+without its initial comments:
+
+image::xtend-template-no-comments.png[Initial Template Without Comments,role=text-center]
 
 Two different types of templating construct appear in this template: an "interpolation" and a
 loop. Xtend also offers an if-then-else construct. Let's look at examples of the two types of
@@ -243,23 +277,27 @@ of our APIs have not yet been updated to reflect our new terminology.] The `ZenM
 a number of properties, one of which is the model's name. The Xtend expression `model.name` yields
 the model's name, and that name is what replaces `&laquo;model.name&raquo;` in the output
 file. Therefore, if we use this GenTemplate on the model we created above, the generated HTML file
-will have as its title "Sample Generated HTML for MyModel," thanks to the interpolation construct on
+will have as its title "Methods of MyModel," thanks to the interpolation construct on
 line 12.
 
-Next, we have two instances of the Xtend loop construct, one covering lines 18-22, and another
-nested within the first, spanning lines 19-21. Let's look at these two loops in detail:
+Next, we have three instances of the Xtend loop construct: one
+covering lines 18-24; a second one nested within the first, spanning
+lines 19-23; a third, inner-most loop on lines 20-23. Lets look at
+these loops in detail.
 [source%nowrap,xtend]
 --
-«FOR resourceAPI : model.resourceAPIs»                      // <1> 
-  «FOR resource : resourceAPI.ownedResourceDefinitions»     // <2>
-    <li>«resource.name»</li>                                // <3> 
-  «ENDFOR»                                                  // <4> 
-«ENDFOR»                                                    // <5>
+«FOR api : model.resourceAPIs»	                        // <1> 
+  «FOR resource : api.ownedResourceDefinitions»	        // <2>
+    «FOR method : resource.methods»     	        // <3>
+      <li>«method.httpMethod» «method.httpMethod»</li>  // <4> 
+    «ENDFOR»                                            // <5> 
+  «ENDFOR»                                              // <6> 
+«ENDFOR»                                                // <7>
 --
 [cols="^.<1,6a"]
 |===
-|+++<strong class="conum" data-value="1"></strong>+++ thru +++<strong class="conum" data-value="5"></strong>+++
-|The outer loop introduces the variable `resourceAPI` and binds it in turn to each of the values
+|+++<strong class="conum" data-value="1"></strong>+++ thru +++<strong class="conum" data-value="7"></strong>+++
+|The outer loop introduces the variable `api` and binds it in turn to each of the values
 appearing in the collection represented by `model.resourceAPIs`. Just like `name`, `resourceAPIs` is
 a property of the `ZenModel` class, and `model.resourceAPIs` is an expression that accesses it. The
 property's vlaue is a collection of values of type `ResourceAPI`, and the collection includes all
@@ -268,34 +306,44 @@ the `resourceAPI` definitions appearing in our model.
 NOTE: We haven't made any changes to our model since creating it, and the {RAS} Project Wizard
 created it as a working sample model with one resource API, named `MyModelAPI`.
 
-|+++<strong class="conum" data-value="2"></strong>+++ thru +++<strong class="conum" data-value="4"></strong>+++
+|+++<strong class="conum" data-value="2"></strong>+++ thru +++<strong class="conum" data-value="6"></strong>+++
 |The second loop introduces a new variable, `resource`, that will represent, in turn, each of the
-Resources defined in whichever Resource API is currently represented by the `resourceAPI`
+Resources defined in whichever Resource API is currently represented by the `api`
 variable. These are obtained via the `ownedResourceDefinitions` property of the `ResourceAPI` class.
 
 NOTE: In the sample model created by {RAS}, the `MyResourceAPI` resource API includes two resources:
 an object resource named `MyModelObject`, and a collection resource named `MyModelCollection`.
 
-|+++<strong class="conum" data-value="3"></strong>+++
-|Finally, we have an interpolation construct that emits the name of whichever resource is currently
- bound to the `resource` variable, in an HTML list item.
+|+++<strong class="conum" data-value="3"></strong>+++ thru +++<strong class="conum" data-value="5"></strong>+++
+|The third loop introduces a new variable, `method`, that will represent, in turn, each of the
+methods defined in whichever Resource is currently represented by the `resource`
+variable. These are obtained via the `methods` property of the `ResourceDefinition` class.
+
+NOTE: In the sample model created by {RAS}, defines a `GET` method and
+a `POST` method for each of its two resources.
+
+|+++<strong class="conum" data-value="4"></strong>+++
+|Finally, we have an interpolation construct that emits the HTTP
+ operation name and the resource URL for each method encountered.
+
 |===
 
-The upshot of these two loops is that the names of all the Resources defined by all the Resource
-APIs in our model will appear in an itemized list. In our case, in our untouched model, we have a
-single resource API named `MyModelAPI`, with two resources named `objectResource` and
-`collectionResource`. Our itemized list will contain those two resource names.
+The upshot of these three loops is that the information about every
+method defined our model will appear in an itemized list. In our case,
+in our untouched model, we would see four methods--two each for our
+two defined resources.
 
 ==== But What About Our Lexicon?
 
-Our goal was not to create an HTML list of resource names, but to generate data to be fed into our
-enterprise lexicon. So let's remove the initial template created for us by the wizard, and create
-the template we really want.
+Our goal was not to create an HTML list of resource names, but to
+generate data to be fed into our enterprise lexicon. So let's remove
+the initial template created for us by the wizard, and create the
+template we really want.
 
-Our first job is to remove the contents of the existing template -- that is, everything between the
-opening triple-apostrophe and the closing triple-apostrophe. We can also remove the comment that the
-GenTemplate Wizard left us pointing at the Xtend documentation.  We're left with something that
-looks like this:
+Our first job is to remove the contents of the existing template --
+that is, everything between the opening triple-apostrophe and the
+closing triple-apostrophe. We're left with something that looks like
+this:
 
 ----
 override generate(ZenModel model) {
@@ -304,41 +352,39 @@ override generate(ZenModel model) {
  }
 ----
 
-Before we go any further, we should change the configuration of our GenTemplate so that it will
-generate files with names like `MyModel.csv` instead of `MyModel.html`. That's specified in a file
-named `config.json` that appears in the same folder as the `MainTemplate.xtend` file that we've been
-working on. Go ahead and open it in {RAS}.
+Before we go any further, we should change the configuration of our
+GenTemplate so that it will generate files with names like
+`MyModel.csv` instead of `MyModel.html`. That's specified in a file
+named `LexiconGenTemplatesGenTemplate.java` that appears in the same
+folder as the `MainTemplate.xtend` file that we've been working on. Go
+ahead and open it in {RAS}. Here's what it looks like with comments
+removed:
 
-The `config.json` file provides configuration information for our GenTemplate, in a format known as
-http://www.json.org/[JSON]. Our output file name is configured on the following line:
+image::gentemplate-no-comments.png[GenTemplate Class Without Comments,role=text-center]
 
-[source%nowrap.java]
+This class illustrates features we're not using, so we'll also remove
+the struck-out lines in the image above, leaving us with this:
+
+image::pruned-gentemplate.png[Pruned GenTemplate Class,role=text-center]
+
+The `configure` method in this class provides information about
+individual generators that should be run when the GenTemplate is
+executed. Our `MainGenerator` Xtend class is the only one we need
+to run.
+
+You can see where this generator is configured with an output file
+name ending with `.html`. We'll change that to `.csv` so the file will
+be understood by our lexicon system. Here's how that code ends up
+looking:
+
 ----
-"outputFile": "${zenModel.name}.html"
-----
-
-You can directly change the `html` at the end of this lineto `csv`, being careful not to dirsupt
-anything else in the line, including the final quote. In the end the file should look like this.
-
-[source%nowrap,java]
-----
-{
-    "primarySource": {
-        "type": "com.modelsolv.reprezen.generators.api.zenmodel.ZenModelSource",
-        "description": "RAPID-ML model for generation"
-    },
-    "outputItems": [
-        {
-            "name": "MainTemplate",
-            "type": "com.modelsolv.reprezen.generators.xtend.template.lexicongentemplates.MainTemplate",
-	        "outputFile": "${zenModel.name}.csv"
-        }
-    ]
-}
+define(outputItem().named("main") //
+	.using(MainGenerator.class) //
+	.writing("${zenModel.name}.csv"));
 ----
 
 Once you are finished, save your changes and go back to the editor where we were working on
-`MainTemplate.xtend`.
+`MainGenerator.xtend`.
 
 
 Now let's start filling in what we really intend to show up in our generated CSV file. For starters,
@@ -379,7 +425,7 @@ second. Our model has no parent, so the parent fields are left blank. The model 
 appears is, of course, our model; so we repeat the model name in the "Model" column.
 
 There is one problem with this line: If the model lacks top-level documentation, this GenTemplate
-will fail. The problem isthat in that case, `model.documentation` will have a null value, and
+will fail. The problem is that in that case, `model.documentation` will have a null value, and
 therefore, trying to retrieve its `text` property will fail.
 
 Fortunately, Xtend includes an extremely useful "guard" syntax to avoid references to properties of
@@ -410,8 +456,8 @@ elements, and they will be picked up by our template.
 
 [source%nowrap,xtend]
 --
-«FOR resourceAPI: model.resourceAPIs»
-  «resourceAPI.name»,ResourceAPI,«model.name»,Model,«model.name»,«resourceAPI.documentation?.text»
+«FOR api : model.resourceAPIs»
+  «api.name»,ResourceAPI,«model.name»,Model,«model.name»,«api.documentation?.text»
 «ENDFOR»
 --
 
@@ -423,8 +469,8 @@ template. We'll use something like this:
 
 [source%nowrap,xtend]
 --
-«FOR resource: resourceAPI.ownedResourceDefinitions»
-  «resource.name»,???,«resourceAPI.name»,ResourceAPI,«model.name»,«resource.documentation?.text»
+«FOR resource: api.ownedResourceDefinitions»
+  «resource.name»,???,«api.name»,ResourceAPI,«model.name»,«resource.documentation?.text»
 «ENDFOR»
 --
 
@@ -476,20 +522,16 @@ that looks in Xtend:
 [source%nowrap,xtend]
 --
 def getType(ResourceDefinition resource) {
-  '''«
-    IF resource instanceof CollectionResource
-      »CollectionResource«
-    ELSEIF resource instanceof ObjectResource
-      »ObjectResource«
-    ENDIF
-  »'''
+    if (resource instanceof ObjectResource) {
+       return "ObjectResource"
+    } else {
+       return "CollectionResource"
+    }
 }
 --
-We've now created a method called `getType` that we can apply to any resource, and it will yield the
-type string that we're after. The method itself is defined using an Xtend template, but the result
-of evaluating the template is not written directly to our output file, as is the case with our main
-template. Instead, this method will apply the template and return the results, which we can
-incorporate in our main template via interpolation:
+We've now created a method called `getType` that we can apply to any
+resource, and it will yield the type string that we're after. We can
+use this new method in our template via interpolation :
 
 [source%nowrap,xtend]
 --
@@ -516,7 +558,7 @@ case you want to use it to try things out in {RAS}:
 
 [source%nowrap,xtend]
 --
-package com.modelsolv.reprezen.generators.xtend.template.lexicongentemplates
+package com.example.lexiconGenTemplates
 
 import com.modelsolv.reprezen.generators.api.zenmodel.ZenModelOutputItem
 import com.modelsolv.reprezen.restapi.CollectionResource
@@ -524,7 +566,7 @@ import com.modelsolv.reprezen.restapi.ObjectResource
 import com.modelsolv.reprezen.restapi.ResourceDefinition
 import com.modelsolv.reprezen.restapi.ZenModel
 
-class MainTemplate extends ZenModelOutputItem {
+class MainGenerator extends ZenModelOutputItem {
     override generate(ZenModel model) {
         '''
             Name,Type,Parent,ParentType,Model,Documentation
@@ -539,13 +581,11 @@ class MainTemplate extends ZenModelOutputItem {
     }
 
     def getType(ResourceDefinition resource) {
-        '''«
-            IF resource instanceof CollectionResource
-                »CollectionResource«
-            ELSEIF resource instanceof ObjectResource
-                »ObjectResource«
-            ENDIF
-        »'''
+        if (resource instanceof ObjectResource) {
+        	return "ObjectResource"
+        } else {
+        	return "CollectionResource"
+        }
     }
 }
 --
