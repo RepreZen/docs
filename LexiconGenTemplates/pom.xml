@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.modelsolv.reprezen.generators</groupId>
-   <artifactId>com.modelsolv.reprezen.generators.xtend.lexicongentemplates</artifactId>
-     <version>1.0-SNAPSHOT</version>
-   <name>LexiconGenTemplates</name>
-     <!-- 
-	mvn exec:java -Dexec.mainClass="com.modelsolv.reprezen.generators.api.GeneratorLauncher" -Dexec.args="xtend-gen-target.json"
-	-->
+    <groupId>com.example.lexiconGenTemplates</groupId>
+    <artifactId>LexiconGenTemplatesGenTemplate</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>LexiconGenTemplates</name>
+    <!-- 
+     mvn exec:java -Dexec.mainClass="com.modelsolv.reprezen.generators.api.GeneratorLauncher" -Dexec.args="xtend-gen-target.json"
+     -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <xtend.version>2.4.2</xtend.version>
-        <reprezen.version>1.2.1.4010</reprezen.version>
+        <reprezen.version>[1.5,1.6)</reprezen.version>
     </properties>
     <build>
         <plugins>
@@ -73,18 +73,17 @@
             <artifactId>com.modelsolv.reprezen.generators.xtend</artifactId>
             <version>${reprezen.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.modelsolv.reprezen</groupId>
+            <artifactId>com.modelsolv.reprezen.generators.standard</artifactId>
+            <version>${reprezen.version}</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
             <id>reprezen-repo-releases</id>
-            <url>http://maven.reprezen.com/repository/releases/</url>
+            <url>http://maven.reprezen.com/repository/releases</url>
             <layout>default</layout>
         </repository>
-        <!-- for development purpose only -->
-        <!--repository>
-            <id>reprezen-dev</id>
-            <url>file://c:/reprezen-repo</url>
-            <layout>default</layout>
-        </repository-->
     </repositories>
 </project>
