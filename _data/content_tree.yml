@@ -37,6 +37,9 @@ areas:
     slug: cg_customSCG
     url: /codegen_custom_swagger_gentemplate/
     type: internal
+  - title: A Deep Dive Into Custom GenTemplates
+    url: /codegen_custom_gentemplate/
+    type: internal
   - title: Sharing GenTemplates
     slug: cg_share
     url: /codegen_sharing/

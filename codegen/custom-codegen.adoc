@@ -1,0 +1,848 @@
+---
+permalink: /codegen_custom_gentemplate/
+---
+= A Deep Dive Into Custom GenTemplates
+:imagesdir: ../images/codegen
+:linkattrs:
+:docinfo2:
+:RAS: RepreZen API Studio 
+:RZ: RepreZen
+:icons: font
+
+In {%link cg_intro%} we include a brief overview of the process of
+creating customized GenTemplates for use in {RAS}. Here we will
+explore this topic in much greater detail. We will examine the
+fundamental interfaces that a GenTemplate must implement, the
+bare-bones abstract implementations of those interfaces, and the
+highly structured `GenTemplate` class and the model it provides for
+GenTemplate construction.
+
+It should be noted that the term `GenTemplate` suggests a
+template-based approach to code generation. That said, the templating
+technology we have used--and which we recommend--is contained within a
+general-purpose programming language called Xtend. The
+link:https://www.eclipse.org/xtend/[Xtend Website] describes Xtend as
+"Java With Spice," and in fact, the Xtend compiler produces standard
+Java, which is then compiled to class files that can be freely
+intermingled with class files produced from primary Java source. The
+Xtend language includes a sophisticated templating facility in which
+templates form part of the Xtend language syntax and are not relegated
+to separate files, as is common in other templating
+facilities. Complete documentation is available
+link:https://www.eclipse.org/xtend/documentation/index.html[here].
+
+
+== The `IGenTemplate` Interface
+
+The basic interface for all GenTemplates is very simple:
+
+[source%nowrap,java]
+--
+public interface IGenTemplate {
+
+    String getName();
+
+    String getId();
+
+    ISource<?> getPrimarySource() throws GenerationException;
+
+    List<GenTemplateDependency> getDependencies() throws GenerationException;
+
+    Generator getGenerator();
+
+    public boolean isSuppressed();
+
+    public interface Generator {
+
+        GenTemplateTrace generate(GenTarget target, GenTemplateTraces traces) throws GenerationException;
+
+        void attachLogger(Logger logger);
+    }
+}
+--
+
+There is an interesting split of this API. The first batch of methods
+are part of `IGenTemplate`, while the final two are separated
+out into a separate `Generator` interface. The reason for this split
+is the two roles that a GenTemplate must play:
+
+* Within {RAS}, GenTemplates are instantiated in order to examine
+  their declarative information. This information is used by wizards,
+  menus, and other UI features of {RAS}.
++
+The classpath in which these instantiations occur is managed by the
+Eclipse OSGi implementation, based on the collection of OSGi bundles
+included in the environment and the access policies they declare. A
+GenTemplate that relies on software not accessible in that
+constrained environment will fail instantiation within {RAS} and
+therefore will be unusable.
+* The more obvious role is that of a code generator. A GenTemplate
+  must also be instantiated so that it can perform the job for which
+  it was created. Clearly, for this role, we cannot limit the software
+  on which a GenTemplate can depend. GenTemplate execution always
+  takes place in a separate JVM, outside of the {RAS} ecosystem, with
+  a classpath managed by Maven or Gradle. This is true even when the
+  GenTemplate is launched from {RAS}.
+
+Our solution is to carefuly separate the methods required for a
+GenTemplate to exist within {RAS} from those required when it is
+executed. The separate `IGenTemplate.Generator` interface defines the
+latter, and the expected implementation structure is one in which
+separate classes implement the two interfaces. {RAS} will only ever
+instantiate and use a GenTemplate's declarative API
+internally. Execution is managed by a launcher class that instantiates
+the GenTemplate and then uses its `IGenTemplate#getGenerator()` method
+to obtain an instance of the GenTemplate's execution implementation.
+
+=== The Declarative Interface
+
+Let's look at how {RAS} uses the information available from the
+declarative GenTemplate interface.
+
+`String getName()`::
+  This provides the name that is listed for the GenTemplate within
+  {RAS}, e.g. in the drop-down list in the New GenTarget wizard.
++
+WARNING: This name is also used--currently without modification--as
+the default name of a directory to house new GenTargets created for
+this GenTemplate. Depending on your operating system, certain
+characters may cause difficulties.
+
+`String getId()`:: This provides a unique ID for the GenTemplate. It
+  is copied into a GenTarget to identify the GenTemplate it is meant
+  to execute.
+
+`ISource<?> getPrimarySource()`:: This declares the primary source, or
+  input, that the GenTemplate will process. GenTemplates can also
+  declare other named sources, but the primary source--or rather
+  its type--is used by {RAS} to identify which GenTemplates to offer
+  in the New GenTarget wizard, based on the selected model. {RAS}
+  currently defines source types for RAPID-ML models, Swagger (aka
+  OpenAPI v2) models, and OpenAPI v3 models.
+
+`List<GenTemplateDependency> getDependencies()`:: Dependencies are
+used by {RAS} when constructing the `.gen` files that comprise
+GenTargets. These are YAML files that can be edited within {RAS} as
+needed by the user. That editing generally focuses on the
+dependencies.
++
+Dependencies come in four flavors:
+
+** Primary Source: The GenTarget provides a path to the file
+   containing the primary source model.
+** Named Sources: The GenTarget provides paths for other secondary
+   sources used by this GenTemplate, each identified by a name defined
+   by the GenTemplate.
+** Parameters: The GenTarget supplies values for named parameters
+   declared by the GenTemplate. In theory, parameter values can be
+   arbitary Java objects, but in practice, since the GenTarget
+   normally takes the form of a YAML file, only JSON values are
+   available.
+** PreRequisites: The GenTarget identifies other GenTargets that must
+   be executed prior to this one. The GenTemplate declares a
+   GenTemplate ID for each prerequisite. Each prerequisite must be
+   satisfied by identifying another GenTarget that is based on the
+   required GenTemplate.
+
++
+Dependencies are all constructed purely from primitive values; where
+classes or complex values are called for (e.g. source declarations,
+parameter values), we use fully qualified class names and JSON
+strings, respectively. The use of class names is required for
+GenTemplate instantiation within {RAS}.
+
+`Generator getGenerator`:: As discussed above, {RAS} never invokes
+this method internally. It is used by the GenTarget launcher, always
+in a separate JVM outside the {RAS} environment, when it comes time to
+execute a GenTarget.
+
+`public boolean isSuppressed()`:: If this method returns `true`, {RAS}
+will act as if the GenTemplate had not been discovered. We use this
+occasionally to control beta access to GenTemplates we are developing,
+by implementing `isSuppressed()` so that its result is based on some
+appropriate condition.
+
+=== The Execution Interface
+
+`GenTemplateTrace generate(GenTarget target, GenTemplateTraces traces)`::
+This is the method that kicks off generation. The GenTemplate is
+supplied with access to its controlling GenTarget, which includes
+values bound to all the dependencies mentioned above.
++
+In addition, the GenTemplate is provided with the
+<<trace-information>> produced by all the GenTargets executed to
+satisfy its prerequisites.
++
+The GenTemplate is expected to produce its own trace information, for
+use by any downstream GenTargets that declared this GenTarget as a prerequisite.
+
+`void attachLogger(Logger logger)`:: This is used by the launcher to
+supply the GenTarget with a logger it can use during its execution.
+
+== The `AbstractGenTemplate` Base Class
+
+All of the factory-default GenTemplates built into {RAS} are
+extensions of `AbstractGentemplate`, which is an abstract
+implementation of `IGenTemplate` that supplies some useful defaults
+and introduces the <<context-management,context object>>. In truth,
+they are all extensions of the <<gentemplate-class>>, which is an
+extension of `AbstractGenTemplate`.
+
+=== Declarative Defaults
+`getId()`:: Returns the GenTemplate class' fully qualified class name.
+
+`getPrimarySource()`:: Returns null. GenTemplates are not _required_ to
+have a primary source, but {RAS} support for GenTemplates that lack
+one is currently somewhat limited.
+
+`getDependencies()`:: Returns a list of dependencies stored in the
+<<context-management,context object>>, which is instantiated by the
+`AbstractGenTemplate` constructor. This really just creates a
+convenient place for the GenTemplate to store its dependencies, that
+can be used both by {RAS} through the declarative interface and also
+later by the executing generator. There is nothing in
+`AbstractGenTarget` that actually fills in dependency information, but
+the <<gentemplate-class>> does provide this capability.
+
+`isSuppressed()`:: Returns `false`.
+
+=== Execution Defaults
+
+The `AbstractGenTemplate` class declares two member classes:
+`Generator` and `StaticGenerator`. `Generator` is deprecated, and
+`StaticGenerator` should be used in all new GenTemplates. (See
+<<static-generator>> for a detailed explanation of this.)
+
+Both `Generator` and `StaticGenerator` implement a single method from
+`IGenTemplate.Generator`.
+
+`attachLogger(Logger logger)`:: Saves the logger into the context
+object. 
+
+The `StaticGenerator` class also declares a constructor. (`Generator`
+does not need a non-default constructor, because it is a non-static
+inner class and therefore has inherent access to the containing class
+instance and its members.)
+
+`StaticGenerator(GenTemplate genTemplate, Context context)`
+
+[[gentemplate-class,GenTemplate Class]]
+==  The `GenTemplate` Class
+
+The `GenTemplate` class extends `AbstractGenTemplate` and provides a
+number of sophisticated capabilities to ease the development of
+well-structured GenTemplate implementations. These capabilities come
+in three categories: <<dependency-declaration>>,
+<<context-management>> and <<generator-management>>. Many of the
+individual features are controlled by definitions appearing in the
+`configure()` method, which should be overridden in GenTemplate
+implementations.
+
+The general form of the `configure()` method is:
+
+```
+@Override
+public void configure() {
+  define(builder);
+  define(builder);
+  ...
+}
+```
+
+There are various types of builders for use in the `configure()`
+method, which are described in the following sections.
+
+The `GenTemplate` class itself is declared with a single type
+parameter, `<PrimaryType>`, which represents the type of object on
+which this GenTemplate will is designed to operate. This is usually
+the representation type of a model (e.g. `ZenModel` for RAPID-ML
+models, `Swagger` for Swagger models, etc.). If a GenTemplate has a
+primary source, that source must produce values that satisfy the
+declared `PrimaryType`.
+
+=== Dependency Declaration
+
+As described earlier, a GenTemplate declares various types of
+dependencies, which are then satisfied using information from a
+GenTarget file when the GenTemplate is executed. The `GenTemplate`
+class provides builders for use in the `configure` method that
+generate these dependency declarations.
+
+==== Primary Source
+
+The `PrimarySourceBuilder` class is used to declare a primary source
+dependency for this GenTemplate. For example:
+
+```
+define(primarySource() //
+    ofType(ZenModelSource.class) //
+    withDescription("Your RAPID-ML model"));
+```
+
+The `ofType()` method is overloaded to accept any of:
+
+* An object that implemtns the `ISource` interface
+* The  `Class` object of a class that implements `ISource`
+* The fully qualified name of a class that implements `ISource`
+
+The dependency information is always converted to the final form of a
+fully qualified class name string. If you are using a custom source
+type, you may not be able to use the first two options, since {RAS}
+may not have access to your class or some of its dependencies.
+
+The builder also supports `required()` (default) and `optional()`
+methods to indicate whether the dependency must be satisfied by a
+GenTarget.
+
+==== Named Source
+
+The `NamedSourceBuilder` works just like the `PrimarySourceBuilder`,
+but it attaches a name to the source.
+
+```
+define(namedSource().named("security") //
+    .ofType(FileSource.class) //
+    .withDescription("Security information"));
+```
+
+In the above example, the completely generic `FileSource` source class
+is used, but a case like this might warrant the creation of a more
+specialized `ISource` implementation so that the security file could
+be parsed, validated, and presented in a more convenient form.
+
+==== Parameter
+
+The `ParameterBuilder` class declares GenTemplate parameters to be
+bound to values in the GenTarget file.
+
+```
+define(parameter().named("packageName") //
+    .withDescription( //
+        "The package name to be used in",
+        "the generated Java classes") //
+    .withDefault("*") //
+    .required());
+```
+As shown here, `withDescription` can take mulitiple strings, which
+will result in a multi-line comment in the generated GenTarget file.
+
+The `withDefault` method takes an arbitrary `Object`, which will be
+serialized as YAML into the `GenTarget` file. When your value is not a
+primitive scalar type, you may want to use `withJsonDefault` instead.
+This takes a JSON String argument and parses it into a `JsonNode`
+value, which is then serialized into YAML in the GenTarget file. This
+avoids the possibility of a lossy or incorrect representation in the
+GenTarget file. You may safely use your own classes, as long as they
+can be safely serialized and deserialized using the Jackson library.
+
+==== Prerequisite
+
+The `PrerequisiteBuilder` class declares prerequisite GenTargets that
+must be satisfied by this GenTarget.
+
+```
+define(prerequisite().named("xml") //
+    .on(XMLSchemaGentemplate.class) //
+    .description("Specify a gentarget that runs the XML Schema GenTemplate") //
+    .required());
+```
+
+The `on()` method is overloaded to permit either a GenTemplate class
+instance, a GenTemplate class, or a GenTemplate ID string. The latter
+is what is actually stored in a GenTarget file. The former options can
+be used as long as the indicated GenTemplate uses its fully qualified
+class name as its ID value (which is the default implemented in
+`AbstractGenTarget`. As with source builders, use of a class name or
+instance may make the GenTemplate unusable within {RAS}.
+
+=== Context Management
+
+The context object, of type `GenTemplateContext`, is instantiated but
+left mostly empty by the `AbstractGenTemplate` class. The
+`GenTemplate` class fills out the context object with information that
+is needed during execution, providing a one-stop location for all such
+information.
+
+All the dependencies declared by the GenTemplate are resolved to
+actual values according to the GenTarget, and those values are
+included in the information available from the context object.
+
+The methods for accessing context information are:
+
+`public IGenTemplate getExecutingGenTemplate()`:: Returns the
+GenTemplate instance that is currently executing.
+
+`public GenTarget getControllingGenTarget()`:: Returns the GenTarget
+through which this GenTemplate is executing.
+
+`public ISource<?> getPrimarySource()`:: Returns the primary source
+instance associated with this GenTarget execution.
+
+`public Map<String, Object> getGenTargetParameters()`:: Returns a map
+associating GenTemplate parameter names to their values under the
+current GenTarget.
+
+`public File getOutputDirectory()`:: Returns the output directory to
+receive files generated by this GenTemplate.
+
+`public File getCurrentOutputFile()`:: When an output item is
+executing, this returns the file to which the generated content will
+be written.
+
+`public File resolveOutputPath(File path)`:: resolves a relative path
+against the output directory.
+
+`public GenTemplateDependencies getDependencies()`:: Returns the
+dependency information declared by the executing GenTemplate.
+
+`public Logger getLogger()`:: Returns the logger object attached to
+this GenTemplate.
+
+`public GenTemplateTraces getTemplateTraces()`:: Provides access to
+trace information from prerequisite GenTarget executions.
+
+`public GenTemplateTraceBuilder getTraceBuilder()`:: Provides various
+methods by which a GenTemplate can add to the trace information
+attached to this GenTarget execution.
+
+`public GenTemplateTrace getPrerequisiteTrace(String prerequisiteName)`::
+Retrieves the trace information for one of this GenTemplates' declared
+prerequisites.
+
+=== Generator Management
+
+The `GenTemplate` class performs generation by executing individual
+generators that are configured for the GenTemplate. Configuration is
+done in the `configure` method override, using builders designed for
+generator configuration.
+
+Generators come in four varieties.
+
+==== Output Item
+
+An output item is an instance of a class that implements the
+`IOutputItem` interface. This inteface has two type parameters:
+`PrimaryType` and `ItemType`. We'll discuss `ItemType` in
+<<extract-output-item>>.
+
+The `PrimaryType` of an `OutputItem` should match the `PrimaryType` of
+any `GenTemplate` in which it is configured. Output item classes
+should generally extend `AbstractOutputItem`, or one of the
+type-specific extensions of that class. (See <<convenience-classes>>.)
+
+The purpose of an output item is to create a single file at a specific
+path relative to the GenTarget's output directory. Its primary purpose
+is to generate the content of this file; the `GenTemplate` class will
+take care of actually writing the file, as well as recording basic
+trace information.
+
+Important methods to override in an output item implementation are:
+
+`String generate(PrimaryType primaryValue, ItemType itemValue)`::
+Create the content for this output item's file. If null is returned,
+no file is written.
+
+`File getOutputFile(PrimaryType primaryValue, ItemType itemValue)`::
+Return the file to which this output item's content should be
+written. If the value is not null, it will be used instead of anything
+specified in the output item's configuration (via the
+`OutputItemBuilder.writing(String)` method, shown below).
+
+Configure an output item using the `OutputItemBuilder`, like this:
+
+```
+define(outputItem().named("main") //
+    .using(MainGenerator.class) //
+    .writing("${model.name}.html") //
+    .withDescription("Main output") //
+    .when("${model.status == \"live\""));
+```
+
+The `using` method is overloaded to accept an instance of an output
+item, a class that implemnts `IOutputItem`, or the fully qualified
+name of such a class. Use of class names or instances may cause the
+GenTemplate to be unusable in {RAS}.
+
+The `writing` and `when` methods take strings that use the MVEL syntax
+to produce a `String` or a `boolean` value, respectively. See
+link:https://github.com/imona/tutorial/wiki/MVEL-Guide[MVEL Guide] for
+information about MVEL, and see <<mvel-bindings>> for details of
+variable bindings in effect when these strings are evaluated.
+
+The `writing` method defines a default file name for this output item;
+the output item itself can override this default.
+
+The `when` method provides conditional output item execution; if the
+condition evaluates to `false`, the output item will be skipped.
+
+==== Extract Output Item
+
+An extract output item is just like an output item, but instead of
+operating on an entire model, it operates on a single "item" extracted
+from the model. This is where the `ItemType` type parameter in the
+`IOutputItem` interface comes into play.
+
+When an output item is configured, the `GenTemplate` class examines
+its bound types. If the types bound to `PrimaryType` and `ItemType`
+are the same type, the output item is treated as a whole-model output
+item. Otherwise, it is treated as an extract output item.
+
+Only specific types are allowed as the item type in an output item,
+and the list of allowed types depends on the model type. See
+<<extract-item-types>> for currently supported types.
+
+An extract output item is configured exactly the same way as a
+whole-model output item. The `GenTemplate` recognizes the difference
+when it instantiates the output item and inspects its parameterized
+types.
+
+==== Static Resources
+
+The `GenTemplate` class can be configured to copy static resources
+from your JAR file to the output folder as-is. You don't need to
+implement anything to use this feature; you just add definitions to
+your `configure` method body, using the `StaticResourceBuilder`, as
+in: 
+
+```
+define(staticResource().copying("css").to("artifacts/css"));
+```
+
+The `copying` argument may name a file or a directory, and can specify
+a path. Likewise for the `to` argument. Precise behavior depends on
+these varations:
+
+[cols="20,20,60",options="header"]
+|===
+| copying from a... | to a... | does this
+| file | nonexisting path | creates a file at the to-path
+| file | existing file | replaces the existing file
+| file | existing directory | adds the file to the folder
+| directory | nonexisting path | creates a directory at to-path and
+recursively copies the from-directory contents there
+| directory | existing file | operation fails
+| directory | existing directory | recursively copies the
+  from-directory contents to the to-directory
+|===
+
+TIP: The from-path is interpreted relative to the root of the
+class path entry (JAR file or file system directory) from which the
+GenTarget class was loaded. It is _not_ relative to the GenTarget
+class's location in that JAR file or directory.
+
+[WARNING]
+====
+If you have multiple static resource definitions in your `configure`
+method body, the order may be important. For example, both might
+create the same file with different contents, with the second
+overwriting the first. Or consider this example:
+
+```
+define(staticResource().copying("a/b/c").to("x/y/z"));
+define(staticResource().copying("d/e/f").to("x/y/z"));
+```
+
+Assume that the path `x/y/z` does not already exist in the output
+folder, and that `a/b/c` names a file, while `d/e/f` names a
+directory.
+
+In the order shown above, the second definition will fail at runtime,
+because the first will have created a file at `/d/e/f`. If the two
+were reversed, they would succeed, but `a/b/c` would be copied to
+`d/e/f/c` rather than `d/e/f`.
+====
+
+==== Dynamic Generator
+
+A dynamic generator is essentially a free-form generator. You can do
+whatever you want with it, creating as many or as few files as needed,
+based on the input model (or completely ignore the input
+model--really, you can do whatever you want! icon:smile-o[]).
+
+Dynamic generators are useful when your needs are not well handled by
+the other options.
+
+==== Overriding `GenTemplate.getGenerator()`
+
+Occasionally you may find that even dynamic generators don't give you
+quite the flexibility you need. For example, perhaps it's important
+that you instantiate your generator class once and reuse with
+different inputs. The `GenTemplate.Generator` class will always
+instantiate a new generator each time it needs one, using that class's
+default constructor. Or perhaps your generator needs access to a
+database connection, and there's no good way to pass such a thing.
+
+In these and other cases you might choose to create your own
+implementation of `IGenTemplate.Generator` and override
+`GenTemplate.getStaticGenerator()` to return an instance of it. Your
+class could then do whatever is needed. If you defined your class as
+an extension of `GenTemplate.StaticGenerator<PrimaryType>`, you could
+still make use of all the capabilities described above, by calling
+`super.generate` from your own `generate` method.
+
+=== Convenience Classes and Methods
+
+A number of convenience classes are created to make it easier to
+create GenTemplates by extending the `GenTemplate` class. They are:
+
+[cols="m,m",options="header"]
+|===
+| Convenience Class | Equivalent To
+| SwaggerGenTemplate | GenTemplate<Swagger>
+| SwaggerOutputItem| AbstractOutputItem<Swagger, Swagger>
+| SwaggerExtractOutputItem<ItemType>|AbstractOutputItem<Swagger, ItemType>
+| SwaggerDynamicGenerator|AbstractDynamicGenerator<Swagger>
+2+^|- - - - - - - - -
+| OpenApi3GenTemplate | GenTemplate<OpenApi3>
+| OpenApi3OutputItem | AbstractOutputItem<OpenApi3, OpenApi3>
+| OpenApi3ExtractOutputItem<ItemType> | AbstractOutputItem<OpenApi3, ItemType>
+| OpenApi3DynamicGenerator | AbstractDynamicGenerator<OpenApi3>
+2+^|- - - - - - - - -
+| ZenModelGenTemplate | GenTemplate<ZenModel>
+| ZenModelOutputItem | AbstractOutputItem<ZenModel, ZenModel>
+| ZenModelExtractOutputItem<ItemType extends EObject> 
+| AbstractOutputItem<ZenModel, ItemType>
+| ZenModelDynamicGenerator | AbstractDynamicGenerator<ZenModel>
+|===
+
+In addition, convenience methods can be used to define primary sources
+for the supported primary types. These can all appear in `configure`
+method overrides in `GenTemplate`-derived classes.
+
+[cols="30m,70m",options="header"]
+|===
+| Convenience method | Equivalent long-form definition
+| defineZenModelSource() |
+  define(primarySource().ofType(ZenModel.class))
+| defineSwaggerSource() |
+  define(primarySource().ofType(Swagger.class))
+| defineOpenApi3Source() |
+  define(primarySource().ofType(OpenApi3.class))
+|===
+
+= Miscellaneous Details
+== GenTemplate Discovery
+
+{RAS} uses the Java `ServiceLoader` class to search for available
+GenTemplates. The classpath used in this search includes all the
+factory-default GenTemplate classes, as well as:
+
+* All JAR files contained within the "Shared GenTemplate"
+  location. This is `/shared/GenTemplates` in the workspace root
+  directory by default, but it can be changed in the *RepreZen > Code
+  Generation* preference panel.
+
+* The output directories associated with Java projects in the
+  workspace.footnote:[More precisely, the resolved classpath for
+  every such project is examined for entries that are not of kind
+  `CPE_LIBRARY`. For each resulting entry that is of kind `CPE_SOURCE`
+  that has a non-null output location, that location is added. For
+  other entries, the entry's path is added. Non-present locations are
+  removed from the final collection.]
+
+
+* All JAR files contained anywhere within a `/lib` folder in any open
+  project in the workspace.
+
+The `ServiceManager` will search the classpath for all files (or JAR
+file entries) named
+`META-INF/services/com.modelsolv.reprezen.generators.api.template.GenTemplate`
+(the fully qualified class name of the `GenTemplate` class). Each such
+file should list one or more fully qualified names of GenTemplate
+classes. If the ServiceManager is able to instantiate a listed class,
+that class is treated as an available GenTemplate.
+
+WARNING: If you rename a GenTemplate class or move it to a different
+package, its fully qualified class name in a
+`META-INF/services/com*GenTemplate` file will need to be updated
+accordingly. Otherwise, the GenTemplate will not be discovered, and it
+will not be available for use.
+
+=== GenTemplate Groups
+
+In some cases, a list of GenTemplates is subject to change and can be
+determined dynamically at run-time. It can be difficult in a case like
+this to maintain an up-to-date set of service files containing all the
+GenTemplate class names.
+
+An alternative is to define a class that implements the
+`IGenTemplateGroup` interface. This interface contains a single
+method:
+
+```
+Iterable<IGenTemplate> getGenTemplates(ClassLoader)
+```
+
+The method should set its context classloader to the passed
+classloader, and then instantiate all the GenTemplates it wishes to
+make available, returning those instances. They will all be included
+in discovery.
+
+But how are the `IGenTemplateGroup` implementations discovered? Using
+the `ServiceLoader`, of course. Therefore, if you implement
+`IGenTemplateGroup`, you must create a services file containing the
+fully qualified name of your implementing class. The service file is
+the same as for individual GenTemplates, but its final name component
+is `IGenTemplateGroup` instead of `IGenTemplate`.
+
+
+== Extract Item Types
+
+Currently supported extract types for our primary model types include:
+
+[cols="25,25,50",options="header"]
+|===
+| Primary Type | Extract Type | Comments
+.11+| ZenModel (a RAPID Model) | (various) | Any EObject type that is part
+  our ECore metamodel. In each case, the overall model is searched for
+  all instances of the given EObject type. Usefule examples are listed
+  in following rows.
+| ResourceAPI | A named collection of resource definitions
+| ServiceDataResource | A resource in a resource API
+| ObjectResource | An object resource in a resource API
+| CollectionResource | A collection resource in a resource API
+| Method | A method defined in a resource
+| TypedMessage | Any request or response definition
+| TypedRequest | Any method request definition
+| TypedResponse | Any method response definition
+| DatModel | A named collection of datatype definitions
+| Structure | A structure definition in a data model
+3+^|- - - - - - - -
+.8+| Swagger (OpenAPI v2),
+  link:https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-models[swagger-models
+  representation]| Path | Path objects listed in `/paths` object
+| Model | Schema definitions appearing in the `/definitions` object
+| Parameter | Parameter definition appearing in the top-level
+  `/parameters` object
+| Response | Response definitions appearing in the `/responses` object
+| NamedPath .4+| Named versions of the main extract types listed
+  above. Each supports `getName()` that returns the property name for
+  this object in the map in which it appears, and `getValue()` that
+  returns the object itself. These types work around an inherent
+  limitation of the Swagger representation that mapped types do not
+  know their own names.
+| NamedModel
+| NamedParameter
+| NamedResponse
+3+^|- - - - - - - -
+.10+| OpenAPIv3,
+  link:https://github.com/RepreZen/KaiZen-OpenApi-Parser[KaiZen
+  OpenApi Parser representation] | Path | Path objects listed in the
+  top-level `/paths` object
+| Schema | A schema listed in the `/components/schemas` object
+| Response | A response listed in the `/components/responses` object
+| Parameter | A parameter listed in the `/components/responses` object
+| Example | An example listed in the `/components/examples` object
+| RequestBody | A request body listed in the
+  `/components/requestBodies` object
+| Header | A header listed in the `/components/headers` object
+| SecurityScheme | A security scheme listed in the
+  `/components/securitySchemes` object
+| Link | A link listed in the `/components/links` object
+| Callback | A callback listed in the `/components/callbacks` object
+|===
+
+
+== MVEL Bindings
+
+link:https://github.com/imona/tutorial/wiki/MVEL-Guide[MVEL] is used
+to construct output file names and `when` conditions for output
+items. For file names, the result should be a string, while a `when`
+condition should produce a boolean value.
+
+The following variables are bound during the evaluation of these
+expressions. They can appear in the MVEL expression, and their
+bean-like properties can be accessed using property syntax, as in
+`${swagger.info.title}` to obtain the title in a Swagger model.
+
+[cols="25m,75",options="header"]
+|===
+| Bound variable | Value
+| `zenModel` | The primary model for a `ZenModelGenTemplate`
+| `swagger` | The primary model for a `SwaggerGenTemplate`
+| `openApi3` | The primary model for an `OpenApi3GenTemplate`
+| `_model` | The primary model in any `GenTemplate`
+| primarySource | The primary source file, as a `FilePOJO` (see below;
+not available for `when` conditions)
+2+^|- - - - - - - -
+e| (modified type name) | The item value for an extract output item. The name
+  is computed by downcasing the character of the extract object's
+  simple type name
+| `_item`| The item value for any extract output item
+2+^|- - - - - - - -
+e| (GenTarget param name) | The value bound the named GenTarget
+parameter
+|===
+
+=== The `FilePOJO` Class
+
+The `MVEL` expression for an output item file name can refer to
+`primarySource` to obtain information about the file containing the
+primary model for the executing GenTemplate. Its fields are as
+follows:
+
+[cols="m,,m", options="header"]
+|===
+| Expression | Value | Equivalent `File` or `FilenameUtils` method
+| primarySource.fileName | The model file name | File#getName()
+| primarySource.baseName | The model file name without its extension |
+  FilenameUtils.getBaseName(File)
+| primarySource.extension | The model file name extension |
+  FilenameUtils.getExtension(File)
+| primarySource.Path | The model file path | File#getPath()
+| primarySource.absolutePath | The absolute model file path |
+  File#getAbsolutePath()
+| primarySource.canonicalPath | The canonical model file path |
+  File#getCanonicalPath()
+| primarySource.parent | The parent directory of the model file | File#getParent()
+|===
+
+
+
+== Trace Information
+
+TBA
+
+[[static-generator]]
+== Why `Generator` and `StaticGenerator`?
+
+As mentioned earlier, `AbstractGenTemplate` defines two member
+classes: `Generator` and `StaticGenerator`. They are identical, except
+that `Generator` is a (non-static) inner class, while
+`StaticGenerator` is static.
+
+The `GenTemplate` class similarly declares two member classes:
+non-static `Generator` that extends `AbstractGenTemplate.Generator`,
+and static `StaticGenerator` that extends
+`AbstractGenerator.StaticGenerator`.
+
+The reason for this is historical. Long ago, the entire `IGentemplate`
+interface was flat, in contrast to its current nested form. This led
+to problems, because there were cases in which {RAS} could not
+instantiate, and therefore could not discover, `GenTemplates` whose
+generators made use of libraries not available in the {RAS} runtime.
+
+To solve this problem we split the interface into its current
+form. However, when adapting existing GenTemplates, we made a decision
+to ease our work: we made the `Generator` member classes inner
+classes, rather than static member classes. This was easiser because
+all access to the containing outer class members still worked!
+
+Unfortunately, this structure is clumsy, and it makes it impossible to
+create generator classes that are reusable across multiple
+GenTemplates, since each generator class must be a non-static inner
+class member of any GenTemplate class that wishes to use it.
+
+There is no particular problem in locating the generator classes
+within the GenTemplate classes; the problem is that they are not
+static.
+
+We have now deprecated the non-static inner classes, but we retain
+them for backward compatibility. However, we also now create static
+versions of these classes, with constructors through which the
+GenTemplate instance and its context object are conveyed to the
+generator. The `GenTemplate.Generator` class is now a simple class
+that instantiates and delegates to an instance of
+`GenTemplate.StaticGenerator`.
+
+
