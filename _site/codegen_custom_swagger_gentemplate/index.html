@@ -139,14 +139,14 @@
 
   
   <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Swagger <span class="caret"></span></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">openapi <span class="caret"></span></a>
     <ul class="dropdown-menu">
       
       
       
       
       
-      <li class=""><a href="/swagger_normalizer/" target="_self">Swagger Normalizer</a></li>
+      <li class=""><a href="/openapi_normalizer/" target="_self">KaiZen OpenAPI Normalizer</a></li>
       
       
     </ul>
@@ -401,7 +401,7 @@ will soon migrate to release 2.1.5. At that time we will update this document as
 <p>The SCG Command Line interface (CLI) includes a command, <code>meta</code>, which can be used to create the
 skeleton for a new SCG module. The CLI is embedded in the Java command line, with the SCG
 executable jar file and the class that implements the selected SCG module as command-line
-arguments.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
+arguments.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>Our first step invokes the SCG <code>meta</code> command to create a skeleton project. The command arguments we
@@ -570,7 +570,7 @@ considerably from both the structure of a Swagger Spec and from that presented b
 Java API. To get some insight into the structure, one helpful resource is the console output created
 when an SCG module is executed with the <code>debugModels</code>, <code>debugOperations</code>, and <code>debugSupportingFiles</code>
 Java system properties set. The output shows the precise JSON structure on which the model, api, and
-supporting templates, respectively, will operate.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
+supporting templates, respectively, will operate.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>Here is our final template:</p>
@@ -616,10 +616,10 @@ showPetById,Operation,Swagger Petstore,Model,Info for a specific pet</code></pre
 </div>
 <div id="footnotes">
 <hr>
-<div class="footnote" id="_footnote_1">
+<div class="footnote" id="_footnotedef_1">
 <a href="#_footnoteref_1">1</a>. Although SCG is published with several convenience scripts that invoke the CLI on specific sample models embedded in the project, it does not provide a general-purpose script to invoke the CLI. Such a script would be simple to create, but in this guide we will show the full Java command lines.
 </div>
-<div class="footnote" id="_footnote_2">
+<div class="footnote" id="_footnotedef_2">
 <a href="#_footnoteref_2">2</a>. Recall that in RepreZen API Studio you can arrange for system properties to be set when executing an SCG-based GenTemplate by providing a value for the <code>swaggerCodegenSystemProperties</code> parameter in the GenTarget file.
 </div>
 </div>

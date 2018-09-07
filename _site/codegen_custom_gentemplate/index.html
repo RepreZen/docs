@@ -139,14 +139,14 @@
 
   
   <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Swagger <span class="caret"></span></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">openapi <span class="caret"></span></a>
     <ul class="dropdown-menu">
       
       
       
       
       
-      <li class=""><a href="/swagger_normalizer/" target="_self">Swagger Normalizer</a></li>
+      <li class=""><a href="/openapi_normalizer/" target="_self">KaiZen OpenAPI Normalizer</a></li>
       
       
     </ul>
@@ -356,7 +356,7 @@ facilities. Complete documentation is available
 </div>
 </div>
 <div class="sect1">
-<h2 id="the-code-igentemplate-code-interface">The <code>IGenTemplate</code> Interface</h2>
+<h2 id="the-igentemplate-interface">The <code>IGenTemplate</code> Interface</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The basic interface for all GenTemplates is very simple:</p>
@@ -566,7 +566,7 @@ supply the GenTarget with a logger it can use during its execution.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="the-code-abstractgentemplate-code-base-class">The <code>AbstractGenTemplate</code> Base Class</h2>
+<h2 id="the-abstractgentemplate-base-class">The <code>AbstractGenTemplate</code> Base Class</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>All of the factory-default GenTemplates built into RepreZen API Studio are
@@ -1021,7 +1021,7 @@ in:</p>
 a path. Likewise for the <code>to</code> argument. Precise behavior depends on
 these varations:</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 20%;">
@@ -1133,7 +1133,7 @@ the other options.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="overriding-code-gentemplate-getgenerator-code">Overriding <code>GenTemplate.getGenerator()</code></h4>
+<h4 id="overriding-gentemplate-getgenerator">Overriding <code>GenTemplate.getGenerator()</code></h4>
 <div class="paragraph">
 <p>Occasionally you may find that even dynamic generators don&#8217;t give you
 quite the flexibility you need. For example, perhaps it&#8217;s important
@@ -1160,7 +1160,7 @@ still make use of all the capabilities described above, by calling
 <p>A number of convenience classes are created to make it easier to
 create GenTemplates by extending the <code>GenTemplate</code> class. They are:</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1233,7 +1233,7 @@ create GenTemplates by extending the <code>GenTemplate</code> class. They are:</
 for the supported primary types. These can all appear in <code>configure</code>
 method overrides in <code>GenTemplate</code>-derived classes.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 30%;">
 <col style="width: 70%;">
@@ -1262,10 +1262,11 @@ method overrides in <code>GenTemplate</code>-derived classes.</p>
 </div>
 </div>
 </div>
-<h1 id="miscellaneous-details" class="sect0">Miscellaneous Details</h1>
 <div class="sect1">
-<h2 id="gentemplate-discovery">GenTemplate Discovery</h2>
+<h2 id="miscellaneous-details">Miscellaneous Details</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="gentemplate-discovery">GenTemplate Discovery</h3>
 <div class="paragraph">
 <p>RepreZen API Studio uses the Java <code>ServiceLoader</code> class to search for available
 GenTemplates. The classpath used in this search includes all the
@@ -1281,7 +1282,7 @@ Generation</strong> preference panel.</p>
 </li>
 <li>
 <p>The output directories associated with Java projects in the
-workspace.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
+workspace.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup></p>
 </li>
 <li>
 <p>All JAR files contained anywhere within a <code>/lib</code> folder in any open
@@ -1314,8 +1315,8 @@ will not be available for use.
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="gentemplate-groups">GenTemplate Groups</h3>
+<div class="sect3">
+<h4 id="gentemplate-groups">GenTemplate Groups</h4>
 <div class="paragraph">
 <p>In some cases, a list of GenTemplates is subject to change and can be
 determined dynamically at run-time. It can be difficult in a case like
@@ -1348,14 +1349,12 @@ is <code>IGenTemplateGroup</code> instead of <code>IGenTemplate</code>.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="extract-item-types">Extract Item Types</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="extract-item-types">Extract Item Types</h3>
 <div class="paragraph">
 <p>Currently supported extract types for our primary model types include:</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -1510,10 +1509,8 @@ is <code>IGenTemplateGroup</code> instead of <code>IGenTemplate</code>.</p>
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="mvel-bindings">MVEL Bindings</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="mvel-bindings">MVEL Bindings</h3>
 <div class="paragraph">
 <p><a href="https://github.com/imona/tutorial/wiki/MVEL-Guide">MVEL</a> is used
 to construct output file names and <code>when</code> conditions for output
@@ -1526,7 +1523,7 @@ expressions. They can appear in the MVEL expression, and their
 bean-like properties can be accessed using property syntax, as in
 <code>${swagger.info.title}</code> to obtain the title in a Swagger model.</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1582,15 +1579,15 @@ parameter</p></td>
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="the-code-filepojo-code-class">The <code>FilePOJO</code> Class</h3>
+<div class="sect3">
+<h4 id="the-filepojo-class">The <code>FilePOJO</code> Class</h4>
 <div class="paragraph">
 <p>The <code>MVEL</code> expression for an output item file name can refer to
 <code>primarySource</code> to obtain information about the file containing the
 primary model for the executing GenTemplate. Its fields are as
 follows:</p>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1643,18 +1640,14 @@ follows:</p>
 </table>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="trace-information">Trace Information</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="trace-information">Trace Information</h3>
 <div class="paragraph">
 <p>TBA</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="static-generator">Why <code>Generator</code> and <code>StaticGenerator</code>?</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="static-generator">Why <code>Generator</code> and <code>StaticGenerator</code>?</h3>
 <div class="paragraph">
 <p>As mentioned earlier, <code>AbstractGenTemplate</code> defines two member
 classes: <code>Generator</code> and <code>StaticGenerator</code>. They are identical, except
@@ -1703,9 +1696,10 @@ that instantiates and delegates to an instance of
 </div>
 </div>
 </div>
+</div>
 <div id="footnotes">
 <hr>
-<div class="footnote" id="_footnote_1">
+<div class="footnote" id="_footnotedef_1">
 <a href="#_footnoteref_1">1</a>. More precisely, the resolved classpath for every such project is examined for entries that are not of kind <code>CPE_LIBRARY</code>. For each resulting entry that is of kind <code>CPE_SOURCE</code> that has a non-null output location, that location is added. For other entries, the entry&#8217;s path is added. Non-present locations are removed from the final collection.
 </div>
 </div>
