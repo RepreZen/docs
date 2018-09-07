@@ -360,9 +360,9 @@ localized;
 <3> that the `Person` schema itself was subjected to inlining, with localization of its recursive
 reference;
 
-<4> The `People` schema never ran into a recursive reference during inlining (though that could have
-happened, e.g. if `matriarch` had a `parents` property of type `People`). Therefore it was not
-localized.
+Note that the `People` schema never ran into a recursive reference during inlining (though that
+could have happened, e.g. if `matriarch` had a `parents` property of type `People`). Therefore it
+was not localized.
 
 When an object is inlined without encountering a recursive reference (so that the object is not also
 localized), we say that it is _fully inlined_. This was the case for `People` above.

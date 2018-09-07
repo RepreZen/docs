@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="/css/asciidoc.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="canonical" href="http://localhost:4000/codegen_custom_gentemplate/">
-  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://localhost:4000/feed.xml">
+  <link rel="canonical" href="http://reprezen.github.io/codegen_custom_gentemplate/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/feed.xml">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 
@@ -1262,10 +1262,11 @@ method overrides in <code>GenTemplate</code>-derived classes.</p>
 </div>
 </div>
 </div>
-<h1 id="miscellaneous-details" class="sect0">Miscellaneous Details</h1>
 <div class="sect1">
-<h2 id="gentemplate-discovery">GenTemplate Discovery</h2>
+<h2 id="miscellaneous-details">Miscellaneous Details</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="gentemplate-discovery">GenTemplate Discovery</h3>
 <div class="paragraph">
 <p>RepreZen API Studio uses the Java <code>ServiceLoader</code> class to search for available
 GenTemplates. The classpath used in this search includes all the
@@ -1314,8 +1315,8 @@ will not be available for use.
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="gentemplate-groups">GenTemplate Groups</h3>
+<div class="sect3">
+<h4 id="gentemplate-groups">GenTemplate Groups</h4>
 <div class="paragraph">
 <p>In some cases, a list of GenTemplates is subject to change and can be
 determined dynamically at run-time. It can be difficult in a case like
@@ -1348,10 +1349,8 @@ is <code>IGenTemplateGroup</code> instead of <code>IGenTemplate</code>.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="extract-item-types">Extract Item Types</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="extract-item-types">Extract Item Types</h3>
 <div class="paragraph">
 <p>Currently supported extract types for our primary model types include:</p>
 </div>
@@ -1510,10 +1509,8 @@ is <code>IGenTemplateGroup</code> instead of <code>IGenTemplate</code>.</p>
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="mvel-bindings">MVEL Bindings</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="mvel-bindings">MVEL Bindings</h3>
 <div class="paragraph">
 <p><a href="https://github.com/imona/tutorial/wiki/MVEL-Guide">MVEL</a> is used
 to construct output file names and <code>when</code> conditions for output
@@ -1582,8 +1579,8 @@ parameter</p></td>
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="the-filepojo-class">The <code>FilePOJO</code> Class</h3>
+<div class="sect3">
+<h4 id="the-filepojo-class">The <code>FilePOJO</code> Class</h4>
 <div class="paragraph">
 <p>The <code>MVEL</code> expression for an output item file name can refer to
 <code>primarySource</code> to obtain information about the file containing the
@@ -1643,18 +1640,14 @@ follows:</p>
 </table>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="trace-information">Trace Information</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="trace-information">Trace Information</h3>
 <div class="paragraph">
 <p>TBA</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="static-generator">Why <code>Generator</code> and <code>StaticGenerator</code>?</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="static-generator">Why <code>Generator</code> and <code>StaticGenerator</code>?</h3>
 <div class="paragraph">
 <p>As mentioned earlier, <code>AbstractGenTemplate</code> defines two member
 classes: <code>Generator</code> and <code>StaticGenerator</code>. They are identical, except
@@ -1700,6 +1693,7 @@ GenTemplate instance and its context object are conveyed to the
 generator. The <code>GenTemplate.Generator</code> class is now a simple class
 that instantiates and delegates to an instance of
 <code>GenTemplate.StaticGenerator</code>.</p>
+</div>
 </div>
 </div>
 </div>

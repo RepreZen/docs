@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="/css/asciidoc.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="canonical" href="http://localhost:4000/openapi_normalizer/">
-  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://localhost:4000/feed.xml">
+  <link rel="canonical" href="http://reprezen.github.io/openapi_normalizer/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/feed.xml">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 
@@ -805,13 +805,12 @@ localized;</td>
 <td>that the <code>Person</code> schema itself was subjected to inlining, with localization of its recursive
 reference;</td>
 </tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The <code>People</code> schema never ran into a recursive reference during inlining (though that could have
-happened, e.g. if <code>matriarch</code> had a <code>parents</code> property of type <code>People</code>). Therefore it was not
-localized.</td>
-</tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Note that the <code>People</code> schema never ran into a recursive reference during inlining (though that
+could have happened, e.g. if <code>matriarch</code> had a <code>parents</code> property of type <code>People</code>). Therefore it
+was not localized.</p>
 </div>
 <div class="paragraph">
 <p>When an object is inlined without encountering a recursive reference (so that the object is not also

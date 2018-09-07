@@ -620,8 +620,8 @@ method overrides in `GenTemplate`-derived classes.
   define(primarySource().ofType(OpenApi3.class))
 |===
 
-= Miscellaneous Details
-== GenTemplate Discovery
+== Miscellaneous Details
+=== GenTemplate Discovery
 
 {RAS} uses the Java `ServiceLoader` class to search for available
 GenTemplates. The classpath used in this search includes all the
@@ -658,7 +658,7 @@ package, its fully qualified class name in a
 accordingly. Otherwise, the GenTemplate will not be discovered, and it
 will not be available for use.
 
-=== GenTemplate Groups
+==== GenTemplate Groups
 
 In some cases, a list of GenTemplates is subject to change and can be
 determined dynamically at run-time. It can be difficult in a case like
@@ -686,7 +686,7 @@ the same as for individual GenTemplates, but its final name component
 is `IGenTemplateGroup` instead of `IGenTemplate`.
 
 
-== Extract Item Types
+=== Extract Item Types
 
 Currently supported extract types for our primary model types include:
 
@@ -743,7 +743,7 @@ Currently supported extract types for our primary model types include:
 |===
 
 
-== MVEL Bindings
+=== MVEL Bindings
 
 link:https://github.com/imona/tutorial/wiki/MVEL-Guide[MVEL] is used
 to construct output file names and `when` conditions for output
@@ -774,7 +774,7 @@ e| (GenTarget param name) | The value bound the named GenTarget
 parameter
 |===
 
-=== The `FilePOJO` Class
+==== The `FilePOJO` Class
 
 The `MVEL` expression for an output item file name can refer to
 `primarySource` to obtain information about the file containing the
@@ -799,12 +799,12 @@ follows:
 
 
 
-== Trace Information
+=== Trace Information
 
 TBA
 
 [[static-generator]]
-== Why `Generator` and `StaticGenerator`?
+=== Why `Generator` and `StaticGenerator`?
 
 As mentioned earlier, `AbstractGenTemplate` defines two member
 classes: `Generator` and `StaticGenerator`. They are identical, except
