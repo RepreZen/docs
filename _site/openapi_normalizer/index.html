@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Using the KaiZen OpenAPI Normalizer GenTemplate</title>
+  <meta name="description" content="">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>  
+
+  <!-- add after bootstrap.min.css -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.css">
+  <!-- add after bootstrap.min.js -->
+  <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.3.0/dist/bootstrap-toc.min.js"></script>
+
+  <link rel="stylesheet" href="/css/asciidoc.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="canonical" href="http://localhost:4000/openapi_normalizer/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://localhost:4000/feed.xml">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
+
+  <link rel="stylesheet" href="/css/misc.css">
+  <script src="/js/misc.js"></script>
+
+</head>
+
+  <body data-spy="scroll" data-targets="#toc">
+    <div class="container">
+      <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://reprezen.com" target="_blank">
+        <img src="/images/reprezen-logo.png">
+      </a>
+      <a class="navbar-brand" href="/">
+	<span class="hidden-xs">&nbsp;Documentation</span>
+      </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+  
+  
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Core <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="http://rapid-api.org/rapid-ml/spec/current/desktop/" target="_blank">RAPID-ML Language Specification</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/learning_rapid_ml/" target="_blank">Learning RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://19dd14f1bca25029f68d-656faf528029c44dd1ad9f4b523fa82b.ssl.cf5.rackcdn.com/current/RepreZen%20API%20Studio%20QRC.pdf" target="_blank">RepreZen API Studio Reference Card</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CodeGen <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_intro/" target="_self">Introduction</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_swagger_codegen/" target="_self">Using Swagger Codegen in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_custom_swagger_gentemplate/" target="_self">Creating a Custom Swagger GenTemplate</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_custom_gentemplate/" target="_self">A Deep Dive Into Custom GenTemplates</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="/codegen_sharing/" target="_self">Sharing GenTemplates</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">openapi <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="/openapi_normalizer/" target="_self">KaiZen OpenAPI Normalizer</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Training <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/channel/UCNwqDgngCot722zwHse5UTg" target="_blank">RepreZen YouTube Channel</a></li>
+      
+      
+      
+      
+      
+      
+      <li class="divider" role="separator"></li>
+      
+      
+      
+      
+      
+      
+      <li class="video-series"><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Play Series: Working with RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=aYYChcU2oJI&index=1&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Introducing RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=UsrsyEVO914&index=2&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RepreZen API Studio & Swagger</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=KX_tHp_KQkE&index=3&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Editing Swagger-OpenAPI in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=sSIX-A4ru7E&index=4&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Test-drive your Swagger-OpenAPI model in RepreZen API Studio</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=5&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=6&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=7&list=PLLMXvAoF1MNYQUezbEEEFfL5Lt8EXTOSg" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class="divider" role="separator"></li>
+      
+      
+      
+      
+      
+      
+      <li class="video-series"><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Play Series: RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=fiEDGvT0Y3I&index=1&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Getting Started with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=HeQrQje8lww&index=2&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">RAPID-ML - Data Modeling Essentials for API Design</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=7F-EooNc9Q0&index=3&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Realization Modeling with RAPID-ML</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://www.youtube.com/watch?v=wYimccfMbAo&index=4&list=PLLMXvAoF1MNYNOly-N_M34LPH-5PlsTHO" target="_blank">Introducing the RAPID-ML Ready! API Plugin</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+  
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RepreZen Sites <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      
+      
+      
+      
+      
+      <li class=""><a href="http://reprezen.com" target="_blank">RepreZen Company Website</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="http://reprezen.com/blog" target="_blank">Team Blog</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="http://support.reprezen.com" target="_blank">Support and Community Site</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="https://github.com/reprezen" target="_blank">RepreZen on GitHub</a></li>
+      
+      
+      
+      
+      
+      
+      <li class=""><a href="http://rapid-api.org/rapid-ml" target="_blank">RAPID-ML Home Page</a></li>
+      
+      
+    </ul>
+  </li>
+
+
+</ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+      <div class="row">
+	<div class="col-sm-10">
+	  <h1>Using the KaiZen OpenAPI Normalizer GenTemplate</h1>
+	  <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>KaiZen OpenAPI Normalizer (formerly known as Swagger Normalizer) is a core component of the OpenAPI
+Multi-File Support in RepreZen API Studio, and as such it is used by each of the three &#8220;live&#8221; views -
+Documentation View, Diagram View, and Swagger UI View - that appear by default in the right-hand
+pane of the RepreZen API Studio GUI, as well as by all Swagger and OpenAPI v3 GenTemplates. You can also use it
+directly as its own GenTemplate, named &#8220;KaiZen OpenAPI Normalizer [YAML+JSON]&#8221; in the GenTarget
+Wizard.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/openapi/normalizer.png" alt="KaiZen OpenAPI Normalizer">
+</div>
+</div>
+<div class="paragraph">
+<p>The primary function of the normalizer is to render a multi-file OpenAPI model spec as a
+functionally equivalent single-file spec. In this way it can simplify the use of other tools and
+libraries in the evolving OpenAPI ecosystem, where external references are not always handled
+consistently.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, the normalizer can perform other transformations of the OpenAPI spec, which may be
+helpful for some circumstances, especially when feeding the spec to downstream systems.</p>
+</div>
+<div class="paragraph">
+<p>Note: The term "Swagger" is a trademark of Smartbear Software and is the prior of some versions of
+the OpenAPI specification. In particular, "Swagger" is still commonly used to refer to version 2.0
+of the <a href="https://github.com/OAI/OpenAPI-Specification">OpenAPI Specification</a>. In this document we will
+refer to this as "OpenAPI v2" wherever we need to refer specifically to that version of the
+specificaiton.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="basic-use"><a class="link" href="#basic-use">Basic Use</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Normalizer is used like any other OpenAPI GenTemplate:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a GenTarget (a <code>.gen</code> file) in your model folder, linking your OpenAPI model file (<code>.yaml</code>
+file) to the GenTemplate. The internal id of this GenTemplate is: <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code>com.modelsolv.reprezen.gentemplates.swaggernorm.SwaggerNormalizerGenTemplate</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The name listed in the drop-down list in the GenTarget wizard is
+&#8220;KaiZen OpenAPI Normalizer [YAML+JSON].&#8221; <sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup></p>
+</div>
+</li>
+<li>
+<p>Configure the GenTarget as desired (see below).</p>
+</li>
+<li>
+<p>Execute the GenTarget</p>
+</li>
+<li>
+<p>Find the generated YAML file in the <code>generated</code> folder that appears
+in the GenTarget folder.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="multifile-processing"><a class="link" href="#multifile-processing">Multifile Processing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The one thing that the normalizer will always do is resolve external references and leave you with a
+single-file OpenAPI Spec. The other things it may do depend on options, described in
+<a href="#normalizer-options">Normalizer Options</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="references-in-openapi-specs"><a class="link" href="#references-in-openapi-specs">References in OpenAPI Specs</a></h3>
+<div class="paragraph">
+<p>Here&#8217;s an example of what a typical <em>reference</em> might look like in a OpenAPI spec:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>responses:
+  default:
+    description: Default Response
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/Pet"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is part of the definition of an operation whose normal response will contain data about
+a pet. That information will be structured according to a schema named <code>Pet</code> defined elsewhere in
+this same OpenAPI spec, in the <code>components/schemas</code> section of the spec.</p>
+</div>
+<div class="paragraph">
+<p>The reference itself appears as the value of the <code>schema</code> property in the the response
+content map. That property could appear with an "in-line" schema definition, but in this case the
+designer has opted to define the schema elsewhere in the file and reference it here by name. The
+reference itself takes the form of an object with a string-valued property named
+<code>$ref</code>. <sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup></p>
+</div>
+<div class="paragraph">
+<p>If the definition of the <code>Pet</code> schema physically appeared in some other model spec, the reference
+would need to include a URL to retrieve that spec, with a fragment identical to the reference string
+shown above:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>responses:
+  default:
+    description: Default Response
+    content:
+      application/json:
+        schema:
+          $ref: "http://models.example.com/petstore-schemas.yaml#/components/schemas/Pet"</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+OpenAPI&#8217;s <code>$ref</code> syntax conforms to a separate standard known as "JSON Reference." That
+standard is available <a href="https://tools.ietf.org/html/draft-pbryan-zyp-json-ref-03" target="_blank" rel="noopener">here</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="conforming-and-non-conforming-references"><a class="link" href="#conforming-and-non-conforming-references">Conforming and Non-Conforming References</a></h4>
+<div class="paragraph">
+<p>References in an OpenAPI spec should all be of the variety specifically endorsed by the OpenAPI Specification. We&#8217;ll
+call those <em>conforming references</em>. All other references will be called <em>non-conforming
+references</em>.</p>
+</div>
+<div class="paragraph">
+<p>The precise definition differs between v2 and v3 of the specification, but in both cases, the
+definition depends on prefixes of the fragment portion of the reference string.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">v2 Conforming Prefixes</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">v3 Conforming Prefixes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>#/paths/</code></p>
+</li>
+<li>
+<p><code>#/parameters/</code></p>
+</li>
+<li>
+<p><code>#/responses/</code></p>
+</li>
+<li>
+<p><code>#/definitions/</code></p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>#/paths/</code></p>
+</li>
+<li>
+<p><code>#/components/schemas/</code></p>
+</li>
+<li>
+<p><code>#/components/responses/</code></p>
+</li>
+<li>
+<p><code>#/components/parameters/</code></p>
+</li>
+<li>
+<p><code>#/components/examples/</code></p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p><code>#/components/requestBodies/</code></p>
+</li>
+<li>
+<p><code>#/components/headers/</code></p>
+</li>
+<li>
+<p><code>#/components/securitySchemes/</code></p>
+</li>
+<li>
+<p><code>#/components/links/</code></p>
+</li>
+<li>
+<p><code>#/components/callbacks/</code></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Normalizer does not treat conforming and non-conforming reference identically.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="what-the-normalizer-does-with-references"><a class="link" href="#what-the-normalizer-does-with-references">What the Normalizer Does with References</a></h3>
+<div class="paragraph">
+<p>When the normalizer encounters any reference, there are two ways it may process the reference:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Inline</dt>
+<dd>
+<p>The normalizer retrieves the referenced value (e.g. the <code>Pet</code> schema definition object) and
+replaces the reference itself with that value.</p>
+</dd>
+<dt class="hdlist1">Localize</dt>
+<dd>
+<p>The normalizer first adds the referenced object to the normalized spec that it is
+creating, if it is not already present, and then replaces the reference with a local reference to
+that object. So in the external reference example shown above, the <code>Pet</code> schema definition would
+appear directly in the OpenAPI spec produced by the normalizer, and references that were formerly
+external references would become local references.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The normalizer <em>always</em> inlines non-conforming references. Any given conforming reference might be
+inlined or localized, depending on
+<a href="#normalizer-options">options</a> in effect.</p>
+</div>
+<div class="sect3">
+<h4 id="name-collisions"><a class="link" href="#name-collisions">Name Collisions</a></h4>
+<div class="paragraph">
+<p>Localization of a conforming reference may lead to a name collision. For example, imagine the
+following excerpts from two OpenAPI specs:</p>
+</div>
+<div class="listingblock">
+<div class="title">main.yaml</div>
+<div class="content">
+<pre class="highlight nowrap"><code>components:
+  schemas:
+    Address:
+      description: An address given by a speaker
+      type: object
+      properties:
+        speaker:
+           $ref: "external.yaml#/components/schemas/Person"
+        title:
+          type: string
+      ...</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">external.yaml</div>
+<div class="content">
+<pre class="highlight nowrap"><code>components:
+  schemas:
+    Person:
+      name:
+         type: string
+      address:
+        $ref: "#/components/schemas/Address"
+    Address:
+      description: A postal address
+      type: object
+      properties:
+        street:
+          type: string
+      ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The main spec is apparently describing APIs related to events where speakers deliver addresses. The
+speakers themselves are represented using an externally referenced <code>Person</code> schema which itself
+makes use of a locally referenced <code>Address</code> schema.</p>
+</div>
+<div class="paragraph">
+<p>In a localizing scenario, the normalized spec created by the normalizer would look something like
+this:</p>
+</div>
+<div class="listingblock">
+<div class="title">main-normalized.yaml</div>
+<div class="content">
+<pre class="highlight nowrap"><code>components:
+  schemas:
+    Address:
+      description: An address given by a speaker
+      type: object
+      properties:
+        speaker:
+           $ref: "#/components/schemas/Person"   <i class="conum" data-value="1"></i><b>(1)</b>
+        title:
+          type: string
+      ...
+    Person:
+      name:
+         type: string
+      address:
+        $ref: "#/components/schemas/Address_1"   <i class="conum" data-value="2"></i><b>(2)</b>
+    Address_1:
+      description: A postal address
+      type: object
+      properties:
+        street:
+          type: string
+      ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The two <code>Address</code> schemas originally in <em>main.yaml</em> and <em>external.yaml</em> are both needed in the
+normalized spec, but their names collide. Therefore, the schema definition originally in
+<em>external.yaml</em> is renamed to <code>Address_1</code>.</p>
+</div>
+<div class="paragraph">
+<p>All references have been adjusted as required:</p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The former external reference to the <code>Person</code> schema is now a local reference.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>Person</code> schema&#8217;s <code>Address</code> reference now reflects the renaming that occurred.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Renaming is done only where necessary due to a conflict, and the names appearing in the top-level
+spec are always preserved as-is; that is, if there is a colliding externally referenced object that
+needs to be localized, that object will be renamed, not the top-level object with which it
+collided. In the above example, the <code>Address</code> schema occurring in <em>main.yaml</em> will always retain its
+original name, forcing any colliding objects to be renamed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="recursive-references"><a class="link" href="#recursive-references">Recursive References</a></h4>
+<div class="paragraph">
+<p>It is possible to set up recursive schema definitions in OpenAPI specs, through the use of
+references. For example, consider the following schema:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        name:
+          type: string
+        children:
+           $ref: "#/components/schemas/People"  <i class="conum" data-value="1"></i><b>(1)</b>
+    People:
+      type: array
+      items:
+        $ref: "#/components/schemas/Person"     <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>Person</code> schema has a <code>children</code> property of type <code>People</code>,
+and</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>the <code>People</code> schema defines an array of <code>Person</code> objects.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Naively attempting to inline a reference to a <code>Person</code> object would
+lead to a never-ending expansion like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">original</div>
+<div class="content">
+<pre class="highlight nowrap"><code>matriarch:
+  $ref: "#/components/schemas/Person"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">inlined</div>
+<div class="content">
+<pre class="highlight nowrap"><code>matriarch:
+  type: object                 # inline Person
+  properties:
+    name:
+      type: string
+    children:
+      type: array              # inline People
+      items:
+        type: object           # inline Person
+        properties:
+          name:
+            type: string
+          children:
+            type: array        # inline People
+            items:
+               type: object    # inline Person
+               ...             # inlining never ends</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We have cut off the inlining above with an ellipsis, but in reality it could never stop.</p>
+</div>
+<div class="paragraph">
+<p>To handle recursive references encountered during inlining, the normalizer stops inlining whenever a
+reference is encountered that is fully contained within another (inlined) instance of the referenced
+object. That recursive reference is localized rather than being inlined.</p>
+</div>
+<div class="paragraph">
+<p>In the above example, we would end up with something like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">partially-inlined</div>
+<div class="content">
+<pre class="highlight nowrap"><code>    matriarch:
+      type: object                                      <i class="conum" data-value="1"></i><b>(1)</b>
+      properties:
+	name:
+	  type: string
+	children:
+	  type: array
+	  items:
+	    $ref: "#/components/schemas/Person"        <i class="conum" data-value="2"></i><b>(2)</b>
+...
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        name:
+          type: string
+        children:
+          type: array
+          items:
+            $ref: "#/components/schemas/Person"        <i class="conum" data-value="3"></i><b>(3)</b>
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here we see:</p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>that the top-level reference to <code>Person</code> as the type of the <code>matriarch</code> property was inlined;</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>that the recursive reference to <code>Person</code> encountered while performing this inlining has been
+localized;</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>that the <code>Person</code> schema itself was subjected to inlining, with localization of its recursive
+reference;</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The <code>People</code> schema never ran into a recursive reference during inlining (though that could have
+happened, e.g. if <code>matriarch</code> had a <code>parents</code> property of type <code>People</code>). Therefore it was not
+localized.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When an object is inlined without encountering a recursive reference (so that the object is not also
+localized), we say that it is <em>fully inlined</em>. This was the case for <code>People</code> above.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+For non-conforming references, recursion is not currently permitted and will cause the
+normalizer to fail.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="object-retention"><a class="link" href="#object-retention">Object Retention</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some of the normalizer options pertain to <em>object retention policy</em>: rules that decide which objects
+from the multifile spec will appear in the normalized output.</p>
+</div>
+<div class="sect2">
+<h3 id="the-completeness-rule"><a class="link" href="#the-completeness-rule">The Completeness Rule</a></h3>
+<div class="paragraph">
+<p>In all cases, the normalized spec must be <em>complete</em>, in the sense that all references appearing in
+the spec resolve to objects defined in the spec.<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup> Thus, any object that is referenced in the normalized spec is also retained in the normalized
+spec.</p>
+</div>
+<div class="paragraph">
+<p>Objects that are <em>fully inlined</em> are not required by the completeness rule and may not be retained,
+depending on options in effect. An object that is <em>partially inlined</em> because of recursive
+references <em>is</em> required by completeness, since recursive references are localized. Such an object
+must be retained.</p>
+</div>
+<div class="paragraph">
+<p>All other retention policy is subordinate to completeness: every referenced object is retained, even
+if other retention policy would cause it to be dropped.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="root-objects"><a class="link" href="#root-objects">Root Objects</a></h3>
+<div class="paragraph">
+<p>Completeness presupposes a starting point: some set of objects that are retained for other
+reasons. References appearing in those objects are processed for completeness, and then objects that
+are retained for completeness are themselves processed for completeness, and so on.</p>
+</div>
+<div class="paragraph">
+<p>We call the objects that are retained for reasons other than completeness <em>root objects</em>. Root
+objects are determined according to <em>retention policy</em> and <em>retention scope</em>, as defined by
+<a href="#normalizer-options">options</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="retention-policy"><a class="link" href="#retention-policy">Retention Policy</a></h4>
+<div class="paragraph">
+<p>Retention policy is determined according to RETAIN and DROP rules that select and reject individual
+objects. An object is retained if it matches at least one RETAIN rule and does not match any DROP
+rule.</p>
+</div>
+<div class="paragraph">
+<p>Currently, there is only one RETAIN rule, which specifies which object types - paths, schemas,
+parameters, responses, etc.  - are to be retained. There are not currently any DROP rules
+implemented. We anticipate implementing additional RETAIN and DROP rules in the future to provide
+additional flexibility.</p>
+</div>
+<div class="paragraph">
+<p>Object-type-based retention policy is specified with the <strong>RETAIN</strong> option.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="retention-scope"><a class="link" href="#retention-scope">Retention Scope</a></h3>
+<div class="paragraph">
+<p>Retention policy is applied only to objects that appear in files that are considered <em>in scope</em> for
+retention. The top-level file is always in scope.</p>
+</div>
+<div class="paragraph">
+<p>When processing an OpenAPI spec, other specs may be loaded in order to satisfy references. By
+default, those other specs are not in scope. However, if the <strong>RETENTION_SCOPE</strong> option is set to ALL,
+specs that are loaded solely to resolve references will also be considered in scope, so that other
+objects in those files may be retained - even if they are not needed for completeness.</p>
+</div>
+<div class="paragraph">
+<p>It is also possible to identify other files to be treated as top-level for retention purposes, by
+listing them in the <strong>ADDITIONAL_FILES</strong> option.<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup> All such files will be loaded and will be in-scope
+for retention, regardless of whether any objects they contain are otherwise required for
+completeness. And of course, retained references from those files will be processed for
+completeness.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>One important use-case for "additional files" involves <code>allOf</code> schema defintions. These are commonly
+used to express type hierarchies, and in such cases it is common for a <em>supertype</em> to be referenced
+from the top-level spec (e.g. a list of <code>Animal</code> objects). The <em>subtypes</em> themselves also reference
+the supertype in their <em>allOf</em> property (e.g. <code>Dog</code> and <code>Cat</code> both reference <code>Animal</code>). However, it
+is common for the subtypes themselves <em>not</em> to be directly referenced in the OpenAPI spec; they are
+<em>not</em> typically referenced by the supertype itself (<code>Dog</code> references <code>Animal</code>, but not vice-versa).</p>
+</div>
+<div class="paragraph">
+<p>If the subtypes are defined in a separate file, that file will not be loaded for reference
+resolution, and so those subtypes will not be loaded&#8212;&#8203;let alone retained&#8212;&#8203;by the
+normalizer. Configuring the file as an "additional file" would cause the file to be loaded, and
+subtype definitions would then be eligible for retention.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="normalizer-options"><a class="link" href="#normalizer-options">Normalizer Options</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the normalizer is used through its GenTemplate ("KaiZen OpenAPI Normalizer [YAML+JSON]"),
+options are configured in the GenTarget file&#8201;&#8212;&#8201;the <code>.gen</code> file created by the GenTarget
+wizard. Each option can take on various values, as detailed below.</p>
+</div>
+<div class="paragraph">
+<p>Options are as follows:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">INLINE </dt>
+<dd>
+<p>Specify which objects are inlined by the normalizer. The
+value of this option can be:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A list of non-PATH object types, drawn from the types relevant to the model version.<sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup></p>
+<div class="ulist">
+<ul>
+<li>
+<p>For v3 models, this includes SCHEMA, RESPONSE, PARAMETER, EXAMPLE, REQUEST_BODY, HEADER,
+SECURITY_SCHEME, LINK, and CALLBACK.</p>
+</li>
+<li>
+<p>For v2 models, this includes DEFINITION, PARAMETER, and RESPONSE.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The value ALL, meaning that all objects are inlined.</p>
+</li>
+<li>
+<p>The value COMPONENT, meaning that all objects except paths are inlined.<sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup></p>
+</li>
+<li>
+<p>The value NONE, meaning that no objects (except paths) are inlined.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">RETAIN </dt>
+<dd>
+<p>Specify which object types will be retained from in-scope files. The value of this option
+can be:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A list of object types relevent to the model type (same as for INLINE, but also including PATH).</p>
+</li>
+<li>
+<p>The value ALL, meaning that all objects are retained.</p>
+</li>
+<li>
+<p>The value COMPONENT, meaning that all objects except paths are retained.</p>
+</li>
+<li>
+<p>The value PATH_OR_COMPONENT <sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup>, meaning
+that:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If the top-level spec defines at least one path, then the PATH option will be in effect.</p>
+</li>
+<li>
+<p>Otherwise, the COMPONENT option will be in effect.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">RETENTION_SCOPE </dt>
+<dd>
+<p>Determines which OpenAPI model specs are considered in-scope for retention
+rules. Value is either:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ROOTS, meaning that only the top-level file and any files specified in <strong>ADDITIONAL_FILES</strong> will be
+in scope; or</p>
+</li>
+<li>
+<p>ALL, meaning that files loaded in order to resolve references will also be considered in scope.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">ADDITIONAL_FILES </dt>
+<dd>
+<p>Specifies additional files that should be treated as top-level for retention,
+and are therefore always loaded and always in-scope. The value is a list of file names, or more
+generally URLs. Each URL, if it is relative, is resolved based on the URL that specifies the
+top-level file.</p>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="swagger-only-options"><a class="link" href="#swagger-only-options">Swagger-Only Options</a></h3>
+<div class="paragraph">
+<p>The following options currently apply only to Swagger (i.e. OpenAPI v2) model specs. They address
+perceived shortcomings in <code>SwaggerParser</code> and its associated <code>Swagger</code> object model and API.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">HOIST </dt>
+<dd>
+<p>Enables some or all of the <em>hoisting</em> operations that can be performed by the
+normalizer. Hoisting refers to extrapolating certain items appearing in a Swagger spec into the
+contexts in which they apply. The option value is a list of hoistable items, drawn from:</p>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>MEDIA_TYPE: Global <code>consumes</code> and <code>produces</code> declarations are extrapolated into all operations
+that do not contain their own declarations.</p>
+</li>
+<li>
+<p>PARAMETER: Parameters defined at path-level are extrapolated into every operation appearing in the
+path that does not already define a parameter with the same name and the same <code>in</code> value.</p>
+</li>
+<li>
+<p>SECURITY_REQUIREMENT: The global security requirements array is extrapolated into every operation
+that does not define its own.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The <strong>HOIST</strong> option value may also be ALL or NONE.</p>
+</div>
+</dd>
+<dt class="hdlist1">REWRITE_SIMPLE_REFS </dt>
+<dd>
+<p>In former versions of the Swagger specification, reference strings were
+allowed to take a simple form like <code>Pet</code>. These would be treated as internal references based on the
+context in which the reference appears. For example, in old pet-store examples, references to the
+<code>Pet</code> schema appeared simply as <code>$ref: Pet</code> and this would be equivalent to <code>$ref:
+#/definitions/Pet</code>.</p>
+<div class="paragraph">
+<p>While these &#8220;simple references&#8221; are no longer supported by the Swagger specification, they are
+still processed by some existing tools. Enabling this option will cause the normalizer to rewrite
+simple references to fully compliant internal references.<sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup></p>
+</div>
+<div class="paragraph">
+<p>The REWRITE_SIMPLE_REFS option value should be either <em>true</em> or <em>false</em>.</p>
+</div>
+</dd>
+<dt class="hdlist1">CREATE_DEF_TITLES </dt>
+<dd>
+<p>This option causes the normalizer to add <code>title</code> properties to definitions that
+do not already have them. The title for such a definition is set to its property name in the
+<code>definitions</code> object of its containing Swagger spec.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This is particularly helpful when name collisions occur during localization, as the titles then
+reflect the original names of the definitions, prior to renaming.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The CREATE_DEF_TITLES option value should be either <em>true</em> or <em>false</em>.</p>
+</div>
+</dd>
+<dt class="hdlist1">INSTANTIATE_NULL_COLLECTIONS </dt>
+<dd>
+<p>There are many optional properties in the Swagger specification, and
+the Swagger Java parser creates structures in which omitted properties generally appear with <code>null</code>
+values. This forces a great deal of null-checking in Java code that processes parsed Swagger
+specs. The <strong>INSTANTIATE_NULL_COLLECTIONS</strong> option causes such null values for either array-valued or
+object-valued properties to be replaced with empty arrays and objects, respectively, where doing so
+would not alter the meaning of the spec.<sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnotedef_10" title="View footnote.">10</a>]</sup></p>
+<div class="paragraph">
+<p>The INSTANTIATE_NULL_COLLECTIONS option value should be either <em>true</em> or <em>false</em>.</p>
+</div>
+</dd>
+<dt class="hdlist1">FIX_MISSING_TYPES </dt>
+<dd>
+<p>The Swagger Java parser accepts Swagger specs in which some object schemas are
+missing their <code>type</code> property. This is allowed when the schema contains either a <code>properties</code> or
+<code>additionalProperties</code> property, and the parser treats the schema as if it contained <code>type:
+object</code>. This option causes the normalizer to explicitly add <code>type: object</code> in these schemas.</p>
+<div class="paragraph">
+<p>The FIX_MISSING_TYPES option value should be either <em>true</em> or <em>false</em>.</p>
+</div>
+</dd>
+<dt class="hdlist1">ORDERING </dt>
+<dd>
+<p>This option gives you some control over the order in which objects appear in the model
+spec produced by the normalizer. Permitted values include:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>AS_DECLARED</strong>, meaning that there should be no reordering of the model elements by
+Normalizer. This applies only to objects declared in the top-level and other root files; objects
+localized or retained from other files will appear after all root file objects, but not in a
+predictable order.</p>
+</li>
+<li>
+<p><strong>SORTED</strong>, meaning that a mostly-alphabetical ordering is imposed within the output model. In this
+case, all objects from all files participate, not just those from root files. The details of this
+ordering are as follows:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Paths, global parameters, global responses, and schema definitions are all ordered in a
+quasi-alphabetic order based on their names in the normalized spec. This is a case-insensitive
+ordering, except that names of the form <strong>Xxx_</strong><strong><em>nnn</em></strong> are treated specially, where <em>nnn</em> is
+a numeric suffix. Such names are typically the result of disambiguation when collisions occur
+through localization. However, if your models use such names on their own, they will be treated
+the same way by the ordering algorithm.</p>
+<div class="paragraph">
+<p>When such names occur, ordering is such that all names with the same root - including the unadorned
+root itself - appear together, and with numerically increasing suffixes. This is the case even when
+two roots differ only by letter case.</p>
+</div>
+<div class="paragraph">
+<p>For example, you would always see the following names in the indicated order:</p>
+</div>
+<div class="paragraph">
+<p><code>FOO, FOO_1, FOO_2, &#8230;&#8203;, FOO_10, Foo, Foo_1, Foo_2, &#8230;&#8203;, Foo_10</code></p>
+</div>
+</li>
+<li>
+<p>Operations within a path are ordered in the standard sequence defined by the Swagger project&#8217;s
+<code>Swagger</code> class: <code>get, head, post, put, delete, options, patch</code></p>
+</li>
+<li>
+<p>Responses defined within an operation are sorted numerically by response code, with a <code>default</code>
+entry, if any, following all numeric entries.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>With both treatments - even <strong>SORTED</strong> - ordering is restricted to the model contents specifically
+mentioned above. So, for example, tags, operation parameters, object schema property lists, and the
+top-level structure of the swagger spec should mostly be as they are in the source spec under both
+ordering treatments, except where Swagger project software may disrupt things (e.g. in the ordering
+of top-level model sections).</p>
+</div>
+<div class="paragraph">
+<p>The way to interpret the above paragraph in the case of <strong>AS_DECLARED</strong> ordering is that the
+Normalizer will not record positional information for items not explicitly mentioned in the details
+of the <strong>SORTED</strong> ordering. Therefore, if these items are reorganized by Swagger software, it will not
+be possible to reconstruct the original ordering.</p>
+</div>
+<div class="paragraph">
+<p>In some cases these unaddressed orderings are likely to become addressed by the normalizer in a
+future release, but we have explicitly chosen <em>not</em> to reorder parameter lists in operations, since
+doing so could cause incompatible changes in the output of certain code generators (e.g. in
+generated method signatures).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="option-defaults"><a class="link" href="#option-defaults">Option Defaults</a></h3>
+<div class="paragraph">
+<p>The normalizer is used in RepreZen API Studio in the following scenarios:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Loading an OpenAPI spec for display in one of the <em>live views</em>: Diagram, Documentation, and
+Swagger UI.</p>
+</li>
+<li>
+<p>Loading an OpenAPI spec for processing by a GenTemplate other than the "KaiZen OpenAPI Normalizer
+[YAML+JSON]" GenTemplate.</p>
+</li>
+<li>
+<p>Loading an OpenAPI spec for processing by the "KaiZen OpenAPI Normalizer [YAML+JSON]" GenTemplate.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following table specifies the option settings that are used in each case:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Documentation Live View</th>
+<th class="tableblock halign-left valign-top">All Other Scenarios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INLINE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PARAMETER, RESPONSE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PARAMETER, RESPONSE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RETAIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PATH_OR_COMPONENT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ALL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RETENTION_SCOPE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ROOTS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ROOTS</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADDITIONAL_FILES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>empty</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>empty</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOIST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ALL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ALL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REWRITE_SIMPLE_REFS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CREATE_DEF_TITLES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>false</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INSTANTIATE_NULL_COLLECTIONS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FIX_MISSING_TYPES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>true</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ORDERING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AS_DECLARED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AS_DECLARED</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Note that the Document Live View defaults differ from all the rest, including other live views.</p>
+</div>
+<div class="paragraph">
+<p>There is currently no way to alter the option settings for any scenario except the "KaiZen OpenAPI
+Normalizer [YAML+JSON]" GenTemplate, where the GenTarget file explicitly sets all option values. The
+New GenTarget wizard in RepreZen API Studio creates a GenTarget with option values set initially according to the
+"All Other Scenarios" column above, and you may edit those options as desired.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. Note that the internal id reflects the fact that the normalizer was initially developed prior to the creation of the <a href="https://www.openapis.org/">OpenAPI Initiative</a>, and we have retained the original id for backward compatibility.
+</div>
+<div class="footnote" id="_footnotedef_2">
+<a href="#_footnoteref_2">2</a>. Note that the internal id reflects the fact that the normalizer was initially developed prior to the creation of the <a href="https://www.openapis.org/">OpenAPI Initiative</a>, and we have retained the original id for backward compatibility.
+</div>
+<div class="footnote" id="_footnotedef_3">
+<a href="#_footnoteref_3">3</a>. Local references like this one - that is references to an object in the same file - always start with a pound sign: "#". This happens to be the comment character in YAML syntax, so a common error is to omit quotes around the reference string. This will have the same effect as an empty string, which can lead to a variety of problems with consumers of the model. Be careful to always use quotes around your reference strings!
+</div>
+<div class="footnote" id="_footnotedef_4">
+<a href="#_footnoteref_4">4</a>. The only exception to this is references that could not be resolved in the original spec; these will be copied as-is into the normalized spec.
+</div>
+<div class="footnote" id="_footnotedef_5">
+<a href="#_footnoteref_5">5</a>. The only difference between these files and the actual top-level file has to do with object renaming. As stated earlier, objects appearing in the top-level spec will never be renamed. However, it is possible for a name collision to occur when loading "additional" files, and such collisions will trigger object renaming. Additional files are loaded immediately after the top-level file, in the order in which they are specified, and naming priority always favors the earlier-loaded files.
+</div>
+<div class="footnote" id="_footnotedef_6">
+<a href="#_footnoteref_6">6</a>. PATH is not an option because paths are always inlined; local path references are disallowed in OpenAPI specs.
+</div>
+<div class="footnote" id="_footnotedef_7">
+<a href="#_footnoteref_7">7</a>. This option is really equivalent to ALL, since paths are always inlined anyway; no other treatment is sensible since local path references are not allowed in an OpneAPI  spec.
+</div>
+<div class="footnote" id="_footnotedef_8">
+<a href="#_footnoteref_8">8</a>. This option is needed for our Reprezen HTML Documentation gen target, which inlines everything by default and retains only top-level paths, except when there are no paths; in that case it still inlines everything, but it also retains everything.
+</div>
+<div class="footnote" id="_footnotedef_9">
+<a href="#_footnoteref_9">9</a>. Simple reference strings are recognized only if they start with an alphabetic character or &#8220;_&#8221; and consist solely of alpha-numeric characters and &#8220;_&#8221;.
+</div>
+<div class="footnote" id="_footnotedef_10">
+<a href="#_footnoteref_10">10</a>. An example of where such replacement would change the spec is the <code>consumes</code> and <code>produces</code> arrays in operation definitions. For these, an empty array would prevent inheriting the corresponding global defaults, while a null value would not.
+</div>
+</div>
+	</div>
+	<div class="col-sm-2 ">
+	  <nav id="sidetoc" data-spy="affix" data-toggle="toc" class="hidden-xs"></nav>
+	</div>
+      </div>
+      <div class="footer">
+  &copy; 2016 ModelSolv, Inc. All rights reserved.
+</div>
+
+    </div>
+  </body>
+</html>
