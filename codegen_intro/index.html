@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="/css/asciidoc.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="canonical" href="http://reprezen.github.io/codegen_intro/">
-  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/codegen_intro/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://localhost:4000/feed.xml">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 
@@ -139,14 +139,14 @@
 
   
   <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Swagger <span class="caret"></span></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">openapi <span class="caret"></span></a>
     <ul class="dropdown-menu">
       
       
       
       
       
-      <li class=""><a href="/swagger_normalizer/" target="_self">Swagger Normalizer</a></li>
+      <li class=""><a href="/openapi_normalizer/" target="_self">KaiZen OpenAPI Normalizer</a></li>
       
       
     </ul>
@@ -379,7 +379,7 @@ generators.</p>
 <dd>
 <p>A GenEngine encompasses facilities built into RepreZen API Studio to support a specific code
 generation technology, such as a templating engine. RepreZen API Studio currently comes with a single GenEngine,
-which supports the <a href="http://xtend-lang.org" target="_blank" rel="noopener">Xtend</a> templating language.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
+which supports the <a href="http://xtend-lang.org" target="_blank" rel="noopener">Xtend</a> templating language.<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup></p>
 <div class="paragraph">
 <p>GenEngines are not currently implemented in a way that makes it feasible for end users to create
 their own. We hope to provide GenEngines for other popular generation tools in the future.</p>
@@ -390,7 +390,7 @@ their own. We hope to provide GenEngines for other popular generation tools in t
 <p>A GenTemplate is an implementation of a code generator using a particular
 GenEngine. Each GenTemplate produces output for a specific purpose, in a form suited to that
 purpose. The generators that are built into RepreZen API Studio are all GenTemplates built using the Xtend
-GenEngine.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
+GenEngine.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup></p>
 </dd>
 <dt class="hdlist1">GenTarget </dt>
 <dd>
@@ -629,7 +629,7 @@ added to our model project for the <code>MyModel</code> model.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="a-id-creategentemplate-a-creating-a-gen-template"><a id="createGenTemplate"></a>Creating a Gen Template</h3>
+<h3 id="creating-a-gen-template"><a id="createGenTemplate"></a>Creating a Gen Template</h3>
 <div class="paragraph">
 <p>So far we have seen how to set up built-in GenTargets to generate
 various types of output in our model projects. But how about if we
@@ -659,7 +659,7 @@ project, this box would be empty. And we wouldn&#8217;t be permitted to type in 
 <code>MyModel</code> project even if we wanted to. Instead, we&#8217;ve chosen the name <code>LexiconGenTemplates</code> for our
 project, which suggests that we may create multiple GenTemplates related to the lexicon over
 time. As it turns out, this project name will also become the name of our single GenTemplate in this
-project.<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup></p>
+project.<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup></p>
 </div>
 <div class="paragraph">
 <p>When we click <code>Finish</code>, our new project is created, and RepreZen API Studio busies itself in building the initial
@@ -743,7 +743,7 @@ of that expression will appear in the output to take the place of the interpolat
 <div class="paragraph">
 <p>In our case, we have <code>&laquo;model.name&raquo;</code>. When RepreZen API Studio applies this template to a model, a
 variable named <code>model</code> will represent the model itself, in the form of an object of type
-<code>ZenModel</code>.<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</sup> The <code>ZenModel</code> class contains
+<code>ZenModel</code>.<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup> The <code>ZenModel</code> class contains
 a number of properties, one of which is the model&#8217;s name. The Xtend expression <code>model.name</code> yields
 the model&#8217;s name, and that name is what replaces <code>&laquo;model.name&raquo;</code> in the output
 file. Therefore, if we use this GenTemplate on the model we created above, the generated HTML file
@@ -767,7 +767,7 @@ these loops in detail.</p>
 «ENDFOR»                                                <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all spread">
+<table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
 <col style="width: 85.7143%;">
@@ -775,7 +775,7 @@ these loops in detail.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="1"></strong> thru <strong class="conum" data-value="7"></strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The outer loop introduces the variable <code>api</code> and binds it in turn to each of the values
 appearing in the collection represented by <code>model.resourceAPIs</code>. Just like <code>name</code>, <code>resourceAPIs</code> is
 a property of the <code>ZenModel</code> class, and <code>model.resourceAPIs</code> is an expression that accesses it. The
@@ -798,7 +798,7 @@ created it as a working sample model with one resource API, named <code>MyModelA
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="2"></strong> thru <strong class="conum" data-value="6"></strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The second loop introduces a new variable, <code>resource</code>, that will represent, in turn, each of the
 Resources defined in whichever Resource API is currently represented by the <code>api</code>
 variable. These are obtained via the <code>ownedResourceDefinitions</code> property of the <code>ResourceAPI</code> class.</p>
@@ -819,7 +819,7 @@ an object resource named <code>MyModelObject</code>, and a collection resource n
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="3"></strong> thru <strong class="conum" data-value="5"></strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The third loop introduces a new variable, <code>method</code>, that will represent, in turn, each of the
 methods defined in whichever Resource is currently represented by the <code>resource</code>
 variable. These are obtained via the <code>methods</code> property of the <code>ResourceDefinition</code> class.</p>
@@ -840,7 +840,7 @@ a <code>POST</code> method for each of its two resources.
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><strong class="conum" data-value="4"></strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Finally, we have an interpolation construct that emits the HTTP
  operation name and the resource URL for each method encountered.</p>
 </div></div></td>
@@ -1260,16 +1260,16 @@ and then replace our documentation expressions with <code>xxx.doc</code>.)
 </div>
 <div id="footnotes">
 <hr>
-<div class="footnote" id="_footnote_1">
+<div class="footnote" id="_footnotedef_1">
 <a href="#_footnoteref_1">1</a>. Note that the Xtend language is very nearly a superset of Java, so if you are a Java programmer you can use most of what you know in your Xtend classes. And you can intermingle pure Java classes at will, and use all available Java libraries without any compatibility issues. This is guaranteed by the fact that Xtend classes are not actually compiled, but are rather transformed into pure Java classes, which are then compiled by the Java compiler.
 </div>
-<div class="footnote" id="_footnote_2">
+<div class="footnote" id="_footnotedef_2">
 <a href="#_footnoteref_2">2</a>. Building on the footnote regarding Xtend in the context of GenEngine, we can further point out that it is perfectly possible to code an Xtend GenTemplate completely in Java. Indeed, some of the GenTemplates built into RepreZen API Studio are pure Java.
 </div>
-<div class="footnote" id="_footnote_3">
+<div class="footnote" id="_footnotedef_3">
 <a href="#_footnoteref_3">3</a>. The wizard is not currently capable of adding a new GenTemplate to an existing project, but that can be done manually.
 </div>
-<div class="footnote" id="_footnote_4">
+<div class="footnote" id="_footnotedef_4">
 <a href="#_footnoteref_4">4</a>. The name <code>ZenModel</code> reflects old terminology related to RAPID-ML models. Some of our APIs have not yet been updated to reflect our new terminology.
 </div>
 </div>

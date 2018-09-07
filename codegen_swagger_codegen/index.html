@@ -28,8 +28,8 @@
   <link rel="stylesheet" href="/css/asciidoc.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="canonical" href="http://reprezen.github.io/codegen_swagger_codegen/">
-  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://reprezen.github.io/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/codegen_swagger_codegen/">
+  <link rel="alternate" type="application/rss+xml" title="RepreZen End-User Documentation" href="http://localhost:4000/feed.xml">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 
@@ -139,14 +139,14 @@
 
   
   <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Swagger <span class="caret"></span></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">openapi <span class="caret"></span></a>
     <ul class="dropdown-menu">
       
       
       
       
       
-      <li class=""><a href="/swagger_normalizer/" target="_self">Swagger Normalizer</a></li>
+      <li class=""><a href="/openapi_normalizer/" target="_self">KaiZen OpenAPI Normalizer</a></li>
       
       
     </ul>
@@ -462,14 +462,14 @@ sources, including GitHub</p>
 <div class="paragraph">
 <p>The good news for SCG users is that the same mechanisms all work for non-standard SCG modules as
 well. As long as your module is properly configured to be discoverable by the SCG command line
-tool,<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup> it will also be discoverable by RepreZen API Studio, which will automatically, upon
+tool,<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup> it will also be discoverable by RepreZen API Studio, which will automatically, upon
 discovery, wrap it into a GenTemplate.</p>
 </div>
 </div>
 </div>
 <div id="footnotes">
 <hr>
-<div class="footnote" id="_footnote_1">
+<div class="footnote" id="_footnotedef_1">
 <a href="#_footnoteref_1">1</a>. Swagger Codegen uses Java&#8217;s <code>ServiceManager</code> class to discover available SCG modules. For a module to be discoverable, the fully-qualified class name of the implementing class must appear on a line by itself in a text resource named <span class="nowrap"><code>META-INF/services/io.swagger.codegen.CodegenConfig</code></span>. This resource is typically packaged as part of any SCG module.
 </div>
 </div>
