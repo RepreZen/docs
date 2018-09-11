@@ -1,6 +1,5 @@
 ---
 permalink: /openapi_normalizer/
-permalink: /swagger_normalizer/
 ---
 = Using the KaiZen OpenAPI Normalizer GenTemplate
 :imagesdir: ../images/openapi
