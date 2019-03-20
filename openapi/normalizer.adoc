@@ -472,7 +472,7 @@ value of this option can be:
 
 * The value ALL, meaning that all objects are inlined.
 
-* The value COMPONENT, meaning that all objects except paths are inlined.footnote:[This option is
+* The value COMPONENTS, meaning that all objects except paths are inlined.footnote:[This option is
   really equivalent to ALL, since paths are always inlined anyway; no other treatment is sensible
   since local path references are not allowed in an OpneAPI  spec.]
 
@@ -485,16 +485,16 @@ can be:
 
 * The value ALL, meaning that all objects are retained.
 
-* The value COMPONENT, meaning that all objects except paths are retained.
+* The value COMPONENTS, meaning that all objects except paths are retained.
 
-* The value PATH_OR_COMPONENT footnote:[This option is needed for our Reprezen HTML Documentation
+* The value PATH_OR_COMPONENTS footnote:[This option is needed for our Reprezen HTML Documentation
   gen target, which inlines everything by default and retains only top-level paths, except when
   there are no paths; in that case it still inlines everything, but it also retains everything.], meaning
   that:
 
 ** If the top-level spec defines at least one path, then the PATH option will be in effect.
 
-** Otherwise, the COMPONENT option will be in effect.
+** Otherwise, the COMPONENTS option will be in effect.
 
 RETENTION_SCOPE :: Determines which OpenAPI model specs are considered in-scope for retention
 rules. Value is either:
@@ -639,7 +639,7 @@ The following table specifies the option settings that are used in each case:
 | Option | Documentation Live View | All Other Scenarios 
 
 | INLINE | PARAMETER, RESPONSE| PARAMETER, RESPONSE 
-| RETAIN | PATH_OR_COMPONENT | ALL
+| RETAIN | PATH_OR_COMPONENTS | ALL
 | RETENTION_SCOPE | ROOTS | ROOTS
 | ADDITIONAL_FILES | _empty_ | _empty_
 | HOIST | ALL | ALL
